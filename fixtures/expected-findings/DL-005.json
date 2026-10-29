@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0.0",
+  "scenarioId": "DL-005",
+  "status": "draft",
+  "notes": [
+    "A fixture é sintética e os findings são hipóteses de referência. Rever manualmente e executar o projeto antes de tratar qualquer resultado como confirmado.",
+    "O foco do teste inclui separar findings de interface de falhas de compilação preexistentes."
+  ],
+  "findings": [
+    {
+      "id": "INT-001",
+      "category": "keyboard-accessibility",
+      "severity": "major",
+      "description": "Um elemento visual usado como ação pode não estar acessível por teclado por não possuir semântica de controlo.",
+      "whyItMatters": "Utilizadores que navegam por teclado precisam de alcançar e ativar ações essenciais.",
+      "matchingGuidance": "Confirmar o trecho fonte e testar a interação; não contar um aviso genérico sem localizar o elemento.",
+      "subjective": false,
+      "sourcePath": "fixtures/source-projects/react-existing-project/src/App.tsx"
+    },
+    {
+      "id": "INT-002",
+      "category": "contrast",
+      "severity": "major",
+      "description": "O texto secundário pode não ter contraste suficiente com o fundo.",
+      "whyItMatters": "Contraste insuficiente reduz legibilidade e pode falhar critérios WCAG aplicáveis.",
+      "matchingGuidance": "Calcular a razão de contraste a partir dos valores de cor reais e identificar o par texto/fundo.",
+      "subjective": false,
+      "sourcePath": "fixtures/source-projects/react-existing-project/src/styles.css"
+    },
+    {
+      "id": "INT-003",
+      "category": "empty-state",
+      "severity": "minor",
+      "description": "A vista de tarefas não define um estado vazio explícito.",
+      "whyItMatters": "Sem tarefas, a interface deve explicar a situação e sugerir uma ação pertinente.",
+      "matchingGuidance": "Verificar ramo condicional e renderização com lista vazia; a presença de dados de exemplo não prova que o estado existe.",
+      "subjective": false,
+      "sourcePath": "fixtures/source-projects/react-existing-project/src/App.tsx"
+    }
+  ]
+}

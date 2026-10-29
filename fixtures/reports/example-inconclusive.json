@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "example-not-executed",
+  "scenarioId": "DL-004",
+  "engineVersion": "5.0.0-dev",
+  "status": "inconclusive",
+  "score": null,
+  "metrics": {
+    "precision": null,
+    "recall": null,
+    "f1": null,
+    "falseDiscoveryRate": null
+  },
+  "environment": {
+    "nodeVersion": "not-recorded",
+    "platform": "not-recorded",
+    "commit": null,
+    "model": null,
+    "seed": null
+  },
+  "findings": [
+    {
+      "id": "GEN-001",
+      "category": "visual-hierarchy",
+      "severity": "major",
+      "description": "A hierarquia visual não foi avaliada nesta amostra de exemplo.",
+      "evidence": [],
+      "verificationStatus": "not_run",
+      "recommendation": "Executar a análise e reunir evidências antes de classificar o resultado."
+    }
+  ],
+  "checks": [
+    {
+      "id": "human-review",
+      "status": "not_run",
+      "description": "A revisão humana não foi executada."
+    }
+  ],
+  "artifacts": [],
+  "limitations": [
+    "Exemplo de contrato apenas; não é resultado de execução do motor."
+  ]
+}

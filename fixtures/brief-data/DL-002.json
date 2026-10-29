@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "scenarioId": "DL-002",
+  "dataKind": "synthetic-demo-data",
+  "disclaimer": "Fictional test data. Must not be presented as real customers, outcomes, certifications or commercial metrics.",
+  "requiredContent": [
+    "weekly-completed-tasks",
+    "open-tasks",
+    "focus-sessions",
+    "today-view",
+    "week-view",
+    "create-task",
+    "loading-state",
+    "error-state",
+    "empty-state",
+    "populated-state"
+  ],
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "data": {
+    "completedTasksThisWeek": 18,
+    "openTasks": 7,
+    "focusSessions": 5,
+    "tasks": [
+      {
+        "id": "t-1",
+        "title": "Rever prioridades",
+        "status": "todo"
+      },
+      {
+        "id": "t-2",
+        "title": "Preparar resumo",
+        "status": "in-progress"
+      },
+      {
+        "id": "t-3",
+        "title": "Organizar semana",
+        "status": "done"
+      }
+    ]
+  }
+}

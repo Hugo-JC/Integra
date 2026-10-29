@@ -1,0 +1,27 @@
+{
+  "name": "integra-ai-design-engine",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Integra AI Design Engine v5 — contracts and V5 Design Lab foundation",
+  "type": "module",
+  "engines": {
+    "node": ">=24 <27",
+    "npm": ">=10"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "validate:fixtures": "tsx scripts/validate-fixtures.ts",
+    "check": "npm run typecheck && npm test && npm run validate:fixtures"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.0"
+  }
+}

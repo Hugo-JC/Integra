@@ -1,0 +1,16 @@
+* { box-sizing: border-box; }
+body { margin: 0; color: #363636; background: #f4f4f4; font: 15px/1.5 Arial, sans-serif; }
+.topbar { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 18px 6vw; background: #fff; border-bottom: 1px solid #e8e8e8; }
+.brand, .eyebrow, .block > span { font-size: 12px; letter-spacing: .08em; color: #929292; }
+nav { display: flex; gap: 22px; }
+a { color: #767676; text-decoration: none; }
+main { max-width: 1180px; margin: 42px auto; padding: 0 24px; }
+.block { background: #fff; border: 1px solid #e6e6e6; border-radius: 14px; padding: 28px; }
+.hero { margin-bottom: 20px; }
+h1 { max-width: 680px; margin: 18px 0; font-size: 30px; font-weight: 500; }
+h2 { font-size: 18px; font-weight: 500; }
+p { color: #929292; }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.muted-button { color: #929292; background: #f4f4f4; border: 1px solid #ededed; padding: 10px 14px; border-radius: 12px; }
+.activity { margin-top: 20px; }
+@media (max-width: 700px) { .topbar { flex-wrap: wrap; } nav { order: 3; width: 100%; flex-wrap: wrap; } .grid { grid-template-columns: 1fr; } main { margin-top: 22px; padding: 0 16px; } }

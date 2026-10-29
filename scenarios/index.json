@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "Integra V5 Design Lab",
+  "note": "Catalog only. Scenarios are defined; the production runner and evaluators have not yet been implemented.",
+  "scenarioManifests": [
+    "scenarios/DL-001-product-landing/scenario.json",
+    "scenarios/DL-002-productivity-dashboard/scenario.json",
+    "scenarios/DL-003-education-platform/scenario.json",
+    "scenarios/DL-004-generic-interface/scenario.json",
+    "scenarios/DL-005-existing-react-project/scenario.json"
+  ]
+}

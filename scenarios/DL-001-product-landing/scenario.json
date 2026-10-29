@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "DL-001",
+  "title": "Landing page de um produto",
+  "priority": "P0",
+  "mode": "generate",
+  "purpose": "Avaliar personalidade visual, hierarquia, coerência e foco no produto em uma landing page gerada a partir de um briefing.",
+  "briefPath": "scenarios/DL-001-product-landing/brief.md",
+  "implementationStatus": "fixture-ready",
+  "tags": [
+    "generation",
+    "visual-direction",
+    "hierarchy",
+    "responsive",
+    "accessibility"
+  ],
+  "fixturePaths": [
+    "fixtures/brief-data/DL-001.json"
+  ],
+  "evaluation": {
+    "minimumScore": 80,
+    "criteria": [
+      {
+        "id": "hierarchy",
+        "label": "Hierarquia visual e clareza do objetivo",
+        "weight": 25,
+        "method": "human"
+      },
+      {
+        "id": "productFocus",
+        "label": "Foco no produto e conteúdo essencial",
+        "weight": 25,
+        "method": "human"
+      },
+      {
+        "id": "coherence",
+        "label": "Coerência e personalidade visual",
+        "weight": 20,
+        "method": "human"
+      },
+      {
+        "id": "responsive",
+        "label": "Responsividade",
+        "weight": 15,
+        "method": "mixed"
+      },
+      {
+        "id": "accessibility",
+        "label": "Acessibilidade",
+        "weight": 15,
+        "method": "mixed"
+      }
+    ]
+  },
+  "acceptance": {
+    "hardGates": [
+      "Conteúdo essencial obrigatório presente.",
+      "Nenhuma falha crítica conhecida de funcionamento ou acessibilidade nos checks executados.",
+      "Todos os critérios obrigatórios possuem evidência ou avaliação explicitamente marcada como não executada."
+    ],
+    "expectedOutcomes": [
+      "O objetivo principal é compreensível.",
+      "O produto recebe ênfase visual adequada ao briefing.",
+      "A direção visual é coerente e contextual, sem impor um único estilo.",
+      "Os viewports desktop e mobile preservam o conteúdo essencial."
+    ]
+  }
+}

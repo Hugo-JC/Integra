@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.0.0",
+  "scenarioId": "DL-003",
+  "dataKind": "synthetic-demo-data",
+  "disclaimer": "Fictional test data. Must not be presented as real customers, outcomes, certifications or commercial metrics.",
+  "requiredContent": [
+    "student-overview",
+    "course-list",
+    "lesson-page",
+    "progress-indicator",
+    "course-search",
+    "empty-no-enrollments",
+    "empty-no-search-results",
+    "empty-no-progress",
+    "keyboard-navigation",
+    "visible-focus"
+  ],
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "accessibilityTarget": "WCAG 2.2 AA reference; automatic checks are not sufficient by themselves."
+}

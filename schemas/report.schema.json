@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://integra.dev/schemas/report.schema.json",
+  "title": "Integra Design Lab Run Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "runId", "scenarioId", "engineVersion", "status", "score", "metrics", "findings", "checks", "artifacts", "limitations"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "runId": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "scenarioId": { "enum": ["DL-001", "DL-002", "DL-003", "DL-004", "DL-005"] },
+    "engineVersion": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "status": { "enum": ["passed", "failed", "inconclusive", "error"] },
+    "score": { "anyOf": [{ "type": "integer", "minimum": 0, "maximum": 100 }, { "type": "null" }] },
+    "startedAt": { "type": "string", "format": "date-time" },
+    "finishedAt": { "type": "string", "format": "date-time" },
+    "durationMs": { "type": "integer", "minimum": 0 },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": { "anyOf": [{ "type": "number", "minimum": 0, "maximum": 1 }, { "type": "null" }] }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "nodeVersion": { "type": "string" },
+        "platform": { "type": "string" },
+        "commit": { "type": ["string", "null"] },
+        "model": { "type": ["string", "null"] },
+        "seed": { "type": ["string", "number", "null"] }
+      }
+    },
+    "findings": { "type": "array", "items": { "$ref": "#/$defs/finding" } },
+    "checks": { "type": "array", "items": { "$ref": "#/$defs/check" } },
+    "artifacts": { "type": "array", "items": { "$ref": "#/$defs/artifact" } },
+    "limitations": { "type": "array", "items": { "type": "string" } }
+  },
+  "$defs": {
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "category", "severity", "description", "evidence", "verificationStatus"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "category": { "type": "string", "minLength": 1 },
+        "severity": { "enum": ["critical", "major", "minor", "info"] },
+        "description": { "type": "string", "minLength": 1 },
+        "impact": { "type": "string" },
+        "recommendation": { "type": "string" },
+        "evidence": { "type": "array", "items": { "$ref": "#/$defs/evidence" } },
+        "verificationStatus": { "enum": ["passed", "failed", "not_run", "not_applicable", "inconclusive"] },
+        "relatedFiles": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "description"],
+      "properties": {
+        "kind": { "enum": ["code", "screenshot", "test", "metric", "text", "external"] },
+        "description": { "type": "string", "minLength": 1 },
+        "file": { "type": "string" },
+        "line": { "type": "integer", "minimum": 1 },
+        "uri": { "type": "string" },
+        "excerpt": { "type": "string" }
+      }
+    },
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "status", "description"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["passed", "failed", "not_run", "not_applicable", "inconclusive"] },
+        "description": { "type": "string", "minLength": 1 },
+        "expected": {},
+        "actual": {},
+        "evidence": { "type": "array", "items": { "$ref": "#/$defs/evidence" } }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "path"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "kind": { "enum": ["source", "report", "screenshot", "log", "diff", "trace", "other"] },
+        "path": { "type": "string", "minLength": 1, "pattern": "^(?!/)(?!.*(^|/)\\.\\.(/|$)).+$" },
+        "sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" },
+        "mediaType": { "type": "string" }
+      }
+    }
+  }
+}

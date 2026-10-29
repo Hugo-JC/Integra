@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "DL-005",
+  "title": "Projeto React existente",
+  "priority": "P0",
+  "mode": "analyze-and-fix",
+  "purpose": "Verificar que o motor consegue analisar um projeto React realista e que as alterações autorizadas não introduzem regressões.",
+  "briefPath": "scenarios/DL-005-existing-react-project/brief.md",
+  "implementationStatus": "fixture-ready",
+  "tags": [
+    "react",
+    "typescript",
+    "code-integrity",
+    "regression",
+    "workspace-isolation"
+  ],
+  "fixturePaths": [
+    "fixtures/source-projects/react-existing-project/package.json",
+    "fixtures/expected-findings/DL-005.json"
+  ],
+  "evaluation": {
+    "minimumScore": 80,
+    "criteria": [
+      {
+        "id": "build",
+        "label": "Integridade da compilação",
+        "weight": 25,
+        "method": "automated"
+      },
+      {
+        "id": "preservation",
+        "label": "Preservação dos testes e comportamentos",
+        "weight": 30,
+        "method": "automated"
+      },
+      {
+        "id": "corrections",
+        "label": "Correção das alterações propostas",
+        "weight": 20,
+        "method": "mixed"
+      },
+      {
+        "id": "diff",
+        "label": "Qualidade e âmbito do diff",
+        "weight": 15,
+        "method": "mixed"
+      },
+      {
+        "id": "traceability",
+        "label": "Relatório, rastreabilidade e reversibilidade",
+        "weight": 10,
+        "method": "mixed"
+      }
+    ]
+  },
+  "acceptance": {
+    "hardGates": [
+      "Nenhuma alteração fora do workspace autorizado.",
+      "Nenhuma regressão crítica introduzida.",
+      "Falhas preexistentes são separadas de novas regressões.",
+      "O diff pode ser revisto e revertido."
+    ],
+    "expectedOutcomes": [
+      "Estrutura do projeto e ficheiros relevantes identificados.",
+      "Findings associados a ficheiros e evidências.",
+      "Build e testes comparados antes/depois, quando configurados.",
+      "Workspace original permanece inalterado."
+    ]
+  }
+}

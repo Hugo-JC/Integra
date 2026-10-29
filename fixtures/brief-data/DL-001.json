@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0.0",
+  "scenarioId": "DL-001",
+  "dataKind": "synthetic-demo-data",
+  "disclaimer": "Fictional test data. Must not be presented as real customers, outcomes, certifications or commercial metrics.",
+  "requiredContent": [
+    "product-name",
+    "value-proposition",
+    "primary-action",
+    "three-capabilities",
+    "audience-section",
+    "no-fabricated-testimonials"
+  ],
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "width": 390,
+      "height": 844
+    }
+  ]
+}

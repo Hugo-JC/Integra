@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://integra.dev/schemas/scenario.schema.json",
+  "title": "Integra Design Lab Scenario Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "id", "title", "priority", "mode", "purpose", "briefPath", "implementationStatus", "tags", "evaluation", "acceptance"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "id": { "type": "string", "pattern": "^DL-[0-9]{3}$" },
+    "title": { "type": "string", "minLength": 4 },
+    "priority": { "enum": ["P0", "P1", "P2"] },
+    "mode": { "enum": ["generate", "analyze", "analyze-and-fix"] },
+    "purpose": { "type": "string", "minLength": 10 },
+    "briefPath": { "type": "string", "pattern": "^scenarios/[A-Za-z0-9-]+/brief\\.md$" },
+    "implementationStatus": { "enum": ["planned", "fixture-ready", "implemented"] },
+    "tags": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "fixturePaths": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "evaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimumScore", "criteria"],
+      "properties": {
+        "minimumScore": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "criteria": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "label", "weight"],
+            "properties": {
+              "id": { "type": "string", "minLength": 1 },
+              "label": { "type": "string", "minLength": 1 },
+              "weight": { "type": "integer", "minimum": 1, "maximum": 100 },
+              "method": { "enum": ["automated", "human", "mixed"] }
+            }
+          }
+        }
+      }
+    },
+    "acceptance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hardGates", "expectedOutcomes"],
+      "properties": {
+        "hardGates": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "expectedOutcomes": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      }
+    }
+  }
+}

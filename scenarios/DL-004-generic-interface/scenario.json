@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "DL-004",
+  "title": "Interface visualmente genérica",
+  "priority": "P1",
+  "mode": "analyze",
+  "purpose": "Medir se o motor deteta problemas conhecidos e produz recomendações contextuais sem tratar preferências visuais como defeitos universais.",
+  "briefPath": "scenarios/DL-004-generic-interface/brief.md",
+  "implementationStatus": "fixture-ready",
+  "tags": [
+    "analysis",
+    "finding-quality",
+    "precision",
+    "recall",
+    "anti-slop"
+  ],
+  "fixturePaths": [
+    "fixtures/source-projects/generic-interface/index.html",
+    "fixtures/expected-findings/DL-004.json"
+  ],
+  "evaluation": {
+    "minimumScore": 80,
+    "criteria": [
+      {
+        "id": "precision",
+        "label": "Precisão dos problemas identificados",
+        "weight": 30,
+        "method": "automated"
+      },
+      {
+        "id": "recall",
+        "label": "Cobertura dos problemas conhecidos",
+        "weight": 25,
+        "method": "automated"
+      },
+      {
+        "id": "recommendations",
+        "label": "Relevância das recomendações",
+        "weight": 25,
+        "method": "human"
+      },
+      {
+        "id": "context",
+        "label": "Adequação ao contexto e neutralidade de estilo",
+        "weight": 20,
+        "method": "human"
+      }
+    ]
+  },
+  "acceptance": {
+    "hardGates": [
+      "Precisão igual ou superior a 0.85 quando o denominador está definido.",
+      "Recall igual ou superior a 0.75 quando o conjunto anotado permite o cálculo.",
+      "Nenhum falso positivo crítico nos casos de referência."
+    ],
+    "expectedOutcomes": [
+      "Findings incluem evidência, impacto e recomendação contextual.",
+      "Escolhas visuais não são automaticamente classificadas como defeitos.",
+      "Os findings duplicados são consolidados antes do cálculo das métricas."
+    ]
+  }
+}

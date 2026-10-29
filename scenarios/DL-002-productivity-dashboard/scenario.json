@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "DL-002",
+  "title": "Dashboard de produtividade",
+  "priority": "P0",
+  "mode": "generate",
+  "purpose": "Avaliar densidade de informação, legibilidade, consistência de componentes, interações e estados de interface num dashboard.",
+  "briefPath": "scenarios/DL-002-productivity-dashboard/brief.md",
+  "implementationStatus": "fixture-ready",
+  "tags": [
+    "generation",
+    "dashboard",
+    "information-density",
+    "states",
+    "responsive"
+  ],
+  "fixturePaths": [
+    "fixtures/brief-data/DL-002.json"
+  ],
+  "evaluation": {
+    "minimumScore": 80,
+    "criteria": [
+      {
+        "id": "readability",
+        "label": "Legibilidade e hierarquia da informação",
+        "weight": 25,
+        "method": "human"
+      },
+      {
+        "id": "density",
+        "label": "Organização e densidade de informação",
+        "weight": 20,
+        "method": "human"
+      },
+      {
+        "id": "consistency",
+        "label": "Consistência dos componentes",
+        "weight": 20,
+        "method": "mixed"
+      },
+      {
+        "id": "interactions",
+        "label": "Interações e estados de interface",
+        "weight": 20,
+        "method": "mixed"
+      },
+      {
+        "id": "responsiveA11y",
+        "label": "Responsividade e acessibilidade",
+        "weight": 15,
+        "method": "mixed"
+      }
+    ]
+  },
+  "acceptance": {
+    "hardGates": [
+      "Indicadores e ações obrigatórios estão presentes.",
+      "Estados de carregamento, erro, vazio e conteúdo são representados.",
+      "Nenhuma interação essencial fica sem feedback."
+    ],
+    "expectedOutcomes": [
+      "Indicadores principais são rapidamente identificáveis.",
+      "A densidade de conteúdo é adequada e não sobrecarrega.",
+      "Componentes de mesma função comportam-se de forma consistente.",
+      "Todos os estados definidos podem ser inspecionados."
+    ]
+  }
+}

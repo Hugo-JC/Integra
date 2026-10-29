@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "DL-003",
+  "title": "Plataforma educativa",
+  "priority": "P0",
+  "mode": "generate",
+  "purpose": "Avaliar acessibilidade, navegação, compreensão e tratamento de estados vazios numa plataforma educativa.",
+  "briefPath": "scenarios/DL-003-education-platform/brief.md",
+  "implementationStatus": "fixture-ready",
+  "tags": [
+    "generation",
+    "accessibility",
+    "navigation",
+    "empty-states",
+    "wcag-2.2-aa"
+  ],
+  "fixturePaths": [
+    "fixtures/brief-data/DL-003.json"
+  ],
+  "evaluation": {
+    "minimumScore": 85,
+    "criteria": [
+      {
+        "id": "semantics",
+        "label": "Semântica e estrutura acessível",
+        "weight": 25,
+        "method": "mixed"
+      },
+      {
+        "id": "keyboard",
+        "label": "Navegação e teclado",
+        "weight": 25,
+        "method": "mixed"
+      },
+      {
+        "id": "emptyStates",
+        "label": "Estados vazios e feedback",
+        "weight": 20,
+        "method": "mixed"
+      },
+      {
+        "id": "comprehension",
+        "label": "Legibilidade e compreensão",
+        "weight": 15,
+        "method": "human"
+      },
+      {
+        "id": "responsive",
+        "label": "Responsividade",
+        "weight": 15,
+        "method": "mixed"
+      }
+    ]
+  },
+  "acceptance": {
+    "hardGates": [
+      "Fluxos principais são percorríveis por teclado.",
+      "Estados vazios obrigatórios estão implementados.",
+      "Nenhuma falha crítica ou grave confirmada nos critérios de aceitação definidos."
+    ],
+    "expectedOutcomes": [
+      "Navegação compreensível e landmarks adequados.",
+      "Controlos com nomes acessíveis e foco visível.",
+      "Estados sem cursos, resultados ou progresso oferecem explicação útil.",
+      "Resultados automáticos e manuais são distinguidos."
+    ]
+  }
+}

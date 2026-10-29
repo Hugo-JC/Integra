@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0.0",
+  "scenarioId": "DL-004",
+  "status": "draft",
+  "notes": [
+    "Estas referências ainda exigem revisão humana antes de serem usadas como gate de release.",
+    "Não usar este ficheiro como regra universal de estética. A adequação deve ser avaliada no contexto do briefing."
+  ],
+  "findings": [
+    {
+      "id": "GEN-001",
+      "category": "visual-hierarchy",
+      "severity": "major",
+      "description": "A hierarquia não diferencia suficientemente a mensagem principal das secções secundárias.",
+      "whyItMatters": "O visitante pode não identificar rapidamente o propósito e a ação principal.",
+      "matchingGuidance": "Aceitar correspondência quando a evidência aponta para relações tipográficas/visuais concretas e não apenas para gosto pessoal.",
+      "subjective": true,
+      "sourcePath": "fixtures/source-projects/generic-interface/index.html"
+    },
+    {
+      "id": "GEN-002",
+      "category": "component-repetition",
+      "severity": "minor",
+      "description": "Os mesmos blocos visuais são repetidos mesmo quando representam conteúdo com papéis diferentes.",
+      "whyItMatters": "A repetição pode reduzir a distinção entre ações, conteúdo e informação secundária.",
+      "matchingGuidance": "Exigir evidência de que a repetição prejudica a compreensão neste briefing; o uso de cartões por si só não conta.",
+      "subjective": true,
+      "sourcePath": "fixtures/source-projects/generic-interface/index.html"
+    },
+    {
+      "id": "GEN-003",
+      "category": "primary-action",
+      "severity": "major",
+      "description": "A ação principal não possui prioridade visual clara sobre ações de menor importância.",
+      "whyItMatters": "O utilizador pode ter dificuldade em perceber o próximo passo esperado.",
+      "matchingGuidance": "Correspondência exige identificar o objetivo do briefing e a ação que compete com ele.",
+      "subjective": true,
+      "sourcePath": "fixtures/source-projects/generic-interface/index.html"
+    }
+  ]
+}

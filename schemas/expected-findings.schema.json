@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://integra.dev/schemas/expected-findings.schema.json",
+  "title": "Annotated Expected Findings",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "scenarioId", "status", "notes", "findings"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "scenarioId": { "enum": ["DL-001", "DL-002", "DL-003", "DL-004", "DL-005"] },
+    "status": { "enum": ["draft", "reviewed", "approved"] },
+    "notes": { "type": "array", "items": { "type": "string" } },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "category", "severity", "description", "whyItMatters", "matchingGuidance", "subjective"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "category": { "type": "string", "minLength": 1 },
+          "severity": { "enum": ["critical", "major", "minor", "info"] },
+          "description": { "type": "string", "minLength": 1 },
+          "whyItMatters": { "type": "string", "minLength": 1 },
+          "matchingGuidance": { "type": "string", "minLength": 1 },
+          "subjective": { "type": "boolean" },
+          "sourcePath": { "type": "string" },
+          "lineHint": { "type": "integer", "minimum": 1 }
+        }
+      }
+    }
+  }
+}
