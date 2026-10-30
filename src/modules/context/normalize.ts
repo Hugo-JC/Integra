@@ -39,7 +39,20 @@ const FACT_FIELDS = [
   'existingTokens',
   'prohibitedClaims',
   'requiredContent',
-] as const;
+] as const satisfies readonly (keyof NonNullable<DirectionContextInput['facts']>)[];
+
+type ClassifiedContextField =
+  | (typeof SCALAR_FIELDS)[number]
+  | (typeof LIST_FIELDS)[number]
+  | 'facts'
+  | 'structuredConstraints';
+type UnclassifiedContextField = Exclude<keyof DirectionContextInput, ClassifiedContextField>;
+const contextFieldClassificationIsExhaustive: UnclassifiedContextField extends never ? true : never = true;
+type UnclassifiedFactField = Exclude<
+  keyof NonNullable<DirectionContextInput['facts']>,
+  (typeof FACT_FIELDS)[number]
+>;
+const factFieldClassificationIsExhaustive: UnclassifiedFactField extends never ? true : never = true;
 
 const CONSTRAINT_PATHS = new Set<DirectionConstraintPath>([
   'project.platform',

@@ -120,9 +120,9 @@ describe('normalizeDirectionContext', () => {
     expect(result.context).toBeDefined();
     expect(result.issues.map((issue) => issue.code)).toEqual([
       'unknown-field',
+      'invalid-type',
+      'invalid-type',
       'unknown-field',
-      'invalid-type',
-      'invalid-type',
       'invalid-value',
     ]);
     expect(result.issues.map((issue) => issue.path)).toContain('audince');
