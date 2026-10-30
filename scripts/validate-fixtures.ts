@@ -17,10 +17,12 @@ const ajv = new Ajv2020({
 const reportSchema = readJson("schemas/report.schema.json");
 const scenarioSchema = readJson("schemas/scenario.schema.json");
 const findingsSchema = readJson("schemas/expected-findings.schema.json");
+const directionSchema = readJson("schemas/direction-artifact.schema.json");
 addFormats(ajv);
 const validateReport = ajv.compile(reportSchema as object);
 const validateScenario = ajv.compile(scenarioSchema as object);
 const validateFindings = ajv.compile(findingsSchema as object);
+const validateDirection = ajv.compile(directionSchema as object);
 
 function assertValid(
   label: string,
