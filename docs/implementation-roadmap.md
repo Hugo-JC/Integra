@@ -19,7 +19,7 @@ Objetivo: transformar briefings e contexto de projeto numa direção visual estr
 
 ### Próximas implementações
 
-1. **Completar o Resolver e a validação do artefacto:** estrutural, semântica, restrições e consistência; se a validação estrutural falhar, as camadas seguintes ficam not_run.
+1. **Expandir o Resolver e a validação do artefacto:** cobrir operadores e cenários adicionais de restrições, mantendo as quatro camadas (estrutural, semântica, restrições e consistência) e `not_run` após falha estrutural.
 2. **Expandir o motor por cenário:** acrescentar DL-002, DL-003 e DL-005 quando os seus dados estruturados e regras específicas estiverem definidos; DL-004 continua focado em avaliação, não em criação de estilo.
 3. **AI Provider Layer:** uma única porta de pedido para candidatos, schema validation, timeout e fornecedor falso nos testes. IA opcional, sem alterar a saída determinística em caso de falha.
 4. **Design Lab Integration:** comparar execução com e sem Direction Artifact e conservar artefactos, versões e limitações.

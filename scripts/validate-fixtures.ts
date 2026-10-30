@@ -5,7 +5,7 @@ import fs from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { normalizeDirectionContextDetailed } from "../src/modules/context/index.js";
-import { generateProductLandingDirection } from "../src/modules/direction/index.js";
+import { generateProductLandingDirection, validateDirectionArtifact } from "../src/modules/direction/index.js";
 
 const addFormats: FormatsPlugin = createRequire(import.meta.url)("ajv-formats");
 const root = process.cwd();
@@ -114,6 +114,13 @@ if (!contextResult.context || contextResult.issues.length > 0) {
 }
 const directionResult = generateProductLandingDirection(contextResult.context);
 assertValid("Generated DL-001 Direction Artifact", directionResult.artifact, validateDirection);
+const directionValidation = validateDirectionArtifact(directionResult.artifact);
+if (directionValidation.status !== "passed") {
+  const details = Object.values(directionValidation.checks)
+    .map((check) => check.id + ": " + check.status + " — " + check.description)
+    .join("\n");
+  throw new Error("DL-001 Direction Artifact validation did not pass:\\n" + details);
+}
 if (directionResult.diagnostics.length > 0) {
   throw new Error(
     "DL-001 Direction Engine has unresolved hard constraints: " +

@@ -9,3 +9,10 @@
 - direction-engine.test.ts: deterministic DL-001 generation, eight sections and schema validation.
 
 The fixture validation script also generates the DL-001 artifact and validates it against the checked-in schema. These checks validate direction contracts and deterministic outputs, not the quality of a website produced by an external agent.
+
+
+## Direction Artifact validation
+
+- Four ordered layers: structural, semantic, hard constraints and provenance/context consistency.
+- A structural failure leaves all deeper layers as `not_run`.
+- An unevaluable hard constraint is `inconclusive`, never silently passed.
