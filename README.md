@@ -2,7 +2,7 @@
 
 **Uma base modular para gerar, analisar e melhorar interfaces com evidências verificáveis.**
 
-> Estado atual: **Fase 1 — contratos, cenários e fixtures**. Esta distribuição contém uma estrutura inicial e ferramentas de validação. Não contém ainda o motor de geração, o analisador completo nem o runner de produção.
+> Estado atual: **Fase 2 — fundação do Direction Engine em implementação**. A base da Fase 1 (contratos, cenários e fixtures) está concluída; a Fase 2 já inclui a fundação determinística de acessibilidade e o contrato versionado do Direction Artifact. Ainda não contém o Context Engine, o motor de direção completo, integração com fornecedores de IA ou runner de produção.
 
 ## O que é o Integra?
 
@@ -69,8 +69,9 @@ A Fase 1 não prova que o motor produz boas interfaces. As fixtures são dados d
 - `src/contracts/` — tipos TypeScript.
 - `src/lab/` — funções puras de pontuação e métricas.
 - `tests/` — testes da Fase 1.
-- `src/modules/` — pontos de extensão para as fases seguintes.
+- `src/modules/` — módulos de capacidade, incluindo a fundação do Direction Engine.
+- `schemas/direction-artifact.schema.json` — contrato versionado do artefacto de direção.
 
-## Próxima fase
+## Próximo trabalho
 
-A Fase 2 deve introduzir o runner isolado e a recolha de artefactos, mantendo as interfaces dos contratos estáveis. Consultar `docs/implementation-roadmap.md`.
+A Fase 2 está a construir o Direction Engine híbrido: primeiro o contrato do artefacto, depois Context Engine, motor determinístico, camada de IA opcional, resolver e integração com o Design Lab. O runner isolado passa para a Fase 3. Consultar `docs/implementation-roadmap.md`.
