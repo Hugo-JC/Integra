@@ -76,7 +76,7 @@ describe('Direction Artifact schema', () => {
   it('allows incomplete context to be reported instead of fabricated', () => {
     const incompleteContext = structuredClone(validArtifact);
     incompleteContext.context.missingInformation = ['Target audience'];
-    delete incompleteContext.context.audience;
+    delete (incompleteContext.context as Record<string, unknown>).audience;
     expect(validate(incompleteContext)).toBe(true);
   });
 });
