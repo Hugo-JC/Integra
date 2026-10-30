@@ -42,6 +42,12 @@ As entradas e saídas devem ser serializáveis, versionadas e independentes de f
 
 `src/engine/` contém os pontos do futuro fluxo coordenado. `src/modules/` contém as capacidades. `src/contracts/` define formatos comuns. `src/lab/` contém utilitários independentes usados para avaliar os resultados.
 
+## Direction Artifact boundary
+
+The Direction module emits a versioned, provider-independent `DirectionArtifact`. Its eight required areas are Visual Identity, Color System, Typography, Layout & Composition, Component Principles, Motion & Interaction, Accessibility and Implementation Guidance. Each area carries a concise summary, decisions with provenance (`brief`, `rule`, `ai`, `default`) and contextual recommendations marked `[R]`.
+
+The artifact is serializable and intentionally excludes generation timestamps. Context fields may be absent; `missingInformation` records gaps instead of allowing the engine to invent audience, goals, constraints or stack details. The artifact schema is separate from the Design Lab run-report schema.
+
 ## Limites da Fase 1
 
 Os diretórios de módulos contêm notas de fronteira e extensões planeadas; não indicam que a funcionalidade já esteja implementada. A fase atual valida apenas contratos, catálogo, fixtures e helpers de avaliação.
