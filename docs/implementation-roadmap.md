@@ -1,58 +1,102 @@
 # Roadmap do Integra
 
-## Fase 1 — Contratos e fixtures (fundação concluída)
+Última atualização: 30/10/2026.
 
-Esquemas, manifests dos cinco cenários, briefings, dados de referência, contratos TypeScript e helpers de scoring. A Fase 1 permanece como base do Design Lab.
+## Direção do produto
 
-## Fase 2 — Direction Engine híbrido (em implementação)
+Integra é um motor provider-agnostic de direção e qualidade de design. Converte briefs e contexto estruturado em artefactos de direção rastreáveis; depois permite que agentes externos os consumam e que o Design Lab avalie os resultados com evidências.
 
-Objetivo: transformar briefings e contexto de projeto numa direção visual estruturada, verificável e independente de fornecedores.
+Integra não é um gerador de sites, um editor visual ou um conjunto de prompts. O núcleo deve permanecer determinístico, testável e útil sem fornecedores externos.
 
-### Concluído nesta fatia
+## Fase 1 — Contracts & Design Lab foundation
 
-1. **Direction Artifact 1.1.0:** oito áreas obrigatórias, proveniência, caminhos de origem e validação estrutural.
-2. **Context contracts:** contrato partilhado em src/contracts/, factos tipados e restrições estruturadas, mantendo texto livre para leitura humana.
-3. **Context normalizer:** normalização determinística, Unicode NFC, deduplicação estável, limites, null/vazio como ausente e diagnósticos agregados.
-4. **Resolver mínimo:** restrições rígidas são aplicadas antes da precedência de decisões; conflitos ou comparações impossíveis permanecem inconclusivos.
-5. **Direction Engine DL-001:** primeira geração determinística das oito áreas, sem IA, com provenance e serialização canónica.
-6. **CI:** typecheck, testes e validação de fixtures em GitHub Actions.
+**Concluída.**
 
-### Próximas implementações
+- Cinco cenários, briefs, manifests e fixtures.
+- Schemas e contratos partilhados para cenários, relatórios e findings.
+- Helpers de scoring e métricas de deteção.
+- Base do V5 Design Lab.
 
-1. **Expandir o Resolver e a validação do artefacto:** cobrir operadores e cenários adicionais de restrições, mantendo as quatro camadas (estrutural, semântica, restrições e consistência) e `not_run` após falha estrutural.
-2. **Expandir o motor por cenário:** acrescentar DL-002, DL-003 e DL-005 quando os seus dados estruturados e regras específicas estiverem definidos; DL-004 continua focado em avaliação, não em criação de estilo.
-3. **AI Provider Layer:** uma única porta de pedido para candidatos, schema validation, timeout e fornecedor falso nos testes. IA opcional, sem alterar a saída determinística em caso de falha.
-4. **Design Lab Integration:** comparar execução com e sem Direction Artifact e conservar artefactos, versões e limitações.
-5. **Extração de briefings:** melhor esforço, com alias PT/EN e missingInformation para tudo o que não puder ser extraído com confiança. Um formato estruturado continua a ser a entrada principal.
+## Fase 2 — Deterministic Direction foundation
 
-## Fase 3 — Runner e artefactos de execução
+**Concluída para DL-001.**
 
-- Carregar manifest validado.
-- Criar workspace temporário com limites claros.
-- Separar inputs de outputs.
-- Recolher logs e hashes de artefactos.
-- Produzir relatório por cenário, mesmo quando uma etapa falha.
-- Testar repetição de execução e limpeza de workspaces.
+- Direction Artifact 1.1.0 com oito secções obrigatórias.
+- Context contracts e normalizador determinístico, com diagnósticos, limites, Unicode NFC e deduplicação estável.
+- Factos de projeto e restrições estruturadas hard/soft.
+- Resolver mínimo: restrições rígidas antes da precedência brief > rule > ai > default.
+- Geração determinística para DL-001 e serialização canónica sem timestamp.
+- Validação ordenada em quatro camadas: structural, semantic, constraints e consistency.
+- CI com typecheck, testes e validação de fixtures.
 
-## Fase 4 — Evaluators automáticos e Refinement
+A fase está concluída para a primeira fatia funcional, não para todos os cenários. Não declarar cobertura geral de Direction enquanto DL-002, DL-003 e DL-005 não tiverem geradores próprios e testes específicos.
 
-- Acessibilidade automatizada com limites documentados.
-- Verificação de conteúdo e estados obrigatórios.
-- Métricas de findings conhecidos e falsos positivos.
-- Comparação de baseline e detecção de regressões.
-- Auditorias com evidências e recomendações verificáveis.
+## Fase 2.1 — Agent integration foundation
 
-## Fase 5 — Investigation, adaptadores e integração contínua avançada
+**Em implementação nesta branch.**
 
-- Adaptadores opcionais para ferramentas externas.
-- Aprovação explícita de baseline.
-- Jobs especializados de CI para execução isolada.
-- Deploy apenas depois de definir o ambiente e validar segredos, comandos e permissões.
+- CLI para gerar e validar Direction Artifacts sem chamar IA.
+- Contrato provider-agnostic para agentes consumidores.
+- Direction Consumption Report para rastrear decisões e recomendações aplicadas, adaptadas ou omitidas.
+- Schema do relatório de consumo e testes de contrato.
+- Design Experiment Record para comparação pareada baseline vs Integra-guided.
+- Protocolo de experiência, instruções de exemplo e documentação de compatibilidade.
 
-## Princípios de release
+Critério de conclusão: o artefacto pode ser gerado, validado, entregue a um agente externo e associado a um relatório de consumo validável.
 
-- Nenhuma fase é considerada concluída só por haver ficheiros.
-- A conclusão exige testes executados, resultados guardados e limitações documentadas.
-- O caminho determinístico deve funcionar sem fornecedores externos.
-- Sugestões de IA nunca ultrapassam restrições explícitas nem regras obrigatórias.
-- Critérios WCAG estabelecidos não são confundidos com recomendações heurísticas ou preferências estéticas.
+## Marco seguinte — First Agent Pilot
+
+1. Escolher um brief DL-001 e congelar o seu SHA-256.
+2. Gerar e validar o Direction Artifact.
+3. Executar o mesmo agente com a mesma configuração em dois workspaces limpos: baseline e Integra-guided.
+4. Guardar outputs, screenshots, hashes e evidências.
+5. Avaliar os mesmos critérios para os dois resultados e preencher o Design Experiment Record.
+6. Documentar ganhos, regressões, aspetos não verificáveis e limitações.
+
+Não alterar o motor com base numa impressão isolada. Primeiro recolher evidência do comportamento real do agente.
+
+## Fase 3 — Runner & reproducible experiments
+
+- Carregar manifests e preparar workspaces isolados.
+- Capturar versões, configurações, logs e hashes.
+- Guardar artefactos de execução sem misturar inputs e outputs.
+- Repetir runs com controlo de variáveis.
+- Produzir relatórios mesmo quando uma execução falha.
+- Limpar workspaces de forma segura.
+
+## Fase 4 — Refinement & evaluators
+
+- Acessibilidade automatizada com limites explícitos e referências WCAG.
+- Verificação de conteúdo obrigatório, claims e estados de interação.
+- Avaliação de responsividade com browser/DOM quando disponível.
+- Findings com evidências, severidade, impacto e correções verificáveis.
+- Deteção de regressões contra baselines aprovadas.
+- Estados not-verifiable e inconclusive sempre que a evidência não permite concluir.
+
+## Fase 5 — Scenario coverage
+
+- DL-002 Productivity Dashboard.
+- DL-003 Education Platform.
+- DL-005 Existing React Project.
+- DL-004 permanece centrado em avaliação de interfaces genéricas, não em impor uma direção criativa universal.
+
+Cada cenário exige contexto, regras, critérios e fixtures próprios. Não criar geradores só para aumentar a contagem.
+
+## Fase 6 — AI Provider Layer & Investigation
+
+- Porta única para pedidos de sugestões.
+- Adaptadores provider-agnostic, timeouts e validação de payloads.
+- Fallback determinístico quando a IA falhar ou devolver dados inválidos.
+- IA nunca ultrapassa hard constraints nem decisões explícitas do brief.
+- Adaptadores opcionais para referências, documentação e ferramentas externas, com proveniência.
+
+Esta fase vem depois do primeiro piloto e da definição das necessidades reais. Não introduzir IA antes de provar o fluxo determinístico.
+
+## Release gates
+
+- Alterações de schema incluem testes, documentação e migração.
+- Nenhuma fase é concluída apenas por adicionar ficheiros.
+- Checks locais e CI têm de passar no head exato do PR.
+- Resultados de agentes são avaliados separadamente dos seus relatórios de autoavaliação.
+- Não publicar claims de melhoria sem experiências reproduzíveis.
+- WCAG, heurísticas [R], preferências subjetivas e decisões de produto continuam separados.

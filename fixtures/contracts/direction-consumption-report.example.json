@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactId": "direction-dl001-example-only",
+  "engineVersion": "0.2.0",
+  "implementationStatus": "partial",
+  "decisions": [
+    {
+      "decisionId": "visual-personality",
+      "status": "applied"
+    },
+    {
+      "decisionId": "implementation-stack",
+      "status": "adapted",
+      "reason": "The consuming project already uses a compatible build setup; no new framework was introduced."
+    }
+  ],
+  "recommendations": [
+    {
+      "recommendationId": "visual-identity-anchor",
+      "status": "adopted"
+    },
+    {
+      "recommendationId": "purposeful-motion",
+      "status": "deferred",
+      "reason": "Motion was deferred until the primary responsive layout is complete."
+    }
+  ],
+  "blockers": [],
+  "unresolvedMissingInformation": [
+    "facts.language"
+  ],
+  "evidence": [
+    {
+      "kind": "source-file",
+      "reference": "src/pages/Home.tsx",
+      "description": "Example reference showing where the primary direction was applied.",
+      "relatedId": "visual-personality"
+    }
+  ],
+  "notes": [
+    "Illustrative contract example only; not evidence of a real Integra-guided run."
+  ]
+}

@@ -20,11 +20,15 @@ const reportSchema = readJson("schemas/report.schema.json");
 const scenarioSchema = readJson("schemas/scenario.schema.json");
 const findingsSchema = readJson("schemas/expected-findings.schema.json");
 const directionSchema = readJson("schemas/direction-artifact.schema.json");
+const consumptionSchema = readJson("schemas/direction-consumption-report.schema.json");
+const experimentSchema = readJson("schemas/design-experiment.schema.json");
 addFormats(ajv);
 const validateReport = ajv.compile(reportSchema as object);
 const validateScenario = ajv.compile(scenarioSchema as object);
 const validateFindings = ajv.compile(findingsSchema as object);
 const validateDirection = ajv.compile(directionSchema as object);
+const validateConsumption = ajv.compile(consumptionSchema as object);
+ajv.compile(experimentSchema as object);
 
 function assertValid(
   label: string,
@@ -101,6 +105,11 @@ assertValid(
   readJson("fixtures/reports/example-inconclusive.json"),
   validateReport,
 );
+assertValid(
+  "Example Direction Consumption Report",
+  readJson("fixtures/contracts/direction-consumption-report.example.json"),
+  validateConsumption,
+);
 
 const dl001 = readJson("fixtures/brief-data/DL-001.json") as {
   directionContext?: unknown;
@@ -119,7 +128,7 @@ if (directionValidation.status !== "passed") {
   const details = Object.values(directionValidation.checks)
     .map((check) => check.id + ": " + check.status + " — " + check.description)
     .join("\n");
-  throw new Error("DL-001 Direction Artifact validation did not pass:\\n" + details);
+  throw new Error("DL-001 Direction Artifact validation did not pass:\n" + details);
 }
 if (directionResult.diagnostics.length > 0) {
   throw new Error(
@@ -129,11 +138,14 @@ if (directionResult.diagnostics.length > 0) {
 }
 
 console.log(
-  "Integra fixtures valid: " + ids.size + " scenarios, 4 schemas, all referenced paths exist.",
+  "Integra fixtures valid: " + ids.size + " scenarios, 6 schemas compiled, all referenced paths exist.",
 );
 console.log(
-  "DL-001 deterministic Direction Artifact generated and schema-valid (8 sections).",
+  "DL-001 deterministic Direction Artifact generated and passed all four validation layers (8 sections).",
 );
 console.log(
-  "Note: this validates definitions and direction contracts, not generated UI quality or the React fixture build.",
+  "Example Direction Consumption Report validates against its versioned contract.",
+);
+console.log(
+  "Note: this validates contracts and direction definitions, not generated UI quality or the React fixture build.",
 );

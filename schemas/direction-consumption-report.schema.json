@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://integra.dev/schemas/direction-consumption-report.schema.json",
+  "title": "Integra Direction Consumption Report",
+  "description": "Agent-reported outcomes. This report is not independent verification of the implemented interface.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "artifactId",
+    "engineVersion",
+    "implementationStatus",
+    "decisions",
+    "recommendations",
+    "blockers",
+    "unresolvedMissingInformation",
+    "evidence",
+    "notes"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "artifactId": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "engineVersion": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "implementationStatus": { "enum": ["completed", "partial", "blocked"] },
+    "decisions": {
+      "type": "array",
+      "maxItems": 500,
+      "items": { "$ref": "#/$defs/decisionOutcome" }
+    },
+    "recommendations": {
+      "type": "array",
+      "maxItems": 500,
+      "items": { "$ref": "#/$defs/recommendationOutcome" }
+    },
+    "blockers": { "$ref": "#/$defs/stringList" },
+    "unresolvedMissingInformation": { "$ref": "#/$defs/stringList" },
+    "evidence": {
+      "type": "array",
+      "maxItems": 500,
+      "items": { "$ref": "#/$defs/evidence" }
+    },
+    "notes": { "$ref": "#/$defs/stringList" }
+  },
+  "$defs": {
+    "identifier": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "reason": { "type": "string", "minLength": 1, "maxLength": 2000 },
+    "stringList": {
+      "type": "array",
+      "maxItems": 100,
+      "items": { "type": "string", "minLength": 1, "maxLength": 2000 }
+    },
+    "decisionOutcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decisionId", "status"],
+      "properties": {
+        "decisionId": { "$ref": "#/$defs/identifier" },
+        "status": { "enum": ["applied", "adapted", "not-applied"] },
+        "reason": { "$ref": "#/$defs/reason" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "status": { "enum": ["adapted", "not-applied"] } },
+            "required": ["status"]
+          },
+          "then": {
+            "properties": { "reason": { "$ref": "#/$defs/reason" } },
+            "required": ["reason"]
+          }
+        }
+      ]
+    },
+    "recommendationOutcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["recommendationId", "status"],
+      "properties": {
+        "recommendationId": { "$ref": "#/$defs/identifier" },
+        "status": { "enum": ["adopted", "adapted", "deferred", "not-applied"] },
+        "reason": { "$ref": "#/$defs/reason" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "status": { "enum": ["adapted", "deferred", "not-applied"] } },
+            "required": ["status"]
+          },
+          "then": {
+            "properties": { "reason": { "$ref": "#/$defs/reason" } },
+            "required": ["reason"]
+          }
+        }
+      ]
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "reference", "description"],
+      "properties": {
+        "kind": { "enum": ["source-file", "screenshot", "test", "url", "other"] },
+        "reference": { "type": "string", "minLength": 1, "maxLength": 2048 },
+        "description": { "type": "string", "minLength": 1, "maxLength": 2000 },
+        "relatedId": { "$ref": "#/$defs/identifier" }
+      }
+    }
+  }
+}

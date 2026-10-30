@@ -1,34 +1,37 @@
 # Integra — AI Design Engine v5
 
-**Uma base modular para gerar, analisar e melhorar interfaces com direções e evidências verificáveis.**
+**Um motor modular para transformar briefs e contexto em direção de design estruturada, rastreável e verificável — pronta para ser consumida por agentes externos.**
 
-> Estado atual: **Fase 2 — primeiro Direction Engine determinístico em implementação**. A fundação inclui contratos partilhados, normalização de contexto estruturado, resolução mínima de restrições e geração das oito áreas do Direction Artifact para o cenário DL-001. O caminho funciona sem fornecedores de IA. A integração com um agente externo de criação de sites será validada como próximo teste prático.
+> **Estado atual:** fundação determinística da Phase 2 concluída para DL-001. O Direction Artifact 1.1.0 é gerado sem IA e validado em quatro camadas. Esta branch acrescenta ferramentas de CLI, contratos de integração com agentes e formatos para experiências controladas.
 
 ## O que é o Integra?
 
-O Integra é a nova identidade de trabalho do AI Design Engine v5. A arquitetura propõe um núcleo partilhado com três capacidades:
+Integra não é um gerador de sites nem um editor visual. É uma camada de direção e qualidade entre a intenção do projeto e o agente que implementa a interface.
 
-- **Direction:** transforma objetivos e contexto em direções visuais coerentes e aplicáveis.
-- **Refinement:** encontra problemas verificáveis e recomenda melhorias específicas.
+- **Direction:** transforma objetivos e contexto em decisões e recomendações visuais aplicáveis.
+- **Refinement:** identifica problemas verificáveis e recomenda melhorias específicas.
 - **Investigation:** recolhe contexto e evidências através de adaptadores opcionais.
+- **V5 Design Lab:** testa cenários e compara resultados sem confundir recomendações com correções comprovadas.
 
-O **V5 Design Lab** é a bancada de testes que avalia os resultados sem confundir uma recomendação com uma correção comprovada.
+O objetivo é reduzir improviso e padrões genéricos, sem impor uma estética universal ou inventar informação ausente.
 
-## Princípios de construção
+## Princípios
 
-1. Regras determinísticas são a base; IA é um enriquecimento opcional.
-2. O mesmo contexto normalizado e a mesma versão do motor devem produzir o mesmo artefacto.
-3. Factos, restrições explícitas e preferências humanas são tratados de forma distinta.
-4. Texto livre continua disponível para leitura humana; decisões bloqueantes usam restrições estruturadas.
-5. Informação ausente é preservada em missingInformation, nunca inventada para preencher as oito áreas.
-6. A origem das decisões é rastreável (brief, rule, ai, default).
-7. WCAG estabelecido não é confundido com recomendações heurísticas [R].
-8. O núcleo não depende de API keys, serviços externos ou ferramentas de browser.
+1. Regras determinísticas são a base; IA é enriquecimento opcional.
+2. O mesmo contexto normalizado e a mesma versão do motor produzem o mesmo artefacto.
+3. Factos, restrições explícitas, preferências e heurísticas são tratados de forma distinta.
+4. Texto livre preserva intenção; restrições bloqueantes usam estrutura tipada.
+5. Informação ausente fica em missingInformation, nunca é inventada.
+6. Decisões preservam proveniência: brief > rule > ai > default.
+7. WCAG estabelecido não se confunde com recomendações heurísticas [R].
+8. Relatórios de autoavaliação de agentes não substituem verificação independente.
+9. O núcleo não depende de API keys, rede ou ferramentas de browser.
 
 ## Stack e requisitos
 
-- TypeScript + Node.js numa arquitetura modular monolítica.
-- Node.js 24 LTS recomendado; npm 10 ou superior.
+- TypeScript e Node.js numa arquitetura modular monolítica.
+- Node.js 24 e npm 10 ou superior.
+- JSON Schema 2020-12 para contratos serializáveis.
 - React + TypeScript é o primeiro contexto de integração, sem obrigar todos os projetos a usar essa stack.
 
 ## Começar
@@ -38,47 +41,79 @@ npm ci
 npm run check
 ~~~
 
-Comandos individuais:
+## Direction CLI
+
+Gerar o artefacto DL-001 a partir do fixture incluído:
 
 ~~~bash
-npm run typecheck
-npm test
-npm run validate:fixtures
+npm run direction:generate
 ~~~
 
-O package-lock.json está versionado e npm ci instala as dependências bloqueadas. O workflow de GitHub Actions executa a mesma verificação completa em pull requests e em pushes para main.
+O output por defeito é escrito em .integra/runs/direction/DL-001.json (pasta ignorada pelo Git).
 
-## O que já está incluído
+Usar um input próprio:
 
-- Cinco cenários documentados, briefings e fixtures de referência.
-- Esquemas versionados para cenários, relatórios, findings esperados e Direction Artifact.
-- Contratos TypeScript para contexto partilhado e artefactos de direção.
-- Normalizador de contexto com diagnósticos agregados, limites, Unicode NFC e deduplicação estável.
-- Factos tipados para viewports, acessibilidade, idioma, tokens, conteúdo obrigatório e claims proibidas.
-- Restrições estruturadas com caminho, operador, valor e sinalizador hard.
-- Resolver mínimo que filtra candidatos incompatíveis antes de aplicar a precedência de proveniência.
-- Primeira geração determinística das oito áreas do Direction Artifact para DL-001.
-- CI para typecheck, testes e validação de fixtures.
+~~~bash
+npm run direction:generate -- --scenario DL-001 --input ./brief.json --out ./.integra/runs/my-direction.json
+~~~
+
+O input pode ser o objeto DirectionContextInput ou um fixture com a propriedade directionContext.
+
+Escrever o JSON diretamente no stdout:
+
+~~~bash
+npm run direction:generate -- --stdout
+~~~
+
+Validar um artefacto existente:
+
+~~~bash
+npm run direction:validate -- --input ./.integra/runs/my-direction.json
+~~~
+
+A validação usa as quatro camadas já existentes. Exit codes: 0 passed, 1 failed, 2 inconclusive ou com diagnóstico de geração que exige revisão.
+
+## O que já está implementado
+
+- Cinco cenários documentados, briefs, manifests e fixtures.
+- Schemas para cenários, relatórios, findings e Direction Artifact.
+- Context contracts e normalizador com diagnósticos, limites, Unicode NFC e deduplicação estável.
+- Factos tipados para viewports, acessibilidade, idioma, tokens e conteúdo.
+- Restrições estruturadas hard/soft e resolver com precedence.
+- Geração determinística DL-001 nas oito áreas do artefacto.
+- Serialização canónica e identidade estável sem timestamp.
+- Validação estrutural, semântica, de restrições e consistência.
+- CLI para gerar e validar direções sem IA.
+- Contract de consumo do agente e Direction Consumption Report.
+- Schema de experiências pareadas baseline vs Integra-guided.
+- GitHub Actions para typecheck, testes e validação de fixtures.
+
+## Próximo marco: First Agent Pilot
+
+A primeira experiência real deve executar o mesmo agente com o mesmo brief e configuração em dois workspaces equivalentes: baseline e Integra-guided. A única diferença intencional será a presença do Direction Artifact. Outputs, hashes, screenshots e resultados por critério ficam registados.
+
+Consultar:
+
+- docs/implementation-roadmap.md — roadmap oficial.
+- docs/architecture.md — fronteiras e fluxo dos módulos.
+- docs/agent-integration-contract.md — como agentes consomem e reportam a direção.
+- docs/design-experiment-protocol.md — protocolo do primeiro teste controlado.
+- examples/agent-consumer/AGENT-INSTRUCTIONS.md — exemplo de instruções para um agente externo.
 
 ## Limites atuais
 
-A geração de direção implementada cobre apenas o cenário DL-001. Ainda não existe extração automática de briefings Markdown, camada de fornecedores de IA, geração de aplicações completas, mutação de projetos React, runner de browser ou avaliação visual automática. O artefacto é uma especificação de direção para um agente de implementação, não uma prova de que o site final ficou bom.
+A geração determinística está implementada apenas para DL-001. Ainda não existem extração automática de briefs Markdown, AI Provider Layer, runner de browser, avaliação visual automática ou mutação de projetos React. A implementação de um agente externo e a eficácia da direção ainda precisam de ser testadas com experiências reais.
 
 ## Mapa rápido
 
-- docs/ — arquitetura, decisões, especificação e roadmap.
-- schemas/ — contratos JSON validados.
+- docs/ — arquitetura, decisões, contratos e roadmap.
+- schemas/ — contratos JSON versionados.
 - scenarios/ — os cinco cenários do V5 Design Lab.
-- fixtures/ — dados de referência, projetos sintéticos e exemplos.
-- src/contracts/ — formatos partilhados entre módulos.
+- fixtures/ — dados e exemplos de referência.
+- src/contracts/ — formatos partilhados.
 - src/modules/context/ — normalização e validação do contexto.
-- src/modules/direction/ — proveniência, resolver e geração de direção.
-- src/engine/ — futuras fronteiras de coordenação e pipeline.
-- src/lab/ — utilitários independentes de avaliação.
+- src/modules/direction/ — proveniência, resolver, geração e validação.
+- src/cli/ — fronteira de aplicação para comandos locais.
+- src/lab/ — helpers de avaliação.
+- scripts/ — CLI e validação de fixtures.
 - tests/ — testes unitários e de contrato.
-
-## Próximo objetivo prático
-
-Ligar o artefacto DL-001 a um agente de criação de sites. O primeiro ensaio deve comparar duas execuções do mesmo briefing: agente sem direção do Integra e agente com o Direction Artifact. Depois avaliamos se a direção melhora a hierarquia, o foco no produto, a coerência, a responsividade e a acessibilidade, sem assumir que uma recomendação foi aplicada só por estar no artefacto.
-
-Consultar docs/implementation-roadmap.md para a sequência das próximas fases.
