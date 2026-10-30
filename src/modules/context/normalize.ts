@@ -26,7 +26,7 @@ function normalizeStringList(value: unknown, field: string): string[] {
       throw new TypeError(`Context field "${field}" item ${index} must be a string.`);
     }
     const normalized = normalizeText(item, `${field}[${index}]`);
-    const key = normalized.toLocaleLowerCase('en');
+    const key = normalized.toLowerCase();
     if (!seen.has(key)) {
       seen.add(key);
       result.push(normalized);
@@ -62,7 +62,7 @@ export function normalizeDirectionContext(input: unknown): DirectionContextSnaps
 
   for (const field of SCALAR_FIELDS) {
     const value = source[field];
-    if (value === undefined || value === null || value === '') {
+    if (value === undefined || value === '') {
       context.missingInformation.push(field);
       continue;
     }
