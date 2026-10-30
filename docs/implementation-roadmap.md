@@ -9,7 +9,7 @@ Esquemas, manifests dos cenários, briefings, dados de referência, contratos Ty
 Objetivo: transformar briefings e contexto de projeto numa direção visual estruturada, verificável e independente de fornecedores.
 
 1. **Contracts & Artifact:** contrato versionado do Direction Artifact, oito áreas obrigatórias, proveniência e validação estrutural.
-2. **Context Engine:** normalização de objetivos, público, plataforma, stack, restrições e preferências; identificação explícita de informação em falta.
+2. **Context Engine (primeira fatia implementada):** normalizador determinístico de contexto estruturado, validação de tipos/chaves, normalização de whitespace, deduplicação estável e identificação explícita de informação em falta. Extração de briefings em texto livre e integração com manifests continuam pendentes.
 3. **Deterministic Direction Engine:** decisões e recomendações baseadas em regras, contexto e restrições.
 4. **AI Provider Layer:** enriquecimento opcional e agnóstico ao fornecedor, com validação e fallback determinístico.
 5. **Resolver & Artifact Validation:** resolução de conflitos, precedência, consistência e validação semântica/estrutural.
