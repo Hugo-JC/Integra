@@ -159,6 +159,7 @@ export function validateDirectionArtifact(
 
   const constraintIssues: string[] = [];
   let hasInconclusiveConstraint = false;
+  let hasConstraintConflict = false;
   const allDecisions = Object.values(artifact.sections).flatMap((section) => section.decisions);
   const hardConstraints = artifact.context.structuredConstraints.filter((constraint) => constraint.hard);
 
@@ -175,7 +176,10 @@ export function validateDirectionArtifact(
     const result = resolveDecisionWithConstraints([decision], hardConstraints);
     for (const rejected of result.rejected) {
       const detail = decision.id + ': ' + rejected.reason + ' (' + rejected.constraintIds.join(', ') + ')';
-      if (rejected.status === 'conflicted') constraintIssues.push(detail);
+      if (rejected.status === 'conflicted') {
+        hasConstraintConflict = true;
+        constraintIssues.push(detail);
+      }
       else {
         hasInconclusiveConstraint = true;
         constraintIssues.push(detail);
@@ -185,11 +189,11 @@ export function validateDirectionArtifact(
 
   const constraintStatus: VerificationStatus = constraintIssues.length === 0
     ? 'passed'
-    : hasInconclusiveConstraint && !constraintIssues.some((issue) =>
-        issue.includes('violates one or more hard structured constraints'),
-      )
-      ? 'inconclusive'
-      : 'failed';
+    : hasConstraintConflict
+      ? 'failed'
+      : hasInconclusiveConstraint
+        ? 'inconclusive'
+        : 'failed';
   if (constraintIssues.length) {
     findings.push(finding(
       'direction-constraints-unresolved',
