@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://integra.dev/schemas/direction-artifact.schema.json",
+  "title": "Integra Design Direction Artifact",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "artifactId", "engineVersion", "context", "sections"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "artifactId": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "engineVersion": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "context": { "$ref": "#/$defs/context" },
+    "sections": { "$ref": "#/$defs/sections" }
+  },
+  "$defs": {
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["goals", "constraints", "preferences", "stack", "missingInformation"],
+      "properties": {
+        "projectType": { "type": "string", "minLength": 1 },
+        "audience": { "type": "string", "minLength": 1 },
+        "primaryGoal": { "type": "string", "minLength": 1 },
+        "platform": { "type": "string", "minLength": 1 },
+        "goals": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "constraints": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "preferences": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "stack": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "missingInformation": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "value", "source", "reason"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "value": {},
+        "source": { "enum": ["brief", "rule", "ai", "default"] },
+        "reason": { "type": "string", "minLength": 1 },
+        "ruleId": { "type": "string", "minLength": 1 }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "description"],
+      "properties": {
+        "kind": { "enum": ["code", "screenshot", "test", "metric", "text", "external"] },
+        "description": { "type": "string", "minLength": 1 },
+        "file": { "type": "string" },
+        "line": { "type": "integer", "minimum": 1 },
+        "uri": { "type": "string" },
+        "excerpt": { "type": "string" }
+      }
+    },
+    "recommendation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "category", "label", "text", "rationale"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "category": { "enum": ["visual-identity", "color", "typography", "layout", "components", "motion", "accessibility", "implementation-guidance"] },
+        "label": { "const": "[R]" },
+        "text": { "type": "string", "minLength": 1 },
+        "rationale": { "type": "string", "minLength": 1 },
+        "evidence": { "type": "array", "items": { "$ref": "#/$defs/evidence" } }
+      }
+    },
+    "section": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["summary", "decisions", "recommendations"],
+      "properties": {
+        "summary": { "type": "string", "minLength": 1 },
+        "decisions": { "type": "array", "items": { "$ref": "#/$defs/decision" } },
+        "recommendations": { "type": "array", "items": { "$ref": "#/$defs/recommendation" } }
+      }
+    },
+    "sections": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["visualIdentity", "colorSystem", "typography", "layoutComposition", "componentPrinciples", "motionInteraction", "accessibility", "implementationGuidance"],
+      "properties": {
+        "visualIdentity": { "$ref": "#/$defs/section" },
+        "colorSystem": { "$ref": "#/$defs/section" },
+        "typography": { "$ref": "#/$defs/section" },
+        "layoutComposition": { "$ref": "#/$defs/section" },
+        "componentPrinciples": { "$ref": "#/$defs/section" },
+        "motionInteraction": { "$ref": "#/$defs/section" },
+        "accessibility": { "$ref": "#/$defs/section" },
+        "implementationGuidance": { "$ref": "#/$defs/section" }
+      }
+    }
+  }
+}

@@ -17,10 +17,12 @@ const ajv = new Ajv2020({
 const reportSchema = readJson("schemas/report.schema.json");
 const scenarioSchema = readJson("schemas/scenario.schema.json");
 const findingsSchema = readJson("schemas/expected-findings.schema.json");
+const directionSchema = readJson("schemas/direction-artifact.schema.json");
 addFormats(ajv);
 const validateReport = ajv.compile(reportSchema as object);
 const validateScenario = ajv.compile(scenarioSchema as object);
 const validateFindings = ajv.compile(findingsSchema as object);
+const validateDirection = ajv.compile(directionSchema as object);
 
 function assertValid(
   label: string,
@@ -99,7 +101,7 @@ assertValid(
 );
 
 console.log(
-  `Integra fixtures valid: ${ids.size} scenarios, 3 schemas, all referenced paths exist.`,
+  `Integra fixtures valid: ${ids.size} scenarios, 4 schemas, all referenced paths exist.`,
 );
 console.log(
   "Note: this validates definitions and contracts, not generated UI quality or the React fixture build.",

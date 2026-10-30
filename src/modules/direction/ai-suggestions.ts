@@ -8,6 +8,7 @@ const CATEGORIES = new Set<RecommendationCategory>([
   'components',
   'motion',
   'accessibility',
+  'implementation-guidance',
 ]);
 
 const MAX_SUGGESTIONS = 50;

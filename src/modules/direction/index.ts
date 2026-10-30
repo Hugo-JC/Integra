@@ -9,4 +9,8 @@ export type {
   DesignDecision,
   DesignRecommendation,
   RecommendationCategory,
+  DirectionArtifact,
+  DirectionContextSnapshot,
+  DirectionSection,
+  DirectionSectionKey,
 } from './types.js';
