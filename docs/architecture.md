@@ -2,7 +2,7 @@
 
 ## Visión
 
-Integra será una aplicación modular monolítica com um núcleo coordenador e módulos de capacidade separados. Não vamos começar com microserviços: a complexidade operacional não se justifica antes de provar os contratos e os fluxos.
+Integra será umaa aplicação modular monolítica com um núcleo coordenador e módulos de capacidade separados. Não vamos começar com microserviços: a complexidade operacional não se justifica antes de provar os contratos e os fluxos.
 
 ```text
 Brief / Project
