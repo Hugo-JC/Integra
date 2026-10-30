@@ -1,9 +1,8 @@
 import { normalizeDirectionContextDetailed } from '../modules/context/index.js';
-import { generateProductLandingDirection } from '../modules/direction/index.js';
 import { validateDirectionArtifact } from '../modules/direction/index.js';
-import type { DirectionContextSnapshot } from '../contracts/direction-context.js';
-import type { DirectionArtifact, DirectionGenerationResult } from '../modules/direction/types.js';
 import type { DirectionArtifactValidationResult } from '../modules/direction/artifact-validation.js';
+import { generateProductLandingDirection } from '../modules/direction/product-landing.js';
+import type { DirectionGenerationResult } from '../modules/direction/product-landing.js';
 
 export interface DirectionGenerateOptions {
   scenario: string;
@@ -112,14 +111,11 @@ export function generateDirectionFromInput(
     throw new TypeError('Direction context is invalid:\n' + details);
   }
 
-  const generation = generateProductLandingDirection(
-    normalized.context as DirectionContextSnapshot,
-  );
+  const generation = generateProductLandingDirection(normalized.context);
   const validation = validateDirectionArtifact(generation.artifact);
-
   return { generation, validation };
 }
 
 export function validateDirectionDocument(input: unknown): DirectionArtifactValidationResult {
-  return validateDirectionArtifact(input as DirectionArtifact);
+  return validateDirectionArtifact(input);
 }
