@@ -41,6 +41,22 @@ async function main(): Promise<void> {
     return;
   }
 
+  if (result.generation.diagnostics.length > 0 || result.validation.status === 'inconclusive') {
+    process.stderr.write('Direction generation is unresolved. No output was written.\n');
+    if (result.generation.diagnostics.length > 0) {
+      process.stderr.write(
+        'Generation diagnostics:\n' +
+        result.generation.diagnostics.map((item) => '- ' + item.code + ': ' + item.message).join('\n') +
+        '\n',
+      );
+    }
+    if (result.validation.status === 'inconclusive') {
+      process.stderr.write(JSON.stringify(result.validation, null, 2) + '\n');
+    }
+    process.exitCode = 2;
+    return;
+  }
+
   const serialized = serializeDirectionArtifact(result.generation.artifact);
   if (options.stdout) {
     process.stdout.write(serialized);
@@ -56,17 +72,6 @@ async function main(): Promise<void> {
     ' · schema ' + result.generation.artifact.schemaVersion +
     ' · validation ' + result.validation.status + '\n',
   );
-
-  if (result.generation.diagnostics.length > 0) {
-    process.stderr.write(
-      'Generation diagnostics:\n' +
-      result.generation.diagnostics.map((item) => '- ' + item.code + ': ' + item.message).join('\n') +
-      '\n',
-    );
-    process.exitCode = 2;
-  } else if (result.validation.status === 'inconclusive') {
-    process.exitCode = 2;
-  }
 }
 
 main().catch((error: unknown) => {
