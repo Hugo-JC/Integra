@@ -27,7 +27,7 @@ Direction  Refinement  Investigation (optional)
 ## Responsabilidades
 
 - **Engine / Orchestrator:** coordena um fluxo, controla falhas e conserva a origem de cada artefacto.
-- **Context:** normaliza briefing, stack, público, restrições e objetivos.
+- **Context:** normaliza contexto estruturado fornecido pelo chamador, preserva a ordem dos dados, remove duplicados triviais e regista campos ausentes sem inferir valores. A extração de briefings em texto livre permanece fora desta primeira fatia.
 - **Direction:** propõe uma direção visual e decisões de sistema coerentes com o contexto.
 - **Refinement:** identifica problemas, explica o impacto e recomenda melhorias verificáveis.
 - **Investigation:** integra referências, ferramentas ou fontes externas através de adaptadores opcionais.

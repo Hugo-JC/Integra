@@ -2,7 +2,7 @@
 
 **Uma base modular para gerar, analisar e melhorar interfaces com evidências verificáveis.**
 
-> Estado atual: **Fase 2 — fundação do Direction Engine em implementação**. A base da Fase 1 (contratos, cenários e fixtures) está concluída; a Fase 2 já inclui a fundação determinística de acessibilidade e o contrato versionado do Direction Artifact. Ainda não contém o Context Engine, o motor de direção completo, integração com fornecedores de IA ou runner de produção.
+> Estado atual: **Fase 2 — fundação do Direction Engine em implementação**. A base da Fase 1 (contratos, cenários e fixtures) está concluída; a Fase 2 já inclui a fundação determinística de acessibilidade e o contrato versionado do Direction Artifact. Inclui agora a primeira fatia do Context Engine: normalização determinística de contexto estruturado e registo de informação em falta. Ainda não inclui extração automática de briefings Markdown, o motor de direção completo, integração com fornecedores de IA ou runner de produção.
 
 ## O que é o Integra?
 
