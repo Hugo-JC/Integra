@@ -40,9 +40,10 @@ describe('normalizeDirectionContext', () => {
     });
   });
 
-  it('does not mark explicitly supplied empty lists as missing only when non-empty', () => {
+  it('tracks absent lists independently from supplied values', () => {
     const result = normalizeDirectionContext({ goals: ['Ship a prototype'] });
-    expect(result.missingInformation).toContain('goals');
+    expect(result.missingInformation).not.toContain('goals');
+    expect(result.missingInformation).toContain('constraints');
     expect(result.goals).toEqual(['Ship a prototype']);
   });
 
