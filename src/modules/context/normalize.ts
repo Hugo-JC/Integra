@@ -6,7 +6,7 @@ const ARRAY_FIELDS = ['goals', 'constraints', 'preferences', 'stack'] as const;
 const ALLOWED_FIELDS = new Set<string>([...SCALAR_FIELDS, ...ARRAY_FIELDS]);
 
 function normalizeText(value: string, field: string): string {
-  const normalized = value.trim().replace(/\\s+/g, ' ');
+  const normalized = value.trim().replace(/\s+/g, ' ');
   if (normalized.length === 0) {
     throw new TypeError(`Context field "${field}" must not be empty.`);
   }
