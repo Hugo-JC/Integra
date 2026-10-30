@@ -13,6 +13,7 @@ This slice moves the Direction Engine from contracts and isolated helpers to its
 - Deterministic Direction Artifact generation for all eight areas of scenario DL-001.
 - Canonical JSON serialization and stable artifact identity without timestamps.
 - GitHub Actions checks for typecheck, tests and fixture validation.
+- Conditional provenance requirements are compatible with Ajv strict mode.
 
 ## Direction generation boundary
 
