@@ -2,7 +2,7 @@
   "name": "integra",
   "version": "0.2.0",
   "private": true,
-  "description": "Integra AI Design Engine v5 — contracts and V5 Design Lab foundation",
+  "description": "Integra AI Design Engine v5 — deterministic design direction and evaluation foundation",
   "type": "module",
   "engines": {
     "node": ">=24 <27",
@@ -12,6 +12,8 @@
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "validate:fixtures": "tsx scripts/validate-fixtures.ts",
+    "direction:generate": "tsx scripts/direction-generate.ts",
+    "direction:validate": "tsx scripts/direction-validate.ts",
     "check": "npm run typecheck && npm test && npm run validate:fixtures"
   },
   "dependencies": {

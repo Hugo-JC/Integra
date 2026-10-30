@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://integra.dev/schemas/design-experiment.schema.json",
+  "title": "Integra Paired Design Experiment",
+  "description": "A controlled baseline vs Integra-guided comparison using shared agent and model controls.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "experimentId",
+    "scenarioId",
+    "briefSha256",
+    "controls",
+    "runs",
+    "evaluation",
+    "limitations"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "experimentId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 128
+    },
+    "scenarioId": { "type": "string", "pattern": "^DL-[0-9]{3}$" },
+    "briefSha256": { "$ref": "#/$defs/sha256" },
+    "controls": { "$ref": "#/$defs/controls" },
+    "runs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["baseline", "integraGuided"],
+      "properties": {
+        "baseline": { "$ref": "#/$defs/baselineRun" },
+        "integraGuided": { "$ref": "#/$defs/guidedRun" }
+      }
+    },
+    "evaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["criteria", "summary"],
+      "properties": {
+        "criteria": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": { "$ref": "#/$defs/criterionResult" }
+        },
+        "summary": { "type": "string", "minLength": 1, "maxLength": 4000 }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "maxItems": 100,
+      "items": { "type": "string", "minLength": 1, "maxLength": 2000 }
+    }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "controls": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["agentId", "agentVersion", "modelId", "modelVersion", "configurationSha256"],
+      "properties": {
+        "agentId": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "agentVersion": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "modelId": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "modelVersion": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "configurationSha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "path", "description"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "kind": {
+          "enum": ["screenshot", "dom-snapshot", "source", "test", "trace", "manual-note"]
+        },
+        "path": { "type": "string", "minLength": 1, "maxLength": 2048 },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "description": { "type": "string", "minLength": 1, "maxLength": 2000 }
+      }
+    },
+    "baselineRun": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["outputPath", "outputSha256", "evidence"],
+      "properties": {
+        "outputPath": { "type": "string", "minLength": 1, "maxLength": 2048 },
+        "outputSha256": { "$ref": "#/$defs/sha256" },
+        "evidence": {
+          "type": "array",
+          "maxItems": 200,
+          "items": { "$ref": "#/$defs/evidence" }
+        }
+      }
+    },
+    "guidedRun": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["outputPath", "outputSha256", "evidence", "directionArtifact"],
+      "properties": {
+        "outputPath": { "type": "string", "minLength": 1, "maxLength": 2048 },
+        "outputSha256": { "$ref": "#/$defs/sha256" },
+        "evidence": {
+          "type": "array",
+          "maxItems": 200,
+          "items": { "$ref": "#/$defs/evidence" }
+        },
+        "directionArtifact": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["artifactId", "schemaVersion", "path", "sha256"],
+          "properties": {
+            "artifactId": { "type": "string", "minLength": 1, "maxLength": 128 },
+            "schemaVersion": { "const": "1.1.0" },
+            "path": { "type": "string", "minLength": 1, "maxLength": 2048 },
+            "sha256": { "$ref": "#/$defs/sha256" }
+          }
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "note"],
+      "properties": {
+        "status": { "enum": ["pass", "partial", "fail", "not-verifiable"] },
+        "note": { "type": "string", "minLength": 1, "maxLength": 2000 }
+      }
+    },
+    "criterionResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "criterion",
+        "baseline",
+        "integraGuided",
+        "baselineEvidenceIds",
+        "integraGuidedEvidenceIds"
+      ],
+      "properties": {
+        "criterion": {
+          "enum": [
+            "product-focus",
+            "information-hierarchy",
+            "visual-coherence",
+            "content-completeness",
+            "responsive-behavior",
+            "accessibility",
+            "interaction-states",
+            "implementation-discipline"
+          ]
+        },
+        "baseline": { "$ref": "#/$defs/result" },
+        "integraGuided": { "$ref": "#/$defs/result" },
+        "baselineEvidenceIds": {
+          "type": "array",
+          "maxItems": 200,
+          "items": { "type": "string", "minLength": 1, "maxLength": 128 }
+        },
+        "integraGuidedEvidenceIds": {
+          "type": "array",
+          "maxItems": 200,
+          "items": { "type": "string", "minLength": 1, "maxLength": 128 }
+        }
+      }
+    }
+  }
+}

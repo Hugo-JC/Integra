@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- Added provider-neutral Direction CLI commands to generate and validate DL-001 artifacts.
+- Added an Agent Integration Contract and example consumer instructions.
+- Added a versioned Direction Consumption Report contract for agent-reported implementation outcomes.
+- Added a paired Design Experiment contract for baseline vs Integra-guided evaluation.
+- Added a controlled experiment protocol that preserves shared run controls, hashes, evidence and non-verifiable outcomes.
+- Updated architecture, roadmap and README to reflect the merged four-layer artifact validation and the first external-agent milestone.
+
 ## 0.2.0 — Direction Engine foundation
 
 - Moved shared direction context contracts into src/contracts/.
