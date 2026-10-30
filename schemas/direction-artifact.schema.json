@@ -4,92 +4,529 @@
   "title": "Integra Design Direction Artifact",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schemaVersion", "artifactId", "engineVersion", "context", "sections"],
+  "required": [
+    "schemaVersion",
+    "artifactId",
+    "engineVersion",
+    "context",
+    "sections"
+  ],
   "properties": {
-    "schemaVersion": { "const": "1.0.0" },
-    "artifactId": { "type": "string", "minLength": 1, "maxLength": 128 },
-    "engineVersion": { "type": "string", "minLength": 1, "maxLength": 128 },
-    "context": { "$ref": "#/$defs/context" },
-    "sections": { "$ref": "#/$defs/sections" }
+    "schemaVersion": {
+      "const": "1.1.0"
+    },
+    "artifactId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "engineVersion": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "context": {
+      "$ref": "#/$defs/context"
+    },
+    "sections": {
+      "$ref": "#/$defs/sections"
+    }
   },
   "$defs": {
+    "scalar": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        }
+      ]
+    },
+    "contextStringList": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2000
+      }
+    },
+    "viewport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "width",
+        "height"
+      ],
+      "properties": {
+        "width": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        }
+      }
+    },
+    "designToken": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "value"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "kind": {
+          "enum": [
+            "color",
+            "typography",
+            "spacing",
+            "radius",
+            "shadow",
+            "other"
+          ]
+        }
+      }
+    },
+    "facts": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "viewports": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/$defs/viewport"
+          }
+        },
+        "accessibilityTarget": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "language": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "existingTokens": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/designToken"
+          }
+        },
+        "prohibitedClaims": {
+          "$ref": "#/$defs/contextStringList"
+        },
+        "requiredContent": {
+          "$ref": "#/$defs/contextStringList"
+        }
+      }
+    },
+    "structuredConstraint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "path",
+        "operator",
+        "value",
+        "hard"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "path": {
+          "enum": [
+            "project.platform",
+            "project.language",
+            "accessibility.target",
+            "viewport.targets",
+            "design.tokens",
+            "design.visualPersonality",
+            "design.colorPalette",
+            "design.typography",
+            "content.required",
+            "content.prohibitedClaims",
+            "motion.reducedMotion",
+            "implementation.stack"
+          ]
+        },
+        "operator": {
+          "enum": [
+            "equals",
+            "not-equals",
+            "includes",
+            "excludes",
+            "min",
+            "max",
+            "one-of",
+            "none-of"
+          ]
+        },
+        "value": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/scalar"
+            },
+            {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 100,
+              "items": {
+                "$ref": "#/$defs/scalar"
+              }
+            }
+          ]
+        },
+        "hard": {
+          "type": "boolean"
+        }
+      }
+    },
     "context": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["goals", "constraints", "preferences", "stack", "missingInformation"],
+      "required": [
+        "goals",
+        "constraints",
+        "preferences",
+        "stack",
+        "structuredConstraints",
+        "missingInformation"
+      ],
       "properties": {
-        "projectType": { "type": "string", "minLength": 1 },
-        "audience": { "type": "string", "minLength": 1 },
-        "primaryGoal": { "type": "string", "minLength": 1 },
-        "platform": { "type": "string", "minLength": 1 },
-        "goals": { "type": "array", "items": { "type": "string", "minLength": 1 } },
-        "constraints": { "type": "array", "items": { "type": "string", "minLength": 1 } },
-        "preferences": { "type": "array", "items": { "type": "string", "minLength": 1 } },
-        "stack": { "type": "array", "items": { "type": "string", "minLength": 1 } },
-        "missingInformation": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+        "projectType": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "audience": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "primaryGoal": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "platform": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "goals": {
+          "$ref": "#/$defs/contextStringList"
+        },
+        "constraints": {
+          "$ref": "#/$defs/contextStringList"
+        },
+        "preferences": {
+          "$ref": "#/$defs/contextStringList"
+        },
+        "stack": {
+          "$ref": "#/$defs/contextStringList"
+        },
+        "facts": {
+          "$ref": "#/$defs/facts"
+        },
+        "structuredConstraints": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/structuredConstraint"
+          }
+        },
+        "missingInformation": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
       }
     },
     "decision": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "value", "source", "reason"],
+      "required": [
+        "id",
+        "value",
+        "source",
+        "reason"
+      ],
       "properties": {
-        "id": { "type": "string", "minLength": 1 },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
         "value": {},
-        "source": { "enum": ["brief", "rule", "ai", "default"] },
-        "reason": { "type": "string", "minLength": 1 },
-        "ruleId": { "type": "string", "minLength": 1 }
-      }
+        "source": {
+          "enum": [
+            "brief",
+            "rule",
+            "ai",
+            "default"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "ruleId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "targetPath": {
+          "enum": [
+            "project.platform",
+            "project.language",
+            "accessibility.target",
+            "viewport.targets",
+            "design.tokens",
+            "design.visualPersonality",
+            "design.colorPalette",
+            "design.typography",
+            "content.required",
+            "content.prohibitedClaims",
+            "motion.reducedMotion",
+            "implementation.stack"
+          ]
+        },
+        "sourcePath": {
+          "type": "string",
+          "pattern": "^context(\\.[A-Za-z][A-Za-z0-9]*)+$",
+          "maxLength": 128
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "source": {
+                "const": "brief"
+              }
+            },
+            "required": [
+              "source"
+            ]
+          },
+          "then": {
+            "properties": {
+              "sourcePath": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "sourcePath"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "source": {
+                "const": "rule"
+              }
+            },
+            "required": [
+              "source"
+            ]
+          },
+          "then": {
+            "properties": {
+              "ruleId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "ruleId"
+            ]
+          }
+        }
+      ]
     },
     "evidence": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["kind", "description"],
+      "required": [
+        "kind",
+        "description"
+      ],
       "properties": {
-        "kind": { "enum": ["code", "screenshot", "test", "metric", "text", "external"] },
-        "description": { "type": "string", "minLength": 1 },
-        "file": { "type": "string" },
-        "line": { "type": "integer", "minimum": 1 },
-        "uri": { "type": "string" },
-        "excerpt": { "type": "string" }
+        "kind": {
+          "enum": [
+            "code",
+            "screenshot",
+            "test",
+            "metric",
+            "text",
+            "external"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "file": {
+          "type": "string"
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "uri": {
+          "type": "string"
+        },
+        "excerpt": {
+          "type": "string"
+        }
       }
     },
     "recommendation": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "category", "label", "text", "rationale"],
+      "required": [
+        "id",
+        "category",
+        "label",
+        "text",
+        "rationale"
+      ],
       "properties": {
-        "id": { "type": "string", "minLength": 1 },
-        "category": { "enum": ["visual-identity", "color", "typography", "layout", "components", "motion", "accessibility", "implementation-guidance"] },
-        "label": { "const": "[R]" },
-        "text": { "type": "string", "minLength": 1 },
-        "rationale": { "type": "string", "minLength": 1 },
-        "evidence": { "type": "array", "items": { "$ref": "#/$defs/evidence" } }
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "category": {
+          "enum": [
+            "visual-identity",
+            "color",
+            "typography",
+            "layout",
+            "components",
+            "motion",
+            "accessibility",
+            "implementation-guidance"
+          ]
+        },
+        "label": {
+          "const": "[R]"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          }
+        }
       }
     },
     "section": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["summary", "decisions", "recommendations"],
+      "required": [
+        "summary",
+        "decisions",
+        "recommendations"
+      ],
       "properties": {
-        "summary": { "type": "string", "minLength": 1 },
-        "decisions": { "type": "array", "items": { "$ref": "#/$defs/decision" } },
-        "recommendations": { "type": "array", "items": { "$ref": "#/$defs/recommendation" } }
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "decisions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/decision"
+          }
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/recommendation"
+          }
+        }
       }
     },
     "sections": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["visualIdentity", "colorSystem", "typography", "layoutComposition", "componentPrinciples", "motionInteraction", "accessibility", "implementationGuidance"],
+      "required": [
+        "visualIdentity",
+        "colorSystem",
+        "typography",
+        "layoutComposition",
+        "componentPrinciples",
+        "motionInteraction",
+        "accessibility",
+        "implementationGuidance"
+      ],
       "properties": {
-        "visualIdentity": { "$ref": "#/$defs/section" },
-        "colorSystem": { "$ref": "#/$defs/section" },
-        "typography": { "$ref": "#/$defs/section" },
-        "layoutComposition": { "$ref": "#/$defs/section" },
-        "componentPrinciples": { "$ref": "#/$defs/section" },
-        "motionInteraction": { "$ref": "#/$defs/section" },
-        "accessibility": { "$ref": "#/$defs/section" },
-        "implementationGuidance": { "$ref": "#/$defs/section" }
+        "visualIdentity": {
+          "$ref": "#/$defs/section"
+        },
+        "colorSystem": {
+          "$ref": "#/$defs/section"
+        },
+        "typography": {
+          "$ref": "#/$defs/section"
+        },
+        "layoutComposition": {
+          "$ref": "#/$defs/section"
+        },
+        "componentPrinciples": {
+          "$ref": "#/$defs/section"
+        },
+        "motionInteraction": {
+          "$ref": "#/$defs/section"
+        },
+        "accessibility": {
+          "$ref": "#/$defs/section"
+        },
+        "implementationGuidance": {
+          "$ref": "#/$defs/section"
+        }
       }
     }
   }

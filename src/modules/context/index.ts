@@ -1,2 +1,11 @@
-export { normalizeDirectionContext } from './normalize.js';
-export type { DirectionContextInput, NormalizedDirectionContext } from './types.js';
+export {
+  ContextValidationError,
+  normalizeDirectionContext,
+  normalizeDirectionContextDetailed,
+} from './normalize.js';
+export type {
+  ContextIssueCode,
+  ContextNormalizationResult,
+  ContextValidationIssue,
+  DirectionContextInput,
+} from './types.js';

@@ -17,8 +17,10 @@ const section: DirectionSection = {
   summary: 'A concise direction summary.',
   decisions: [{
     id: 'visual-tone',
+    targetPath: 'design.visualPersonality',
     value: 'confident and calm',
     source: 'brief',
+    sourcePath: 'context.preferences',
     reason: 'Explicitly requested in the brief.',
   }],
   recommendations: [{
@@ -31,8 +33,8 @@ const section: DirectionSection = {
 };
 
 const validArtifact: DirectionArtifact = {
-  schemaVersion: '1.0.0',
-  artifactId: 'direction-dl-001',
+  schemaVersion: '1.1.0',
+  artifactId: 'direction-dl-001-test',
   engineVersion: '0.2.0',
   context: {
     projectType: 'product landing page',
@@ -40,6 +42,7 @@ const validArtifact: DirectionArtifact = {
     constraints: ['Must support mobile layouts'],
     preferences: ['Confident visual tone'],
     stack: ['React', 'TypeScript'],
+    structuredConstraints: [],
     missingInformation: [],
   },
   sections: {
@@ -77,9 +80,31 @@ describe('Direction Artifact schema', () => {
     expect(validate(invalid)).toBe(false);
   });
 
+  it('validates stable source paths for brief-derived decisions', () => {
+    const invalid = structuredClone(validArtifact);
+    (invalid.sections.visualIdentity.decisions[0] as { sourcePath: string }).sourcePath = 'audience';
+    expect(validate(invalid)).toBe(false);
+  });
+
+  it('requires stable source references for brief decisions and rule IDs for rule decisions', () => {
+    const invalidBrief = structuredClone(validArtifact);
+    delete (invalidBrief.sections.visualIdentity.decisions[0] as { sourcePath?: string }).sourcePath;
+    expect(validate(invalidBrief)).toBe(false);
+
+    const invalidRule = structuredClone(validArtifact);
+    const decision = invalidRule.sections.typography.decisions[0] as {
+      source: string;
+      ruleId?: string;
+      sourcePath?: string;
+    };
+    decision.source = 'rule';
+    delete decision.sourcePath;
+    expect(validate(invalidRule)).toBe(false);
+  });
+
   it('allows incomplete context to be reported instead of fabricated', () => {
     const incompleteContext = structuredClone(validArtifact);
-    incompleteContext.context.missingInformation = ['Target audience'];
+    incompleteContext.context.missingInformation = ['audience'];
     delete incompleteContext.context.audience;
     expect(validate(incompleteContext)).toBe(true);
   });

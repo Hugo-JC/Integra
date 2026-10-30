@@ -4,6 +4,8 @@ import type { FormatsPlugin } from "ajv-formats";
 import fs from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
+import { normalizeDirectionContextDetailed } from "../src/modules/context/index.js";
+import { generateProductLandingDirection } from "../src/modules/direction/index.js";
 
 const addFormats: FormatsPlugin = createRequire(import.meta.url)("ajv-formats");
 const root = process.cwd();
@@ -31,9 +33,9 @@ function assertValid(
 ): void {
   if (!validator(value)) {
     const details = (validator.errors ?? [])
-      .map((error) => `${error.instancePath || "/"} ${error.message}`)
+      .map((error) => (error.instancePath || "/") + " " + error.message)
       .join("\n");
-    throw new Error(`${label} is invalid:\n${details}`);
+    throw new Error(label + " is invalid:\n" + details);
   }
 }
 
@@ -44,7 +46,7 @@ if (!Array.isArray(index.scenarioManifests))
   throw new Error("scenarios/index.json must contain scenarioManifests[]");
 if (index.scenarioManifests.length !== 5)
   throw new Error(
-    `Expected exactly 5 scenarios, received ${index.scenarioManifests.length}`,
+    "Expected exactly 5 scenarios, received " + index.scenarioManifests.length,
   );
 
 const ids = new Set<string>();
@@ -54,7 +56,7 @@ for (const manifestPath of index.scenarioManifests) {
     manifestPath.includes("..") ||
     path.isAbsolute(manifestPath)
   ) {
-    throw new Error(`Unsafe manifest path: ${String(manifestPath)}`);
+    throw new Error("Unsafe manifest path: " + String(manifestPath));
   }
   const manifest = readJson(manifestPath) as {
     id: string;
@@ -64,7 +66,7 @@ for (const manifestPath of index.scenarioManifests) {
   };
   assertValid(manifestPath, manifest, validateScenario);
   if (ids.has(manifest.id))
-    throw new Error(`Duplicate scenario ID: ${manifest.id}`);
+    throw new Error("Duplicate scenario ID: " + manifest.id);
   ids.add(manifest.id);
   const weightSum = manifest.evaluation.criteria.reduce(
     (sum, item) => sum + item.weight,
@@ -72,7 +74,7 @@ for (const manifestPath of index.scenarioManifests) {
   );
   if (weightSum !== 100)
     throw new Error(
-      `${manifest.id} criterion weights must sum to 100; received ${weightSum}`,
+      manifest.id + " criterion weights must sum to 100; received " + weightSum,
     );
   const referencedPaths = [
     manifest.briefPath,
@@ -80,10 +82,10 @@ for (const manifestPath of index.scenarioManifests) {
   ];
   for (const relativePath of referencedPaths) {
     if (relativePath.includes("..") || path.isAbsolute(relativePath))
-      throw new Error(`${manifest.id} contains unsafe path: ${relativePath}`);
+      throw new Error(manifest.id + " contains unsafe path: " + relativePath);
     if (!fs.existsSync(path.join(root, relativePath)))
       throw new Error(
-        `${manifest.id} references missing file: ${relativePath}`,
+        manifest.id + " references missing file: " + relativePath,
       );
   }
 }
@@ -100,9 +102,31 @@ assertValid(
   validateReport,
 );
 
+const dl001 = readJson("fixtures/brief-data/DL-001.json") as {
+  directionContext?: unknown;
+};
+const contextResult = normalizeDirectionContextDetailed(dl001.directionContext);
+if (!contextResult.context || contextResult.issues.length > 0) {
+  const details = contextResult.issues
+    .map((issue) => issue.path + " [" + issue.code + "] " + issue.message)
+    .join("\n");
+  throw new Error("DL-001 directionContext is invalid:\n" + details);
+}
+const directionResult = generateProductLandingDirection(contextResult.context);
+assertValid("Generated DL-001 Direction Artifact", directionResult.artifact, validateDirection);
+if (directionResult.diagnostics.length > 0) {
+  throw new Error(
+    "DL-001 Direction Engine has unresolved hard constraints: " +
+    directionResult.diagnostics.map((item) => item.decisionId).join(", "),
+  );
+}
+
 console.log(
-  `Integra fixtures valid: ${ids.size} scenarios, 4 schemas, all referenced paths exist.`,
+  "Integra fixtures valid: " + ids.size + " scenarios, 4 schemas, all referenced paths exist.",
 );
 console.log(
-  "Note: this validates definitions and contracts, not generated UI quality or the React fixture build.",
+  "DL-001 deterministic Direction Artifact generated and schema-valid (8 sections).",
+);
+console.log(
+  "Note: this validates definitions and direction contracts, not generated UI quality or the React fixture build.",
 );
