@@ -342,6 +342,11 @@
             ]
           },
           "then": {
+            "properties": {
+              "sourcePath": {
+                "type": "string"
+              }
+            },
             "required": [
               "sourcePath"
             ]
@@ -359,6 +364,11 @@
             ]
           },
           "then": {
+            "properties": {
+              "ruleId": {
+                "type": "string"
+              }
+            },
             "required": [
               "ruleId"
             ]
