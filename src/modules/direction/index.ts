@@ -1,3 +1,5 @@
+export { validateDirectionArtifact } from './artifact-validation.js';
+export type { DirectionArtifactValidationResult } from './artifact-validation.js';
 export { calculateContrastRatio, evaluateTextContrast } from './contrast.js';
 export type { TextContrastInput, TextContrastResult } from './contrast.js';
 export { validateAiSuggestions } from './ai-suggestions.js';
