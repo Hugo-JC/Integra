@@ -1,77 +1,84 @@
 # Integra — AI Design Engine v5
 
-**Uma base modular para gerar, analisar e melhorar interfaces com evidências verificáveis.**
+**Uma base modular para gerar, analisar e melhorar interfaces com direções e evidências verificáveis.**
 
-> Estado atual: **Fase 2 — fundação do Direction Engine em implementação**. A base da Fase 1 (contratos, cenários e fixtures) está concluída; a Fase 2 já inclui a fundação determinística de acessibilidade e o contrato versionado do Direction Artifact. Inclui agora a primeira fatia do Context Engine: normalização determinística de contexto estruturado e registo de informação em falta. Ainda não inclui extração automática de briefings Markdown, o motor de direção completo, integração com fornecedores de IA ou runner de produção.
+> Estado atual: **Fase 2 — primeiro Direction Engine determinístico em implementação**. A fundação inclui contratos partilhados, normalização de contexto estruturado, resolução mínima de restrições e geração das oito áreas do Direction Artifact para o cenário DL-001. O caminho funciona sem fornecedores de IA. A integração com um agente externo de criação de sites será validada como próximo teste prático.
 
 ## O que é o Integra?
 
 O Integra é a nova identidade de trabalho do AI Design Engine v5. A arquitetura propõe um núcleo partilhado com três capacidades:
 
-- **Direction:** transforma objetivos e contexto em direções visuais coerentes.
+- **Direction:** transforma objetivos e contexto em direções visuais coerentes e aplicáveis.
 - **Refinement:** encontra problemas verificáveis e recomenda melhorias específicas.
 - **Investigation:** recolhe contexto e evidências através de adaptadores opcionais.
 
 O **V5 Design Lab** é a bancada de testes que avalia os resultados sem confundir uma recomendação com uma correção comprovada.
 
-## Decisões iniciais tomadas
+## Princípios de construção
 
-1. **Missão:** geração e análise de interfaces, com contratos e contexto partilhados.
-2. **Stack de referência:** TypeScript + Node.js, numa arquitetura modular monolítica.
-3. **Compatibilidade inicial:** priorizar React + TypeScript; usar HTML/CSS/JavaScript como entrada de análise e adicionar adaptadores específicos quando necessário.
-4. **Investigação externa:** opcional; o caminho principal deve funcionar localmente sem fornecedores externos.
-5. **Dados e baselines:** fixtures e esquemas versionados no repositório; resultados de execução local em `.integra/runs/`, ignorados pelo Git. Apenas baselines revistos devem ser versionados.
-6. **Entrega:** não há deploy configurado nem executado nesta fase. Primeiro validar os contratos e a estrutura local.
-7. **Repositórios de origem:** este scaffold é independente; não modifica `ai-design-engine`, `impeccable` ou `rea`.
+1. Regras determinísticas são a base; IA é um enriquecimento opcional.
+2. O mesmo contexto normalizado e a mesma versão do motor devem produzir o mesmo artefacto.
+3. Factos, restrições explícitas e preferências humanas são tratados de forma distinta.
+4. Texto livre continua disponível para leitura humana; decisões bloqueantes usam restrições estruturadas.
+5. Informação ausente é preservada em missingInformation, nunca inventada para preencher as oito áreas.
+6. A origem das decisões é rastreável (brief, rule, ai, default).
+7. WCAG estabelecido não é confundido com recomendações heurísticas [R].
+8. O núcleo não depende de API keys, serviços externos ou ferramentas de browser.
 
-## Requisitos
+## Stack e requisitos
 
-- Node.js 24 LTS recomendado. Node.js 24 está em Active LTS em outubro de 2026, segundo o calendário oficial: <https://nodejs.org/en/about/previous-releases>.
-- npm incluído com Node.js.
+- TypeScript + Node.js numa arquitetura modular monolítica.
+- Node.js 24 LTS recomendado; npm 10 ou superior.
+- React + TypeScript é o primeiro contexto de integração, sem obrigar todos os projetos a usar essa stack.
 
 ## Começar
 
-```bash
-npm install
+~~~bash
+npm ci
 npm run check
-```
+~~~
 
 Comandos individuais:
 
-```bash
-npm test                 # testes unitários e de contrato
-npm run typecheck        # verificação de tipos TypeScript
-npm run validate:fixtures # valida esquemas, cenários e caminhos de fixtures
-```
+~~~bash
+npm run typecheck
+npm test
+npm run validate:fixtures
+~~~
 
-O primeiro `npm install` requer acesso ao registo npm. Não é incluído `node_modules` no ZIP. **Esta distribuição ainda não tem `package-lock.json`** porque a instalação de dependências não terminou no ambiente de criação; depois de instalares as dependências com sucesso, conserva o lockfile gerado no repositório antes de configurar o deploy.
+O package-lock.json está versionado e npm ci instala as dependências bloqueadas. O workflow de GitHub Actions executa a mesma verificação completa em pull requests e em pushes para main.
 
 ## O que já está incluído
 
-- Arquitetura proposta e decisões registadas em ADRs.
-- Esquemas JSON para cenários, relatórios e listas de resultados esperados.
-- Cinco cenários documentados, com briefings, critérios, pesos e condições de aceitação.
-- Fixtures para problemas visuais conhecidos e um pequeno projeto React sintético para testes futuros.
-- Contratos TypeScript e utilitários puros para pontuação e métricas de deteção.
-- Testes automatizados iniciais para contratos, catálogo e pontuação.
-- Um relatório exemplo marcado como `inconclusive`, não como resultado real.
+- Cinco cenários documentados, briefings e fixtures de referência.
+- Esquemas versionados para cenários, relatórios, findings esperados e Direction Artifact.
+- Contratos TypeScript para contexto partilhado e artefactos de direção.
+- Normalizador de contexto com diagnósticos agregados, limites, Unicode NFC e deduplicação estável.
+- Factos tipados para viewports, acessibilidade, idioma, tokens, conteúdo obrigatório e claims proibidas.
+- Restrições estruturadas com caminho, operador, valor e sinalizador hard.
+- Resolver mínimo que filtra candidatos incompatíveis antes de aplicar a precedência de proveniência.
+- Primeira geração determinística das oito áreas do Direction Artifact para DL-001.
+- CI para typecheck, testes e validação de fixtures.
 
-## Limites desta versão
+## Limites atuais
 
-A Fase 1 não prova que o motor produz boas interfaces. As fixtures são dados de referência; as avaliações subjetivas ainda exigem revisão humana. Os valores de aprovação são limiares iniciais e devem ser calibrados com execuções reais. Nenhuma execução do motor ou deploy é alegada nesta distribuição.
+A geração de direção implementada cobre apenas o cenário DL-001. Ainda não existe extração automática de briefings Markdown, camada de fornecedores de IA, geração de aplicações completas, mutação de projetos React, runner de browser ou avaliação visual automática. O artefacto é uma especificação de direção para um agente de implementação, não uma prova de que o site final ficou bom.
 
 ## Mapa rápido
 
-- `docs/` — arquitetura, decisões, especificação, segurança e plano de entrega.
-- `schemas/` — contratos JSON validados.
-- `scenarios/` — os cinco cenários do V5 Design Lab.
-- `fixtures/` — resultados esperados e projeto de referência.
-- `src/contracts/` — tipos TypeScript.
-- `src/lab/` — funções puras de pontuação e métricas.
-- `tests/` — testes da Fase 1.
-- `src/modules/` — módulos de capacidade, incluindo a fundação do Direction Engine.
-- `schemas/direction-artifact.schema.json` — contrato versionado do artefacto de direção.
+- docs/ — arquitetura, decisões, especificação e roadmap.
+- schemas/ — contratos JSON validados.
+- scenarios/ — os cinco cenários do V5 Design Lab.
+- fixtures/ — dados de referência, projetos sintéticos e exemplos.
+- src/contracts/ — formatos partilhados entre módulos.
+- src/modules/context/ — normalização e validação do contexto.
+- src/modules/direction/ — proveniência, resolver e geração de direção.
+- src/engine/ — futuras fronteiras de coordenação e pipeline.
+- src/lab/ — utilitários independentes de avaliação.
+- tests/ — testes unitários e de contrato.
 
-## Próximo trabalho
+## Próximo objetivo prático
 
-A Fase 2 está a construir o Direction Engine híbrido: primeiro o contrato do artefacto, depois Context Engine, motor determinístico, camada de IA opcional, resolver e integração com o Design Lab. O runner isolado passa para a Fase 3. Consultar `docs/implementation-roadmap.md`.
+Ligar o artefacto DL-001 a um agente de criação de sites. O primeiro ensaio deve comparar duas execuções do mesmo briefing: agente sem direção do Integra e agente com o Direction Artifact. Depois avaliamos se a direção melhora a hierarquia, o foco no produto, a coerência, a responsividade e a acessibilidade, sem assumir que uma recomendação foi aplicada só por estar no artefacto.
+
+Consultar docs/implementation-roadmap.md para a sequência das próximas fases.

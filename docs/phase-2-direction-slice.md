@@ -1,25 +1,28 @@
-# Phase 2 — deterministic Direction slice
+# Phase 2 — deterministic Direction foundation
 
-This commit introduces a deliberately narrow, provider-independent foundation. It does not claim to implement the full Direction Engine.
+This slice moves the Direction Engine from contracts and isolated helpers to its first deterministic scenario output. It does not claim to implement the complete hybrid engine.
 
 ## Included
 
-- WCAG 2.2 SC 1.4.3 (AA) text contrast calculation for opaque `#RGB` and `#RRGGBB` colors.
-- Normal-text and large-text thresholds (4.5:1 and 3:1), surfaced through the existing `CheckResult` and `Finding` contracts.
-- Decision provenance with explicit precedence: brief > deterministic rule > AI > default. Equal-precedence candidates preserve input order.
-- Runtime validation for untrusted AI suggestion payloads, bounded in count and text length, with an optional deterministic compatibility predicate.
-- A `[R]` recommendation classification in the shared Direction types so heuristic recommendations are not confused with WCAG failures.
+- Shared Context contracts in src/contracts/direction-context.ts.
+- Structured facts for viewports, accessibility target, language, existing design tokens, prohibited claims and required content.
+- Structured constraints with stable path, operator, value and hard/soft classification.
+- Context normalizer with aggregate machine-readable diagnostics, null/empty handling, NFC normalization, stable deduplication and bounded input sizes.
+- Minimal decision resolver that applies hard constraints before the existing source precedence.
+- Stable sourcePath and targetPath metadata for decisions.
+- Deterministic Direction Artifact generation for all eight areas of scenario DL-001.
+- Canonical JSON serialization and stable artifact identity without timestamps.
+- GitHub Actions checks for typecheck, tests and fixture validation.
 
-## Boundaries and limitations
+## Direction generation boundary
 
-- Contrast evaluation is a pure helper, not a DOM/CSS analyzer. Callers must supply the actual opaque, composited foreground/background colors and font metrics.
-- Alpha colors, CSS color functions, gradients, images and background compositing are not inferred.
-- Large-text classification uses WCAG point-to-CSS-pixel conversion: at least 24px regular, or at least 14pt (18.666… CSS px) bold (weight >= 700).
-- The contrast ratio is kept at full precision for threshold comparison; presentation layers may round it for display.
-- AI suggestions remain advisory data. Validation checks structure and delegates compatibility to a deterministic callback; it does not establish semantic truth or apply suggestions.
-- The `[R]` marker denotes a heuristic recommendation, not a WCAG criterion or verified defect.
-- No DOM parser, interactive semantics audit, provider integration, API key handling, report schema change or production orchestrator is added.
+The DL-001 generator consumes a normalized context snapshot. It does not read files, parse Markdown, call an AI provider, create a React application or mutate an external project. It does not invent missing brand colors, visual preferences, locale, stack or accessibility conformance claims.
 
-## Verification
+The artifact provides implementation direction to a consuming site-creation agent. It does not prove that the resulting website is visually or functionally correct.
 
-The new Vitest suite covers contrast calculations, thresholds, invalid inputs, provenance precedence and AI payload rejection. Run the repository's full checks with `npm run check` in an environment with dependencies installed.
+## Explicit next work
+
+- Complete four-layer artifact validation (structural, semantic, constraints and consistency).
+- Add the next deterministic scenario slice only when its structured facts and scenario-specific rules are understood.
+- Add the provider-neutral AI candidate boundary after the resolver and hard-constraint semantics are stable.
+- Compare an agent run with the artifact against a baseline run without it.

@@ -20,5 +20,60 @@
       "width": 390,
       "height": 844
     }
-  ]
+  ],
+  "directionContext": {
+    "projectType": "Product landing page",
+    "audience": "Students, freelancers and small teams",
+    "primaryGoal": "Explain the product value proposition and invite visitors to try a demo",
+    "platform": "web",
+    "goals": [
+      "Explain the product clearly",
+      "Invite visitors to try a demo"
+    ],
+    "constraints": [
+      "Do not invent testimonials, customer counts or certifications",
+      "Do not use placeholder text",
+      "Do not rely on external images for essential information",
+      "Prevent horizontal overflow at the supplied viewports",
+      "Do not claim commercial results that were not supplied"
+    ],
+    "preferences": [],
+    "stack": [],
+    "facts": {
+      "viewports": [
+        { "width": 1440, "height": 900 },
+        { "width": 390, "height": 844 }
+      ],
+      "requiredContent": [
+        "product-name",
+        "value-proposition",
+        "primary-action",
+        "three-capabilities",
+        "audience-section",
+        "no-fabricated-testimonials"
+      ],
+      "prohibitedClaims": [
+        "testimonials",
+        "customer-counts",
+        "certifications",
+        "unprovided-commercial-results"
+      ]
+    },
+    "structuredConstraints": [
+      {
+        "id": "keep-required-anti-fabrication-content",
+        "path": "content.required",
+        "operator": "includes",
+        "value": "no-fabricated-testimonials",
+        "hard": true
+      },
+      {
+        "id": "preserve-prohibited-claims-list",
+        "path": "content.prohibitedClaims",
+        "operator": "includes",
+        "value": "testimonials",
+        "hard": true
+      }
+    ]
+  }
 }

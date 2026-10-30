@@ -1,4 +1,8 @@
 import type { EvidenceRecord } from '../../contracts/report.js';
+import type {
+  DirectionContextSnapshot,
+  DirectionConstraintPath,
+} from '../../contracts/direction-context.js';
 
 export type DecisionSource = 'brief' | 'rule' | 'ai' | 'default';
 
@@ -8,6 +12,10 @@ export interface DesignDecision<T = unknown> {
   source: DecisionSource;
   reason: string;
   ruleId?: string;
+  /** Stable context path used to evaluate structured hard constraints. */
+  targetPath?: DirectionConstraintPath;
+  /** Stable origin path for brief-derived values, e.g. context.audience. */
+  sourcePath?: string;
 }
 
 export type RecommendationCategory =
@@ -51,18 +59,6 @@ export type DirectionSectionKey =
   | 'accessibility'
   | 'implementationGuidance';
 
-export interface DirectionContextSnapshot {
-  projectType?: string;
-  audience?: string;
-  primaryGoal?: string;
-  platform?: string;
-  goals: string[];
-  constraints: string[];
-  preferences: string[];
-  stack: string[];
-  missingInformation: string[];
-}
-
 export interface DirectionSection {
   summary: string;
   decisions: DesignDecision[];
@@ -75,9 +71,11 @@ export interface DirectionSection {
  * byte-stable artifacts.
  */
 export interface DirectionArtifact {
-  schemaVersion: '1.0.0';
+  schemaVersion: '1.1.0';
   artifactId: string;
   engineVersion: string;
   context: DirectionContextSnapshot;
   sections: Record<DirectionSectionKey, DirectionSection>;
 }
+
+export type { DirectionContextSnapshot };
