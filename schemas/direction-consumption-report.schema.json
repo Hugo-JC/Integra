@@ -64,7 +64,10 @@
             "properties": { "status": { "enum": ["adapted", "not-applied"] } },
             "required": ["status"]
           },
-          "then": { "required": ["reason"] }
+          "then": {
+            "properties": { "reason": { "$ref": "#/$defs/reason" } },
+            "required": ["reason"]
+          }
         }
       ]
     },
@@ -83,7 +86,10 @@
             "properties": { "status": { "enum": ["adapted", "deferred", "not-applied"] } },
             "required": ["status"]
           },
-          "then": { "required": ["reason"] }
+          "then": {
+            "properties": { "reason": { "$ref": "#/$defs/reason" } },
+            "required": ["reason"]
+          }
         }
       ]
     },
