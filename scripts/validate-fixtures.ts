@@ -101,7 +101,7 @@ assertValid(
 );
 
 console.log(
-  `Integra fixtures valid: ${ids.size} scenarios, 3 schemas, all referenced paths exist.`,
+  `Integra fixtures valid: ${ids.size} scenarios, 4 schemas, all referenced paths exist.`,
 );
 console.log(
   "Note: this validates definitions and contracts, not generated UI quality or the React fixture build.",
