@@ -14,7 +14,8 @@ This commit introduces a deliberately narrow, provider-independent foundation. I
 
 - Contrast evaluation is a pure helper, not a DOM/CSS analyzer. Callers must supply the actual opaque, composited foreground/background colors and font metrics.
 - Alpha colors, CSS color functions, gradients, images and background compositing are not inferred.
-- Large-text classification uses the WCAG thresholds in CSS pixels: at least 24px regular, or at least 18.66px bold (weight >= 700).
+- Large-text classification uses WCAG point-to-CSS-pixel conversion: at least 24px regular, or at least 14pt (18.666… CSS px) bold (weight >= 700).
+- The contrast ratio is kept at full precision for threshold comparison; presentation layers may round it for display.
 - AI suggestions remain advisory data. Validation checks structure and delegates compatibility to a deterministic callback; it does not establish semantic truth or apply suggestions.
 - The `[R]` marker denotes a heuristic recommendation, not a WCAG criterion or verified defect.
 - No DOM parser, interactive semantics audit, provider integration, API key handling, report schema change or production orchestrator is added.
