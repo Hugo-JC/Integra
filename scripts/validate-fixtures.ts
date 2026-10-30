@@ -118,7 +118,7 @@ const directionValidation = validateDirectionArtifact(directionResult.artifact);
 if (directionValidation.status !== "passed") {
   const details = Object.values(directionValidation.checks)
     .map((check) => check.id + ": " + check.status + " — " + check.description)
-    .join("\\n");
+    .join("\n");
   throw new Error("DL-001 Direction Artifact validation did not pass:\\n" + details);
 }
 if (directionResult.diagnostics.length > 0) {
