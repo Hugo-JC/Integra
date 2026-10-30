@@ -50,7 +50,7 @@ O módulo Direction emite um DirectionArtifact versionado e independente de forn
 
 Cada decisão inclui origem e razão; decisões derivadas do brief podem apontar para um caminho estável do contexto (sourcePath). Recomendações heurísticas são marcadas [R]. O artefacto não contém timestamp para preservar a reprodutibilidade.
 
-A primeira fatia de geração cobre DL-001. Os restantes cenários só serão adicionados quando as suas necessidades justificarem regras específicas. Não há presets globais de estilo.
+A validação do Direction Artifact ocorre em quatro camadas ordenadas: estrutural (JSON Schema), semântica (identificadores e categorias), restrições (compatibilidade com restrições rígidas) e consistência (proveniência e contexto). Se a camada estrutural falhar, as três seguintes ficam `not_run`. Resultados não avaliáveis permanecem `inconclusive`.\n\nA primeira fatia de geração cobre DL-001. Os restantes cenários só serão adicionados quando as suas necessidades justificarem regras específicas. Não há presets globais de estilo.
 
 ## Restrições e precedência
 
