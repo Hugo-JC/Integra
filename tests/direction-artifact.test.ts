@@ -1,6 +1,10 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { Ajv2020 } from 'ajv/dist/2020.js';
+import type {
+  DirectionArtifact,
+  DirectionSection,
+} from '../src/modules/direction/types.js';
 import { describe, expect, it } from 'vitest';
 
 const schema = JSON.parse(
@@ -9,7 +13,7 @@ const schema = JSON.parse(
 const ajv = new Ajv2020({ allErrors: true, strict: true });
 const validate = ajv.compile(schema);
 
-const section = {
+const section: DirectionSection = {
   summary: 'A concise direction summary.',
   decisions: [{
     id: 'visual-tone',
@@ -26,7 +30,7 @@ const section = {
   }],
 };
 
-const validArtifact = {
+const validArtifact: DirectionArtifact = {
   schemaVersion: '1.0.0',
   artifactId: 'direction-dl-001',
   engineVersion: '0.2.0',
@@ -76,7 +80,7 @@ describe('Direction Artifact schema', () => {
   it('allows incomplete context to be reported instead of fabricated', () => {
     const incompleteContext = structuredClone(validArtifact);
     incompleteContext.context.missingInformation = ['Target audience'];
-    delete (incompleteContext.context as Record<string, unknown>).audience;
+    delete incompleteContext.context.audience;
     expect(validate(incompleteContext)).toBe(true);
   });
 });
