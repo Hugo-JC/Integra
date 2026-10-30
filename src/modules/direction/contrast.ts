@@ -46,7 +46,7 @@ export function calculateContrastRatio(foreground: string, background: string): 
   const second = relativeLuminance(background);
   const lighter = Math.max(first, second);
   const darker = Math.min(first, second);
-  return Math.round(((lighter + 0.05) / (darker + 0.05)) * 100) / 100;
+  return (lighter + 0.05) / (darker + 0.05);
 }
 
 /**
@@ -63,7 +63,7 @@ export function evaluateTextContrast(input: TextContrastInput): TextContrastResu
     throw new RangeError('fontWeight must be an integer between 1 and 1000.');
   }
 
-  const isLargeText = input.fontSizePx >= 24 || (input.fontSizePx >= 18.66 && weight >= 700);
+  const isLargeText = input.fontSizePx >= 24 || (input.fontSizePx >= (14 * 96 / 72) && weight >= 700);
   const requiredRatio = isLargeText ? 3 : 4.5;
   const ratio = calculateContrastRatio(input.foreground, input.background);
   const passed = ratio >= requiredRatio;
