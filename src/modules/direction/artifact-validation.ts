@@ -119,7 +119,7 @@ export function validateDirectionArtifact(
     };
   }
 
-  const artifact = input as DirectionArtifact;
+  const artifact = input as unknown as DirectionArtifact;
   const semanticIssues: string[] = [];
   const decisionIds = new Set<string>();
   const recommendationIds = new Set<string>();
