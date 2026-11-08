@@ -167,6 +167,9 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
       tag.style.display = 'none';
       return;
     }
+    if (highlighted && highlighted !== element && highlighted !== selected) {
+      resizeObserver?.unobserve(highlighted);
+    }
     highlighted = element;
     resizeObserver?.observe(element);
     const rect = element.getBoundingClientRect();
