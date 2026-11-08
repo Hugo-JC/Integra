@@ -14,6 +14,52 @@ export interface LiveContrastResult {
   aaaLarge: boolean;
 }
 
+export type LiveEditableProperty = LiveStyleProperty;
+
+export interface LiveElementSnapshot {
+  selector: string;
+  tagName: string;
+  accessibleName?: string;
+  originalClasses: string;
+  componentHint?: string;
+}
+
+export interface LiveElementChangeSet {
+  schemaVersion: '1.0.0';
+  target: LiveElementSnapshot;
+  originalClasses: string;
+  updatedClasses: string;
+  addedClasses: string[];
+  removedClasses: string[];
+  styleChanges: LiveStyleChange[];
+  evidence: {
+    contrastRatio?: number;
+    contrastRequired?: number;
+    contrastPass?: boolean;
+    contrastNote: string;
+  };
+}
+
+export interface LiveInspectorContrastAssessment {
+  ratio: number;
+  requiredRatio: number;
+  passesAA: boolean;
+  isLargeText: boolean;
+  level: 'AA' | 'fail';
+}
+
+export interface IntegraLiveInspectorOptions {
+  title?: string;
+  sourceHint?: string;
+  onApply?: (changes: LiveElementChangeSet[], prompt: string) => void;
+}
+
+export interface IntegraLiveInspectorController {
+  getChangeSets(): LiveElementChangeSet[];
+  getPrompt(): string | null;
+  stop(options?: { restore?: boolean }): void;
+}
+
 export interface LiveInspectorPatch {
   schemaVersion: '1.0.0';
   source: 'integra-live-inspector';

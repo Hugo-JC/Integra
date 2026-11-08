@@ -3,8 +3,8 @@ import type { CommandDefinition, CommandRouteOptions, IntegraCommandRoute, Integ
 
 const manifest=getCommandManifest();
 const commands=manifest.commands;
-const orchestrator=commands.find((item)=>item.kind==="orchestrator");
-if(!orchestrator) throw new Error("Command manifest has no orchestrator.");
+const orchestrator:CommandDefinition=commands.find((item)=>item.kind==="orchestrator")
+  ?? (()=>{throw new Error("Command manifest has no orchestrator.");})();
 
 function normalize(value:string):string {
   return value.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("en-US")
@@ -56,7 +56,7 @@ export function routeIntegraRequest(request:string,options:CommandRouteOptions={
     if(winners.length>1) return result(orchestrator,"ambiguous",
       "Equal-specificity workflows matched. Do not choose randomly; ask one focused question.",
       modifierMatches.map((item)=>item.command.id),winners.map((item)=>item.command.id),winners.flatMap((item)=>item.matches),true);
-    const winner=winners[0];
+    const winner=winners[0]!;
     return result(winner.command,"matched","The unique longest whole-phrase trigger selected this focused workflow.",
       modifierMatches.map((item)=>item.command.id),[],winner.matches);
   }

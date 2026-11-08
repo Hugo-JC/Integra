@@ -1,4 +1,4 @@
-import type { LiveContrastResult } from './types.js';
+import type { LiveContrastResult, LiveInspectorContrastAssessment } from './types.js';
 
 export interface RGBColor { r: number; g: number; b: number; }
 
@@ -45,6 +45,27 @@ export function evaluateContrast(foreground: string, background: string): LiveCo
   return ratio === null ? null : {
     ratio, aaNormal: ratio >= 4.5, aaLarge: ratio >= 3,
     aaaNormal: ratio >= 7, aaaLarge: ratio >= 4.5
+  };
+}
+
+/** Evaluates contrast using the WCAG AA threshold for the supplied text size and weight. */
+export function calculateLiveContrast(
+  foreground: string,
+  background: string,
+  fontSize: number,
+  fontWeight: number,
+): LiveInspectorContrastAssessment | null {
+  const ratio = contrastRatio(foreground, background);
+  if (ratio === null || !Number.isFinite(fontSize) || !Number.isFinite(fontWeight)) return null;
+  const isLargeText = fontSize >= 24 || (fontSize >= 18.66 && fontWeight >= 700);
+  const requiredRatio = isLargeText ? 3 : 4.5;
+  const passesAA = ratio >= requiredRatio;
+  return {
+    ratio,
+    requiredRatio,
+    passesAA,
+    isLargeText,
+    level: passesAA ? 'AA' : 'fail',
   };
 }
 

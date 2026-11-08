@@ -1,13 +1,14 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { isAbsolute, relative, resolve, sep } from 'node:path';
-import Ajv2020 from 'ajv/dist/2020.js';
+import type { ErrorObject } from 'ajv';
+import { Ajv2020 } from 'ajv/dist/2020.js';
 import manifestJson from '../../../commands/manifest.json' with { type: 'json' };
 import schemaJson from '../../../schemas/command-manifest.schema.json' with { type: 'json' };
 import type { CommandDefinition, CommandManifest, CommandResolution } from './types.js';
 
 const ajv = new Ajv2020({ allErrors: true, strict: true });
-const validateSchema = ajv.compile(schemaJson);
-const manifest = manifestJson as CommandManifest;
+const validateSchema = ajv.compile<CommandManifest>(schemaJson);
+const manifest: unknown = manifestJson;
 
 export interface ManifestValidation { valid:boolean; errors:string[]; }
 
@@ -18,10 +19,10 @@ export interface ManifestValidation { valid:boolean; errors:string[]; }
 export function validateCommandManifest(candidate:unknown=manifest,root=process.cwd()):ManifestValidation {
   const errors:string[]=[];
   if (!validateSchema(candidate)) {
-    errors.push(...(validateSchema.errors??[]).map((error)=>`${error.instancePath||'/'} ${error.message??'is invalid'}`));
+    errors.push(...(validateSchema.errors??[]).map((error:ErrorObject)=>`${error.instancePath||'/'} ${error.message??'is invalid'}`));
     return {valid:false,errors};
   }
-  const value=candidate as CommandManifest;
+  const value=candidate;
   const ids=new Set<string>(), invocations=new Set<string>();
   const skillRoot=resolve(root,'.agents','skills');
   for (const command of value.commands) {
@@ -47,6 +48,7 @@ export function validateCommandManifest(candidate:unknown=manifest,root=process.
 export function getCommandManifest():CommandManifest {
   const validation=validateCommandManifest();
   if(!validation.valid) throw new Error(`Invalid Integra command manifest:\n- ${validation.errors.join('\n- ')}`);
+  if(!validateSchema(manifest)) throw new Error('Invalid Integra command manifest.');
   return manifest;
 }
 export function listCommands(kind?:CommandDefinition['kind']):CommandDefinition[] {
