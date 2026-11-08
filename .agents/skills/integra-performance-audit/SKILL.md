@@ -1,24 +1,25 @@
 ---
 name: integra-performance-audit
-description: Reviews frontend loading, responsiveness, rendering work, state updates, asset delivery and animation cost using measurements rather than blanket optimization rules. Use when a page feels slow, has unnecessary rerenders or needs performance hardening.
+description: Diagnose frontend loading, responsiveness, rendering and animation cost using measurements and before/after evidence rather than blanket optimization. Use when a page feels slow, rerenders excessively or needs hardening; never claim gains without data.
 ---
 
 # Integra Performance Audit
 
 ## Workflow
-1. Reproduce the reported performance problem and capture the environment.
-2. Establish a baseline with browser tooling or project metrics before modifying code.
-3. Separate network, asset, main-thread, layout, rendering and interaction latency.
-4. Inspect large assets, font loading, image sizing, route splitting, third-party scripts and expensive components.
-5. Trace repeated renders and state updates. Do not assume every rerender is harmful.
-6. Avoid premature useMemo/useCallback/memo. Measure the cost and confirm the optimization changes the observed bottleneck.
-7. Preserve accessibility, perceived responsiveness and visual stability.
-8. Compare the same scenario after the change.
-9. Report metrics, test conditions and what remains unmeasured.
+1. Reproduce the symptom; record environment (device class, network, browser, build mode).
+2. Baseline with browser tooling or project metrics **before** editing (LCP, INP, CLS, long tasks, bundle size).
+3. Classify the bottleneck: network, asset, main thread, layout, paint, interaction latency.
+4. Inspect heavy assets, font loading, image sizing/format, route splitting, third-party scripts, expensive components.
+5. Trace repeated renders; a rerender is harmful only if it costs measurable time.
+6. Avoid premature `useMemo`/`useCallback`/`memo`; change only what moves the measured bottleneck.
+7. Preserve accessibility, perceived responsiveness and layout stability.
+8. Re-measure the same scenario and compare.
 
 ## Principles
-- Optimize the user-visible bottleneck, not a style preference.
-- Prefer responsive feedback and stable layout over decorative animation.
-- Reduce JavaScript and image cost before adding abstractions.
-- Include low-end device and constrained network considerations when relevant.
-- Never claim a performance gain without before/after evidence.
+User-visible bottleneck first. Reduce JavaScript and image cost before adding abstractions. Prefer transform/opacity animation. Consider low-end devices and constrained networks when relevant.
+
+## Output
+Table: metric · before · after · conditions · confidence. Then: changes made, what stayed unmeasured, risks.
+
+## Signature touch: "Budget line"
+State a performance budget for the surface (e.g. LCP, JS KB) up front and report against it, so "faster" always means "faster than a number".
