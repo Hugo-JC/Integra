@@ -79,11 +79,21 @@ export interface LiveElementChangeSet {
 
 export interface IntegraLiveInspectorOptions {
   title?: string;
+  panelTitle?: string;
   sourceHint?: string;
+  accentColor?: string;
+  enabled?: boolean;
+  keyboardShortcut?: boolean;
+  ignoreSelector?: string;
+  onSelectionChange?: (element: HTMLElement | null) => void;
+  onChange?: (changes: LiveElementChangeSet[]) => void;
   onApply?: (changes: LiveElementChangeSet[], prompt: string) => void;
 }
 
 export interface IntegraLiveInspectorController {
+  isActive(): boolean;
+  setActive(active: boolean): void;
+  getSelectedElement(): HTMLElement | SVGElement | null;
   getChangeSets(): LiveElementChangeSet[];
   getPrompt(): string;
   stop(options?: { restore?: boolean }): void;
