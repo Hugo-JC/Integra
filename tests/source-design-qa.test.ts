@@ -12,6 +12,11 @@ describe('design QA heuristics', () => {
     };
     visit(source);
     expect(tags).toContain('img');
-    expect(source.parseDiagnostics).toHaveLength(0);
+    const result = ts.transpileModule(code, {
+      fileName: 'fixture.tsx',
+      compilerOptions: { jsx: ts.JsxEmit.Preserve, target: ts.ScriptTarget.ES2022 },
+      reportDiagnostics: true,
+    });
+    expect(result.diagnostics ?? []).toHaveLength(0);
   });
 });
