@@ -57,8 +57,13 @@ function scan(file: string): void {
     ts.forEachChild(node, visit);
   };
   visit(ast);
-  if (ast.parseDiagnostics.length) {
-    for (const diagnostic of ast.parseDiagnostics) {
+  const syntaxDiagnostics = ts.transpileModule(source, {
+    fileName: file,
+    compilerOptions: { jsx: ts.JsxEmit.Preserve, target: ts.ScriptTarget.ES2022 },
+    reportDiagnostics: true,
+  }).diagnostics ?? [];
+  if (syntaxDiagnostics.length) {
+    for (const diagnostic of syntaxDiagnostics) {
       const pos = diagnostic.start ?? 0;
       findings.push({ file: path.relative(process.cwd(), file), line: ast.getLineAndCharacterOfPosition(pos).line + 1,
         rule: 'source.parse-error', severity: 'major', message: ts.flattenDiagnosticMessageText(diagnostic.messageText, ' '),
