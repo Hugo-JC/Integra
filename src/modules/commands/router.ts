@@ -3,8 +3,9 @@ import type { CommandDefinition, CommandRouteOptions, IntegraCommandRoute, Integ
 
 const manifest=getCommandManifest();
 const commands=manifest.commands;
-const orchestrator=commands.find((item)=>item.kind==="orchestrator");
-if(!orchestrator) throw new Error("Command manifest has no orchestrator.");
+const orchestrator=commands.find((item)=>item.kind==="orchestrator") ?? (() => {
+  throw new Error("Command manifest has no orchestrator.");
+})();
 
 function normalize(value:string):string {
   return value.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("en-US")
@@ -71,7 +72,7 @@ export function routeIntegraRequest(request:string,options:CommandRouteOptions={
 }
 
 export function createIntegraExecutionPlan(route:IntegraCommandRoute):IntegraExecutionPlan {
-  const command=commands.find((item)=>item.id===route.commandId)??orchestrator;
+  const command=commands.find((item)=>item.id===route.commandId) ?? orchestrator;
   return {commandId:command.id,invocation:command.invocation,modifierIds:[...route.modifierIds],
     mode:"review",status:"planned",approvalRequired:true,sourceMutationAuthorized:false,
     allowedBeforeApproval:["read-project-context","inspect","analyze","prepare-proposal","temporary-dom-preview"],

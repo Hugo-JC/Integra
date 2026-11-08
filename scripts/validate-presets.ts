@@ -1,5 +1,6 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { relative, resolve, sep } from 'node:path';
+import type { ErrorObject } from 'ajv';
 import Ajv2020 from 'ajv/dist/2020.js';
 
 const root = process.cwd();
@@ -7,8 +8,10 @@ const presetRoot = resolve(root, 'presets');
 const errors: string[] = [];
 const readJson = (path: string): unknown => JSON.parse(readFileSync(path, 'utf8'));
 const ajv = new Ajv2020({ allErrors: true, strict: true });
-const presetValidator = ajv.compile(readJson(resolve(root, 'schemas/design-preset.schema.json')));
-const referenceValidator = ajv.compile(readJson(resolve(root, 'schemas/reference-catalog.schema.json')));
+const presetSchema = readJson(resolve(root, 'schemas/design-preset.schema.json'));
+const referenceSchema = readJson(resolve(root, 'schemas/reference-catalog.schema.json'));
+const presetValidator = ajv.compile(presetSchema);
+const referenceValidator = ajv.compile(referenceSchema);
 
 const presetManifest = readJson(resolve(presetRoot, 'manifest.json')) as {
   version: string;
@@ -16,7 +19,7 @@ const presetManifest = readJson(resolve(presetRoot, 'manifest.json')) as {
 };
 const referenceCatalog = readJson(resolve(root, 'references/catalog.json')) as { references: Array<{ id: string }> };
 if (!referenceValidator(referenceCatalog)) {
-  errors.push(...(referenceValidator.errors ?? []).map((item) => 'references/catalog.json: ' + item.instancePath + ' ' + item.message));
+  errors.push(...(referenceValidator.errors ?? []).map((item: ErrorObject) => 'references/catalog.json: ' + item.instancePath + ' ' + item.message));
 }
 const referenceIds = new Set(referenceCatalog.references.map((item) => item.id));
 const presetIds = new Set<string>();
@@ -36,7 +39,7 @@ for (const entry of presetManifest.presets) {
   try {
     const preset = readJson(file) as { id: string; references?: string[]; compositionEscapes?: Array<{ id: string }> };
     if (preset.id !== entry.id) errors.push(entry.id + ': file id does not match manifest');
-    if (!presetValidator(preset)) errors.push(...(presetValidator.errors ?? []).map((item) => entry.id + ': ' + item.instancePath + ' ' + item.message));
+    if (!presetValidator(preset)) errors.push(...(presetValidator.errors ?? []).map((item: ErrorObject) => entry.id + ': ' + item.instancePath + ' ' + item.message));
     for (const reference of preset.references ?? []) if (!referenceIds.has(reference)) errors.push(entry.id + ': unknown reference id "' + reference + '"');
     const escapeIds = (preset.compositionEscapes ?? []).map((item) => item.id);
     if (new Set(escapeIds).size !== escapeIds.length) errors.push(entry.id + ': composition escape IDs must be unique');

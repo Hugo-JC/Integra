@@ -71,8 +71,7 @@ function createSnapshot(element: Element, doc: Document, sourceHint?: string): L
 export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}): IntegraLiveInspectorController {
   if (typeof document === 'undefined') throw new Error('Integra Live Inspector requires a browser document.');
   const doc = document;
-  const view = doc.defaultView;
-  if (!view) throw new Error('Integra Live Inspector requires an active browser window.');
+  const view = doc.defaultView ?? (() => { throw new Error('Integra Live Inspector requires an active browser window.'); })();
   if (!doc.body) throw new Error('Integra Live Inspector must start after document.body is available.');
 
   const requestedAccent = options.accentColor ?? '#3B82F6';
@@ -95,8 +94,8 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
       :host { all: initial; color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
       * { box-sizing: border-box; }
       #highlight { position: fixed; display: none; border: 2px solid ${accent}; border-radius: 3px; background: rgba(59,130,246,.07); pointer-events: none; }
-      #tag { position: fixed; display: none; max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 4px 7px; border-radius: 5px 5px 5px 0; color: #fff; background: ${accent}; font: 11px/1.2 ui-monospace, monospace; pointer-events: none; }
-      #panel { position: fixed; top: 16px; right: 16px; width: min(360px, calc(100vw - 32px)); max-height: calc(100vh - 32px); overflow: auto; padding: 16px; border: 1px solid #30343b; border-radius: 12px; color: #f4f6f8; background: #0d1016; box-shadow: 0 16px 50px rgba(0,0,0,.4); pointer-events: auto; font-size: 13px; }
+      #tag { position: fixed; display: none; max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 4px 7px; border-radius: 5px 5px 5px 0; color: #fff; background: rgba(7,10,18,.9); box-shadow: 0 6px 18px rgba(0,0,0,.28); pointer-events: none; }
+      #panel { position: fixed; top: 16px; right: 16px; width: min(360px, calc(100vw - 32px)); max-height: calc(100vh - 32px); overflow: auto; padding: 16px; border: 1px solid #30343b; border-radius: 14px; background: rgba(10,13,20,.96); box-shadow: 0 19px 52px rgba(0,0,0,.42); color:#f5f7fb; pointer-events: auto; }
       #panel[hidden] { display:none; }
       .head { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px; }
       .brand { display:flex; align-items:center; gap:8px; font-weight:700; letter-spacing:-.02em; }
@@ -133,7 +132,7 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
       <div class="contrast" id="contrast" aria-live="polite">O contraste será calculado após selecionar um elemento.</div>
       <hr class="rule">
       <div class="muted">A seleção usa o azul Integra ${accent}. O tema da interface analisada não é alterado automaticamente.</div>
-      <div class="actions"><button type="button" data-action="unlock">Escolher outro</button><button type="button" data-action="reset">Reverter elemento</button><button type="button" class="primary" data-action="apply">Gerar diff + prompt</button></div>
+      <div class="actions"><button type="button" data-action="unlock">Escolher outro</button><button type="button" data-action="reset">Reverter elemento</button><button type="button" class="primary" data-action="apply">Aplicar sugestão</button></div>
       <div id="status" role="status" aria-live="polite"></div>
     </section>
   `;
@@ -235,8 +234,8 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
       contrastOutput.style.borderColor = '#B45309';
       return;
     }
-    contrastOutput.textContent = `Contraste ${result.ratio}:1 · WCAG AA ${result.passesAA ? 'passou' : 'não passou'} (mínimo ${result.requiredRatio}:1)${result.isLargeText ? ' · texto grande' : ''}.`;
-    contrastOutput.style.borderColor = result.passesAA ? '${accent}' : '#B45309';
+    contrastOutput.textContent = `Contraste ${result.ratio}:1 · WCAG AA ${result.passesAA ? 'passou' : 'não passou'} (mínimo ${result.requiredRatio}:1)${result.isLargeText ? ' · texto grande' : ''}`;
+    contrastOutput.style.borderColor = result.passesAA ? accent : '#B45309';
   };
 
   const selectElement = (element: HTMLElement | SVGElement): void => {

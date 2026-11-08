@@ -34,15 +34,15 @@ export function findUniqueSelector(element: Element, doc: Document = element.own
   let current: Element | null = element;
   while (current && current.tagName.toLowerCase() !== 'html') {
     let segment = current.tagName.toLowerCase();
-    const parent = current.parentElement;
-    if (parent) {
-      const sameTag = [...parent.children].filter((child) => child.tagName === current?.tagName);
+    const parentElement = current.parentElement;
+    if (parentElement) {
+      const sameTag = [...parentElement.children].filter((child) => child.tagName === current.tagName);
       if (sameTag.length > 1) segment += `:nth-of-type(${sameTag.indexOf(current) + 1})`;
     }
     parts.unshift(segment);
     const candidate = parts.join(' > ');
     if (isUnique(candidate, element, doc)) return candidate;
-    current = parent;
+    current = parentElement;
   }
   return parts.join(' > ');
 }

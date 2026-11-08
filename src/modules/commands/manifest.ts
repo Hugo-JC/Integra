@@ -1,6 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
-import { Ajv2020 } from 'ajv/dist/2020.js';
+import { isAbsolute, relative, resolve, sep } from 'node:path';
+import Ajv2020 from 'ajv/dist/2020.js';
 import type { ErrorObject } from 'ajv';
 import manifestJson from '../../../commands/manifest.json' with { type: 'json' };
 import schemaJson from '../../../schemas/command-manifest.schema.json' with { type: 'json' };
@@ -24,7 +24,7 @@ export function validateCommandManifest(candidate:unknown=manifest,root=process.
     ));
     return { valid: false, errors };
   }
-  const value=candidate as CommandManifest;
+  const value = candidate as unknown as CommandManifest;
   const ids=new Set<string>(), invocations=new Set<string>();
   const skillRoot=resolve(root,'.agents','skills');
   for (const command of value.commands) {
