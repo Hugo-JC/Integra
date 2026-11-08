@@ -2,31 +2,34 @@
 
 ## Unreleased
 
-- Added provider-neutral Direction CLI commands to generate and validate DL-001 artifacts.
-- Added an Agent Integration Contract and example consumer instructions.
-- Added a versioned Direction Consumption Report contract for agent-reported implementation outcomes.
-- Added a paired Design Experiment contract for baseline vs Integra-guided evaluation.
-- Added a controlled experiment protocol that preserves shared run controls, hashes, evidence and non-verifiable outcomes.
-- Updated architecture, roadmap and README to reflect the merged four-layer artifact validation and the first external-agent milestone.
+### Design intelligence
+- Added eight provider-neutral Agent Skills for direction, UI generation, refactoring, design QA, live inspection, reference investigation, accessibility and performance.
+- Added Gemini CLI project guidance and skill discovery.
+- Added nine contextual, validated design presets.
+- Added design quality standard, evidence-first investigation method and design command vocabulary.
+- Migrated the legacy AI Design Engine's niche profiles, style systems, rules, anti-patterns, archetypes, component catalog, playbook and curated references into a provenance-marked knowledge library.
+
+### Live Inspector
+- Added an opt-in browser inspector using native DOM APIs and Shadow DOM.
+- Added pointer selection and blue Integra overlay (#3B82F6).
+- Added temporary class, color, border-radius and padding previews.
+- Added precise class/style diffs and a coding-agent handoff prompt.
+- Added a WCAG AA contrast estimate for simple opaque/composited CSS backgrounds.
+- Source persistence and source-map resolution remain out of scope; DOM selectors are not source paths.
+
+### Quality
+- Added deterministic P0–P3 findings from explicitly supplied observations.
+- Added evidence record normalization with source, confidence and limitations.
+- Added unit tests and validation scripts for skills and presets.
+- Retained Direction Artifact generation and validation for DL-001.
 
 ## 0.2.0 — Direction Engine foundation
 
-- Moved shared direction context contracts into src/contracts/.
-- Added structured project facts and hard/soft constraints.
-- Added aggregate Context diagnostics, input bounds, Unicode NFC normalization and stable deduplication.
-- Added a minimal constraint-aware decision resolver.
-- Added stable source and target paths for decision provenance.
-- Added deterministic DL-001 Direction Artifact generation across all eight areas.
-- Added canonical serialization and stable artifact identity without timestamps.
-- Added GitHub Actions CI for typecheck, tests and fixture validation.
-- Corrected the README lockfile instructions.
+- Added shared direction context, structured facts and constraints.
+- Added deterministic DL-001 Direction Artifact generation and canonical serialization.
+- Added four-layer artifact validation and CI.
+- Added Agent Integration Contract, consumption report and experiment protocol.
 
 ## 0.1.0 — Initial scaffold
 
-- Integra naming and modular architecture proposal.
-- V5 Design Lab specification and five scenario manifests.
-- JSON Schemas for scenarios, reports and expected findings.
-- TypeScript report/scenario contracts.
-- Scoring and detection-metric helpers with unit tests.
-- Synthetic HTML and React project fixtures.
-- Architecture decisions, safety rules and deployment notes.
+- Added modular architecture, Design Lab specification, scenarios, schemas, fixtures and initial tests.
