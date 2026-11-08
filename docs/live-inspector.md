@@ -21,7 +21,7 @@ Start Vite with `VITE_INTEGRA_LIVE=true`. Use the actual relative import path fo
 2. Click to lock the element. The click is intercepted so the underlying control does not activate.
 3. Edit Tailwind classes, text/background colors, font size, padding or border radius.
 4. Use **↑ Pai** to select the containing DOM node when a nested element is too small.
-5. Review the selected text's WCAG contrast status. The audit checks WCAG 2.2 SC 1.4.3 and reports inconclusive when the effective background cannot be established safely.
+5. Review the selected text's WCAG contrast status. The audit checks WCAG 2.2 SC 1.4.3 (AA) and reports the stricter SC 1.4.6 (AAA) threshold separately. It reports inconclusive when the effective background cannot be established safely.
 6. Reset the selected element, copy the before/after DOM diff, then ask the implementation agent to apply and verify a source-level change.
 7. Destroy the inspector or reload the page to leave preview mode.
 
