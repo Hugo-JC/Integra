@@ -16,9 +16,10 @@
     "validate:presets": "tsx scripts/validate-presets.ts",
     "direction:generate": "tsx scripts/direction-generate.ts",
     "direction:validate": "tsx scripts/direction-validate.ts",
-    "check": "npm run typecheck && npm test && npm run validate:fixtures && npm run validate:agent-assets",
+    "check": "npm run typecheck && npm test && npm run validate:fixtures && npm run validate:skills && npm run validate:presets && npm run validate:agent-assets && npm run validate:commands",
     "direction:presets": "tsx scripts/direction-presets.ts",
-    "validate:agent-assets": "tsx scripts/validate-agent-assets.ts"
+    "validate:agent-assets": "tsx scripts/validate-agent-assets.ts",
+    "validate:commands": "tsx scripts/validate-command-manifest.ts"
   },
   "dependencies": {
     "ajv": "^8.20.0",

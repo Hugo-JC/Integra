@@ -13,7 +13,9 @@
         "deterministic anti-pattern detection",
         "local live iteration"
       ],
-      "adaptation": "Use independently authored Integra skills and checks; do not vendor Impeccable source."
+      "adaptation": "Use independently authored Integra skills and checks; do not vendor Impeccable source.",
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null
     },
     {
       "id": "rea",
@@ -26,7 +28,9 @@
         "traceable results",
         "local-first workflows"
       ],
-      "adaptation": "REA is a reverse-engineering/investigation toolkit, not a visual design system; only general architecture ideas are relevant."
+      "adaptation": "REA is a reverse-engineering/investigation toolkit, not a visual design system; only general architecture ideas are relevant.",
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null
     },
     {
       "id": "ade",
@@ -40,7 +44,9 @@
         "layout archetypes",
         "design heuristics"
       ],
-      "adaptation": "Migrated local data with source provenance; validate all references before relying on them."
+      "adaptation": "Migrated local data with source provenance; validate all references before relying on them.",
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null
     },
     {
       "id": "wcag22",
@@ -53,7 +59,9 @@
         "keyboard",
         "reflow",
         "focus"
-      ]
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null
     },
     {
       "id": "wai-apg",
@@ -64,7 +72,9 @@
         "keyboard patterns",
         "roles and states",
         "accessible widgets"
-      ]
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null
     },
     {
       "id": "mdn",
@@ -75,7 +85,9 @@
         "HTML semantics",
         "CSS",
         "Web APIs"
-      ]
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null
     },
     {
       "id": "react",
@@ -86,7 +98,9 @@
         "component state",
         "rendering",
         "effects"
-      ]
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null
     },
     {
       "id": "vite",
@@ -96,7 +110,9 @@
       "useFor": [
         "development plugin lifecycle",
         "HTML transform"
-      ]
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null
     },
     {
       "id": "tailwind",
@@ -107,7 +123,9 @@
         "utility classes",
         "responsive variants",
         "design tokens"
-      ]
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null
     },
     {
       "id": "radix",
@@ -117,7 +135,9 @@
       "useFor": [
         "accessible primitives",
         "keyboard and focus behavior"
-      ]
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null
     },
     {
       "id": "shadcn",
@@ -127,7 +147,9 @@
       "useFor": [
         "composable React components",
         "token-driven UI"
-      ]
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null
     },
     {
       "id": "material3",
@@ -138,7 +160,9 @@
         "semantic color roles",
         "tokens",
         "interaction patterns"
-      ]
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null
     },
     {
       "id": "apple-hig",
@@ -148,7 +172,9 @@
       "useFor": [
         "platform conventions",
         "navigation and interaction"
-      ]
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null
     },
     {
       "id": "carbon",
@@ -158,7 +184,9 @@
       "useFor": [
         "enterprise density",
         "forms and data tables"
-      ]
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null
     },
     {
       "id": "polaris",
@@ -169,7 +197,16 @@
         "commerce workflows",
         "forms",
         "operational UI"
-      ]
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null
     }
-  ]
+  ],
+  "agentGuidance": {
+    "selection": "Select sources by the exact question being answered, not by popularity or name recognition.",
+    "trust": "Standards and official technical documentation support requirements; official product documentation supports current product behavior; product websites are inspiration only unless directly inspected.",
+    "evidence": "Do not claim inspection from a catalog entry. Record the inspected page/section, observed behavior, access date, and limitations.",
+    "adaptation": "Extract a reusable principle and explain how it maps to the target product. Never reproduce a reference's exact layout, copy, assets or identity.",
+    "freshness": "Recheck sources whose content or API may change. A null lastVerifiedAt means the source has not been revalidated in this project."
+  }
 }

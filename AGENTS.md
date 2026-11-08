@@ -29,7 +29,7 @@ Phase 1 includes contracts, fixtures, scenario manifests, documentation and pure
 5. Document breaking changes in `docs/decisions/`.
 
 
-## Portable Agent Skills
+## AI context and evidence\n\nRead `docs/ai-context-contract.md` before using presets, references or design-quality rules. Presets are candidates, reference URLs are not proof of inspection, and heuristic matches require evidence before becoming findings.\n\n## Portable Agent Skills
 Read the relevant task skill under `.agents/skills/<skill-name>/SKILL.md` before work; use `GEMINI.md` for Gemini CLI routing.
 
 - New direction/redesign: `integra-design-direction`.

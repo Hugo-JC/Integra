@@ -218,5 +218,34 @@
       "requiredEvidence": "Interaction capture",
       "status": "heuristic"
     }
+  ],
+  "evidencePolicy": {
+    "defaultStatus": "candidate",
+    "requireObservedEvidence": true,
+    "severityIsNotProof": true,
+    "statuses": [
+      "verified",
+      "partial",
+      "not-run",
+      "inconclusive"
+    ],
+    "note": "A trigger match is a review candidate, not a confirmed defect. Promote only after evidence is observed and the expected criterion is stated."
+  },
+  "severityDefinitions": {
+    "P0": "Critical blocker, serious accessibility barrier, content integrity issue, or failure of a core task.",
+    "P1": "Major usability, accessibility, responsive, or reliability problem.",
+    "P2": "Meaningful quality issue with a practical workaround.",
+    "P3": "Polish or consistency opportunity."
+  },
+  "findingContract": [
+    "ruleId",
+    "observedEvidence",
+    "expectedCriterion",
+    "actualBehavior",
+    "userImpact",
+    "severityRationale",
+    "recommendation",
+    "verificationMethod",
+    "verificationStatus"
   ]
 }
