@@ -126,7 +126,7 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
       <div class="contrast" id="contrast" aria-live="polite">O contraste será calculado após selecionar um elemento.</div>
       <hr class="rule">
       <div class="muted">A seleção usa o azul Integra #3B82F6. O tema da interface analisada não é alterado automaticamente.</div>
-      <div class="actions"><button type="button" data-action="reset">Reverter elemento</button><button type="button" class="primary" data-action="apply">Gerar diff + prompt</button></div>
+      <div class="actions"><button type="button" data-action="unlock">Escolher outro</button><button type="button" data-action="reset">Reverter elemento</button><button type="button" class="primary" data-action="apply">Gerar diff + prompt</button></div>
       <div id="status" role="status" aria-live="polite"></div>
     </section>
   `;
@@ -146,6 +146,7 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
 
   const originals = new Map<Element, OriginalElementState>();
   let selected: HTMLElement | SVGElement | null = null;
+  let selectionLocked = false;
   let stopped = false;
 
   const isInspectorEvent = (event: Event): boolean => event.composedPath().includes(host);
@@ -196,6 +197,7 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
 
   const selectElement = (element: HTMLElement | SVGElement): void => {
     selected = element;
+    selectionLocked = true;
     if (!originals.has(element)) {
       originals.set(element, {
         snapshot: createSnapshot(element, doc, options.sourceHint),
@@ -263,13 +265,13 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
   };
 
   const onPointerMove = (event: PointerEvent): void => {
-    if (stopped || isInspectorEvent(event)) return;
+    if (stopped || selectionLocked || isInspectorEvent(event)) return;
     const candidate = event.composedPath().find(isElement);
     if (candidate && isInspectable(candidate)) positionHighlight(candidate);
   };
 
   const onClick = (event: MouseEvent): void => {
-    if (stopped || isInspectorEvent(event)) return;
+    if (stopped || selectionLocked || isInspectorEvent(event)) return;
     const candidate = event.composedPath().find(isElement);
     if (!candidate || !isInspectable(candidate)) return;
     event.preventDefault();
@@ -304,6 +306,14 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
     if (!action) return;
     if (action === 'close') {
       stop({ restore: true });
+      return;
+    }
+    if (action === 'unlock') {
+      selected = null;
+      selectionLocked = false;
+      panel.hidden = true;
+      highlight.style.display = 'none';
+      tag.style.display = 'none';
       return;
     }
     if (action === 'reset' && selected) {
