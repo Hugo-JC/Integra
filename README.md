@@ -47,7 +47,7 @@ npm ci
 npm run check
 ~~~
 
-O check inclui typecheck, testes, validação de fixtures, Agent Skills e presets.
+O check inclui typecheck, testes, validação de fixtures, Agent Skills, presets e da biblioteca ADE migrada.
 
 ## Direction CLI
 
@@ -78,13 +78,14 @@ Módulo opcional em src/modules/live-inspector/. O runtime destaca elementos com
 
 Limites importantes: não identifica automaticamente ficheiros TSX a partir do DOM; sourceHint é opcional e explícito. Contraste é inconclusivo para transparências, imagens, gradientes, pseudo-elementos e camadas complexas. As alterações são temporárias e não são escritas no source. Não exponhas o inspector em produção.
 
-Ver docs/live-inspector.md.
+Ver docs/live-inspector.md. Para verificar a migração da biblioteca antiga, execute `npm run validate:legacy-knowledge`.
 
 ## Presets e referências
 
 - presets/manifest.json — catálogo versionado.
 - presets/*.json — nove direções contextuais.
 - references/catalog.json — sistemas, documentação e ferramentas de referência.
+- references/ade-knowledge/ — biblioteca migrada do AI Design Engine: 61 perfis de nicho, 17 estilos, regras, anti-padrões, playbook, arquétipos e referências.
 - docs/design-quality-standard.md — regras e critérios de qualidade.
 - docs/reference-investigation.md — método evidence-first inspirado em REA.
 
