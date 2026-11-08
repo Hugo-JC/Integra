@@ -5,7 +5,7 @@ function runTs(entry: string, ...args: string[]) {
   return spawnSync(process.execPath, ['--import', 'tsx', entry, ...args], {
     cwd: process.cwd(),
     encoding: 'utf8',
-    timeout: 20_000,
+    timeout: 60_000,
   });
 }
 

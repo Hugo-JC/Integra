@@ -69,7 +69,7 @@
       "invocation": "/integra:shape",
       "description": "Clarify user needs, task flows, constraints and information architecture before visual direction or implementation.",
       "skills": [
-        "integra-design-direction"
+        "integra-ux-shape"
       ],
       "outputs": [
         "ux-brief",

@@ -3,6 +3,7 @@ import { join } from 'node:path';
 
 const root = join(process.cwd(), '.agents', 'skills');
 const errors: string[] = [];
+const names = new Set<string>();
 const skillDirectories = readdirSync(root).filter((name) => statSync(join(root, name)).isDirectory());
 
 if (skillDirectories.length === 0) errors.push('No skills found in .agents/skills.');
@@ -19,6 +20,10 @@ for (const directory of skillDirectories) {
     const name = frontmatter[1].match(/^name:\s*([a-z0-9-]+)\s*$/m)?.[1];
     const description = frontmatter[1].match(/^description:\s*(.+)$/m)?.[1]?.trim();
     if (name !== directory) errors.push(`${directory}: frontmatter name must match the directory name`);
+    if (name) {
+      if (names.has(name)) errors.push(`${directory}: duplicate skill name "${name}"`);
+      names.add(name);
+    }
     if (!description || description.length > 1024) errors.push(`${directory}: description must contain 1–1024 characters`);
     if (directory.length > 64 || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(directory)) errors.push(`${directory}: invalid Agent Skills directory name`);
     if (content.split('\n').length > 500) errors.push(`${directory}: keep SKILL.md under 500 lines; move details to references/`);

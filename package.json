@@ -20,7 +20,8 @@
     "direction:presets": "tsx scripts/direction-presets.ts",
     "validate:agent-assets": "tsx scripts/validate-agent-assets.ts",
     "validate:commands": "tsx scripts/validate-command-manifest.ts",
-    "design:route": "tsx scripts/design-route.ts"
+    "design:route": "tsx scripts/design-route.ts",
+    "design:qa": "tsx scripts/design-qa.ts"
   },
   "dependencies": {
     "ajv": "^8.20.0",
