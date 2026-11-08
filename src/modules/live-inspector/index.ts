@@ -192,3 +192,8 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px soli
 
 export { evaluateContrast, contrastRatio, parseColor, relativeLuminance, toHexColor };
 export type * from './types.js';
+
+
+/** Canonical v2 browser inspector API. */
+export { createIntegraInspector } from './overlay.js';
+export type { IntegraLiveInspectorController, IntegraLiveInspectorOptions, LiveElementChangeSet, LiveElementSnapshot } from './types.js';
