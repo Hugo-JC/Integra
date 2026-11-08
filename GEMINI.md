@@ -2,7 +2,7 @@
 
 Integra is a product-contextual design direction and quality toolkit. Read `AGENTS.md` and `CORE.md`, then choose the relevant portable Agent Skill under `.agents/skills/<skill-name>/SKILL.md`.
 
-## Skill routing
+## AI context and evidence\n- Read `docs/ai-context-contract.md` before using presets, references or quality rules.\n- Presets are contextual candidates, not mandatory themes.\n- A reference URL is not proof that its current content was inspected.\n- Heuristic matches require evidence before being reported as confirmed findings.\n\n## Skill routing
 - Canonical workspace skills: `.agents/skills/*/SKILL.md`.
 - New direction: `integra-design-direction`.
 - New component: `integra-ui-generator`.
