@@ -100,3 +100,14 @@ Esta fase vem depois do primeiro piloto e da definição das necessidades reais.
 - Resultados de agentes são avaliados separadamente dos seus relatórios de autoavaliação.
 - Não publicar claims de melhoria sem experiências reproduzíveis.
 - WCAG, heurísticas [R], preferências subjetivas e decisões de produto continuam separados.
+
+
+## Delivered: agent skills, design intelligence and Live Inspector
+- Migrated 61 niche presets and 17 style definitions from AI Design Engine v3 with provenance.
+- Added deterministic offline preset matching and the `direction:presets` command.
+- Added experience archetypes, evidence-led quality heuristics and agent prompt vocabulary.
+- Added eight portable Agent Skills plus Gemini CLI guidance.
+- Added a Vite development-only Live Inspector with element selection, temporary style/class previews, contrast estimate and exact diff/prompt export.
+- Added asset validation to the project quality check.
+
+Still outside this slice: persistent source writing, React state mutation, source-map resolution, full WCAG audit, automatic visual scoring and a complete Design Lab runner.

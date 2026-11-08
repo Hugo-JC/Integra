@@ -1,0 +1,3232 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "Integra contextual niche presets",
+  "description": "Migrated, source-attributed local design presets. Matches are advisory candidates, not global design mandates.",
+  "provenance": {
+    "source": "https://github.com/Hugo-JC/ai-design-engine",
+    "sourceVersion": 3,
+    "migratedAt": "2026-11-08",
+    "policy": "Preserve principles and reference cues; never copy protected layouts, copy, assets or brand identity."
+  },
+  "selectionPolicy": "Score explicit niche terms deterministically. Treat matches as candidates; validate them against brief facts, hard constraints and existing product identity.",
+  "styleIds": [
+    "saas_dark_modern",
+    "clean_editorial",
+    "bold_neobrutalism",
+    "minimalist_corporate",
+    "glassmorphism_tech",
+    "bento_grid_layout",
+    "minimalist_warm",
+    "minimalist_warm_dark",
+    "organic_forest_dark",
+    "dark_craft_ink",
+    "loud_beverage_dark",
+    "fresh_playful_light",
+    "swiss_technical_light",
+    "game_arcade_dark",
+    "luxury_noir",
+    "sport_kinetic_dark",
+    "civic_trust_light"
+  ],
+  "presets": [
+    {
+      "id": "coffee-artisan-food",
+      "matchTerms": [
+        "café",
+        "torrefação",
+        "chá",
+        "alimentar artesanal",
+        "coffee",
+        "coffee shop",
+        "roastery",
+        "cafetaria",
+        "casa de chá",
+        "barista"
+      ],
+      "styleId": "minimalist_warm",
+      "variants": [
+        {
+          "when_any": [
+            "premium",
+            "sofisticado",
+            "noturno",
+            "torra escura"
+          ],
+          "style_id": "minimalist_warm_dark"
+        },
+        {
+          "when_any": [
+            "orgânico",
+            "origem",
+            "natureza",
+            "sustentável"
+          ],
+          "style_id": "organic_forest_dark"
+        }
+      ],
+      "patterns": {
+        "hero": "H1",
+        "features": [
+          "F3",
+          "F2"
+        ],
+        "social_proof": [
+          "S1",
+          "S4"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Foreground the product, its origin, process, and specific sensory details.",
+        "Use warm negative space and restrained editorial storytelling; show real product or producer imagery."
+      ],
+      "sources": [
+        {
+          "name": "Blue Bottle Coffee",
+          "url": "https://bluebottlecoffee.com/",
+          "patternCues": [
+            "Product and origin storytelling",
+            "Quiet composition and deliberate product photography"
+          ]
+        },
+        {
+          "name": "Onyx Coffee Lab",
+          "url": "https://onyxcoffeelab.com/",
+          "patternCues": [
+            "Specific lot and process details",
+            "Packaging and product as strong visual anchors"
+          ]
+        }
+      ],
+      "dossier": [
+        "Café, torrefação, alimentar artesanal"
+      ],
+      "heroAlternatives": [
+        "H3",
+        "H5"
+      ]
+    },
+    {
+      "id": "wellness-health-beauty",
+      "matchTerms": [
+        "bem-estar",
+        "wellness",
+        "saúde",
+        "saúde natural",
+        "terapias naturais",
+        "produtos naturais",
+        "herbalista",
+        "ervas medicinais"
+      ],
+      "styleId": "minimalist_warm",
+      "variants": [
+        {
+          "when_any": [
+            "luxo",
+            "premium"
+          ],
+          "style_id": "clean_editorial"
+        }
+      ],
+      "patterns": {
+        "hero": "H2",
+        "features": [
+          "F2"
+        ],
+        "social_proof": [
+          "S1"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Keep copy calm and concise with generous whitespace and tactile, truthful imagery.",
+        "Use credible product or care details instead of generic health claims or decorative icon overload."
+      ],
+      "sources": [
+        {
+          "name": "Aesop",
+          "url": "https://www.aesop.com/",
+          "patternCues": [
+            "Measured editorial copy",
+            "Material and product-led imagery"
+          ]
+        },
+        {
+          "name": "Headspace",
+          "url": "https://www.headspace.com/",
+          "patternCues": [
+            "Approachable language",
+            "Consistent, calm illustration and content hierarchy"
+          ]
+        }
+      ],
+      "dossier": [
+        "Bem-estar, saúde, cosmética"
+      ],
+      "heroAlternatives": [
+        "H3"
+      ]
+    },
+    {
+      "id": "fashion-commerce",
+      "matchTerms": [
+        "moda",
+        "vestuário",
+        "roupa",
+        "streetwear",
+        "calçado",
+        "sapatilha",
+        "lingerie",
+        "fashion",
+        "clothing",
+        "apparel"
+      ],
+      "styleId": "minimalist_warm",
+      "variants": [
+        {
+          "when_any": [
+            "streetwear",
+            "urbana",
+            "urbano",
+            "skate"
+          ],
+          "style_id": "bold_neobrutalism"
+        },
+        {
+          "when_any": [
+            "luxo",
+            "premium"
+          ],
+          "style_id": "clean_editorial"
+        }
+      ],
+      "patterns": {
+        "hero": "H3",
+        "features": [
+          "F1"
+        ],
+        "social_proof": [
+          "S2"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Let consistent product photography and useful product details lead.",
+        "Make price, materials, fit, and care easy to scan; keep promotion secondary."
+      ],
+      "sources": [
+        {
+          "name": "Everlane",
+          "url": "https://www.everlane.com/",
+          "patternCues": [
+            "Product information and material details",
+            "Consistent catalog presentation"
+          ]
+        },
+        {
+          "name": "Glossier",
+          "url": "https://www.glossier.com/",
+          "patternCues": [
+            "Distinctive product photography",
+            "Clear paths between editorial content and shopping"
+          ]
+        }
+      ],
+      "dossier": [
+        "Moda e e-commerce"
+      ],
+      "heroAlternatives": [
+        "H5"
+      ]
+    },
+    {
+      "id": "saas-developer-ai",
+      "matchTerms": [
+        "saas",
+        "api",
+        "dashboard",
+        "developer tools",
+        "ferramentas para developers",
+        "inteligência artificial",
+        "ia",
+        "software",
+        "plataforma saas",
+        "web app",
+        "crm",
+        "erp",
+        "startup tecnológica",
+        "produtividade",
+        "gestão de projetos",
+        "b2b",
+        "analytics",
+        "business intelligence",
+        "observabilidade"
+      ],
+      "styleId": "saas_dark_modern",
+      "variants": [
+        {
+          "when_any": [
+            "futurista",
+            "ia avançada",
+            "glassmorphism"
+          ],
+          "style_id": "glassmorphism_tech"
+        },
+        {
+          "when_any": [
+            "múltiplos recursos",
+            "mosaico",
+            "bento"
+          ],
+          "style_id": "bento_grid_layout"
+        }
+      ],
+      "patterns": {
+        "hero": "H4",
+        "features": [
+          "F1",
+          "F4"
+        ],
+        "social_proof": [
+          "S2",
+          "S3"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Show the working product, a credible workflow, or code instead of abstract technology imagery.",
+        "Use distinct feature hierarchy and concrete evidence; avoid interchangeable feature cards and ornamental gradients."
+      ],
+      "sources": [
+        {
+          "name": "Linear",
+          "url": "https://linear.app/",
+          "patternCues": [
+            "Product-led demonstrations",
+            "Compact, high-clarity hierarchy"
+          ]
+        },
+        {
+          "name": "Vercel",
+          "url": "https://vercel.com/",
+          "patternCues": [
+            "Technical proof and developer-facing language",
+            "Clear product capability sections"
+          ]
+        },
+        {
+          "name": "Stripe",
+          "url": "https://stripe.com/",
+          "patternCues": [
+            "Concrete product workflows",
+            "Structured explanations of complex capabilities"
+          ]
+        }
+      ],
+      "dossier": [
+        "SaaS, developer tools, IA"
+      ],
+      "heroAlternatives": [
+        "H1"
+      ]
+    },
+    {
+      "id": "fintech-enterprise",
+      "matchTerms": [
+        "fintech",
+        "finanças",
+        "banco",
+        "bancário",
+        "seguros",
+        "enterprise",
+        "pagamento",
+        "carteira digital",
+        "mobile money",
+        "multicaixa",
+        "kwanza",
+        "microcrédito",
+        "crédito",
+        "cartão de crédito",
+        "corretora",
+        "investimentos",
+        "poupança",
+        "payments",
+        "wallet",
+        "lending",
+        "insurtech"
+      ],
+      "styleId": "minimalist_corporate",
+      "variants": [],
+      "patterns": {
+        "hero": "H1",
+        "features": [
+          "F5",
+          "F3"
+        ],
+        "social_proof": [
+          "S3",
+          "S4"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Make fees, security, eligibility, and next steps explicit and easy to compare.",
+        "Use restrained color, legible data displays, and substantiated trust signals."
+      ],
+      "sources": [
+        {
+          "name": "Stripe",
+          "url": "https://stripe.com/",
+          "patternCues": [
+            "Clear explanations of money movement",
+            "Product evidence paired with concise copy"
+          ]
+        },
+        {
+          "name": "Ramp",
+          "url": "https://ramp.com/",
+          "patternCues": [
+            "Finance workflows presented as measurable outcomes",
+            "Prominent product and trust information"
+          ]
+        },
+        {
+          "name": "Wise",
+          "url": "https://wise.com/",
+          "patternCues": [
+            "Transparent pricing cues",
+            "Plain-language explanations of transfers"
+          ]
+        }
+      ],
+      "dossier": [
+        "Fintech e enterprise"
+      ],
+      "heroAlternatives": [
+        "H4"
+      ]
+    },
+    {
+      "id": "real-estate-marketplace",
+      "matchTerms": [
+        "imobiliário",
+        "imobiliária",
+        "imóveis",
+        "alojamento",
+        "apartamento",
+        "vivenda",
+        "arrendamento",
+        "condomínio",
+        "mansão",
+        "mansões",
+        "real estate"
+      ],
+      "styleId": "minimalist_corporate",
+      "variants": [
+        {
+          "when_any": [
+            "luxo",
+            "luxuosa",
+            "luxuoso",
+            "mansões",
+            "mansão",
+            "exclusivo",
+            "villas"
+          ],
+          "style_id": "luxury_noir"
+        },
+        {
+          "when_any": [
+            "moderno",
+            "tecnológico"
+          ],
+          "style_id": "saas_dark_modern"
+        }
+      ],
+      "patterns": {
+        "hero": "H6",
+        "features": [
+          "F3",
+          "F1"
+        ],
+        "social_proof": [
+          "S2",
+          "S1"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Put useful search controls first and keep the initial form to a few meaningful fields.",
+        "Make listing imagery, location, price, and verification cues easy to compare."
+      ],
+      "sources": [
+        {
+          "name": "Airbnb",
+          "url": "https://www.airbnb.com/",
+          "patternCues": [
+            "Search-led discovery",
+            "Large listing photography and scannable details"
+          ]
+        },
+        {
+          "name": "Zillow",
+          "url": "https://www.zillow.com/",
+          "patternCues": [
+            "Search and map/list coordination",
+            "Prominent listing price and location"
+          ]
+        }
+      ],
+      "dossier": [
+        "Imobiliário e marketplaces (ex: ONDJO, ImoBlog)"
+      ],
+      "heroAlternatives": []
+    },
+    {
+      "id": "portfolio-editorial-education",
+      "matchTerms": [
+        "portfólio",
+        "portfolio",
+        "blog",
+        "revista",
+        "educação",
+        "educativo",
+        "publicação",
+        "freelancer",
+        "designer",
+        "currículo",
+        "cv online",
+        "site pessoal",
+        "personal website",
+        "revista online"
+      ],
+      "styleId": "clean_editorial",
+      "variants": [
+        {
+          "when_any": [
+            "tecnológico"
+          ],
+          "style_id": "saas_dark_modern"
+        }
+      ],
+      "patterns": {
+        "hero": "H8",
+        "features": [
+          "F2"
+        ],
+        "social_proof": [
+          "S4"
+        ],
+        "navigation": "N1",
+        "footer": "R1"
+      },
+      "principles": [
+        "Prioritize typographic hierarchy, useful metadata, and a deliberate reading or project index.",
+        "Use real work, authorship, and publication details rather than generic card grids."
+      ],
+      "sources": [
+        {
+          "name": "Stripe Press",
+          "url": "https://press.stripe.com/",
+          "patternCues": [
+            "Editorial pacing",
+            "Distinctive book and author presentation"
+          ]
+        },
+        {
+          "name": "Substack",
+          "url": "https://substack.com/",
+          "patternCues": [
+            "Publication identity and topic discovery",
+            "Clear reading-oriented content hierarchy"
+          ]
+        },
+        {
+          "name": "Awwwards",
+          "url": "https://www.awwwards.com/",
+          "patternCues": [
+            "Portfolio navigation and varied project presentation"
+          ]
+        }
+      ],
+      "dossier": [
+        "Portfólio, criativo, developer pessoal",
+        "Educação, blog, conteúdo"
+      ],
+      "heroAlternatives": [
+        "H2"
+      ]
+    },
+    {
+      "id": "community-gaming",
+      "matchTerms": [
+        "jogos",
+        "gaming",
+        "discord",
+        "streaming",
+        "roblox",
+        "esports",
+        "servidor de jogos",
+        "minecraft",
+        "fortnite",
+        "gamer",
+        "clã",
+        "twitch",
+        "comunidade de jogos"
+      ],
+      "styleId": "game_arcade_dark",
+      "variants": [
+        {
+          "when_any": [
+            "profissional",
+            "corporativo",
+            "empresa"
+          ],
+          "style_id": "saas_dark_modern"
+        }
+      ],
+      "patterns": {
+        "hero": "H1",
+        "features": [
+          "F1"
+        ],
+        "social_proof": [
+          "S2"
+        ],
+        "navigation": "N1",
+        "footer": "R1"
+      },
+      "principles": [
+        "Tornar tangível a atividade da comunidade: canais, eventos, níveis, contadores.",
+        "Cor de marca quente sobre fundo petróleo; mascote/personagem próprio. Evitar roxo/neon e estética corporativa fria."
+      ],
+      "sources": [
+        {
+          "name": "Discord",
+          "url": "https://discord.com/",
+          "patternCues": [
+            "Community and channel discovery",
+            "Participation-oriented product storytelling"
+          ]
+        },
+        {
+          "name": "Twitch",
+          "url": "https://www.twitch.tv/",
+          "patternCues": [
+            "Live activity and creator discovery",
+            "Clear status and audience signals"
+          ]
+        }
+      ],
+      "dossier": [
+        "Comunidades, jogos, Discord"
+      ],
+      "heroAlternatives": [
+        "H7",
+        "H5"
+      ]
+    },
+    {
+      "id": "tattoo-barber-nightlife",
+      "matchTerms": [
+        "tatuagem",
+        "barbearia",
+        "bar",
+        "rock",
+        "estúdio de tattoo",
+        "tattoo",
+        "piercing",
+        "barber shop",
+        "barbershop",
+        "discoteca",
+        "clube noturno",
+        "cocktail bar",
+        "pub",
+        "tatuador",
+        "tatuadora"
+      ],
+      "styleId": "dark_craft_ink",
+      "variants": [],
+      "patterns": {
+        "hero": "H3",
+        "features": [
+          "F2"
+        ],
+        "social_proof": [
+          "S1"
+        ],
+        "navigation": "N1",
+        "footer": "R1"
+      },
+      "principles": [
+        "Let authentic work photography, booking details, and strong type establish the character.",
+        "Use high contrast and a restrained accent; avoid corporate blue, generic gradients, and overly rounded controls."
+      ],
+      "sources": [
+        {
+          "name": "Brutalist Websites",
+          "url": "https://brutalistwebsites.com/",
+          "patternCues": [
+            "Unconventional composition",
+            "Direct, high-contrast typography"
+          ]
+        },
+        {
+          "name": "Fontsinuse",
+          "url": "https://fontsinuse.com/",
+          "patternCues": [
+            "Typography research by context and medium"
+          ]
+        },
+        {
+          "name": "Liquid Death",
+          "url": "https://liquiddeath.com/",
+          "patternCues": [
+            "Distinctive irreverent brand voice",
+            "Packaging-led visual impact"
+          ]
+        }
+      ],
+      "dossier": [
+        "Tatuagem, barbearia, bares, atitude"
+      ],
+      "heroAlternatives": [
+        "H2",
+        "H5"
+      ]
+    },
+    {
+      "id": "crypto-web3-youth",
+      "matchTerms": [
+        "crypto",
+        "web3",
+        "blockchain",
+        "nft",
+        "defi",
+        "criptomoeda",
+        "bitcoin",
+        "memecoin",
+        "dao"
+      ],
+      "styleId": "bold_neobrutalism",
+      "variants": [],
+      "patterns": {
+        "hero": "H7",
+        "features": [
+          "F1"
+        ],
+        "social_proof": [
+          "S2"
+        ],
+        "navigation": "N1",
+        "footer": "R1"
+      },
+      "principles": [
+        "Use bold flat color, visible structure, and strong typography with restraint.",
+        "Explain utility and risk plainly; avoid implying returns or using decorative motion that obscures content."
+      ],
+      "sources": [
+        {
+          "name": "Neobrutalism",
+          "url": "https://neobrutalism.dev/",
+          "patternCues": [
+            "Hard edges and direct visual hierarchy",
+            "Flat colors and decisive borders"
+          ]
+        },
+        {
+          "name": "Brutalist Websites",
+          "url": "https://brutalistwebsites.com/",
+          "patternCues": [
+            "Expressive, unconventional web composition"
+          ]
+        }
+      ],
+      "dossier": [
+        "Jovem, crypto, web3, atitude digital"
+      ],
+      "heroAlternatives": [
+        "H1"
+      ]
+    },
+    {
+      "id": "restaurant-hospitality",
+      "matchTerms": [
+        "restaurante",
+        "hospitalidade",
+        "cozinha",
+        "gastronomia",
+        "bistrô",
+        "tasca",
+        "cantina",
+        "marisqueira",
+        "churrascaria",
+        "petiscos",
+        "cervejaria",
+        "chef",
+        "restaurant",
+        "bistro",
+        "cuisine",
+        "fine dining"
+      ],
+      "styleId": "minimalist_warm",
+      "variants": [],
+      "patterns": {
+        "hero": "H3",
+        "features": [
+          "F2"
+        ],
+        "social_proof": [
+          "S1"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Use authentic atmosphere imagery and concise sensory copy.",
+        "Keep menu or offering, opening hours, location, and reservation path easy to find."
+      ],
+      "sources": [
+        {
+          "name": "Noma",
+          "url": "https://noma.dk/",
+          "patternCues": [
+            "Place and experience-led storytelling",
+            "Editorial presentation of offerings"
+          ]
+        },
+        {
+          "name": "Blue Bottle Coffee",
+          "url": "https://bluebottlecoffee.com/",
+          "patternCues": [
+            "Product and hospitality context",
+            "Quiet, deliberate photography"
+          ]
+        }
+      ],
+      "dossier": [
+        "Restaurantes e hospitalidade"
+      ],
+      "heroAlternatives": [
+        "H2"
+      ]
+    },
+    {
+      "id": "beverage-packaging-loud",
+      "matchTerms": [
+        "refrigerante",
+        "bebida energética",
+        "energy drink",
+        "cerveja artesanal",
+        "kombucha",
+        "soda",
+        "cervejeira artesanal",
+        "cervejaria artesanal",
+        "craft beer",
+        "brewery",
+        "soft drink",
+        "água com gás",
+        "chá gelado",
+        "bebidas energéticas"
+      ],
+      "styleId": "loud_beverage_dark",
+      "variants": [
+        {
+          "when_any": [
+            "infantil",
+            "crianças",
+            "divertido",
+            "frutas",
+            "natural",
+            "saudável"
+          ],
+          "style_id": "fresh_playful_light"
+        }
+      ],
+      "patterns": {
+        "hero": "H5",
+        "features": [
+          "F2",
+          "F1"
+        ],
+        "social_proof": [
+          "S2"
+        ],
+        "navigation": "N1",
+        "footer": "R1"
+      },
+      "principles": [
+        "A embalagem é o herói: em escala, reconhecível, cortada pela margem; texto mínimo.",
+        "Sabor/variante muda a cor do produto, não a paleta inteira da UI. Declarar números e avisos legais com unidade ligada."
+      ],
+      "sources": [
+        {
+          "name": "Liquid Death",
+          "url": "https://liquiddeath.com/",
+          "patternCues": [
+            "Voz de marca irreverente",
+            "Embalagem como impacto visual"
+          ]
+        },
+        {
+          "name": "Poppi",
+          "url": "https://drinkpoppi.com/",
+          "patternCues": [
+            "Cor por sabor",
+            "Produto repetido em escala e ritmo"
+          ]
+        }
+      ],
+      "dossier": [
+        "Bebidas e embalagem de consumo (energéticos, refrigerantes)"
+      ],
+      "heroAlternatives": [
+        "H7",
+        "H3"
+      ]
+    },
+    {
+      "id": "hardware-engineering-architecture",
+      "matchTerms": [
+        "hardware",
+        "engenharia",
+        "arquitetura",
+        "industrial",
+        "laboratório",
+        "máquinas",
+        "maquinaria",
+        "fábrica",
+        "fabricante",
+        "manufatura",
+        "indústria",
+        "prototipagem",
+        "impressão 3d",
+        "robótica",
+        "iot",
+        "atelier de arquitetura",
+        "arquiteto",
+        "design industrial",
+        "architecture firm",
+        "manufacturing",
+        "engineering firm",
+        "robotics",
+        "engenharia mecânica"
+      ],
+      "styleId": "swiss_technical_light",
+      "variants": [
+        {
+          "when_any": [
+            "luxo",
+            "premium",
+            "galeria"
+          ],
+          "style_id": "clean_editorial"
+        }
+      ],
+      "patterns": {
+        "hero": "H1",
+        "features": [
+          "F3",
+          "F5",
+          "F6"
+        ],
+        "social_proof": [
+          "S3",
+          "S4"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Especificações, medidas e diagramas como conteúdo principal; monoespaçada para dados.",
+        "Grelha visível e hierarquia técnica; evitar imagens de stock genéricas."
+      ],
+      "sources": [
+        {
+          "name": "Teenage Engineering",
+          "url": "https://teenage.engineering/",
+          "patternCues": [
+            "Produto + especificação em primeiro plano"
+          ]
+        },
+        {
+          "name": "Framework",
+          "url": "https://frame.work/",
+          "patternCues": [
+            "Especificações e modularidade em destaque"
+          ]
+        }
+      ],
+      "dossier": [
+        "Hardware, engenharia, arquitetura"
+      ],
+      "heroAlternatives": [
+        "H2",
+        "H8"
+      ]
+    },
+    {
+      "id": "clinic-healthcare",
+      "matchTerms": [
+        "clínica",
+        "consultório",
+        "hospital",
+        "médico",
+        "dentista",
+        "fisioterapia",
+        "saúde mental",
+        "clínica dentária",
+        "dentária",
+        "ortodontia",
+        "oftalmologia",
+        "dermatologia",
+        "pediatria",
+        "análises clínicas",
+        "médica",
+        "clinic",
+        "dental clinic",
+        "doctor",
+        "medical",
+        "enfermagem",
+        "fisioterapeuta",
+        "odontologia"
+      ],
+      "styleId": "minimalist_corporate",
+      "variants": [
+        {
+          "when_any": [
+            "bem-estar",
+            "spa",
+            "holístico"
+          ],
+          "style_id": "minimalist_warm"
+        }
+      ],
+      "patterns": {
+        "hero": "H1",
+        "features": [
+          "F3",
+          "F2"
+        ],
+        "social_proof": [
+          "S1",
+          "S2"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Marcação, horários, morada e especialidades visíveis sem scroll.",
+        "Linguagem clara, sem promessas de cura; credenciais verificáveis."
+      ],
+      "sources": [
+        {
+          "name": "One Medical",
+          "url": "https://www.onemedical.com/",
+          "patternCues": [
+            "Marcação como ação principal",
+            "Informação prática clara"
+          ]
+        },
+        {
+          "name": "Zocdoc",
+          "url": "https://www.zocdoc.com/",
+          "patternCues": [
+            "Marcação como ação principal"
+          ]
+        }
+      ],
+      "dossier": [
+        "Clínicas e saúde"
+      ],
+      "heroAlternatives": [
+        "H2"
+      ]
+    },
+    {
+      "id": "beauty-cosmetics-skincare",
+      "matchTerms": [
+        "cosmética",
+        "cosmético",
+        "skincare",
+        "skin care",
+        "cuidados da pele",
+        "cuidados de pele",
+        "maquilhagem",
+        "maquiagem",
+        "perfume",
+        "perfumaria",
+        "creme facial",
+        "sérum",
+        "loção",
+        "loções",
+        "hidratante",
+        "shampoo",
+        "cosmetics",
+        "makeup",
+        "beauty brand"
+      ],
+      "styleId": "minimalist_warm",
+      "variants": [
+        {
+          "when_any": [
+            "luxo",
+            "luxuoso",
+            "luxuosa",
+            "perfumaria de nicho",
+            "alta perfumaria",
+            "luxury"
+          ],
+          "style_id": "luxury_noir"
+        }
+      ],
+      "patterns": {
+        "hero": "H5",
+        "features": [
+          "F2",
+          "F1"
+        ],
+        "social_proof": [
+          "S1"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Produto em escala e textura (cor, ingrediente, aplicação) como herói; fotografia própria, não stock.",
+        "Ingredientes, modo de uso e provas visíveis; alegações dermatológicas só com evidência (marcar [PLACEHOLDER])."
+      ],
+      "sources": [],
+      "dossier": [
+        "Cosmética e skincare"
+      ],
+      "heroAlternatives": [
+        "H3",
+        "H1"
+      ]
+    },
+    {
+      "id": "jewelry-watches-luxury",
+      "matchTerms": [
+        "joalharia",
+        "joia",
+        "ourivesaria",
+        "relojoaria",
+        "relógio",
+        "anéis de noivado",
+        "alianças de casamento",
+        "jewelry",
+        "jewellery",
+        "watch"
+      ],
+      "styleId": "luxury_noir",
+      "variants": [],
+      "patterns": {
+        "hero": "H3",
+        "features": [
+          "F2"
+        ],
+        "social_proof": [
+          "S4"
+        ],
+        "navigation": "N2",
+        "footer": "R2"
+      },
+      "principles": [
+        "Fotografia macro e luz controlada; poucos elementos, muito espaço; o produto domina.",
+        "Preço, materiais e certificação visíveis; narrativa de artesanato com factos."
+      ],
+      "sources": [],
+      "dossier": [
+        "Joalharia e relógios"
+      ],
+      "heroAlternatives": [
+        "H5",
+        "H2"
+      ]
+    },
+    {
+      "id": "consumer-electronics-gadgets",
+      "matchTerms": [
+        "eletrónica",
+        "eletrónico",
+        "eletrônica",
+        "eletrônico",
+        "electrónica",
+        "gadget",
+        "smartphone",
+        "telemóvel",
+        "telemóveis",
+        "celular",
+        "computador",
+        "portátil",
+        "portáteis",
+        "auscultadores",
+        "headphones",
+        "smartwatch",
+        "wearable",
+        "consumer electronics",
+        "loja de tecnologia"
+      ],
+      "styleId": "swiss_technical_light",
+      "variants": [
+        {
+          "when_any": [
+            "gaming",
+            "gamer",
+            "jogos"
+          ],
+          "style_id": "game_arcade_dark"
+        }
+      ],
+      "patterns": {
+        "hero": "H5",
+        "features": [
+          "F5",
+          "F6"
+        ],
+        "social_proof": [
+          "S2"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Especificações e comparação em primeiro plano; produto em escala sobre fundo neutro.",
+        "Preço, garantia e compatibilidade claros; tabela comparativa honesta."
+      ],
+      "sources": [],
+      "dossier": [
+        "Eletrónica de consumo"
+      ],
+      "heroAlternatives": [
+        "H4",
+        "H1"
+      ]
+    },
+    {
+      "id": "home-decor-furniture",
+      "matchTerms": [
+        "decoração",
+        "mobiliário",
+        "móvel",
+        "móveis",
+        "mobília",
+        "design de interiores",
+        "arquitetura de interiores",
+        "interiores",
+        "cozinhas à medida",
+        "roupeiros",
+        "tapetes",
+        "furniture",
+        "home decor",
+        "interior design",
+        "sofá"
+      ],
+      "styleId": "minimalist_warm",
+      "variants": [
+        {
+          "when_any": [
+            "luxo",
+            "luxuoso",
+            "alta gama"
+          ],
+          "style_id": "clean_editorial"
+        }
+      ],
+      "patterns": {
+        "hero": "H3",
+        "features": [
+          "F2"
+        ],
+        "social_proof": [
+          "S1"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Ambientes reais em escala humana e luz natural; mostrar o produto em contexto e em detalhe.",
+        "Medidas, materiais, prazos de entrega e política de devolução visíveis."
+      ],
+      "sources": [],
+      "dossier": [
+        "Casa, decoração e mobiliário"
+      ],
+      "heroAlternatives": [
+        "H1",
+        "H8"
+      ]
+    },
+    {
+      "id": "grocery-farm-fresh-produce",
+      "matchTerms": [
+        "mercearia",
+        "supermercado",
+        "hortofrutícola",
+        "frutas frescas",
+        "produtos frescos",
+        "legumes",
+        "hortaliças",
+        "talho",
+        "peixaria",
+        "minimercado",
+        "mercado local",
+        "cabaz",
+        "grocery",
+        "supermarket",
+        "farm shop",
+        "fresh produce"
+      ],
+      "styleId": "fresh_playful_light",
+      "variants": [],
+      "patterns": {
+        "hero": "H3",
+        "features": [
+          "F1"
+        ],
+        "social_proof": [
+          "S2"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Frescura visível: fotografia real de produto, origem e época; categorias claras.",
+        "Cabaz, entrega e janela horária explicados; preço por unidade e por peso."
+      ],
+      "sources": [],
+      "dossier": [
+        "Mercearia e produtos frescos"
+      ],
+      "heroAlternatives": [
+        "H5",
+        "H1"
+      ]
+    },
+    {
+      "id": "books-publishing-bookstore",
+      "matchTerms": [
+        "editora",
+        "livraria",
+        "escritor",
+        "escritora",
+        "romancista",
+        "publishing house",
+        "bookstore",
+        "book publisher",
+        "author website",
+        "site de autor"
+      ],
+      "styleId": "clean_editorial",
+      "variants": [],
+      "patterns": {
+        "hero": "H8",
+        "features": [
+          "F2"
+        ],
+        "social_proof": [
+          "S1"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Capas como protagonistas, tipografia de livro (serifa) e ritmo de leitura.",
+        "Excertos, autor e onde comprar claros; newsletter como CTA secundário."
+      ],
+      "sources": [],
+      "dossier": [
+        "Editoras e livrarias"
+      ],
+      "heroAlternatives": [
+        "H2",
+        "H3"
+      ]
+    },
+    {
+      "id": "toys-kids-products",
+      "matchTerms": [
+        "brinquedo",
+        "loja de brinquedos",
+        "artigos para bebé",
+        "artigos para bebe",
+        "puericultura",
+        "roupa de bebé",
+        "toys",
+        "baby products",
+        "kids store"
+      ],
+      "styleId": "fresh_playful_light",
+      "variants": [],
+      "patterns": {
+        "hero": "H1",
+        "features": [
+          "F1"
+        ],
+        "social_proof": [
+          "S1"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Cor e forma alegres com contraste AA; fotografia de produto limpa e segurança em destaque.",
+        "Faixa etária, segurança e certificação visíveis; pais como público de decisão."
+      ],
+      "sources": [],
+      "dossier": [
+        "Brinquedos e puericultura"
+      ],
+      "heroAlternatives": [
+        "H5"
+      ]
+    },
+    {
+      "id": "pet-care-veterinary",
+      "matchTerms": [
+        "pet shop",
+        "animais de estimação",
+        "veterinária",
+        "veterinário",
+        "clínica veterinária",
+        "hospital veterinário",
+        "canil",
+        "gatil",
+        "tosquia",
+        "banho e tosa",
+        "ração",
+        "cães",
+        "gatos",
+        "pet care",
+        "dog grooming",
+        "vet clinic",
+        "animal shelter",
+        "adoção de animais"
+      ],
+      "styleId": "fresh_playful_light",
+      "variants": [
+        {
+          "when_any": [
+            "clínica veterinária",
+            "hospital veterinário",
+            "veterinária",
+            "veterinário"
+          ],
+          "style_id": "minimalist_corporate"
+        }
+      ],
+      "patterns": {
+        "hero": "H1",
+        "features": [
+          "F2"
+        ],
+        "social_proof": [
+          "S1"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Calor e confiança: fotografia real de animais, serviços e horários claros.",
+        "Marcação e urgências visíveis; equipa com nome e especialidade."
+      ],
+      "sources": [],
+      "dossier": [
+        "Pet shop e veterinária"
+      ],
+      "heroAlternatives": [
+        "H3"
+      ]
+    },
+    {
+      "id": "florist-gifts-flowers",
+      "matchTerms": [
+        "florista",
+        "floristaria",
+        "flores",
+        "ramo de flores",
+        "arranjos florais",
+        "bouquet",
+        "loja de presentes",
+        "gift shop",
+        "florist",
+        "flower shop"
+      ],
+      "styleId": "minimalist_warm",
+      "variants": [],
+      "patterns": {
+        "hero": "H3",
+        "features": [
+          "F2"
+        ],
+        "social_proof": [
+          "S1"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Fotografia de arranjos em luz natural; sazonalidade e entrega no mesmo dia como promessa concreta.",
+        "Escolha por ocasião e prazo de entrega visíveis."
+      ],
+      "sources": [],
+      "dossier": [
+        "Floristas e presentes"
+      ],
+      "heroAlternatives": [
+        "H1"
+      ]
+    },
+    {
+      "id": "wine-spirits-cellar",
+      "matchTerms": [
+        "vinho",
+        "adega",
+        "vinícola",
+        "vinhedo",
+        "whisky",
+        "uísque",
+        "gin",
+        "destilaria",
+        "enólogo",
+        "vinho do porto",
+        "clube de vinho",
+        "winery",
+        "wine",
+        "spirits",
+        "distillery"
+      ],
+      "styleId": "luxury_noir",
+      "variants": [],
+      "patterns": {
+        "hero": "H9",
+        "features": [
+          "F2"
+        ],
+        "social_proof": [
+          "S4"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Terroir e origem como narrativa; garrafa em escala sobre fundo escuro.",
+        "Notas de prova, castas, ano e harmonizações legíveis; aviso de consumo responsável."
+      ],
+      "sources": [],
+      "dossier": [
+        "Vinhos e destilados"
+      ],
+      "heroAlternatives": [
+        "H3",
+        "H5"
+      ]
+    },
+    {
+      "id": "bakery-patisserie-sweets",
+      "matchTerms": [
+        "padaria",
+        "pastelaria",
+        "confeitaria",
+        "doçaria",
+        "bolo",
+        "bolos personalizados",
+        "pão",
+        "pâtisserie",
+        "chocolataria",
+        "bakery",
+        "cake",
+        "cupcake",
+        "pastry shop"
+      ],
+      "styleId": "minimalist_warm",
+      "variants": [
+        {
+          "when_any": [
+            "infantil",
+            "festas",
+            "cupcakes",
+            "divertido"
+          ],
+          "style_id": "fresh_playful_light"
+        }
+      ],
+      "patterns": {
+        "hero": "H3",
+        "features": [
+          "F2"
+        ],
+        "social_proof": [
+          "S1"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Apetite primeiro: fotografia próxima, textura e luz natural; horários e encomendas à vista.",
+        "Encomenda com antecedência e opções (tamanho, alergénios) claras."
+      ],
+      "sources": [],
+      "dossier": [
+        "Padarias e pastelarias"
+      ],
+      "heroAlternatives": [
+        "H1"
+      ]
+    },
+    {
+      "id": "handmade-crafts-candles",
+      "matchTerms": [
+        "vela",
+        "artesanato",
+        "cerâmica",
+        "feito à mão",
+        "feito a mão",
+        "handmade",
+        "candle",
+        "artesão",
+        "artesã",
+        "sabonete",
+        "macramé",
+        "crochê",
+        "croché",
+        "tricot",
+        "bijuteria"
+      ],
+      "styleId": "minimalist_warm",
+      "variants": [],
+      "patterns": {
+        "hero": "H3",
+        "features": [
+          "F2"
+        ],
+        "social_proof": [
+          "S1"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Processo e materiais como história: mãos, oficina, lote; fotografia com textura.",
+        "Lotes limitados, tempo de produção e envio claros."
+      ],
+      "sources": [],
+      "dossier": [
+        "Artesanato e velas"
+      ],
+      "heroAlternatives": [
+        "H1"
+      ]
+    },
+    {
+      "id": "sports-outdoor-gear",
+      "matchTerms": [
+        "equipamento desportivo",
+        "artigos de desporto",
+        "loja de desporto",
+        "outdoor",
+        "campismo",
+        "trekking",
+        "caminhadas",
+        "ciclismo",
+        "bicicleta",
+        "surf",
+        "running",
+        "trail",
+        "escalada",
+        "sports gear",
+        "hiking",
+        "camping",
+        "cycling"
+      ],
+      "styleId": "sport_kinetic_dark",
+      "variants": [],
+      "patterns": {
+        "hero": "H5",
+        "features": [
+          "F1"
+        ],
+        "social_proof": [
+          "S2"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Movimento e escala: fotografia em ação, produto em uso, tipografia condensada forte.",
+        "Especificações técnicas (peso, material, condições) legíveis e comparáveis."
+      ],
+      "sources": [],
+      "dossier": [
+        "Desporto e outdoor"
+      ],
+      "heroAlternatives": [
+        "H3",
+        "H7"
+      ]
+    },
+    {
+      "id": "fitness-gym-training",
+      "matchTerms": [
+        "ginásio",
+        "academia de ginástica",
+        "crossfit",
+        "musculação",
+        "personal trainer",
+        "treino",
+        "calistenia",
+        "fitness",
+        "gym",
+        "boxe",
+        "artes marciais"
+      ],
+      "styleId": "sport_kinetic_dark",
+      "variants": [],
+      "patterns": {
+        "hero": "H3",
+        "features": [
+          "F3"
+        ],
+        "social_proof": [
+          "S2"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Energia real: pessoas reais a treinar, horários e planos claros; aula experimental como CTA.",
+        "Preços e planos transparentes; resultados só com consentimento e sem promessas médicas."
+      ],
+      "sources": [],
+      "dossier": [
+        "Ginásios e fitness"
+      ],
+      "heroAlternatives": [
+        "H5",
+        "H7"
+      ]
+    },
+    {
+      "id": "yoga-pilates-meditation-studio",
+      "matchTerms": [
+        "yoga",
+        "pilates",
+        "meditação",
+        "mindfulness",
+        "retiro",
+        "reiki",
+        "estúdio de yoga",
+        "yoga studio",
+        "breathwork"
+      ],
+      "styleId": "minimalist_warm",
+      "variants": [],
+      "patterns": {
+        "hero": "H3",
+        "features": [
+          "F3"
+        ],
+        "social_proof": [
+          "S1"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Calma visual: espaço negativo, luz suave, movimento lento.",
+        "Horários, níveis e primeira aula grátis visíveis."
+      ],
+      "sources": [],
+      "dossier": [
+        "Yoga e meditação"
+      ],
+      "heroAlternatives": [
+        "H2"
+      ]
+    },
+    {
+      "id": "spa-salon-aesthetics",
+      "matchTerms": [
+        "spa",
+        "salão de beleza",
+        "cabeleireiro",
+        "cabeleireira",
+        "clínica de estética",
+        "centro de estética",
+        "esteticista",
+        "manicure",
+        "unhas",
+        "massagem",
+        "depilação",
+        "hair salon",
+        "beauty salon",
+        "nail studio"
+      ],
+      "styleId": "minimalist_warm",
+      "variants": [
+        {
+          "when_any": [
+            "luxo",
+            "luxuoso",
+            "premium"
+          ],
+          "style_id": "luxury_noir"
+        }
+      ],
+      "patterns": {
+        "hero": "H3",
+        "features": [
+          "F2"
+        ],
+        "social_proof": [
+          "S1"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Serviços com preço e duração claros; marcação como ação principal.",
+        "Fotografia do espaço e da equipa; antes/depois só com consentimento."
+      ],
+      "sources": [],
+      "dossier": [
+        "Salões e spa"
+      ],
+      "heroAlternatives": [
+        "H1"
+      ]
+    },
+    {
+      "id": "mental-health-coaching-therapy",
+      "matchTerms": [
+        "psicólogo",
+        "psicóloga",
+        "psicologia",
+        "consultório de psicologia",
+        "psicoterapia",
+        "terapia",
+        "terapeuta",
+        "coaching",
+        "coach",
+        "nutricionista",
+        "nutrição",
+        "consultório de nutrição",
+        "dietista",
+        "life coach",
+        "therapist",
+        "psychologist",
+        "nutritionist",
+        "counselling",
+        "counseling"
+      ],
+      "styleId": "minimalist_warm",
+      "variants": [],
+      "patterns": {
+        "hero": "H2",
+        "features": [
+          "F3"
+        ],
+        "social_proof": [
+          "S1"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Confiança antes de tudo: foto real do profissional, abordagem explicada e como é a primeira sessão.",
+        "Privacidade, preços e marcação claros; sem promessas de cura."
+      ],
+      "sources": [],
+      "dossier": [
+        "Terapia, coaching e nutrição"
+      ],
+      "heroAlternatives": [
+        "H1"
+      ]
+    },
+    {
+      "id": "pharmacy-health-products",
+      "matchTerms": [
+        "farmácia",
+        "parafarmácia",
+        "suplemento",
+        "vitamina",
+        "produtos de saúde",
+        "pharmacy",
+        "supplement",
+        "vitamin"
+      ],
+      "styleId": "minimalist_corporate",
+      "variants": [],
+      "patterns": {
+        "hero": "H6",
+        "features": [
+          "F1"
+        ],
+        "social_proof": [
+          "S2"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Pesquisa e categorias primeiro; informação clara sobre produto, dosagem e aviso legal.",
+        "Serviço (entrega, aconselhamento) e horários visíveis."
+      ],
+      "sources": [],
+      "dossier": [
+        "Farmácias e suplementos"
+      ],
+      "heroAlternatives": [
+        "H1"
+      ]
+    },
+    {
+      "id": "law-firm-legal",
+      "matchTerms": [
+        "advogado",
+        "advogada",
+        "advocacia",
+        "escritório de advogados",
+        "sociedade de advogados",
+        "direito civil",
+        "direito comercial",
+        "direito de família",
+        "direito laboral",
+        "jurídico",
+        "jurídica",
+        "notário",
+        "solicitador",
+        "law firm",
+        "lawyer",
+        "attorney",
+        "legal services"
+      ],
+      "styleId": "minimalist_corporate",
+      "variants": [
+        {
+          "when_any": [
+            "boutique",
+            "prestígio",
+            "tradicional"
+          ],
+          "style_id": "clean_editorial"
+        }
+      ],
+      "patterns": {
+        "hero": "H1",
+        "features": [
+          "F3"
+        ],
+        "social_proof": [
+          "S3"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Autoridade calma: tipografia sóbria, áreas de atuação claras, equipa com nome e especialidade.",
+        "Primeiro contacto simples; confidencialidade e honorários explicados."
+      ],
+      "sources": [],
+      "dossier": [
+        "Advogados e serviços jurídicos"
+      ],
+      "heroAlternatives": [
+        "H2"
+      ]
+    },
+    {
+      "id": "accounting-consulting-business",
+      "matchTerms": [
+        "contabilidade",
+        "contabilista",
+        "consultoria",
+        "consultor",
+        "consultora",
+        "auditoria",
+        "fiscalidade",
+        "gestão empresarial",
+        "gabinete de contabilidade",
+        "accounting",
+        "accountant",
+        "consulting",
+        "tax advisory",
+        "business consulting"
+      ],
+      "styleId": "minimalist_corporate",
+      "variants": [],
+      "patterns": {
+        "hero": "H1",
+        "features": [
+          "F3"
+        ],
+        "social_proof": [
+          "S3"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Clareza e números: serviços por tipo de cliente, prazos fiscais, preços ou pacotes.",
+        "Casos e resultados concretos e primeiro contacto simples."
+      ],
+      "sources": [],
+      "dossier": [
+        "Contabilidade e consultoria"
+      ],
+      "heroAlternatives": [
+        "H2"
+      ]
+    },
+    {
+      "id": "marketing-creative-agency",
+      "matchTerms": [
+        "agência de marketing",
+        "agência criativa",
+        "agência de publicidade",
+        "agência digital",
+        "agência de comunicação",
+        "estúdio de design",
+        "creative agency",
+        "marketing agency",
+        "digital agency",
+        "design studio"
+      ],
+      "styleId": "bold_neobrutalism",
+      "variants": [
+        {
+          "when_any": [
+            "minimal",
+            "elegante",
+            "sofisticada",
+            "editorial"
+          ],
+          "style_id": "clean_editorial"
+        }
+      ],
+      "patterns": {
+        "hero": "H2",
+        "features": [
+          "F5"
+        ],
+        "social_proof": [
+          "S4"
+        ],
+        "navigation": "N2",
+        "footer": "R1"
+      },
+      "principles": [
+        "Trabalho em primeiro plano: casos com resultado e processo; tipografia com personalidade.",
+        "Pontos de prova (logos + frase do que fizeram) e CTA claro para briefing."
+      ],
+      "sources": [],
+      "dossier": [
+        "Agências criativas"
+      ],
+      "heroAlternatives": [
+        "H7",
+        "H8"
+      ]
+    },
+    {
+      "id": "photography-video-studio",
+      "matchTerms": [
+        "fotógrafo",
+        "fotógrafa",
+        "fotografia de produto",
+        "fotografia de casamento",
+        "videomaker",
+        "videografia",
+        "estúdio fotográfico",
+        "ensaio fotográfico",
+        "photographer",
+        "videographer",
+        "photo studio"
+      ],
+      "styleId": "clean_editorial",
+      "variants": [],
+      "patterns": {
+        "hero": "H3",
+        "features": [
+          "F2"
+        ],
+        "social_proof": [
+          "S1"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "O trabalho é a página: imagens grandes, carregamento rápido, séries bem editadas.",
+        "Serviços, preços indicativos e disponibilidade; contacto direto."
+      ],
+      "sources": [],
+      "dossier": [
+        "Fotografia e vídeo"
+      ],
+      "heroAlternatives": [
+        "H8",
+        "H2"
+      ]
+    },
+    {
+      "id": "construction-trades-home-services",
+      "matchTerms": [
+        "construtora",
+        "empreiteiro",
+        "construção civil",
+        "obras de remodelação",
+        "remodelação",
+        "canalizador",
+        "eletricista",
+        "pintor",
+        "carpinteiro",
+        "serralheiro",
+        "reparações",
+        "limpeza",
+        "jardinagem",
+        "serviços domésticos",
+        "pedreiro",
+        "construction company",
+        "contractor",
+        "plumber",
+        "electrician",
+        "handyman",
+        "cleaning service"
+      ],
+      "styleId": "minimalist_corporate",
+      "variants": [],
+      "patterns": {
+        "hero": "H1",
+        "features": [
+          "F3"
+        ],
+        "social_proof": [
+          "S3"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Confiança local: obras reais antes/depois, zona de atuação, orçamento grátis como CTA.",
+        "Certificações, seguros e garantia visíveis; telefone/WhatsApp em destaque."
+      ],
+      "sources": [],
+      "dossier": [
+        "Construção e serviços domésticos"
+      ],
+      "heroAlternatives": [
+        "H6"
+      ]
+    },
+    {
+      "id": "logistics-transport-delivery",
+      "matchTerms": [
+        "logística",
+        "transportadora",
+        "transportes",
+        "empresa de mudanças",
+        "serviço de mudanças",
+        "empresa de entregas",
+        "serviço de entregas",
+        "courier",
+        "frete",
+        "transporte de mercadorias",
+        "shipping",
+        "freight",
+        "logistics",
+        "moving company",
+        "courier service"
+      ],
+      "styleId": "minimalist_corporate",
+      "variants": [],
+      "patterns": {
+        "hero": "H1",
+        "features": [
+          "F3"
+        ],
+        "social_proof": [
+          "S2"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Rastreio, cobertura e prazos: informação operacional antes de adjetivos.",
+        "Pedido de cotação em poucos campos; SLA e contactos visíveis."
+      ],
+      "sources": [],
+      "dossier": [
+        "Logística e transportes"
+      ],
+      "heroAlternatives": [
+        "H6"
+      ]
+    },
+    {
+      "id": "automotive-dealer-workshop",
+      "matchTerms": [
+        "stand de automóveis",
+        "stand automóvel",
+        "concessionário",
+        "carro usado",
+        "carros usados",
+        "viatura",
+        "oficina mecânica",
+        "oficina auto",
+        "mecânico",
+        "pneu",
+        "aluguer de carros",
+        "rent a car",
+        "car dealership",
+        "car rental",
+        "auto repair",
+        "mechanic"
+      ],
+      "styleId": "swiss_technical_light",
+      "variants": [
+        {
+          "when_any": [
+            "luxo",
+            "superdesportivo",
+            "clássicos"
+          ],
+          "style_id": "luxury_noir"
+        }
+      ],
+      "patterns": {
+        "hero": "H5",
+        "features": [
+          "F5"
+        ],
+        "social_proof": [
+          "S2"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Inventário e ficha técnica primeiro: filtros, preço, quilometragem, garantia.",
+        "Marcação de revisão e orçamento transparentes."
+      ],
+      "sources": [],
+      "dossier": [
+        "Stands e oficinas"
+      ],
+      "heroAlternatives": [
+        "H1",
+        "H6"
+      ]
+    },
+    {
+      "id": "energy-solar-sustainability",
+      "matchTerms": [
+        "energia solar",
+        "painel solar",
+        "painéis solares",
+        "fotovoltaico",
+        "energias renováveis",
+        "energia renovável",
+        "eficiência energética",
+        "solar panels",
+        "renewable energy",
+        "cleantech",
+        "instalação solar"
+      ],
+      "styleId": "minimalist_corporate",
+      "variants": [
+        {
+          "when_any": [
+            "natureza",
+            "ecológico",
+            "ecologico"
+          ],
+          "style_id": "organic_forest_dark"
+        }
+      ],
+      "patterns": {
+        "hero": "H1",
+        "features": [
+          "F3"
+        ],
+        "social_proof": [
+          "S2"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Poupança e impacto em números reais (kWh, anos de retorno) e simulador simples.",
+        "Instalação, garantia e financiamento explicados."
+      ],
+      "sources": [],
+      "dossier": [
+        "Energia solar e renováveis"
+      ],
+      "heroAlternatives": [
+        "H4"
+      ]
+    },
+    {
+      "id": "agriculture-agritech-farm",
+      "matchTerms": [
+        "agricultura",
+        "agropecuária",
+        "agronegócio",
+        "agrícola",
+        "fazenda",
+        "herdade",
+        "agricultor",
+        "agritech",
+        "pecuária",
+        "gado",
+        "cooperativa agrícola",
+        "agriculture",
+        "farm",
+        "farming"
+      ],
+      "styleId": "organic_forest_dark",
+      "variants": [],
+      "patterns": {
+        "hero": "H9",
+        "features": [
+          "F2"
+        ],
+        "social_proof": [
+          "S3"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Origem e terra: fotografia real de campo, safra e processo; números de produção.",
+        "Certificações e rastreabilidade visíveis; contacto comercial direto."
+      ],
+      "sources": [],
+      "dossier": [
+        "Agricultura e agritech"
+      ],
+      "heroAlternatives": [
+        "H3",
+        "H1"
+      ]
+    },
+    {
+      "id": "school-university-institutional",
+      "matchTerms": [
+        "escola",
+        "colégio",
+        "universidade",
+        "faculdade",
+        "ensino superior",
+        "politécnico",
+        "instituto",
+        "school",
+        "university",
+        "college",
+        "institute"
+      ],
+      "styleId": "civic_trust_light",
+      "variants": [],
+      "patterns": {
+        "hero": "H1",
+        "features": [
+          "F3"
+        ],
+        "social_proof": [
+          "S2"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Informação prática primeiro: cursos, candidaturas, calendário e contactos.",
+        "Acessibilidade alta: contraste, texto grande e navegação simples."
+      ],
+      "sources": [],
+      "dossier": [
+        "Escolas e universidades"
+      ],
+      "heroAlternatives": [
+        "H6"
+      ]
+    },
+    {
+      "id": "online-courses-edtech",
+      "matchTerms": [
+        "cursos online",
+        "curso online",
+        "plataforma de cursos",
+        "e-learning",
+        "elearning",
+        "ensino à distância",
+        "mentoria",
+        "bootcamp",
+        "edtech",
+        "online courses",
+        "online learning",
+        "course platform",
+        "masterclass",
+        "formação online",
+        "aulas online"
+      ],
+      "styleId": "fresh_playful_light",
+      "variants": [
+        {
+          "when_any": [
+            "empresas",
+            "corporativo",
+            "b2b"
+          ],
+          "style_id": "minimalist_corporate"
+        }
+      ],
+      "patterns": {
+        "hero": "H1",
+        "features": [
+          "F3"
+        ],
+        "social_proof": [
+          "S2"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Resultado de aprendizagem concreto: o que vais saber fazer; programa, duração e preço claros.",
+        "Pré-visualização real da aula e provas de alunos."
+      ],
+      "sources": [],
+      "dossier": [
+        "Cursos online e edtech"
+      ],
+      "heroAlternatives": [
+        "H4",
+        "H6"
+      ]
+    },
+    {
+      "id": "language-school-tutoring",
+      "matchTerms": [
+        "escola de línguas",
+        "escola de idiomas",
+        "escola de inglês",
+        "aulas de inglês",
+        "aulas particulares",
+        "explicações",
+        "explicador",
+        "centro de estudos",
+        "tutor",
+        "tutoring",
+        "language school",
+        "english classes"
+      ],
+      "styleId": "fresh_playful_light",
+      "variants": [],
+      "patterns": {
+        "hero": "H1",
+        "features": [
+          "F3"
+        ],
+        "social_proof": [
+          "S1"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Níveis e horários claros; aula experimental; professores com nome.",
+        "Prova de progresso (certificações) sem promessas milagrosas."
+      ],
+      "sources": [],
+      "dossier": [
+        "Escolas de línguas e explicações"
+      ],
+      "heroAlternatives": []
+    },
+    {
+      "id": "kindergarten-childcare",
+      "matchTerms": [
+        "creche",
+        "infantário",
+        "jardim de infância",
+        "pré-escola",
+        "atl",
+        "ludoteca",
+        "daycare",
+        "kindergarten",
+        "nursery school",
+        "preschool"
+      ],
+      "styleId": "fresh_playful_light",
+      "variants": [],
+      "patterns": {
+        "hero": "H3",
+        "features": [
+          "F2"
+        ],
+        "social_proof": [
+          "S1"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Segurança e calor humano: rotina diária, equipa e instalações reais; visita marcada como CTA.",
+        "Preços, horários e regras claros para os pais."
+      ],
+      "sources": [],
+      "dossier": [
+        "Creches e infantários"
+      ],
+      "heroAlternatives": [
+        "H1"
+      ]
+    },
+    {
+      "id": "nonprofit-ngo-charity",
+      "matchTerms": [
+        "ong",
+        "organização não governamental",
+        "associação",
+        "associação sem fins lucrativos",
+        "fundação",
+        "caridade",
+        "voluntariado",
+        "voluntário",
+        "doação",
+        "doações",
+        "donativo",
+        "angariação de fundos",
+        "causa social",
+        "solidariedade",
+        "nonprofit",
+        "charity",
+        "volunteer",
+        "donate",
+        "fundraising"
+      ],
+      "styleId": "civic_trust_light",
+      "variants": [
+        {
+          "when_any": [
+            "crianças",
+            "infância",
+            "carenciadas"
+          ],
+          "style_id": "fresh_playful_light"
+        }
+      ],
+      "patterns": {
+        "hero": "H3",
+        "features": [
+          "F3"
+        ],
+        "social_proof": [
+          "S2"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Impacto em números reais e histórias com consentimento; doar em 2 cliques.",
+        "Transparência: relatório, destino dos fundos e contactos."
+      ],
+      "sources": [],
+      "dossier": [
+        "ONG e associações"
+      ],
+      "heroAlternatives": [
+        "H9",
+        "H1"
+      ]
+    },
+    {
+      "id": "church-faith-community",
+      "matchTerms": [
+        "igreja",
+        "paróquia",
+        "comunidade religiosa",
+        "culto",
+        "pastor",
+        "capela",
+        "mesquita",
+        "sinagoga",
+        "templo",
+        "congregação",
+        "church",
+        "parish",
+        "congregation",
+        "worship",
+        "missa"
+      ],
+      "styleId": "minimalist_warm",
+      "variants": [],
+      "patterns": {
+        "hero": "H3",
+        "features": [
+          "F2"
+        ],
+        "social_proof": [
+          "S1"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Acolhimento: horários de culto, morada e como chegar visíveis; rostos reais da comunidade.",
+        "Eventos e transmissões; doações com transparência; tom humilde."
+      ],
+      "sources": [],
+      "dossier": [
+        "Igrejas e comunidades de fé"
+      ],
+      "heroAlternatives": [
+        "H1"
+      ]
+    },
+    {
+      "id": "government-municipality-public",
+      "matchTerms": [
+        "município",
+        "câmara municipal",
+        "junta de freguesia",
+        "governo",
+        "instituição pública",
+        "serviço público",
+        "administração pública",
+        "autarquia",
+        "portal do cidadão",
+        "ministério",
+        "prefeitura",
+        "government",
+        "municipality",
+        "city council",
+        "public service"
+      ],
+      "styleId": "civic_trust_light",
+      "variants": [],
+      "patterns": {
+        "hero": "H1",
+        "features": [
+          "F3"
+        ],
+        "social_proof": [
+          "S2"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Tarefas primeiro: o que o cidadão quer fazer (pagar, pedir, marcar) em 1 clique.",
+        "Acessibilidade AA/AAA, linguagem simples, contactos e horários."
+      ],
+      "sources": [],
+      "dossier": [
+        "Governo e serviços públicos"
+      ],
+      "heroAlternatives": [
+        "H6"
+      ]
+    },
+    {
+      "id": "events-conference-festival",
+      "matchTerms": [
+        "conferência",
+        "congresso",
+        "evento",
+        "festival",
+        "concerto",
+        "feira",
+        "workshop",
+        "meetup",
+        "hackathon",
+        "summit",
+        "conference",
+        "event",
+        "festa"
+      ],
+      "styleId": "bold_neobrutalism",
+      "variants": [
+        {
+          "when_any": [
+            "congresso",
+            "formal",
+            "corporativo",
+            "summit"
+          ],
+          "style_id": "minimalist_corporate"
+        }
+      ],
+      "patterns": {
+        "hero": "H7",
+        "features": [
+          "F3"
+        ],
+        "social_proof": [
+          "S4"
+        ],
+        "navigation": "N2",
+        "footer": "R1"
+      },
+      "principles": [
+        "Data, local e preço no primeiro ecrã; programa claro por dia; CTA de bilhete.",
+        "Oradores/artistas com nome e rosto reais; contagem decrescente discreta."
+      ],
+      "sources": [],
+      "dossier": [
+        "Eventos e festivais"
+      ],
+      "heroAlternatives": [
+        "H2",
+        "H1"
+      ]
+    },
+    {
+      "id": "music-artist-band-label",
+      "matchTerms": [
+        "banda",
+        "cantor",
+        "cantora",
+        "artista musical",
+        "discográfica",
+        "dj",
+        "digressão",
+        "digressões",
+        "musician",
+        "band",
+        "record label",
+        "singer",
+        "album release",
+        "compositor"
+      ],
+      "styleId": "dark_craft_ink",
+      "variants": [
+        {
+          "when_any": [
+            "eletrónica",
+            "dj",
+            "club",
+            "techno"
+          ],
+          "style_id": "bold_neobrutalism"
+        }
+      ],
+      "patterns": {
+        "hero": "H3",
+        "features": [
+          "F2"
+        ],
+        "social_proof": [
+          "S1"
+        ],
+        "navigation": "N1",
+        "footer": "R1"
+      },
+      "principles": [
+        "Música primeiro: player visível, datas de concertos, merch e links de streaming.",
+        "Identidade forte e coerente com o som; imagens próprias."
+      ],
+      "sources": [],
+      "dossier": [
+        "Artistas e bandas"
+      ],
+      "heroAlternatives": [
+        "H7",
+        "H2"
+      ]
+    },
+    {
+      "id": "film-production-studio",
+      "matchTerms": [
+        "produtora de vídeo",
+        "produtora audiovisual",
+        "produtora de cinema",
+        "cinema",
+        "realizador",
+        "realizadora",
+        "filme",
+        "curta-metragem",
+        "documentário",
+        "filmmaker",
+        "film production",
+        "production company",
+        "cinematography"
+      ],
+      "styleId": "luxury_noir",
+      "variants": [],
+      "patterns": {
+        "hero": "H3",
+        "features": [
+          "F2"
+        ],
+        "social_proof": [
+          "S4"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Showreel como herói (com fallback estático); frames fortes e tipografia contida.",
+        "Créditos, prémios e contacto de produção claros."
+      ],
+      "sources": [],
+      "dossier": [
+        "Produtoras e cinema"
+      ],
+      "heroAlternatives": [
+        "H9",
+        "H8"
+      ]
+    },
+    {
+      "id": "podcast-media-newsletter",
+      "matchTerms": [
+        "podcast",
+        "newsletter",
+        "jornal",
+        "jornalismo",
+        "redação",
+        "canal de vídeo",
+        "youtuber",
+        "criador de conteúdo",
+        "webzine",
+        "journalism",
+        "newsroom",
+        "podcaster"
+      ],
+      "styleId": "clean_editorial",
+      "variants": [],
+      "patterns": {
+        "hero": "H8",
+        "features": [
+          "F2"
+        ],
+        "social_proof": [
+          "S1"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Episódios/edições como índice editorial; subscrição em destaque; tipografia de leitura.",
+        "Autor, periodicidade e onde ouvir/ler claros."
+      ],
+      "sources": [],
+      "dossier": [
+        "Podcasts, newsletters e media"
+      ],
+      "heroAlternatives": [
+        "H2",
+        "H1"
+      ]
+    },
+    {
+      "id": "indie-game-studio",
+      "matchTerms": [
+        "estúdio de jogos",
+        "jogo indie",
+        "jogos indie",
+        "game studio",
+        "indie game",
+        "videojogo",
+        "videogame",
+        "game jam",
+        "jogo mobile",
+        "jogo de plataformas"
+      ],
+      "styleId": "game_arcade_dark",
+      "variants": [],
+      "patterns": {
+        "hero": "H3",
+        "features": [
+          "F2"
+        ],
+        "social_proof": [
+          "S4"
+        ],
+        "navigation": "N1",
+        "footer": "R1"
+      },
+      "principles": [
+        "Trailer e capturas reais primeiro; plataformas e data de lançamento claras; wishlist como CTA.",
+        "Personagem/mascote e arte própria; press kit acessível."
+      ],
+      "sources": [],
+      "dossier": [
+        "Estúdios de jogos indie"
+      ],
+      "heroAlternatives": [
+        "H7",
+        "H5"
+      ]
+    },
+    {
+      "id": "hotel-resort-travel-agency",
+      "matchTerms": [
+        "hotel",
+        "hotéis",
+        "resort",
+        "hostel",
+        "alojamento local",
+        "turismo",
+        "agência de viagens",
+        "viagens",
+        "férias",
+        "pousada",
+        "guest house",
+        "travel agency",
+        "tourism",
+        "vacation rental",
+        "bed and breakfast",
+        "hotel boutique"
+      ],
+      "styleId": "minimalist_warm",
+      "variants": [
+        {
+          "when_any": [
+            "luxo",
+            "luxuoso",
+            "5 estrelas",
+            "exclusivo"
+          ],
+          "style_id": "luxury_noir"
+        }
+      ],
+      "patterns": {
+        "hero": "H3",
+        "features": [
+          "F2"
+        ],
+        "social_proof": [
+          "S1"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Lugar e experiência: fotografia real do lugar e dos quartos; localização e reserva à vista.",
+        "Preços e política de cancelamento claros; avaliações verificadas."
+      ],
+      "sources": [],
+      "dossier": [
+        "Hotéis, turismo e viagens"
+      ],
+      "heroAlternatives": [
+        "H6",
+        "H9"
+      ]
+    },
+    {
+      "id": "food-delivery-takeaway-truck",
+      "matchTerms": [
+        "delivery de comida",
+        "entrega de comida",
+        "takeaway",
+        "food truck",
+        "comida de rua",
+        "hambúrguer",
+        "pizzaria",
+        "pizza",
+        "sushi",
+        "snack bar",
+        "fast food",
+        "burger",
+        "pizzeria",
+        "food delivery",
+        "comida para levar"
+      ],
+      "styleId": "fresh_playful_light",
+      "variants": [],
+      "patterns": {
+        "hero": "H5",
+        "features": [
+          "F3"
+        ],
+        "social_proof": [
+          "S2"
+        ],
+        "navigation": "N1",
+        "footer": "R1"
+      },
+      "principles": [
+        "Apetite e rapidez: fotografia de prato, menu claro, pedido em poucos toques.",
+        "Zona de entrega, tempo e custo visíveis; horários e localização do truck."
+      ],
+      "sources": [],
+      "dossier": [
+        "Delivery, takeaway e food trucks"
+      ],
+      "heroAlternatives": [
+        "H6",
+        "H7"
+      ]
+    },
+    {
+      "id": "wedding-private-events",
+      "matchTerms": [
+        "casamento",
+        "wedding planner",
+        "wedding",
+        "noiva",
+        "organização de casamentos",
+        "organização de eventos",
+        "festas de aniversário",
+        "batizado",
+        "event planner",
+        "event planning"
+      ],
+      "styleId": "clean_editorial",
+      "variants": [
+        {
+          "when_any": [
+            "festa infantil",
+            "aniversário",
+            "batizado"
+          ],
+          "style_id": "fresh_playful_light"
+        }
+      ],
+      "patterns": {
+        "hero": "H3",
+        "features": [
+          "F2"
+        ],
+        "social_proof": [
+          "S1"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Emoção e detalhe: galeria real, estilo da equipa e processo de planeamento.",
+        "Pacotes e disponibilidade/datas; pedido de orçamento simples."
+      ],
+      "sources": [],
+      "dossier": [
+        "Casamentos e eventos privados"
+      ],
+      "heroAlternatives": [
+        "H9",
+        "H2"
+      ]
+    },
+    {
+      "id": "marketplace-classifieds",
+      "matchTerms": [
+        "classificado",
+        "anúncio",
+        "compra e venda",
+        "segunda mão",
+        "classifieds",
+        "buy and sell",
+        "anúncios gratuitos"
+      ],
+      "styleId": "minimalist_corporate",
+      "variants": [],
+      "patterns": {
+        "hero": "H6",
+        "features": [
+          "F3"
+        ],
+        "social_proof": [
+          "S2"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Pesquisa e filtros primeiro; confiança (verificação, denúncia, pagamento seguro).",
+        "Fluxo de publicar anúncio simples e visível."
+      ],
+      "sources": [],
+      "dossier": [
+        "Marketplaces e classificados"
+      ],
+      "heroAlternatives": [
+        "H1"
+      ]
+    },
+    {
+      "id": "cybersecurity-it-services",
+      "matchTerms": [
+        "cibersegurança",
+        "segurança informática",
+        "segurança digital",
+        "firewall",
+        "pentest",
+        "serviços de ti",
+        "suporte informático",
+        "devops",
+        "cybersecurity",
+        "it services",
+        "managed services",
+        "managed security"
+      ],
+      "styleId": "saas_dark_modern",
+      "variants": [
+        {
+          "when_any": [
+            "pme",
+            "empresas locais",
+            "pequenas empresas"
+          ],
+          "style_id": "minimalist_corporate"
+        }
+      ],
+      "patterns": {
+        "hero": "H4",
+        "features": [
+          "F4"
+        ],
+        "social_proof": [
+          "S4"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Credibilidade técnica: certificações, metodologia e casos; demonstração real em vez de ícones de escudo.",
+        "Resposta a incidentes e contacto 24/7 visíveis."
+      ],
+      "sources": [],
+      "dossier": [
+        "Cibersegurança e serviços de TI"
+      ],
+      "heroAlternatives": [
+        "H1"
+      ]
+    },
+    {
+      "id": "mobile-app-landing",
+      "matchTerms": [
+        "app móvel",
+        "aplicação móvel",
+        "aplicativo",
+        "app mobile",
+        "mobile app",
+        "app para ios",
+        "app para android",
+        "aplicação para ios",
+        "app ios",
+        "app android",
+        "download da app",
+        "lançamento de app"
+      ],
+      "styleId": "bento_grid_layout",
+      "variants": [],
+      "patterns": {
+        "hero": "H5",
+        "features": [
+          "F4"
+        ],
+        "social_proof": [
+          "S2"
+        ],
+        "navigation": "N2",
+        "footer": "R2"
+      },
+      "principles": [
+        "Ecrãs reais do produto e uma promessa; link de loja visível acima da dobra.",
+        "Capturas por funcionalidade, avaliações reais e política de privacidade."
+      ],
+      "sources": [],
+      "dossier": [
+        "Landing de aplicações móveis"
+      ],
+      "heroAlternatives": [
+        "H4",
+        "H1"
+      ]
+    },
+    {
+      "id": "telecom-internet-isp",
+      "matchTerms": [
+        "telecomunicações",
+        "operadora",
+        "internet por fibra",
+        "fibra ótica",
+        "planos de internet",
+        "banda larga",
+        "tarifário",
+        "telecom",
+        "mobile operator",
+        "internet provider",
+        "fornecedor de internet",
+        "isp"
+      ],
+      "styleId": "minimalist_corporate",
+      "variants": [],
+      "patterns": {
+        "hero": "H1",
+        "features": [
+          "F5"
+        ],
+        "social_proof": [
+          "S2"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Planos e cobertura primeiro: comparar tarifas lado a lado; verificação de cobertura por morada.",
+        "Suporte e preços finais sem letras pequenas."
+      ],
+      "sources": [],
+      "dossier": [
+        "Telecomunicações e internet"
+      ],
+      "heroAlternatives": [
+        "H6"
+      ]
+    },
+    {
+      "id": "recruitment-hr-jobs",
+      "matchTerms": [
+        "recrutamento",
+        "emprego",
+        "vagas de emprego",
+        "bolsa de emprego",
+        "recursos humanos",
+        "headhunter",
+        "job board",
+        "recruitment",
+        "careers",
+        "hiring",
+        "agência de emprego"
+      ],
+      "styleId": "minimalist_corporate",
+      "variants": [],
+      "patterns": {
+        "hero": "H6",
+        "features": [
+          "F3"
+        ],
+        "social_proof": [
+          "S2"
+        ],
+        "navigation": "N1",
+        "footer": "R2"
+      },
+      "principles": [
+        "Pesquisa de vagas primeiro (filtros por área/local); candidatura em poucos passos.",
+        "Para empresas: processo e preços claros; transparência salarial quando possível."
+      ],
+      "sources": [],
+      "dossier": [
+        "Emprego e recrutamento"
+      ],
+      "heroAlternatives": [
+        "H1"
+      ]
+    }
+  ]
+}

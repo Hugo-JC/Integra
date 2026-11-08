@@ -13,3 +13,6 @@ Thumbs.db
 !.integra/runs/.gitkeep
 artifacts/**
 !artifacts/README.md
+
+# Local browser inspector runtime data
+.integra/live/**

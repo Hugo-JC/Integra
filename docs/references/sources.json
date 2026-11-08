@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "1.0.0",
+  "policy": "Study patterns, behavior and principles; do not copy proprietary layouts, assets, copy or identity. Revalidate time-sensitive sources.",
+  "sources": [
+    {
+      "id": "impeccable",
+      "name": "Impeccable",
+      "url": "https://github.com/pbakaus/impeccable",
+      "kind": "agent-design-toolkit",
+      "useFor": [
+        "design command vocabulary",
+        "critique and audit workflow",
+        "deterministic anti-pattern detection",
+        "local live iteration"
+      ],
+      "adaptation": "Use independently authored Integra skills and checks; do not vendor Impeccable source."
+    },
+    {
+      "id": "rea",
+      "name": "REA",
+      "url": "https://github.com/morluto/rea",
+      "kind": "investigation-and-evidence-toolkit",
+      "useFor": [
+        "evidence-oriented research",
+        "provider/adaptor boundaries",
+        "traceable results",
+        "local-first workflows"
+      ],
+      "adaptation": "REA is a reverse-engineering/investigation toolkit, not a visual design system; only general architecture ideas are relevant."
+    },
+    {
+      "id": "ade",
+      "name": "AI Design Engine",
+      "url": "https://github.com/Hugo-JC/ai-design-engine",
+      "kind": "migrated-user-knowledge",
+      "useFor": [
+        "61 niche presets",
+        "17 styles",
+        "reference routing",
+        "layout archetypes",
+        "design heuristics"
+      ],
+      "adaptation": "Migrated local data with source provenance; validate all references before relying on them."
+    },
+    {
+      "id": "wcag22",
+      "name": "W3C WCAG 2.2",
+      "url": "https://www.w3.org/TR/WCAG22/",
+      "kind": "standard",
+      "useFor": [
+        "normative accessibility criteria",
+        "contrast",
+        "keyboard",
+        "reflow",
+        "focus"
+      ]
+    },
+    {
+      "id": "wai-apg",
+      "name": "WAI-ARIA APG",
+      "url": "https://www.w3.org/WAI/ARIA/apg/",
+      "kind": "pattern-guidance",
+      "useFor": [
+        "keyboard patterns",
+        "roles and states",
+        "accessible widgets"
+      ]
+    },
+    {
+      "id": "mdn",
+      "name": "MDN Web Docs",
+      "url": "https://developer.mozilla.org/",
+      "kind": "technical-reference",
+      "useFor": [
+        "HTML semantics",
+        "CSS",
+        "Web APIs"
+      ]
+    },
+    {
+      "id": "react",
+      "name": "React",
+      "url": "https://react.dev/",
+      "kind": "technical-reference",
+      "useFor": [
+        "component state",
+        "rendering",
+        "effects"
+      ]
+    },
+    {
+      "id": "vite",
+      "name": "Vite Plugin API",
+      "url": "https://vite.dev/guide/api-plugin",
+      "kind": "technical-reference",
+      "useFor": [
+        "development plugin lifecycle",
+        "HTML transform"
+      ]
+    },
+    {
+      "id": "tailwind",
+      "name": "Tailwind CSS",
+      "url": "https://tailwindcss.com/docs",
+      "kind": "technical-reference",
+      "useFor": [
+        "utility classes",
+        "responsive variants",
+        "design tokens"
+      ]
+    },
+    {
+      "id": "radix",
+      "name": "Radix Primitives",
+      "url": "https://www.radix-ui.com/primitives",
+      "kind": "component-reference",
+      "useFor": [
+        "accessible primitives",
+        "keyboard and focus behavior"
+      ]
+    },
+    {
+      "id": "shadcn",
+      "name": "shadcn/ui",
+      "url": "https://ui.shadcn.com/docs",
+      "kind": "component-reference",
+      "useFor": [
+        "composable React components",
+        "token-driven UI"
+      ]
+    },
+    {
+      "id": "material3",
+      "name": "Material 3",
+      "url": "https://m3.material.io/",
+      "kind": "design-system-reference",
+      "useFor": [
+        "semantic color roles",
+        "tokens",
+        "interaction patterns"
+      ]
+    },
+    {
+      "id": "apple-hig",
+      "name": "Apple HIG",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/",
+      "kind": "platform-guidance",
+      "useFor": [
+        "platform conventions",
+        "navigation and interaction"
+      ]
+    },
+    {
+      "id": "carbon",
+      "name": "IBM Carbon",
+      "url": "https://carbondesignsystem.com/",
+      "kind": "design-system-reference",
+      "useFor": [
+        "enterprise density",
+        "forms and data tables"
+      ]
+    },
+    {
+      "id": "polaris",
+      "name": "Shopify Polaris",
+      "url": "https://polaris.shopify.com/",
+      "kind": "design-system-reference",
+      "useFor": [
+        "commerce workflows",
+        "forms",
+        "operational UI"
+      ]
+    }
+  ]
+}

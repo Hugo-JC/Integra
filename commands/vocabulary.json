@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "1.0.0",
+  "usage": "Prompt vocabulary for agents. These verbs are not standalone CLI commands.",
+  "commands": [
+    {
+      "name": "shape",
+      "intent": "Plan UX and information architecture before code."
+    },
+    {
+      "name": "direction",
+      "intent": "Create a contextual visual thesis and direction artifact."
+    },
+    {
+      "name": "critique",
+      "intent": "Review one page or component and rank UX issues."
+    },
+    {
+      "name": "audit",
+      "intent": "Review accessibility, responsive behavior and performance."
+    },
+    {
+      "name": "polish",
+      "intent": "Perform a focused final quality pass."
+    },
+    {
+      "name": "distill",
+      "intent": "Remove complexity that does not help users."
+    },
+    {
+      "name": "bolder",
+      "intent": "Increase distinctiveness without harming clarity."
+    },
+    {
+      "name": "quieter",
+      "intent": "Reduce visual competition while preserving hierarchy."
+    },
+    {
+      "name": "colorize",
+      "intent": "Improve semantic color roles and validate contrast."
+    },
+    {
+      "name": "typeset",
+      "intent": "Improve type roles, scale, measure and line height."
+    },
+    {
+      "name": "layout",
+      "intent": "Improve composition, spacing, alignment and density."
+    },
+    {
+      "name": "animate",
+      "intent": "Add meaningful state feedback and respect reduced motion."
+    },
+    {
+      "name": "adapt",
+      "intent": "Adapt a target to viewports and input methods."
+    },
+    {
+      "name": "harden",
+      "intent": "Improve empty, loading, error and edge-case resilience."
+    },
+    {
+      "name": "generate",
+      "intent": "Generate a component for a named product need."
+    },
+    {
+      "name": "refactor",
+      "intent": "Refactor existing code while preserving behavior."
+    },
+    {
+      "name": "live",
+      "intent": "Inspect a local DOM node and export a precise patch."
+    },
+    {
+      "name": "investigate",
+      "intent": "Research a design/technical question using primary sources."
+    },
+    {
+      "name": "onboard",
+      "intent": "Improve first-run, setup and empty states."
+    },
+    {
+      "name": "extract",
+      "intent": "Identify repeated UI patterns worth systematizing."
+    }
+  ]
+}

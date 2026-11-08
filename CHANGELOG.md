@@ -1,3 +1,11 @@
+# Unreleased
+
+- Added eight portable Agent Skills, including refactoring, UI generation, design QA, accessibility and Live Inspector workflows.
+- Migrated AI Design Engine v3 niche presets and style tokens; added offline preset discovery.
+- Added contextual experience archetypes, evidence-led quality rules and prompt vocabulary.
+- Added a Vite development-only Live Inspector with blue selection chrome, DOM previews, contrast estimate and exact diff/prompt export.
+- Added Gemini CLI guidance and asset validation.
+
 # Changelog
 
 ## Unreleased

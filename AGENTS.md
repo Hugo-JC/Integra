@@ -27,3 +27,18 @@ Phase 1 includes contracts, fixtures, scenario manifests, documentation and pure
 3. Add or update tests.
 4. Run `npm run check`.
 5. Document breaking changes in `docs/decisions/`.
+
+
+## Portable Agent Skills
+Read the relevant task skill under `.agents/skills/<skill-name>/SKILL.md` before work; use `GEMINI.md` for Gemini CLI routing.
+
+- New direction/redesign: `integra-design-direction`.
+- New UI component: `integra-ui-generator`.
+- Existing TSX refactor: `integra-refactor-agent`.
+- Review/critique: `integra-design-qa`.
+- Accessibility: `integra-accessibility-audit`.
+- External references: `integra-investigation`.
+- Tokens/components: `integra-design-system`.
+- Local DOM inspection: `integra-live-inspector`.
+
+Skills are guidance, not authorization to edit a project. If independent agents are unavailable, label sequential QA as single-agent.

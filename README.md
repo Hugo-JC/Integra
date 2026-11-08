@@ -117,3 +117,33 @@ A geração determinística está implementada apenas para DL-001. Ainda não ex
 - src/lab/ — helpers de avaliação.
 - scripts/ — CLI e validação de fixtures.
 - tests/ — testes unitários e de contrato.
+
+
+## Agent Skills, design knowledge and Live Inspector
+
+Integra distributes portable Agent Skills from `.agents/skills/`. Gemini CLI, Codex, Claude Code, Cursor and other compatible agents can read the relevant skill through their workspace conventions; `GEMINI.md` describes Gemini-specific routing.
+
+Included skills: `integra-design-direction`, `integra-ui-generator`, `integra-refactor-agent`, `integra-design-qa`, `integra-accessibility-audit`, `integra-investigation`, `integra-design-system` and `integra-live-inspector`.
+
+### Local design intelligence
+The predecessor AI Design Engine v3 niche/style catalogs are preserved in `presets/`. Discover offline candidates with:
+
+```bash
+npm run direction:presets -- "fintech para pagamentos em Angola"
+```
+
+Matches are advisory and subordinate to explicit brief facts, hard constraints and the existing product identity. The repository also includes contextual experience archetypes, evidence-led quality rules and agent prompt vocabulary.
+
+### Live Inspector (Vite development only)
+```ts
+import { defineConfig } from 'vite';
+import { integraLiveInspectorPlugin } from './src/modules/live-inspector/vite-plugin';
+export default defineConfig({ plugins: [integraLiveInspectorPlugin()] });
+```
+
+Use `Alt + Shift + I` to toggle. Hover and click to select an element, preview color/spacing/class changes, then export an exact diff and agent prompt. The blue outline (`#3B82F6`) is reserved for inspector chrome. Vite integration runs only with `apply: 'serve'`; the preview never writes source files.
+
+Contrast output is a limited estimate for solid colors—not a complete WCAG audit. Gradients, images, transparency and compositing need rendered accessibility verification.
+
+### Reference policy
+Impeccable informs command-oriented critique/live workflows; REA informs evidence-oriented investigation and adapter boundaries (REA is not treated as a design system). W3C, WAI-ARIA APG, MDN, React, Vite, Tailwind, Radix, shadcn/ui, Material, Apple HIG, Carbon and Polaris are indexed in `docs/references/sources.json`. References are for study and adaptation, not copying.
