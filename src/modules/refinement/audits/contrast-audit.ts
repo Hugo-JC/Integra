@@ -76,7 +76,6 @@ export function auditTextContrast(element: Element, view: Window = window): Cont
     if (layer) background = compositeColors(layer, background);
     current = current.parentElement;
   }
-  foreground = compositeColors(foreground, background);
   if (background.alpha < 0.999) {
     return { status: 'inconclusive', message: 'No fully opaque ancestor background was found; the browser canvas color is not assumed.', criterion: 'WCAG 2.2 SC 1.4.3' };
   }
