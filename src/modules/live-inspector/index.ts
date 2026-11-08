@@ -1,4 +1,4 @@
-import { evaluateContrast, parseColor, toHexColor } from './contrast.js';
+import { evaluateContrast, contrastRatio, parseColor, relativeLuminance, toHexColor } from './contrast.js';
 import type { LiveInspectorHandle, LiveInspectorOptions, LiveInspectorPatch, LiveStyleProperty, LiveStyleChange } from './types.js';
 
 const PROPERTIES: LiveStyleProperty[] = ['background-color','color','border-radius','padding'];
