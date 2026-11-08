@@ -1,6 +1,6 @@
 # Roadmap do Integra
 
-Última atualização: 30/10/2026.
+Última atualização: 08/11/2026.
 
 ## Direção do produto
 
@@ -43,6 +43,19 @@ A fase está concluída para a primeira fatia funcional, não para todos os cen�
 - Protocolo de experiência, instruções de exemplo e documentação de compatibilidade.
 
 Critério de conclusão: o artefacto pode ser gerado, validado, entregue a um agente externo e associado a um relatório de consumo validável.
+
+## Fase 2.2 — Design Intelligence & Browser Preview
+
+**Implementação inicial nesta branch; precisa de validação em Node 24 e browser real.**
+
+- Biblioteca migrada do AI Design Engine: estilos, presets, fontes, regras, anti-patterns, playbook, arquétipos e catálogo.
+- Router determinístico com termos fortes/fracos, variantes condicionais, alternativas e confirmação em fallback/ambiguidade.
+- Skills interoperáveis em `.agents/skills/` e contextos para Gemini, Claude Code, Cursor e GitHub Copilot.
+- QA estático AST para regras JSX/TSX selecionadas.
+- Live Inspector local: seleção DOM azul, navegação ao pai, preview de classes/estilos, reset e exportação de diff.
+- Auditoria de contraste de texto WCAG 2.2 1.4.3 com estados passed/failed/inconclusive.
+
+Não declarar conformidade WCAG global nem persistência das edições do Live Inspector. O preview altera apenas o DOM; mudanças duráveis são feitas no código-fonte após revisão do agente.
 
 ## Marco seguinte — First Agent Pilot
 
