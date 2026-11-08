@@ -1,12 +1,161 @@
 {
-  "id":"commerce-storefront","name":"Commerce & Storefront","version":"1.0.0",
-  "productContexts":["e-commerce","product catalogs","fashion stores","marketplaces","subscriptions"],
-  "designIntent":{"primaryGoal":"Make product discovery, comparison and purchase decisions clear and trustworthy.","audienceNeeds":["accurate product information","transparent price and delivery","easy comparison","low-friction checkout"],"personalityAxes":["brand-led","credible","clear"],"visualThesis":"Product imagery and information carry the page; interface chrome supports the decision."},
-  "visualDirection":{"density":"low-to-medium on product storytelling; higher for catalog comparison and filters","surfaces":"simple product surfaces; separate promotional content from purchase-critical information","colorIntent":"brand-led accent with distinct sale, stock and validation states","typography":"expressive display type may support brand, but price, size and shipping remain highly legible","motion":"subtle gallery and cart feedback; never delay purchase controls"},
-  "layout":{"pattern":"category navigation + filters + product grid; product details use media and decision column","spacing":"generous around product imagery; compact and aligned for specification tables","responsive":"mobile filters and purchase CTA remain reachable without hiding critical terms","contentPriority":["product identity","price","availability","delivery/returns","primary action"]},
-  "components":{"preferred":["product card","filter drawer","gallery","variant selector","quantity control","cart summary","checkout stepper"],"states":["out of stock","variant unavailable","discount terms","cart updated","payment error"],"avoid":["fake scarcity","hidden fees","ambiguous discount math","unavailable product variants appearing selectable"]},
-  "accessibility":{"minimumTextContrast":"WCAG 2.2 AA","keyboard":"filters, galleries, variants and checkout must support keyboard use","focus":"variant selection and cart updates need visible state and announced feedback","reducedMotion":"product carousel and cart animation must not be required to understand state"},
-  "antiPatterns":["fake reviews","fabricated trust badges","misleading countdowns","product images without meaningful alt text"],
-  "references":["shopify-polaris","govuk-design-system","wai-aria-apg","impeccable"],
-  "notes":["Never invent product reviews, customer counts, certifications or delivery promises."]
+  "id": "commerce-storefront",
+  "name": "Commerce & Storefront",
+  "version": "1.1.0",
+  "productContexts": [
+    "e-commerce",
+    "product catalogs",
+    "fashion stores",
+    "marketplaces",
+    "subscriptions"
+  ],
+  "designIntent": {
+    "primaryGoal": "Make product discovery, comparison and purchase decisions clear and trustworthy.",
+    "audienceNeeds": [
+      "accurate product information",
+      "transparent price and delivery",
+      "easy comparison",
+      "low-friction checkout"
+    ],
+    "personalityAxes": [
+      "brand-led",
+      "credible",
+      "clear"
+    ],
+    "visualThesis": "Product imagery and information carry the page; interface chrome supports the decision."
+  },
+  "visualDirection": {
+    "density": "low-to-medium on product storytelling; higher for catalog comparison and filters",
+    "surfaces": "simple product surfaces; separate promotional content from purchase-critical information",
+    "colorIntent": "brand-led accent with distinct sale, stock and validation states",
+    "typography": "expressive display type may support brand, but price, size and shipping remain highly legible",
+    "motion": "subtle gallery and cart feedback; never delay purchase controls"
+  },
+  "layout": {
+    "pattern": "category navigation + filters + product grid; product details use media and decision column",
+    "spacing": "generous around product imagery; compact and aligned for specification tables",
+    "responsive": "mobile filters and purchase CTA remain reachable without hiding critical terms",
+    "contentPriority": [
+      "product identity",
+      "price",
+      "availability",
+      "delivery/returns",
+      "primary action"
+    ]
+  },
+  "components": {
+    "preferred": [
+      "product card",
+      "filter drawer",
+      "gallery",
+      "variant selector",
+      "quantity control",
+      "cart summary",
+      "checkout stepper"
+    ],
+    "states": [
+      "out of stock",
+      "variant unavailable",
+      "discount terms",
+      "cart updated",
+      "payment error"
+    ],
+    "avoid": [
+      "fake scarcity",
+      "hidden fees",
+      "ambiguous discount math",
+      "unavailable product variants appearing selectable"
+    ]
+  },
+  "accessibility": {
+    "minimumTextContrast": "WCAG 2.2 AA",
+    "keyboard": "filters, galleries, variants and checkout must support keyboard use",
+    "focus": "variant selection and cart updates need visible state and announced feedback",
+    "reducedMotion": "product carousel and cart animation must not be required to understand state"
+  },
+  "antiPatterns": [
+    "fake reviews",
+    "fabricated trust badges",
+    "misleading countdowns",
+    "product images without meaningful alt text"
+  ],
+  "references": [
+    "shopify-polaris",
+    "govuk-design-system",
+    "wai-aria-apg",
+    "impeccable"
+  ],
+  "notes": [
+    "Never invent product reviews, customer counts, certifications or delivery promises."
+  ],
+  "aiGuidance": {
+    "primaryFlow": "Discover category → narrow options → inspect product → compare terms → choose variant → checkout → confirmation.",
+    "prioritize": [
+      "Accurate product image, name and distinguishing attributes",
+      "Price, stock, delivery, returns and payment terms",
+      "Variant selection and purchase action without hidden conditions"
+    ],
+    "confirmOrMarkUnknown": [
+      "Real prices, taxes, currency, availability and shipping rules",
+      "Supported product variants and combinations",
+      "Reviews, certifications, scarcity and customer claims before display"
+    ],
+    "avoidByDefault": [
+      "Fake stock urgency, countdowns or testimonials",
+      "Promotions that hide purchase-critical terms",
+      "Generic feature cards in place of product discovery"
+    ],
+    "acceptanceChecks": [
+      "Filters and selections behave as labelled",
+      "Unavailable combinations cannot be selected",
+      "Costs and important terms appear before commitment"
+    ]
+  },
+  "compositionEscapes": [
+    {
+      "id": "category-discovery",
+      "when": "The key task is browsing a broad catalogue and narrowing many products.",
+      "composition": "Lead with category context and useful filters; choose a grid or compact list based on image importance and attribute complexity.",
+      "contentRequirements": [
+        "Real product records and meaningful filters",
+        "Sorting with clear criteria",
+        "Useful empty and no-result states"
+      ],
+      "avoid": [
+        "Promotional hero delaying browsing",
+        "Filters that do not affect results",
+        "Cards without decision-relevant attributes"
+      ]
+    },
+    {
+      "id": "product-decision-detail",
+      "when": "The page is about understanding one product and deciding whether it fits.",
+      "composition": "Make product media and decision-critical details primary; keep variant, price, delivery and purchase controls near the decision point.",
+      "contentRequirements": [
+        "Actual imagery and variant data",
+        "Price and availability with source or freshness",
+        "Shipping, return or warranty terms where applicable"
+      ],
+      "avoid": [
+        "Fake ratings or trust badges",
+        "Unavailable variants presented as selectable",
+        "Hidden fees or speculative delivery promises"
+      ]
+    },
+    {
+      "id": "comparison-first",
+      "when": "Users must compare a small number of alternatives with materially different specifications or terms.",
+      "composition": "Use a comparison table or aligned attribute groups with an obvious path to inspect each product in detail.",
+      "contentRequirements": [
+        "Comparable attributes with consistent units",
+        "Verified prices and terms",
+        "Accessible table headers and narrow-screen alternative"
+      ],
+      "avoid": [
+        "Invented advantages or superlatives",
+        "Comparing non-equivalent attributes",
+        "Color-only winner highlighting"
+      ]
+    }
+  ]
 }

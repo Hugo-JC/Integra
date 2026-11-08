@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "purpose": "Examples for deterministic routing, explicit ambiguity and review-only planning.",
+  "cases": [
+    {
+      "request": "Build a complete SaaS application from briefing to implementation",
+      "expectedCommand": "integra"
+    },
+    {
+      "request": "Faz uma auditoria de acessibilidade",
+      "expectedCommand": "accessibility"
+    },
+    {
+      "request": "review interface",
+      "expectedCommand": "integra",
+      "expectedStatus": "ambiguous"
+    },
+    {
+      "request": "melhorar composição e espaçamento",
+      "activeCommandId": "generate",
+      "expectedCommand": "generate",
+      "expectedModifierIds": [
+        "layout"
+      ]
+    },
+    {
+      "request": "/integra:polish",
+      "expectedCommand": "integra",
+      "expectedModifierIds": [
+        "polish"
+      ],
+      "requiresUserClarification": true
+    }
+  ]
+}

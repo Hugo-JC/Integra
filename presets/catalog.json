@@ -8,7 +8,7 @@
     "migratedAt": "2026-11-08",
     "policy": "Preserve principles and reference cues; never copy protected layouts, copy, assets or brand identity."
   },
-  "selectionPolicy": "Score explicit niche terms deterministically. Treat matches as candidates; validate them against brief facts, hard constraints and existing product identity.",
+  "selectionPolicy": "Advisory discovery only. Matching normalizes case, diacritics and punctuation, prefers complete phrase matches, and separately labels partial token overlap. Results are ranked candidates, not a confirmed style decision. This matcher must never replace routeDesignPreset() or override the user's brief, project tokens or hard constraints.",
   "styleIds": [
     "saas_dark_modern",
     "clean_editorial",
@@ -3358,12 +3358,21 @@
     }
   ],
   "agentGuidance": {
-    "presetUse": "Treat every match as a candidate hypothesis. Match the user's actual product, task, content and constraints; never apply a preset wholesale.",
-    "variantUse": "Apply a variant only when its stated condition is explicitly supported by the brief. If multiple variants conflict, compare them and explain the selection.",
+    "presetUse": "Treat every catalog result as a candidate hypothesis. The advisory matcher exposes exact-phrase versus partial-token evidence; validate the product, primary task, content and constraints. Never apply a preset wholesale or treat its score as confidence.",
+    "variantUse": "A variant is eligible only on a complete normalized when_any phrase. If equally specific matches point to different style IDs, preserve the base style and request clarification rather than choosing by array order.",
     "patternUse": "Pattern codes are internal references. Resolve the referenced pattern definition before use; never infer a pattern from its short code.",
     "referenceUse": "A catalog entry is a research lead, not evidence that the current live page was inspected. Only report observed patterns after opening and inspecting the source.",
     "sourceTrust": "Prefer normative standards and official technical/product documentation for factual requirements. Treat gallery sites and secondary commentary as inspiration only.",
-    "output": "Report selected preset IDs, matching rationale, selected variants, reference IDs actually inspected, rejected recommendations and unresolved uncertainty.",
+    "output": "Report candidate IDs, matchQuality, matchedTerms, matchReasons, variantCandidates and variantAmbiguous. Keep the selected deterministic style route separate and record any required confirmation.",
     "nonCopying": "Extract transferable principles. Do not reproduce a source's exact layout, copy, assets, proprietary components or brand identity."
+  },
+  "matchingSemantics": {
+    "normalization": "Unicode diacritics are removed, text is lowercased, punctuation is converted to spaces and whitespace is collapsed.",
+    "exactMatch": "A complete normalized phrase must occur on word boundaries in the normalized brief. Substring fragments inside longer words do not count.",
+    "partialMatch": "A multi-word niche term may be returned as token-overlap only when at least two significant tokens (or half its significant tokens, rounded up) are present. A single significant token is not enough to represent a multi-word term.",
+    "scoring": "Exact phrase matches score 4 + min(normalized term length / 40, 1). Partial token overlap scores 0.5 + overlap ratio. Multiple matching terms accumulate; the result is a ranking aid, not a probability.",
+    "variants": "A variant is eligible only when a complete normalized when_any phrase is present. If equally specific conditions lead to multiple style IDs, variantAmbiguous is true and the base style remains selected.",
+    "ordering": "Candidates sort by descending score and then stable preset ID. Limit is clamped to 1–20. Equal candidate scores are not proof of equal task fit.",
+    "boundary": "This advisory catalog does not select the deterministic style preset. Use routeDesignPreset() and require confirmation for ambiguous, weak-only or fallback results."
   }
 }

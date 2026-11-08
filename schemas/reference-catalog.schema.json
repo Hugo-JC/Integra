@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://integra.dev/schemas/reference-catalog.schema.json",
+  "title": "Integra reference catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "policy",
+    "usagePolicy",
+    "references"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "policy": {
+      "type": "string",
+      "minLength": 20
+    },
+    "usagePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "selectByQuestion",
+        "sourcePrecedence",
+        "quantity",
+        "verification",
+        "evidence",
+        "adaptation"
+      ],
+      "properties": {
+        "selectByQuestion": {
+          "type": "string",
+          "minLength": 30
+        },
+        "sourcePrecedence": {
+          "type": "string",
+          "minLength": 30
+        },
+        "quantity": {
+          "type": "string",
+          "minLength": 15
+        },
+        "verification": {
+          "type": "string",
+          "minLength": 30
+        },
+        "evidence": {
+          "type": "string",
+          "minLength": 30
+        },
+        "adaptation": {
+          "type": "string",
+          "minLength": 30
+        }
+      }
+    },
+    "references": {
+      "type": "array",
+      "minItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "url",
+          "category",
+          "useFor",
+          "adaptation",
+          "authority",
+          "evidenceType",
+          "useWhen",
+          "notFor",
+          "verificationStatus",
+          "lastVerifiedAt",
+          "verifiedPage"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 2
+          },
+          "url": {
+            "type": "string",
+            "pattern": "^https://"
+          },
+          "category": {
+            "type": "string",
+            "minLength": 2
+          },
+          "useFor": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "adaptation": {
+            "type": "string",
+            "minLength": 15
+          },
+          "licenseNote": {
+            "type": "string"
+          },
+          "authority": {
+            "enum": [
+              "methodology",
+              "normative-standard",
+              "technical-specification",
+              "official-guidance",
+              "official-design-system",
+              "official-platform-guidance",
+              "official-component-library",
+              "official-technical-documentation"
+            ]
+          },
+          "evidenceType": {
+            "type": "string",
+            "minLength": 3
+          },
+          "useWhen": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 15
+            }
+          },
+          "notFor": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 15
+            }
+          },
+          "verificationStatus": {
+            "enum": [
+              "catalog-only",
+              "verified"
+            ]
+          },
+          "lastVerifiedAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "verifiedPage": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
