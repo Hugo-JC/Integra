@@ -88,7 +88,11 @@
           "patternCues": [
             "Product and origin storytelling",
             "Quiet composition and deliberate product photography"
-          ]
+          ],
+          "referenceId": "ref-bluebottlecoffee-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         },
         {
           "name": "Onyx Coffee Lab",
@@ -96,7 +100,11 @@
           "patternCues": [
             "Specific lot and process details",
             "Packaging and product as strong visual anchors"
-          ]
+          ],
+          "referenceId": "ref-onyxcoffeelab-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         }
       ],
       "dossier": [
@@ -151,7 +159,11 @@
           "patternCues": [
             "Measured editorial copy",
             "Material and product-led imagery"
-          ]
+          ],
+          "referenceId": "ref-aesop-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         },
         {
           "name": "Headspace",
@@ -159,7 +171,11 @@
           "patternCues": [
             "Approachable language",
             "Consistent, calm illustration and content hierarchy"
-          ]
+          ],
+          "referenceId": "ref-headspace-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         }
       ],
       "dossier": [
@@ -224,7 +240,11 @@
           "patternCues": [
             "Product information and material details",
             "Consistent catalog presentation"
-          ]
+          ],
+          "referenceId": "ref-everlane-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         },
         {
           "name": "Glossier",
@@ -232,7 +252,11 @@
           "patternCues": [
             "Distinctive product photography",
             "Clear paths between editorial content and shopping"
-          ]
+          ],
+          "referenceId": "ref-glossier-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         }
       ],
       "dossier": [
@@ -308,7 +332,11 @@
           "patternCues": [
             "Product-led demonstrations",
             "Compact, high-clarity hierarchy"
-          ]
+          ],
+          "referenceId": "ref-linear-app",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         },
         {
           "name": "Vercel",
@@ -316,7 +344,11 @@
           "patternCues": [
             "Technical proof and developer-facing language",
             "Clear product capability sections"
-          ]
+          ],
+          "referenceId": "ref-vercel-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         },
         {
           "name": "Stripe",
@@ -324,7 +356,11 @@
           "patternCues": [
             "Concrete product workflows",
             "Structured explanations of complex capabilities"
-          ]
+          ],
+          "referenceId": "ref-stripe-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         }
       ],
       "dossier": [
@@ -385,7 +421,11 @@
           "patternCues": [
             "Clear explanations of money movement",
             "Product evidence paired with concise copy"
-          ]
+          ],
+          "referenceId": "ref-stripe-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         },
         {
           "name": "Ramp",
@@ -393,7 +433,11 @@
           "patternCues": [
             "Finance workflows presented as measurable outcomes",
             "Prominent product and trust information"
-          ]
+          ],
+          "referenceId": "ref-ramp-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         },
         {
           "name": "Wise",
@@ -401,7 +445,11 @@
           "patternCues": [
             "Transparent pricing cues",
             "Plain-language explanations of transfers"
-          ]
+          ],
+          "referenceId": "ref-wise-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         }
       ],
       "dossier": [
@@ -472,7 +520,11 @@
           "patternCues": [
             "Search-led discovery",
             "Large listing photography and scannable details"
-          ]
+          ],
+          "referenceId": "ref-airbnb-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         },
         {
           "name": "Zillow",
@@ -480,7 +532,11 @@
           "patternCues": [
             "Search and map/list coordination",
             "Prominent listing price and location"
-          ]
+          ],
+          "referenceId": "ref-zillow-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         }
       ],
       "dossier": [
@@ -537,7 +593,11 @@
           "patternCues": [
             "Editorial pacing",
             "Distinctive book and author presentation"
-          ]
+          ],
+          "referenceId": "ref-press-stripe-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         },
         {
           "name": "Substack",
@@ -545,14 +605,22 @@
           "patternCues": [
             "Publication identity and topic discovery",
             "Clear reading-oriented content hierarchy"
-          ]
+          ],
+          "referenceId": "ref-substack-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         },
         {
           "name": "Awwwards",
           "url": "https://www.awwwards.com/",
           "patternCues": [
             "Portfolio navigation and varied project presentation"
-          ]
+          ],
+          "referenceId": "ref-awwwards-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         }
       ],
       "dossier": [
@@ -613,7 +681,11 @@
           "patternCues": [
             "Community and channel discovery",
             "Participation-oriented product storytelling"
-          ]
+          ],
+          "referenceId": "ref-discord-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         },
         {
           "name": "Twitch",
@@ -621,7 +693,11 @@
           "patternCues": [
             "Live activity and creator discovery",
             "Clear status and audience signals"
-          ]
+          ],
+          "referenceId": "ref-twitch-tv",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         }
       ],
       "dossier": [
@@ -675,14 +751,22 @@
           "patternCues": [
             "Unconventional composition",
             "Direct, high-contrast typography"
-          ]
+          ],
+          "referenceId": "ref-brutalistwebsites-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         },
         {
           "name": "Fontsinuse",
           "url": "https://fontsinuse.com/",
           "patternCues": [
             "Typography research by context and medium"
-          ]
+          ],
+          "referenceId": "ref-fontsinuse-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         },
         {
           "name": "Liquid Death",
@@ -690,7 +774,11 @@
           "patternCues": [
             "Distinctive irreverent brand voice",
             "Packaging-led visual impact"
-          ]
+          ],
+          "referenceId": "ref-liquiddeath-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         }
       ],
       "dossier": [
@@ -738,14 +826,22 @@
           "patternCues": [
             "Hard edges and direct visual hierarchy",
             "Flat colors and decisive borders"
-          ]
+          ],
+          "referenceId": "ref-neobrutalism-dev",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         },
         {
           "name": "Brutalist Websites",
           "url": "https://brutalistwebsites.com/",
           "patternCues": [
             "Expressive, unconventional web composition"
-          ]
+          ],
+          "referenceId": "ref-brutalistwebsites-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         }
       ],
       "dossier": [
@@ -799,7 +895,11 @@
           "patternCues": [
             "Place and experience-led storytelling",
             "Editorial presentation of offerings"
-          ]
+          ],
+          "referenceId": "ref-noma-dk",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         },
         {
           "name": "Blue Bottle Coffee",
@@ -807,7 +907,11 @@
           "patternCues": [
             "Product and hospitality context",
             "Quiet, deliberate photography"
-          ]
+          ],
+          "referenceId": "ref-bluebottlecoffee-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         }
       ],
       "dossier": [
@@ -872,7 +976,11 @@
           "patternCues": [
             "Voz de marca irreverente",
             "Embalagem como impacto visual"
-          ]
+          ],
+          "referenceId": "ref-liquiddeath-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         },
         {
           "name": "Poppi",
@@ -880,7 +988,11 @@
           "patternCues": [
             "Cor por sabor",
             "Produto repetido em escala e ritmo"
-          ]
+          ],
+          "referenceId": "ref-drinkpoppi-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         }
       ],
       "dossier": [
@@ -953,14 +1065,22 @@
           "url": "https://teenage.engineering/",
           "patternCues": [
             "Produto + especificação em primeiro plano"
-          ]
+          ],
+          "referenceId": "ref-teenage-engineering",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         },
         {
           "name": "Framework",
           "url": "https://frame.work/",
           "patternCues": [
             "Especificações e modularidade em destaque"
-          ]
+          ],
+          "referenceId": "ref-frame-work",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         }
       ],
       "dossier": [
@@ -1032,14 +1152,22 @@
           "patternCues": [
             "Marcação como ação principal",
             "Informação prática clara"
-          ]
+          ],
+          "referenceId": "ref-onemedical-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         },
         {
           "name": "Zocdoc",
           "url": "https://www.zocdoc.com/",
           "patternCues": [
             "Marcação como ação principal"
-          ]
+          ],
+          "referenceId": "ref-zocdoc-com",
+          "sourceType": "live-product-example",
+          "verificationStatus": "catalog-only",
+          "lastVerifiedAt": null
         }
       ],
       "dossier": [
@@ -3228,5 +3356,14 @@
         "H1"
       ]
     }
-  ]
+  ],
+  "agentGuidance": {
+    "presetUse": "Treat every match as a candidate hypothesis. Match the user's actual product, task, content and constraints; never apply a preset wholesale.",
+    "variantUse": "Apply a variant only when its stated condition is explicitly supported by the brief. If multiple variants conflict, compare them and explain the selection.",
+    "patternUse": "Pattern codes are internal references. Resolve the referenced pattern definition before use; never infer a pattern from its short code.",
+    "referenceUse": "A catalog entry is a research lead, not evidence that the current live page was inspected. Only report observed patterns after opening and inspecting the source.",
+    "sourceTrust": "Prefer normative standards and official technical/product documentation for factual requirements. Treat gallery sites and secondary commentary as inspiration only.",
+    "output": "Report selected preset IDs, matching rationale, selected variants, reference IDs actually inspected, rejected recommendations and unresolved uncertainty.",
+    "nonCopying": "Extract transferable principles. Do not reproduce a source's exact layout, copy, assets, proprietary components or brand identity."
+  }
 }
