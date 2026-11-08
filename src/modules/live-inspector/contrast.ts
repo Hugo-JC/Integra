@@ -10,15 +10,25 @@ export function parseColor(input: string): RGBColor | null {
   const hex = value.match(/^#([\da-f]{3,4}|[\da-f]{6}|[\da-f]{8})$/i);
   if (hex) {
     let digits = hex[1];
+    if (digits.length === 4 && digits[3] !== 'f') return null;
+    if (digits.length === 8 && digits.slice(6) !== 'ff') return null;
     if (digits.length === 3 || digits.length === 4) digits = [...digits.slice(0, 3)].map((x) => x + x).join('');
     else if (digits.length === 8) digits = digits.slice(0, 6);
     return { r: parseInt(digits.slice(0, 2), 16), g: parseInt(digits.slice(2, 4), 16), b: parseInt(digits.slice(4, 6), 16) };
   }
+
   const rgb = value.match(/^rgba?\((.*)\)$/);
   if (!rgb) return null;
-  const values = rgb[1].replace(/\s*\/\s*[^,\s]+\s*$/, '').split(/[\s,]+/).filter(Boolean).slice(0, 3);
-  if (values.length !== 3) return null;
-  const parsed = values.map((part) => {
+  const [channelsPart, slashAlpha] = rgb[1].split('/');
+  const channels = channelsPart.split(/[\s,]+/).filter(Boolean);
+  if (channels.length < 3 || channels.length > 4) return null;
+  const alphaToken = slashAlpha?.trim() ?? channels[3];
+  if (alphaToken !== undefined) {
+    const parsedAlpha = Number.parseFloat(alphaToken);
+    const alpha = alphaToken.endsWith('%') ? parsedAlpha / 100 : parsedAlpha;
+    if (!Number.isFinite(alpha) || alpha < 0.999) return null;
+  }
+  const parsed = channels.slice(0, 3).map((part) => {
     const number = Number.parseFloat(part);
     return Number.isFinite(number) ? channel(part.endsWith('%') ? number * 2.55 : number) : NaN;
   });
