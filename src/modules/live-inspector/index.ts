@@ -33,7 +33,15 @@ function safeLength(value: string): boolean { return value === '0' || /^-?(?:\d+
 
 export function createLiveInspector(options: LiveInspectorOptions = {}): LiveInspectorHandle {
   if (typeof window === 'undefined' || typeof document === 'undefined') throw new Error('Integra Live Inspector requires a browser.');
-  const accent = options.accentColor ?? BLUE;
+  const requestedAccent = options.accentColor ?? BLUE;
+  const accent = typeof CSS !== 'undefined' && CSS.supports('color', requestedAccent) ? requestedAccent : BLUE;
+  if (options.ignoreSelector) {
+    try {
+      document.createElement('div').matches(options.ignoreSelector);
+    } catch {
+      throw new TypeError('Integra Live Inspector received an invalid ignoreSelector CSS selector.');
+    }
+  }
   const host = document.createElement('div');
   host.id = 'integra-inspector-ui';
   host.setAttribute('data-integra-ignore','');
@@ -55,7 +63,7 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px soli
 </style>
 <div id="outline" aria-hidden="true"><span id="tag"></span></div>
 <aside id="panel" role="dialog" aria-label="Integra Live Inspector">
-<header class="top"><span>${options.panelTitle ?? 'Integra Live Inspector'}</span><button id="close" type="button">Esc</button></header>
+<header class="top"><span id="panel-title">Integra Live Inspector</span><button id="close" type="button">Esc</button></header>
 <div class="body">
 <div><div class="muted">Elemento selecionado</div><div id="target" class="target">Passe o rato e clique num elemento.</div></div>
 <div class="grid">
@@ -72,6 +80,7 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px soli
   document.documentElement.appendChild(host);
   const q = <T extends HTMLElement>(selector:string) => shadow.querySelector<T>(selector)!;
   const outline=q<HTMLDivElement>('#outline'), tag=q<HTMLSpanElement>('#tag'), panel=q<HTMLElement>('#panel'), targetLabel=q<HTMLElement>('#target');
+  q<HTMLElement>('#panel-title').textContent = options.panelTitle ?? 'Integra Live Inspector';
   const bg=q<HTMLInputElement>('#bg'), fg=q<HTMLInputElement>('#fg'), radius=q<HTMLInputElement>('#radius'), padding=q<HTMLInputElement>('#padding'), classes=q<HTMLTextAreaElement>('#classes');
   const ratio=q<HTMLElement>('#ratio'), status=q<HTMLElement>('#status');
   let active=options.enabled ?? true, hovered:HTMLElement|null=null, selected:HTMLElement|null=null;
