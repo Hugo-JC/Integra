@@ -80,6 +80,16 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
   if (!view) throw new Error('Integra Live Inspector requires an active browser window.');
   if (!doc.body) throw new Error('Integra Live Inspector must start after document.body is available.');
 
+  const requestedAccent = options.accentColor ?? '${accent}';
+  const accent = typeof CSS !== 'undefined' && CSS.supports('color', requestedAccent) ? requestedAccent : '${accent}';
+  if (options.ignoreSelector) {
+    try {
+      doc.createElement('div').matches(options.ignoreSelector);
+    } catch {
+      throw new TypeError('Integra Live Inspector received an invalid ignoreSelector CSS selector.');
+    }
+  }
+
   const host = doc.createElement('div');
   host.id = 'integra-inspector-ui';
   host.setAttribute('data-integra-inspector', 'true');
@@ -89,16 +99,16 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
     <style>
       :host { all: initial; color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
       * { box-sizing: border-box; }
-      #highlight { position: fixed; display: none; border: 2px solid #3B82F6; border-radius: 3px; background: rgba(59,130,246,.07); pointer-events: none; }
-      #tag { position: fixed; display: none; max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 4px 7px; border-radius: 5px 5px 5px 0; color: #fff; background: #2563EB; font: 11px/1.2 ui-monospace, monospace; pointer-events: none; }
+      #highlight { position: fixed; display: none; border: 2px solid ${accent}; border-radius: 3px; background: rgba(59,130,246,.07); pointer-events: none; }
+      #tag { position: fixed; display: none; max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 4px 7px; border-radius: 5px 5px 5px 0; color: #fff; background: ${accent}; font: 11px/1.2 ui-monospace, monospace; pointer-events: none; }
       #panel { position: fixed; top: 16px; right: 16px; width: min(360px, calc(100vw - 32px)); max-height: calc(100vh - 32px); overflow: auto; padding: 16px; border: 1px solid #30343b; border-radius: 12px; color: #f4f6f8; background: #0d1016; box-shadow: 0 16px 50px rgba(0,0,0,.4); pointer-events: auto; font-size: 13px; }
       #panel[hidden] { display:none; }
       .head { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px; }
       .brand { display:flex; align-items:center; gap:8px; font-weight:700; letter-spacing:-.02em; }
-      .mark { width:9px; height:9px; border-radius:3px; background:#3B82F6; box-shadow:0 0 0 3px rgba(59,130,246,.16); }
+      .mark { width:9px; height:9px; border-radius:3px; background:${accent}; box-shadow:0 0 0 3px rgba(59,130,246,.16); }
       button { border:1px solid #343b46; border-radius:7px; background:#171c25; color:#f4f6f8; padding:7px 10px; cursor:pointer; font:inherit; }
-      button:hover { border-color:#3B82F6; }
-      button.primary { border-color:#2563EB; background:#2563EB; }
+      button:hover { border-color:${accent}; }
+      button.primary { border-color:${accent}; background:${accent}; }
       label { display:block; margin:12px 0 5px; color:#abb4c2; font-size:11px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; }
       input { width:100%; min-width:0; border:1px solid #343b46; border-radius:7px; padding:8px; background:#141922; color:#f4f6f8; font:12px ui-monospace,monospace; }
       input[type=color] { height:36px; padding:3px; }
@@ -127,7 +137,7 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
       </div>
       <div class="contrast" id="contrast" aria-live="polite">O contraste será calculado após selecionar um elemento.</div>
       <hr class="rule">
-      <div class="muted">A seleção usa o azul Integra #3B82F6. O tema da interface analisada não é alterado automaticamente.</div>
+      <div class="muted">A seleção usa o azul Integra ${accent}. O tema da interface analisada não é alterado automaticamente.</div>
       <div class="actions"><button type="button" data-action="unlock">Escolher outro</button><button type="button" data-action="reset">Reverter elemento</button><button type="button" class="primary" data-action="apply">Gerar diff + prompt</button></div>
       <div id="status" role="status" aria-live="polite"></div>
     </section>
@@ -144,13 +154,13 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
   if (!highlight || !tag || !panel || !status || !targetName || !targetSelector || !contrastOutput || !title) {
     throw new Error('Integra Live Inspector could not initialize its shadow UI.');
   }
-  title.textContent = options.title ?? 'Integra Live Inspector';
+  title.textContent = options.title ?? options.panelTitle ?? 'Integra Live Inspector';
 
   const originals = new Map<Element, OriginalElementState>();
   let selected: HTMLElement | SVGElement | null = null;
   let highlighted: Element | null = null;
   let selectionLocked = false;
-  let enabled = true;
+  let enabled = options.enabled ?? true;
   let stopped = false;
   const previouslyFocused = doc.activeElement instanceof view.HTMLElement ? doc.activeElement : null;
   let geometryFrame = 0;
@@ -159,9 +169,9 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
   const isInspectorEvent = (event: Event): boolean => event.composedPath().includes(host);
   const isInspectable = (element: Element): element is HTMLElement | SVGElement => {
     const ignored = new Set(['HTML', 'BODY', 'SCRIPT', 'STYLE', 'LINK', 'META', 'HEAD']);
-    return !ignored.has(element.tagName)
-      && 'style' in element
-      && !element.closest('[data-integra-inspector="true"], [data-integra-ignore]');
+    if (ignored.has(element.tagName) || !('style' in element)
+      || element.closest('[data-integra-inspector="true"], [data-integra-ignore]')) return false;
+    return !options.ignoreSelector || !element.matches(options.ignoreSelector);
   };
 
   const positionHighlight = (element: Element): void => {
@@ -231,7 +241,7 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
       return;
     }
     contrastOutput.textContent = `Contraste ${result.ratio}:1 · WCAG AA ${result.passesAA ? 'passou' : 'não passou'} (mínimo ${result.requiredRatio}:1)${result.isLargeText ? ' · texto grande' : ''}.`;
-    contrastOutput.style.borderColor = result.passesAA ? '#2563EB' : '#B45309';
+    contrastOutput.style.borderColor = result.passesAA ? '${accent}' : '#B45309';
   };
 
   const selectElement = (element: HTMLElement | SVGElement): void => {
@@ -268,8 +278,10 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
     updateContrast(element);
     positionHighlight(element);
     scheduleGeometryUpdate();
-    panel.hidden = false;
+    panel.hidden = !enabled;
     status.textContent = 'Elemento selecionado. As alterações ainda não foram escritas no código-fonte.';
+    options.onSelectionChange?.(element instanceof view.HTMLElement ? element : null);
+    notifyChanges();
   };
 
   const applyProperty = (property: LiveEditableProperty, value: string): void => {
@@ -277,6 +289,7 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
     selected.style.setProperty(property, value, 'important');
     updateContrast(selected);
     positionHighlight(selected);
+    notifyChanges();
   };
 
   const restoreElement = (element: Element, original: OriginalElementState): void => {
@@ -331,6 +344,7 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
       if (target.value.trim()) selected.setAttribute('class', target.value);
       else selected.removeAttribute('class');
       positionHighlight(selected);
+      notifyChanges();
       return;
     }
     if (property && EDITABLE_PROPERTIES.includes(property as LiveEditableProperty)) {
@@ -351,7 +365,7 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
       stop({ restore: true });
       return;
     }
-    if (event.altKey && event.shiftKey && event.key.toLowerCase() === 'i') {
+    if (options.keyboardShortcut !== false && event.altKey && event.shiftKey && event.key.toLowerCase() === 'i') {
       event.preventDefault();
       enabled = !enabled;
       panel.hidden = !enabled || !selected;
@@ -377,6 +391,7 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
     if (action === 'unlock') {
       selected = null;
       highlighted = null;
+      options.onSelectionChange?.(null);
       selectionLocked = false;
       resizeObserver?.disconnect();
       resizeObserver?.observe(doc.documentElement);
@@ -390,6 +405,7 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
       if (original) restoreElement(selected, original);
       selectElement(selected);
       status.textContent = 'Pré-visualização deste elemento revertida.';
+      notifyChanges();
       return;
     }
     if (action === 'apply') {
@@ -430,7 +446,21 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
       for (const [element, original] of originals) restoreElement(element, original);
     }
     host.remove();
+    options.onSelectionChange?.(null);
+    options.onChange?.([]);
     if (previouslyFocused?.isConnected) previouslyFocused.focus();
+  }
+
+  function setActive(value: boolean): void {
+    if (stopped) return;
+    enabled = value;
+    panel.hidden = !enabled || !selected;
+    if (!enabled) {
+      highlight.style.display = 'none';
+      tag.style.display = 'none';
+    } else if (selected) {
+      positionHighlight(selected);
+    }
   }
 
   resizeObserver = typeof ResizeObserver !== 'undefined'
@@ -448,7 +478,16 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
   view.visualViewport?.addEventListener('resize', scheduleGeometryUpdate);
   view.visualViewport?.addEventListener('scroll', scheduleGeometryUpdate);
   doc.body.append(host);
-  panel.hidden = false;
+  panel.hidden = !enabled;
 
-  return { getChangeSets: buildChangeSets, getPrompt: () => synthesizeLivePrompt(buildChangeSets()), stop };
+  const notifyChanges = (): void => options.onChange?.(buildChangeSets());
+
+  return {
+    isActive: () => enabled && !stopped,
+    setActive,
+    getSelectedElement: () => selected,
+    getChangeSets: buildChangeSets,
+    getPrompt: () => synthesizeLivePrompt(buildChangeSets()),
+    stop,
+  };
 }
