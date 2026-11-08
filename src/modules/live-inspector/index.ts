@@ -196,4 +196,3 @@ export type * from './types.js';
 
 /** Canonical v2 browser inspector API. */
 export { createIntegraInspector } from './overlay.js';
-export type { IntegraLiveInspectorController, IntegraLiveInspectorOptions, LiveElementChangeSet, LiveElementSnapshot } from './types.js';
