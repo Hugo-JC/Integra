@@ -63,6 +63,7 @@ export function auditTextContrast(element: Element, view: Window = window): Cont
   let foreground = parseCssColor(computed.color);
   if (!foreground) return { status: 'inconclusive', message: 'The foreground color format could not be parsed.', criterion: 'WCAG 2.2 SC 1.4.3' };
   let background: RgbaColor = { red: 0, green: 0, blue: 0, alpha: 0 };
+  const backgroundLayers: RgbaColor[] = [];
   let current: Element | null = element;
   while (current) {
     const style = view.getComputedStyle(current);
@@ -73,9 +74,10 @@ export function auditTextContrast(element: Element, view: Window = window): Cont
       return { status: 'inconclusive', message: 'A background image or gradient makes the effective background uncertain.', criterion: 'WCAG 2.2 SC 1.4.3' };
     }
     const layer = parseCssColor(style.backgroundColor);
-    if (layer) background = compositeColors(layer, background);
+    if (layer && layer.alpha > 0) backgroundLayers.push(layer);
     current = current.parentElement;
   }
+  for (const layer of backgroundLayers.reverse()) background = compositeColors(layer, background);
   if (background.alpha < 0.999) {
     return { status: 'inconclusive', message: 'No fully opaque ancestor background was found; the browser canvas color is not assumed.', criterion: 'WCAG 2.2 SC 1.4.3' };
   }
