@@ -55,7 +55,7 @@ export function buildElementSelector(element: Element): string {
 export function getAccessibleName(element: Element): string {
   const labelledBy = element.getAttribute('aria-labelledby');
   if (labelledBy) {
-    const name = labelledBy.split(/\\s+/)
+    const name = labelledBy.split(/\s+/)
       .map((id) => element.ownerDocument.getElementById(id)?.textContent?.trim() ?? '')
       .filter(Boolean)
       .join(' ');
@@ -78,7 +78,7 @@ export function getAccessibleName(element: Element): string {
   if (title) return title.slice(0, 160);
 
   if (/^(BUTTON|A|SUMMARY)$/i.test(element.tagName)) {
-    return (element.textContent ?? '').replace(/\\s+/g, ' ').trim().slice(0, 160);
+    return (element.textContent ?? '').replace(/\s+/g, ' ').trim().slice(0, 160);
   }
   return '';
 }
