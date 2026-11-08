@@ -6,7 +6,7 @@ const candidate = readCommandManifest(manifestPath);
 const result = validateCommandManifest(candidate);
 
 if (!result.valid) {
-  console.error('Command manifest validation failed:\\n- ' + result.errors.join('\\n- '));
+  console.error('Command manifest validation failed:\n- ' + result.errors.join('\n- '));
   process.exitCode = 1;
 } else {
   const commands = (candidate as { commands: Array<{ kind: string }> }).commands;
