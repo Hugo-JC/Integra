@@ -1,13 +1,15 @@
 # Changelog
 
-## Unreleased
+## Unreleased — Design Intelligence & Live Inspector
 
-- Added provider-neutral Direction CLI commands to generate and validate DL-001 artifacts.
-- Added an Agent Integration Contract and example consumer instructions.
-- Added a versioned Direction Consumption Report contract for agent-reported implementation outcomes.
-- Added a paired Design Experiment contract for baseline vs Integra-guided evaluation.
-- Added a controlled experiment protocol that preserves shared run controls, hashes, evidence and non-verifiable outcomes.
-- Updated architecture, roadmap and README to reflect the merged four-layer artifact validation and the first external-agent milestone.
+- Imported the AI Design Engine's style catalog, niche presets and reference-source metadata with provenance.
+- Added deterministic preset routing with strong/weak matches, ambiguity reporting and explicit fallback confirmation.
+- Added a browser-only Live Inspector with blue DOM selection, parent navigation, utility/style previews, reset and DOM diff export.
+- Added rendered text contrast audit for WCAG 2.2 SC 1.4.3 AA/AAA; uncertain compositing remains inconclusive.
+- Added TypeScript AST-based design QA for common JSX accessibility and token anti-patterns.
+- Added six cross-agent skills and dedicated Gemini, Claude, Cursor and GitHub Copilot entry instructions.
+- Added design intelligence principles, reference policy, command vocabulary and implementation boundaries.
+- Added validators for the imported design library and skill metadata.
 
 ## 0.2.0 — Direction Engine foundation
 
