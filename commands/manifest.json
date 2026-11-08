@@ -1,0 +1,197 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "Integra Command System",
+  "description": "Canonical, host-agnostic command catalog for Integra workflows and modifiers.",
+  "invocation": {
+    "orchestrator": "/integra",
+    "namespace": "/integra:",
+    "bareAliases": "optional-host-adapter-only"
+  },
+  "executionPolicy": {
+    "defaultMode": "review",
+    "sourceMutation": "approval-required",
+    "previewMutation": "temporary-dom-only",
+    "approvalScope": "exact-proposed-diff",
+    "neverInferApprovalFrom": ["command invocation", "preview acceptance", "generated patch", "test success"]
+  },
+  "commands": [
+    {
+      "id": "integra",
+      "kind": "orchestrator",
+      "invocation": "/integra",
+      "description": "Understand the request, inspect project context, select and sequence the smallest useful set of workflows, then present a reviewable plan.",
+      "skills": [],
+      "outputs": ["execution-plan", "selected-workflows", "review-summary"],
+      "sourceMutation": "approval-required"
+    },
+    {
+      "id": "shape",
+      "kind": "workflow",
+      "invocation": "/integra:shape",
+      "description": "Clarify user needs, task flows, constraints and information architecture before visual direction or implementation.",
+      "skills": ["integra-design-direction"],
+      "outputs": ["ux-brief", "information-architecture", "open-questions"]
+    },
+    {
+      "id": "direction",
+      "kind": "workflow",
+      "invocation": "/integra:direction",
+      "description": "Create a contextual visual thesis, experience archetype, design principles and token direction.",
+      "skills": ["integra-design-direction"],
+      "outputs": ["direction-artifact", "token-plan", "visual-acceptance-criteria"]
+    },
+    {
+      "id": "investigate",
+      "kind": "workflow",
+      "invocation": "/integra:investigate",
+      "description": "Research references, patterns or technical questions and separate verified evidence from interpretation.",
+      "skills": ["integra-investigation"],
+      "outputs": ["evidence-report", "reference-set", "recommendations"]
+    },
+    {
+      "id": "generate",
+      "kind": "workflow",
+      "invocation": "/integra:generate",
+      "description": "Generate a new UI component or screen from an approved brief and direction.",
+      "skills": ["integra-ui-generator", "integra-design-system"],
+      "outputs": ["proposed-source-diff", "implementation-notes", "verification-plan"]
+    },
+    {
+      "id": "refactor",
+      "kind": "workflow",
+      "invocation": "/integra:refactor",
+      "description": "Improve existing UI code while preserving behavior, semantics, project conventions and public APIs.",
+      "skills": ["integra-refactor-agent", "integra-design-system"],
+      "outputs": ["proposed-source-diff", "behavior-preservation-report", "test-results"]
+    },
+    {
+      "id": "critique",
+      "kind": "workflow",
+      "invocation": "/integra:critique",
+      "description": "Review a page or component for product clarity, hierarchy, usability and visual consistency.",
+      "skills": ["integra-design-qa"],
+      "outputs": ["ranked-findings", "evidence", "recommendations"]
+    },
+    {
+      "id": "audit",
+      "kind": "workflow",
+      "invocation": "/integra:audit",
+      "description": "Run a broad quality review covering responsive behavior, interaction states, accessibility signals and performance risks.",
+      "skills": ["integra-design-qa", "integra-accessibility-audit", "integra-performance-audit"],
+      "outputs": ["quality-report", "severity-ranked-findings", "verification-status"]
+    },
+    {
+      "id": "accessibility",
+      "kind": "workflow",
+      "invocation": "/integra:accessibility",
+      "description": "Perform a focused accessibility review with evidence, impact and actionable remediation.",
+      "skills": ["integra-accessibility-audit"],
+      "outputs": ["accessibility-report", "contrast-evidence", "remediation-plan"]
+    },
+    {
+      "id": "system",
+      "kind": "workflow",
+      "invocation": "/integra:system",
+      "description": "Identify repeated patterns and define or refine tokens, components and usage guidance.",
+      "skills": ["integra-design-system"],
+      "outputs": ["system-inventory", "token-proposal", "component-guidance"]
+    },
+    {
+      "id": "live",
+      "kind": "workflow",
+      "invocation": "/integra:live",
+      "description": "Inspect a local development page, preview reversible DOM changes and prepare a structured source-code handoff.",
+      "skills": ["integra-live-inspector"],
+      "outputs": ["inspection-session", "preview-diff", "review-package"],
+      "sourceMutation": "never"
+    },
+    {
+      "id": "polish",
+      "kind": "modifier",
+      "invocation": "/integra:polish",
+      "description": "Perform a focused finishing pass for consistency, spacing, typography and interaction feedback.",
+      "skills": ["integra-design-qa"],
+      "outputs": ["focused-recommendations"]
+    },
+    {
+      "id": "distill",
+      "kind": "modifier",
+      "invocation": "/integra:distill",
+      "description": "Remove complexity that does not improve the user task, clarity or system consistency.",
+      "skills": ["integra-design-qa", "integra-refactor-agent"],
+      "outputs": ["simplification-proposal"]
+    },
+    {
+      "id": "bolder",
+      "kind": "modifier",
+      "invocation": "/integra:bolder",
+      "description": "Increase visual distinctiveness without sacrificing clarity, accessibility or product fit.",
+      "skills": ["integra-design-direction", "integra-design-qa"],
+      "outputs": ["visual-adjustment-proposal"]
+    },
+    {
+      "id": "quieter",
+      "kind": "modifier",
+      "invocation": "/integra:quieter",
+      "description": "Reduce visual competition while preserving information hierarchy and discoverability.",
+      "skills": ["integra-design-qa"],
+      "outputs": ["visual-adjustment-proposal"]
+    },
+    {
+      "id": "colorize",
+      "kind": "modifier",
+      "invocation": "/integra:colorize",
+      "description": "Improve semantic color roles and evaluate contrast with explicit confidence limits.",
+      "skills": ["integra-design-system", "integra-accessibility-audit"],
+      "outputs": ["color-token-proposal", "contrast-evidence"]
+    },
+    {
+      "id": "typeset",
+      "kind": "modifier",
+      "invocation": "/integra:typeset",
+      "description": "Refine typography roles, scale, line height, measure and readability.",
+      "skills": ["integra-design-system", "integra-design-qa"],
+      "outputs": ["typography-proposal"]
+    },
+    {
+      "id": "layout",
+      "kind": "modifier",
+      "invocation": "/integra:layout",
+      "description": "Improve composition, spacing, alignment, grouping and information density.",
+      "skills": ["integra-design-qa"],
+      "outputs": ["layout-proposal"]
+    },
+    {
+      "id": "animate",
+      "kind": "modifier",
+      "invocation": "/integra:animate",
+      "description": "Propose meaningful motion and state feedback while respecting reduced-motion preferences.",
+      "skills": ["integra-ui-generator", "integra-accessibility-audit"],
+      "outputs": ["motion-specification"]
+    },
+    {
+      "id": "adapt",
+      "kind": "modifier",
+      "invocation": "/integra:adapt",
+      "description": "Review and adapt the experience across viewport sizes, pointer types and input modes.",
+      "skills": ["integra-design-qa"],
+      "outputs": ["responsive-findings", "adaptation-proposal"]
+    },
+    {
+      "id": "harden",
+      "kind": "modifier",
+      "invocation": "/integra:harden",
+      "description": "Strengthen empty, loading, error, overflow, keyboard and edge-case states.",
+      "skills": ["integra-refactor-agent", "integra-design-qa"],
+      "outputs": ["resilience-findings", "hardening-proposal"]
+    },
+    {
+      "id": "extract",
+      "kind": "modifier",
+      "invocation": "/integra:extract",
+      "description": "Find repeated UI patterns that are candidates for reusable components or design tokens.",
+      "skills": ["integra-design-system"],
+      "outputs": ["pattern-inventory", "extraction-proposal"]
+    }
+  ]
+}
