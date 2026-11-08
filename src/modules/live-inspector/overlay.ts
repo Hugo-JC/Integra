@@ -1,4 +1,5 @@
 import { calculateLiveContrast } from './contrast.js';
+import { restoreElementAttributes } from './dom.js';
 import { colorToHex, parseCssColor, compositeColors } from './color.js';
 import { createElementChangeSet, synthesizeLivePrompt } from './diff.js';
 import { getAccessibleName, findUniqueSelector } from './selector.js';
@@ -7,6 +8,7 @@ import type { IntegraLiveInspectorController, IntegraLiveInspectorOptions, LiveE
 interface OriginalElementState {
   snapshot: LiveElementSnapshot;
   originalStyleAttribute: string | null;
+  originalClassAttribute: string | null;
   originalClasses: string;
   originalComputedStyles: Record<string, string>;
 }
@@ -236,6 +238,7 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
       originals.set(element, {
         snapshot: createSnapshot(element, doc, options.sourceHint),
         originalStyleAttribute: element.getAttribute('style'),
+        originalClassAttribute: element.getAttribute('class'),
         originalClasses: element.getAttribute('class') ?? '',
         originalComputedStyles: currentComputed(element),
       });
@@ -272,10 +275,10 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
   };
 
   const restoreElement = (element: Element, original: OriginalElementState): void => {
-    if (original.originalClasses) element.setAttribute('class', original.originalClasses);
-    else element.removeAttribute('class');
-    if (original.originalStyleAttribute === null) element.removeAttribute('style');
-    else element.setAttribute('style', original.originalStyleAttribute);
+    restoreElementAttributes(element, {
+      classAttribute: original.originalClassAttribute,
+      styleAttribute: original.originalStyleAttribute,
+    });
   };
 
   const buildChangeSets = (): LiveElementChangeSet[] => {
