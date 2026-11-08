@@ -341,7 +341,6 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
     if (event.key === 'Escape') {
       event.preventDefault();
       stop({ restore: true });
-      previouslyFocused?.isConnected && previouslyFocused.focus();
       return;
     }
     if (event.altKey && event.shiftKey && event.key.toLowerCase() === 'i') {
