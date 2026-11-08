@@ -2,7 +2,7 @@
   "name": "integra",
   "version": "0.2.0",
   "private": true,
-  "description": "Integra AI Design Engine v5 — design direction, live inspection and evidence-based quality tooling",
+  "description": "Integra AI Design Engine v5 — contextual design direction, portable agent skills, local preset discovery, live DOM inspection and evidence-led QA",
   "type": "module",
   "engines": {
     "node": ">=24 <27",
@@ -16,11 +16,9 @@
     "validate:presets": "tsx scripts/validate-presets.ts",
     "direction:generate": "tsx scripts/direction-generate.ts",
     "direction:validate": "tsx scripts/direction-validate.ts",
-    "check": "npm run typecheck && npm test && npm run validate:fixtures && npm run validate:design-library && npm run validate:agent-skills",
-    "design:route": "tsx scripts/design-route.ts",
-    "design:qa": "tsx scripts/design-qa.ts",
-    "validate:design-library": "tsx scripts/validate-design-library.ts",
-    "validate:agent-skills": "node scripts/validate-agent-skills.mjs"
+    "check": "npm run typecheck && npm test && npm run validate:fixtures && npm run validate:agent-assets",
+    "direction:presets": "tsx scripts/direction-presets.ts",
+    "validate:agent-assets": "tsx scripts/validate-agent-assets.ts"
   },
   "dependencies": {
     "ajv": "^8.20.0",

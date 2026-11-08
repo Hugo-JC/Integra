@@ -1,41 +1,33 @@
 # Integra Live Inspector
 
-Browser-only visual inspection utility for local development.
+A temporary browser inspector for local development. It selects DOM nodes, previews a small set of styles/classes, estimates text contrast and exports an exact handoff. It never writes project files.
 
-## What it does
+## Vite setup
 
-- Selects rendered elements with pointer hover and click.
-- Uses the Integra electric-blue selection outline (#3B82F6), isolated in a Shadow DOM.
-- Temporarily edits classes, foreground/background colors, border radius and padding.
-- Reports exact class additions/removals and inline-style deltas.
-- Estimates text contrast from computed text color and the nearest opaque ancestor background.
-- Produces a structured diff and a source-refactoring prompt.
-- Exposes changes through a callback; it does not call an AI provider or write source files.
+```ts
+// vite.config.ts
+import { defineConfig } from 'vite';
+import { integraLiveInspectorPlugin } from './src/modules/live-inspector/vite-plugin';
 
-## Non-goals and limits
+export default defineConfig({
+  plugins: [integraLiveInspectorPlugin()]
+});
+```
 
-A DOM selector is not a TSX source location. Provide sourceHint only when it is known, or resolve the source with a framework/dev-server adapter. The contrast result is inconclusive for transparent, gradient, image-backed and layered backgrounds. Verify rendered states manually before treating an estimate as a WCAG result.
+The plugin uses Vite's `apply: 'serve'` boundary. Override `entry` when the module is hosted elsewhere. Toggle with Alt+Shift+I; Escape deactivates. The UI is isolated in Shadow DOM; selection chrome defaults to Integra blue #3B82F6.
 
-All changes are temporary in-memory DOM changes. Call stop() to restore the original class/style attributes. Pass { restore: false } only when intentionally keeping the preview until the page is reloaded.
+## Source hints
 
-## Usage
+Add `data-integra-source="src/components/Example.tsx"` to a development element when a stable source hint is available. This is only a hint; DOM-to-source mapping is not inferred.
 
-~~~ts
-import { createIntegraInspector } from './modules/live-inspector/index.js';
+## Programmatic use
 
-let inspector: ReturnType<typeof createIntegraInspector> | undefined;
+```ts
+import { createLiveInspector } from './src/modules/live-inspector';
 
-if (import.meta.env.DEV) {
-  inspector = createIntegraInspector({
-    sourceHint: 'src/App.tsx', // optional; use only when this path is known
-    onApply: (changes, prompt) => {
-      console.info('Integra DOM diff', changes);
-      console.info(prompt);
-    },
-  });
-}
+const inspector = createLiveInspector();
+const patch = inspector.getPatch();
+const prompt = inspector.toPrompt();
+```
 
-inspector?.stop();
-~~~
-
-The snippet is an integration example for a browser app with a development-only environment flag. Do not ship the inspector in production.
+The contrast calculator covers solid hex/rgb colors. Gradients, image backgrounds, alpha compositing, filters and overlays need rendered analysis. Contrast results are estimates—not a WCAG audit. Review the patch before applying it to source code.

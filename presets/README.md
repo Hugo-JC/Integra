@@ -1,12 +1,10 @@
-# Design presets
+# Preset library
 
-Presets are contextual direction documents, not locked themes or token dumps.
+- `ai-design-engine-v3.json`: source local niche preset catalog from the predecessor.
+- `design-styles-v3.json`: source style/token definitions.
+- `catalog.json`: normalized runtime data consumed by the offline matcher.
+- `experience-patterns.json`: contextual product archetypes.
 
-- The manifest is the only supported index.
-- Each preset describes a product context, design intent, visual direction, layout, components, accessibility and anti-patterns.
-- A preset must never override explicit user requirements or an existing brand system.
-- New presets need a rationale, at least one product context, relevant references and validation.
-- Do not make an industry-specific preset by changing only colors and fonts.
-- Keep palette guidance semantic and contextual; exact tokens belong to the actual project's direction artifact.
+Try: `npm run direction:presets -- "analytics dashboard for SaaS"`.
 
-Run npm run validate:presets to check manifest and file consistency.
+Matches are recommendations. Agents must compare them with the current brief, existing tokens, hard constraints and product context before applying a direction.

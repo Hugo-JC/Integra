@@ -1,40 +1,27 @@
 ---
 name: integra-design-direction
-description: Creates contextual visual direction for a product, page or flow. Use before designing a new interface, redesigning a surface, choosing a preset, or translating a brief into design decisions and tokens.
+description: Create a distinctive, usable and implementable product-specific visual direction before implementation. Use for new pages, redesigns, visual personality, tokens and layout decisions.
 ---
 
 # Integra Design Direction
 
-## Goal
-Produce a distinctive, usable visual direction grounded in the actual product. Do not pick a preset or palette before understanding the task.
+Start with product intent, users, primary task and constraints—not a fashionable style.
 
 ## Workflow
-1. Inspect the repository, existing product UI, brand assets, design tokens and framework conventions.
-2. Extract known facts: audience, primary job, platform, content density, success action, viewport and constraints.
-3. Record missing facts separately. Do not invent brand colors, product metrics, customer proof or user preferences.
-4. Choose the closest contextual preset from presets/manifest.json. Explain why it fits and what must be adapted.
-5. Define one visual thesis and a clear hierarchy. Include an alternative only when it changes the strategy meaningfully.
-6. Define semantic color roles, typography roles, spacing/layout rhythm, surface/elevation, components and motion.
-7. Define required states: default, hover, focus, active, disabled, loading, empty, error and success as relevant.
-8. Check WCAG 2.2 AA requirements and reduced-motion needs before implementation.
-9. Produce a compact Direction Brief that another agent can implement without guessing.
+1. Inspect routes, components, tokens, fonts, assets, screenshots, tests and product docs. Preserve established identity unless redesign is requested.
+2. Extract audience, primary job, content hierarchy, key action, trust needs, platform, viewports and accessibility target. Separate facts, preferences, assumptions and missing information.
+3. Write a one-sentence visual thesis and choose 2–4 supporting traits. Adjectives alone are not a direction.
+4. Define semantic tokens for surfaces, text, borders, accent, focus, status, spacing, type, radius, elevation and motion. Reuse existing tokens first.
+5. Plan composition, information order, density, grid and responsive transformations before decoration.
+6. Specify hover, focus, active, disabled, loading, empty, error, success and reduced-motion states where relevant.
+7. Compare at least two plausible directions, state trade-offs and remove decoration without a product purpose.
+8. Hand off thesis, tokens, layout rules, component principles, responsive behavior, accessibility constraints, assumptions and acceptance checks.
 
-## Required output
-- Product and task summary.
-- Known facts, assumptions and missing information.
-- Chosen preset and rationale.
-- Visual thesis.
-- Color roles and contrast pairings (not just raw hex values).
-- Typography roles and type scale.
-- Layout and spacing rules.
-- Component patterns and interaction states.
-- Responsive behavior.
-- Accessibility and motion constraints.
-- Risks and verification plan.
+## Anti-generic safeguards
+- Do not default to purple/blue gradients, giant centered hero copy, glassmorphism, pills everywhere, nested cards or icon tiles above every heading.
+- Do not ban patterns universally; use them when brand, content or interaction justifies them.
+- Keep real product imagery and truthful content ahead of decorative blobs or invented metrics.
+- Integra blue belongs to Integra tooling, not every customer palette.
 
-## Guardrails
-- The Integra blue selection color #3B82F6 belongs to the inspector UI, not every product.
-- Never force dark mode, gradients, glass, cards or rounded corners.
-- Existing brand and project tokens outrank presets.
-- A popular reference is not proof that a pattern fits the current product.
-- Keep functional requirements and aesthetics separate.
+## Acceptance
+The primary task is obvious; composition is distinctive and clear; tokens are semantic; mobile/desktop behavior is described; keyboard, contrast and reduced motion are considered; claims are sourced or marked as assumptions.

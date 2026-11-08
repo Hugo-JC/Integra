@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "Evidence-led heuristics. A rule match is not a defect until context and evidence are reviewed.",
+  "rules": [
+    {
+      "id": "keyboard-operability",
+      "severity": "P0",
+      "category": "Accessibility",
+      "trigger": "Core task cannot be completed by keyboard.",
+      "requiredEvidence": "Keyboard interaction trace",
+      "status": "heuristic"
+    },
+    {
+      "id": "content-truth",
+      "severity": "P0",
+      "category": "Content integrity",
+      "trigger": "Interface presents unsupported metrics, testimonials or claims.",
+      "requiredEvidence": "Content-to-source trace",
+      "status": "heuristic"
+    },
+    {
+      "id": "semantic-structure",
+      "severity": "P1",
+      "category": "Accessibility",
+      "trigger": "Meaningful controls lack semantics or accessible names.",
+      "requiredEvidence": "DOM snapshot and interaction",
+      "status": "heuristic"
+    },
+    {
+      "id": "focus-visible",
+      "severity": "P1",
+      "category": "Accessibility",
+      "trigger": "Keyboard focus is invisible or obscured.",
+      "requiredEvidence": "Focused-state screenshot",
+      "status": "heuristic"
+    },
+    {
+      "id": "text-contrast",
+      "severity": "P1",
+      "category": "Accessibility",
+      "trigger": "Text contrast is below the project's WCAG target.",
+      "requiredEvidence": "Computed colors and ratio",
+      "status": "heuristic"
+    },
+    {
+      "id": "color-not-only-signal",
+      "severity": "P1",
+      "category": "Accessibility",
+      "trigger": "Meaning depends on color alone.",
+      "requiredEvidence": "DOM and rendered state",
+      "status": "heuristic"
+    },
+    {
+      "id": "motion-preference",
+      "severity": "P1",
+      "category": "Motion",
+      "trigger": "Non-essential motion ignores reduced-motion preference.",
+      "requiredEvidence": "Emulated media query",
+      "status": "heuristic"
+    },
+    {
+      "id": "responsive-overflow",
+      "severity": "P1",
+      "category": "Responsive",
+      "trigger": "Required content overflows supported viewport.",
+      "requiredEvidence": "Viewport capture and overflow measurement",
+      "status": "heuristic"
+    },
+    {
+      "id": "state-completeness",
+      "severity": "P1",
+      "category": "Interaction",
+      "trigger": "Necessary loading, empty, error or disabled states are absent.",
+      "requiredEvidence": "State inventory and tests",
+      "status": "heuristic"
+    },
+    {
+      "id": "error-recovery",
+      "severity": "P1",
+      "category": "Forms",
+      "trigger": "Errors are vague or destroy recoverable input.",
+      "requiredEvidence": "Form submission and DOM",
+      "status": "heuristic"
+    },
+    {
+      "id": "responsive-navigation",
+      "severity": "P1",
+      "category": "Responsive",
+      "trigger": "Navigation becomes undiscoverable or unusable on small screens.",
+      "requiredEvidence": "Mobile capture and keyboard check",
+      "status": "heuristic"
+    },
+    {
+      "id": "destructive-action",
+      "severity": "P1",
+      "category": "Interaction",
+      "trigger": "Destructive action is unclear or lacks recovery.",
+      "requiredEvidence": "Interaction flow",
+      "status": "heuristic"
+    },
+    {
+      "id": "non-text-contrast",
+      "severity": "P2",
+      "category": "Accessibility",
+      "trigger": "Essential control boundaries or indicators lack contrast.",
+      "requiredEvidence": "Rendered state and measured pair",
+      "status": "heuristic"
+    },
+    {
+      "id": "target-size",
+      "severity": "P2",
+      "category": "Accessibility",
+      "trigger": "Essential touch targets are difficult to activate.",
+      "requiredEvidence": "Element bounds and viewport",
+      "status": "heuristic"
+    },
+    {
+      "id": "type-scale",
+      "severity": "P2",
+      "category": "Typography",
+      "trigger": "Typography roles weaken hierarchy or readability.",
+      "requiredEvidence": "Computed type metrics",
+      "status": "heuristic"
+    },
+    {
+      "id": "measure-leading",
+      "severity": "P2",
+      "category": "Typography",
+      "trigger": "Long-form text has difficult line length or spacing.",
+      "requiredEvidence": "Rendered text measurement",
+      "status": "heuristic"
+    },
+    {
+      "id": "spacing-rhythm",
+      "severity": "P2",
+      "category": "Layout",
+      "trigger": "Spacing is arbitrary and weakens grouping.",
+      "requiredEvidence": "Computed spacing inventory",
+      "status": "heuristic"
+    },
+    {
+      "id": "density-fit",
+      "severity": "P2",
+      "category": "Layout",
+      "trigger": "Density does not match task frequency or data volume.",
+      "requiredEvidence": "Task analysis and screenshot",
+      "status": "heuristic"
+    },
+    {
+      "id": "feedback-latency",
+      "severity": "P2",
+      "category": "Interaction",
+      "trigger": "Action has no timely, understandable feedback.",
+      "requiredEvidence": "Interaction recording",
+      "status": "heuristic"
+    },
+    {
+      "id": "token-drift",
+      "severity": "P2",
+      "category": "Design system",
+      "trigger": "Repeated one-off values conflict with existing semantic tokens.",
+      "requiredEvidence": "Token/value inventory",
+      "status": "heuristic"
+    },
+    {
+      "id": "component-consistency",
+      "severity": "P2",
+      "category": "Design system",
+      "trigger": "Equivalent components behave inconsistently.",
+      "requiredEvidence": "Component inventory",
+      "status": "heuristic"
+    },
+    {
+      "id": "performance-motion",
+      "severity": "P2",
+      "category": "Performance",
+      "trigger": "Animation causes unnecessary layout or continuous work.",
+      "requiredEvidence": "Performance trace",
+      "status": "heuristic"
+    },
+    {
+      "id": "table-readability",
+      "severity": "P2",
+      "category": "Data display",
+      "trigger": "Dense tables lose meaning or usability on narrow screens.",
+      "requiredEvidence": "Table DOM and viewport",
+      "status": "heuristic"
+    },
+    {
+      "id": "decorative-noise",
+      "severity": "P3",
+      "category": "Visual quality",
+      "trigger": "Decoration competes with content without clear purpose.",
+      "requiredEvidence": "Before/after capture and rationale",
+      "status": "heuristic"
+    },
+    {
+      "id": "generic-pattern",
+      "severity": "P3",
+      "category": "Visual quality",
+      "trigger": "Common patterns repeat without product-specific reasoning.",
+      "requiredEvidence": "Design rationale",
+      "status": "heuristic"
+    },
+    {
+      "id": "image-crop",
+      "severity": "P3",
+      "category": "Media",
+      "trigger": "Important visual content is cropped or lacks useful alternative text.",
+      "requiredEvidence": "Rendered image and alt inspection",
+      "status": "heuristic"
+    },
+    {
+      "id": "feedback-polish",
+      "severity": "P3",
+      "category": "Interaction",
+      "trigger": "Micro-feedback can be clearer without adding noise.",
+      "requiredEvidence": "Interaction capture",
+      "status": "heuristic"
+    }
+  ]
+}

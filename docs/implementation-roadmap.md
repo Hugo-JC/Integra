@@ -85,4 +85,21 @@ Implementar DL-002, DL-003 e DL-005 com regras e fixtures específicas. DL-004 c
 Adapters autorizados para fontes externas; providers opcionais com timeout, cancelamento, validação, fallback determinístico e respeito por hard constraints.
 
 ## Release gates
-Nenhuma fase é concluída apenas por adicionar ficheiros. Checks têm de passar no head exato. Relatórios autoavaliados por agentes não substituem avaliação independente. Não publicar ganhos sem experiências reproduzíveis.
+
+- Alterações de schema incluem testes, documentação e migração.
+- Nenhuma fase é concluída apenas por adicionar ficheiros.
+- Checks locais e CI têm de passar no head exato do PR.
+- Resultados de agentes são avaliados separadamente dos seus relatórios de autoavaliação.
+- Não publicar claims de melhoria sem experiências reproduzíveis.
+- WCAG, heurísticas [R], preferências subjetivas e decisões de produto continuam separados.
+
+
+## Delivered: agent skills, design intelligence and Live Inspector
+- Migrated 61 niche presets and 17 style definitions from AI Design Engine v3 with provenance.
+- Added deterministic offline preset matching and the `direction:presets` command.
+- Added experience archetypes, evidence-led quality heuristics and agent prompt vocabulary.
+- Added eight portable Agent Skills plus Gemini CLI guidance.
+- Added a Vite development-only Live Inspector with element selection, temporary style/class previews, contrast estimate and exact diff/prompt export.
+- Added asset validation to the project quality check.
+
+Still outside this slice: persistent source writing, React state mutation, source-map resolution, full WCAG audit, automatic visual scoring and a complete Design Lab runner.

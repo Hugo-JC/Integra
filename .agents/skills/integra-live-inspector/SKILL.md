@@ -1,29 +1,25 @@
 ---
 name: integra-live-inspector
-description: Use when inspecting a locally running UI, selecting DOM elements, previewing style changes, auditing text contrast and generating an exact diff for an AI agent.
+description: Inspect a local development DOM element, preview style changes, estimate contrast, export an exact diff and prepare an AI refactoring handoff.
 ---
 
-# Integra Live Inspector
+# Integra Live Inspector & Diff Handoff
 
-## Start
-Use the exported `startIntegraInspector()` from `src/modules/live-inspector/index.ts` in a local development-only entry point. The inspector is localhost-only by default. Do not enable remote hosts unless the preview is trusted and explicitly approved.
+## Principles
+- Local development only; never inject into production or weaken production CSP.
+- Integra blue (#3B82F6) is selection chrome only, never the inspected product's theme.
+- DOM changes are temporary previews. The inspector does not write source files.
+- Export exact differences, not vague styling instructions.
 
-## Interaction model
-1. Hover outlines and the element badge use Integra blue `#3B82F6`.
-2. Click locks the target and prevents the underlying click action.
-3. Use **↑ Pai** to move to the containing element when a nested wrapper is selected.
-4. Preview Tailwind classes, text/background color, font size, padding and radius in the live DOM.
-5. Run the contrast check after color or typography edits.
-6. Reset the selected element or destroy the inspector to restore tracked class/style attributes.
-7. Copy the DOM diff and send it to the implementation agent for source-level review.
+## Workflow
+1. Confirm local dev environment and authorization.
+2. Start the documented Vite dev server. Toggle with Alt+Shift+I; Escape deactivates.
+3. Hover to inspect and click to lock. Ignore the inspector UI and [data-integra-ignore].
+4. Preview background, text color, radius, padding and existing utility classes.
+5. Review contrast estimate. It is not reliable for gradients, opacity, images, filters or complex compositing.
+6. Export getPatch() or toPrompt(); use data-integra-source as a source hint when available.
+7. Locate the real component; never infer a file path from a DOM class.
+8. Apply only the reviewed delta with the refactor skill. Preserve behavior, semantics, tokens and responsive behavior.
+9. Run typecheck, tests and browser/accessibility checks.
 
-## Diff integrity
-The diff must preserve exact original and updated class/style attributes and a best-effort DOM selector. A selector is not a source file path. Only treat `data-integra-file` as a source hint when the application deliberately provides it.
-
-## Safety and correctness
-- Preview is not source mutation. Never claim a source file was edited.
-- Do not inject the inspector into production or weaken CSP to make it run.
-- Never send DOM content or patches to a remote provider without user approval.
-- React/Vue/Svelte may re-render and overwrite preview styles; apply durable fixes in the source component.
-- A contrast result is inconclusive when compositing cannot be established reliably.
-- Destroy the inspector before finishing and verify the page returns to its original state.
+The handoff includes target element, source hint, original/updated classes, exact CSS changes, contrast estimate and acceptance checks. Browser preview is not proof of WCAG conformance or a source-code edit.

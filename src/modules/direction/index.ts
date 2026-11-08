@@ -36,3 +36,6 @@ export type {
   DirectionContextSnapshot,
   DirectionConstraintPath,
 } from '../../contracts/direction-context.js';
+
+export { directionPresetMetadata, getDirectionStyle, listDirectionPresets, matchDirectionPresets } from './preset-catalog.js';
+export type { DirectionPresetMatch } from './preset-catalog.js';

@@ -1,27 +1,17 @@
 ---
 name: integra-investigation
-description: Investigate a UI pattern or product behavior using evidence, explicit hypotheses, confidence and implementation constraints.
+description: Research design patterns, component behavior, references and implementation techniques before proposing a direction.
 ---
 
 # Integra Investigation
 
-Adapt the evidence-first investigation discipline of REA to design and product research. Do not copy its implementation or use reverse-engineering tooling outside its intended scope.
+1. Turn the question into a narrow research problem.
+2. Prefer primary sources: official design systems, platform guidance, accessibility standards, technical docs and original case studies.
+3. Use secondary sources for context, not to override normative requirements.
+4. Compare at least two relevant examples when making a pattern recommendation.
+5. Record source URL, publisher, access date, observed pattern, evidence, limitations and adaptation.
+6. Separate facts from interpretation and recommendations; cite external claims.
+7. Extract reusable principles, not copied layouts, wording, assets or brand identity.
+8. Record contradictory evidence and uncertainty.
 
-## Protocol
-1. Define the question and target behavior precisely.
-2. Capture the source, version/date, URL or screenshot and the user's permission to inspect it.
-3. Write competing hypotheses before concluding how a pattern works.
-4. Observe behavior across states, sizes and inputs; separate observation from inference.
-5. Record evidence for each claim, including exact element, text, dimensions, state or source link.
-6. Assign confidence (high/medium/low) and list unknowns and alternative explanations.
-7. Translate findings into transferable principles, not a pixel-perfect copy.
-8. Recommend an implementation approach compatible with the target project's stack, accessibility and constraints.
-
-## Evidence report
-Include: question, scope, sources, observations, hypotheses, evidence, confidence, limitations, transferable principles and next verification step.
-
-## Rules
-- Do not infer source code, user data or private behavior from a screenshot.
-- Do not treat a marketing gallery as evidence of usability or accessibility.
-- Respect copyright and terms; do not reproduce distinctive layouts or assets.
-- Unknown remains unknown. Never turn an unverified assumption into a fact.
+Deliver an evidence ledger, pattern comparison, recommendation, risks and implementation implications. State what should not be copied and what needs user validation.

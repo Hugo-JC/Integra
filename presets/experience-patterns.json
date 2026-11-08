@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "Contextual starting patterns, not universal templates.",
+  "archetypes": [
+    {
+      "id": "saas-product",
+      "name": "SaaS product",
+      "thesis": "Help users reach the core job quickly.",
+      "buildingBlocks": [
+        "product navigation",
+        "task surface",
+        "feature discovery"
+      ],
+      "qualityChecks": [
+        "Make the first useful action obvious",
+        "Explain value before asking for commitment"
+      ]
+    },
+    {
+      "id": "analytics-dashboard",
+      "name": "Analytics dashboard",
+      "thesis": "Help users interpret changing data and decide.",
+      "buildingBlocks": [
+        "summary metrics",
+        "time filters",
+        "charts and table fallback"
+      ],
+      "qualityChecks": [
+        "Show units and freshness",
+        "Provide a non-chart data alternative"
+      ]
+    },
+    {
+      "id": "developer-tool",
+      "name": "Developer tool",
+      "thesis": "Optimize technical workflows for precision and scanability.",
+      "buildingBlocks": [
+        "command surface",
+        "configuration",
+        "logs and status"
+      ],
+      "qualityChecks": [
+        "Keep code and output dominant",
+        "Make errors actionable"
+      ]
+    },
+    {
+      "id": "documentation",
+      "name": "Documentation",
+      "thesis": "Support learning and reference lookup.",
+      "buildingBlocks": [
+        "table of contents",
+        "search",
+        "prose and code"
+      ],
+      "qualityChecks": [
+        "Use semantic heading order",
+        "Keep examples copyable"
+      ]
+    },
+    {
+      "id": "commerce-catalog",
+      "name": "Commerce catalog",
+      "thesis": "Support product discovery and comparison.",
+      "buildingBlocks": [
+        "filters",
+        "sort",
+        "product list"
+      ],
+      "qualityChecks": [
+        "Preserve filters",
+        "Expose useful product attributes"
+      ]
+    },
+    {
+      "id": "commerce-detail",
+      "name": "Product detail",
+      "thesis": "Help users evaluate one item.",
+      "buildingBlocks": [
+        "gallery",
+        "price and variants",
+        "availability"
+      ],
+      "qualityChecks": [
+        "Keep selection explicit",
+        "Do not fabricate reviews or stock"
+      ]
+    },
+    {
+      "id": "editorial",
+      "name": "Editorial",
+      "thesis": "Let content and reading structure lead.",
+      "buildingBlocks": [
+        "headline",
+        "byline",
+        "body",
+        "related stories"
+      ],
+      "qualityChecks": [
+        "Tune line length",
+        "Separate metadata from prose"
+      ]
+    },
+    {
+      "id": "portfolio",
+      "name": "Portfolio",
+      "thesis": "Show work and credible proof of skill.",
+      "buildingBlocks": [
+        "intro",
+        "selected work",
+        "case studies",
+        "contact"
+      ],
+      "qualityChecks": [
+        "Make projects primary",
+        "Support claims with evidence"
+      ]
+    },
+    {
+      "id": "education",
+      "name": "Education platform",
+      "thesis": "Help learners orient, progress and resume.",
+      "buildingBlocks": [
+        "course navigation",
+        "lesson",
+        "progress",
+        "practice"
+      ],
+      "qualityChecks": [
+        "Do not rely on color alone",
+        "Keep keyboard navigation usable"
+      ]
+    },
+    {
+      "id": "booking",
+      "name": "Booking flow",
+      "thesis": "Reduce uncertainty through selection and confirmation.",
+      "buildingBlocks": [
+        "service choice",
+        "availability",
+        "summary",
+        "confirmation"
+      ],
+      "qualityChecks": [
+        "Show selections before commit",
+        "Explain unavailable states"
+      ]
+    },
+    {
+      "id": "community",
+      "name": "Community",
+      "thesis": "Support discovery and meaningful participation.",
+      "buildingBlocks": [
+        "feed",
+        "composer",
+        "discussion",
+        "moderation"
+      ],
+      "qualityChecks": [
+        "Make author and time clear",
+        "Expose moderation controls"
+      ]
+    },
+    {
+      "id": "onboarding",
+      "name": "Onboarding",
+      "thesis": "Reach first value with minimal setup friction.",
+      "buildingBlocks": [
+        "step context",
+        "one primary action",
+        "help",
+        "completion"
+      ],
+      "qualityChecks": [
+        "Explain sensitive data requests",
+        "Preserve recoverable input"
+      ]
+    },
+    {
+      "id": "ai-assistant",
+      "name": "AI assistant",
+      "thesis": "Make capabilities and action consequences legible.",
+      "buildingBlocks": [
+        "conversation",
+        "composer",
+        "tool status",
+        "source/result review"
+      ],
+      "qualityChecks": [
+        "Distinguish generated from verified",
+        "Confirm consequential actions"
+      ]
+    },
+    {
+      "id": "data-entry",
+      "name": "Data entry",
+      "thesis": "Help users create accurate structured records.",
+      "buildingBlocks": [
+        "grouped fields",
+        "field help",
+        "validation",
+        "review"
+      ],
+      "qualityChecks": [
+        "Associate errors with fields",
+        "Preserve input on recoverable errors"
+      ]
+    },
+    {
+      "id": "split-workspace",
+      "name": "Split workspace",
+      "thesis": "Support work across list and detail panes.",
+      "buildingBlocks": [
+        "master list",
+        "detail/editor",
+        "context actions"
+      ],
+      "qualityChecks": [
+        "Keep selection visible",
+        "Provide narrow-screen navigation"
+      ]
+    }
+  ]
+}

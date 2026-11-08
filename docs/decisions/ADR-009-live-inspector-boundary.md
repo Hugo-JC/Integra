@@ -1,13 +1,13 @@
-# ADR-009 — Live Inspector as a Local Browser Preview
+# ADR-009: Live Inspector as a development-only adapter
 
 - Status: accepted
 - Date: 2026-11-08
 
 ## Decision
-Implement a framework-agnostic browser module that selects DOM elements, previews safe class/style edits, displays text contrast status and exports a before/after DOM diff. Keep it local-only by default and separate from the source-mutating agent workflow.
+Implement Live Inspector as a browser-side preview and patch handoff, integrated through a Vite plugin restricted to `apply: 'serve'`. Use Shadow DOM to isolate panel styles, blue selection chrome (#3B82F6), temporary DOM changes and a serializable patch contract.
+
+## Explicit non-goals
+The inspector does not write files, modify framework state, resolve source maps, inject into production or claim WCAG conformance. Its contrast estimate is limited to solid colors.
 
 ## Rationale
-A visual preview reduces the distance between design intent and implementation feedback, while explicit diff export keeps source changes reviewable and avoids hidden filesystem or provider actions.
-
-## Consequences
-The inspector does not write source code, infer a file path, or guarantee framework state persistence. A future source adapter must be explicit, permissioned and tested separately.
+The boundary enables fast local feedback while source mutation and verification stay under the developer or coding agent's normal review and test workflow.

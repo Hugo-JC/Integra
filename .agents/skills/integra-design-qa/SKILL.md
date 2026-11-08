@@ -1,36 +1,30 @@
 ---
 name: integra-design-qa
-description: Independently audit UI code and rendered interfaces for accessibility, hierarchy, consistency, responsive behavior and interaction quality.
+description: Independently review a page, flow or component for product UX, visual quality, responsiveness, accessibility and implementation discipline.
 ---
 
 # Integra Design QA
 
-Act as an independent reviewer. Do not assume the implementation is correct because its author says it follows the design brief.
+Review against the brief, real tasks, tokens and observable evidence. Do not report a taste preference as a defect without context.
 
-## Review order
-1. Re-read the original brief and the current design direction.
-2. Run static checks where available: `npm run design:qa -- src/ --json`.
-3. Inspect the actual rendered page at representative desktop and narrow/mobile viewports when a browser is available.
-4. Test keyboard navigation, focus visibility, form labels, buttons, links and important interaction states.
-5. Check WCAG 2.2 AA text contrast using rendered/composited colors. Unknown backgrounds, images, gradients and effects must be marked inconclusive.
-6. Review hierarchy, content completeness, responsive overflow, consistency, loading/empty/error states and performance risks.
-7. Compare against the project's own tokens and documented rationale, not a universal aesthetic.
+## Multi-agent protocol
+When independent agents are available, assign focused passes: (1) product/UX, (2) visual system/responsive, (3) accessibility/interaction, (4) implementation/evidence. Give each the same brief and artifact; require evidence; deduplicate and rank findings. If only one agent is available, perform sequential passes and label the review single-agent—never pretend independent reviewers ran.
 
-## Finding format
-Each finding must include:
-- Stable rule ID and file/element locator.
-- Severity: blocker, major, minor or suggestion.
-- Evidence: source excerpt, DOM selector, screenshot or measured value.
-- User impact and affected state/viewport.
-- A concrete, minimal recommendation.
-- Verification state: verified, failed, inconclusive or not-run.
+## Review passes
+1. Product/UX: user goal, hierarchy, navigation, content, trust and task completion.
+2. Visual: type, spacing, semantic colors, surfaces, borders, elevation, icons and personality.
+3. Responsive: narrow/medium/wide behavior, overflow, navigation and touch usability.
+4. Accessibility: semantics, keyboard, focus, names, form errors, contrast, zoom/reflow and reduced motion.
+5. Implementation: boundaries, types, state coverage, errors, dependencies, performance and duplicated styles.
+6. Evidence: inspect code, run checks and inspect the rendered page when a browser exists.
 
-## Reviewer discipline
-- Do not classify taste as a defect without contextual evidence.
-- Hard-coded color classes are suggestions unless they violate an explicit token contract.
-- Do not claim WCAG compliance from source classes alone.
-- Prioritize a few high-impact issues over cosmetic noise.
-- Re-check after fixes and report regressions.
+## Severity
+- P0 blocker: core task impossible, data loss or severe accessibility/security issue.
+- P1 high: major flow or common interaction materially broken.
+- P2 medium: noticeable usability/consistency issue with a workaround.
+- P3 polish: useful craft refinement, not a blocker.
 
-## Multi-agent handoff
-The reviewer must be independent from the implementation agent. Return actionable findings; never silently rewrite the whole UI during an audit.
+## Finding contract
+Include ID, severity, location, evidence (selector/file/line/screenshot), user impact, recommendation, verification method and status: verified, unverified, not_run or inconclusive.
+
+Never claim WCAG conformance from one contrast ratio. Separate objective checks from visual ratings. Order fixes by impact and effort.

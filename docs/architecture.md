@@ -64,4 +64,10 @@ O Live Inspector corre no browser do projeto local, opera por cima do DOM e expo
 
 ## Reprodutibilidade e limites
 
-O caminho determinístico não usa relógio, aleatoriedade, rede ou providers. Experiências devem fixar brief, agente, modelo, configuração e starter project. O artefacto orienta implementação, mas não prova a qualidade final.
+O artefacto direciona um agente de implementação; não prova que o site criado esteja correto. Avaliação visual, browser runner, mutação de projetos e geração de aplicações inteiras permanecem fora do âmbito do núcleo atual.
+
+
+## Agent knowledge and local tooling
+`.agents/skills/` is the canonical portable skill directory; `GEMINI.md` and `AGENTS.md` route host agents. The preset catalog migrates AI Design Engine v3 niche/style knowledge and exposes deterministic offline discovery. Presets and experience archetypes are contextual references, not universal templates.
+
+Live Inspector is an optional browser adapter. It uses Vite `apply: 'serve'`, Shadow DOM, temporary DOM previews and a serializable diff. It does not mutate source code, resolve source maps or become a production runtime dependency.

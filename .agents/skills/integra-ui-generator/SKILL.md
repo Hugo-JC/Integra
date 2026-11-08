@@ -1,32 +1,29 @@
 ---
 name: integra-ui-generator
-description: Generate production-oriented UI components or screens from a brief using contextual presets, semantic tokens and accessible interaction patterns.
+description: Generate polished React and TypeScript interface components from abstract product requests. Use for cards, dashboards, navigation, forms, menus, tables, empty states and dialogs.
 ---
 
 # Integra UI Generator
 
-## Understand before generating
-- Identify the job-to-be-done, primary user, content hierarchy, device context and success action.
-- Inspect existing project tokens and components before introducing new ones.
-- Use `npm run design:route -- "<brief>" --json` as a suggestion, not as an authority.
-- Confirm low-confidence or ambiguous preset routes.
+## Before JSX
+- Determine component job, user, information, primary action and data states.
+- Inspect existing stack, tokens, component library and nearby components.
+- Reuse installed systems such as shadcn/ui when present; do not install a library for one component.
+- Ask only for missing facts that materially block implementation; otherwise state assumptions.
 
-## Design quality
-- Establish one clear visual idea; avoid generic dashboard cards, gratuitous gradients, glass effects and excessive rounding.
-- Use meaningful typography hierarchy, intentional whitespace and content-first composition.
-- Prefer semantic color roles and a restrained, intentional accent.
-- Use real product language and plausible content. Never fabricate trust signals.
-- Build responsive layouts from content constraints, not arbitrary device labels.
-- Include accessible labels, focus, keyboard interactions and reduced-motion behavior.
-- Provide coherent loading, empty, error, success and disabled states.
-- Make interactions discoverable and give immediate feedback.
+## Build rules
+1. Use semantic HTML and the simplest structure that supports the behavior.
+2. Establish hierarchy through content order, type, spacing, alignment and contrast before decoration.
+3. Use semantic tokens (surface, text, border, accent, focus and status roles) mapped to the project's syntax.
+4. Reuse type and spacing scales; avoid arbitrary values when tokens exist.
+5. Keep one clear primary action per local context.
+6. Never fabricate metrics, testimonials, reviews, customer logos or performance claims.
+7. Cover loading, empty, error, disabled, hover, active and focus states where relevant.
+8. Make layouts responsive from content constraints, not by shrinking desktop columns.
+9. Respect reduced motion; motion must communicate state or feedback.
+10. Prefer transform/opacity for simple transitions. Avoid scroll hijacking and expensive effects without clear value.
+11. Add ARIA only where native semantics are insufficient.
+12. Deliver complete, type-safe code, tests and necessary token additions.
 
-## Implementation
-- Follow the host project's stack and conventions; do not add dependencies for trivial effects.
-- Prefer native HTML and project components; avoid unnecessary wrappers.
-- Keep components composable and types explicit.
-- Add tests for meaningful interactions and state transitions.
-- Use animation only when it clarifies hierarchy or state.
-
-## Final self-check
-Explain the chosen direction, key trade-offs, responsive behavior, accessibility decisions and remaining unknowns. Do not say the result is polished or production-ready without actually verifying it.
+## Visual quality gate
+Review narrow mobile and desktop. Remove gratuitous gradients, oversized headings, nested cards, excessive rounding, repeated icons and purposeless shadows. Keep a distinctive concept rather than generic decoration.
