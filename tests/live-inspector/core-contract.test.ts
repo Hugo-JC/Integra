@@ -1,11 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { calculateLiveContrast } from '../../src/modules/live-inspector/contrast.js';
 import { findUniqueSelector, getAccessibleName } from '../../src/modules/live-inspector/selector.js';
-import { createIntegraInspector } from '../../src/modules/live-inspector/index.js';
+import { createIntegraInspector, createLiveInspector } from '../../src/modules/live-inspector/index.js';
 
 describe('Live Inspector v2 core contracts', () => {
   it('exposes the canonical inspector API from the module entry', () => {
     expect(createIntegraInspector).toBeTypeOf('function');
+    expect(createLiveInspector).toBeTypeOf('function');
   });
 
   it('uses the large-text AA threshold only for qualifying text', () => {
