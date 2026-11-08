@@ -10,7 +10,8 @@ export interface ContrastAuditResult {
   foreground?: string;
   background?: string;
   message: string;
-  criterion: 'WCAG 2.2 SC 1.4.3';
+  criterionAA: 'WCAG 2.2 SC 1.4.3';
+  criterionAAA: 'WCAG 2.2 SC 1.4.6';
 }
 
 export function parseCssColor(input: string): RgbaColor | null {
@@ -57,23 +58,23 @@ export function colorToHex(color: RgbaColor): string {
 export function auditTextContrast(element: Element, view: Window = window): ContrastAuditResult {
   const computed = view.getComputedStyle(element);
   if (!computed.color || computed.display === 'none' || computed.visibility === 'hidden') {
-    return { status: 'not-applicable', message: 'No visible text was detected on this element.', criterion: 'WCAG 2.2 SC 1.4.3' };
+    return { status: 'not-applicable', message: 'No visible text was detected on this element.', criterionAA: 'WCAG 2.2 SC 1.4.3', criterionAAA: 'WCAG 2.2 SC 1.4.6' };
   }
   if (computed.backgroundImage !== 'none' || computed.filter !== 'none' || computed.mixBlendMode !== 'normal') {
-    return { status: 'inconclusive', message: 'Image/gradient, filter or blend mode prevents a reliable color calculation.', criterion: 'WCAG 2.2 SC 1.4.3' };
+    return { status: 'inconclusive', message: 'Image/gradient, filter or blend mode prevents a reliable color calculation.', criterionAA: 'WCAG 2.2 SC 1.4.3', criterionAAA: 'WCAG 2.2 SC 1.4.6' };
   }
   let foreground = parseCssColor(computed.color);
-  if (!foreground) return { status: 'inconclusive', message: 'The foreground color format could not be parsed.', criterion: 'WCAG 2.2 SC 1.4.3' };
+  if (!foreground) return { status: 'inconclusive', message: 'The foreground color format could not be parsed.', criterionAA: 'WCAG 2.2 SC 1.4.3', criterionAAA: 'WCAG 2.2 SC 1.4.6' };
   let background: RgbaColor = { red: 0, green: 0, blue: 0, alpha: 0 };
   const backgroundLayers: RgbaColor[] = [];
   let current: Element | null = element;
   while (current) {
     const style = view.getComputedStyle(current);
     if (Number.parseFloat(style.opacity) < 1 || style.filter !== 'none' || style.mixBlendMode !== 'normal') {
-      return { status: 'inconclusive', message: 'An ancestor opacity/filter/blend layer makes the effective colors uncertain.', criterion: 'WCAG 2.2 SC 1.4.3' };
+      return { status: 'inconclusive', message: 'An ancestor opacity/filter/blend layer makes the effective colors uncertain.', criterionAA: 'WCAG 2.2 SC 1.4.3', criterionAAA: 'WCAG 2.2 SC 1.4.6' };
     }
     if (style.backgroundImage !== 'none') {
-      return { status: 'inconclusive', message: 'A background image or gradient makes the effective background uncertain.', criterion: 'WCAG 2.2 SC 1.4.3' };
+      return { status: 'inconclusive', message: 'A background image or gradient makes the effective background uncertain.', criterionAA: 'WCAG 2.2 SC 1.4.3', criterionAAA: 'WCAG 2.2 SC 1.4.6' };
     }
     const layer = parseCssColor(style.backgroundColor);
     if (layer && layer.alpha > 0) backgroundLayers.push(layer);
@@ -81,11 +82,11 @@ export function auditTextContrast(element: Element, view: Window = window): Cont
   }
   for (const layer of backgroundLayers.reverse()) background = compositeColors(layer, background);
   if (background.alpha < 0.999) {
-    return { status: 'inconclusive', message: 'No fully opaque ancestor background was found; the browser canvas color is not assumed.', criterion: 'WCAG 2.2 SC 1.4.3' };
+    return { status: 'inconclusive', message: 'No fully opaque ancestor background was found; the browser canvas color is not assumed.', criterionAA: 'WCAG 2.2 SC 1.4.3', criterionAAA: 'WCAG 2.2 SC 1.4.6' };
   }
   foreground = compositeColors(foreground, background);
   if (foreground.alpha < 0.999) {
-    return { status: 'inconclusive', message: 'The final text color is not fully opaque after compositing.', criterion: 'WCAG 2.2 SC 1.4.3' };
+    return { status: 'inconclusive', message: 'The final text color is not fully opaque after compositing.', criterionAA: 'WCAG 2.2 SC 1.4.3', criterionAAA: 'WCAG 2.2 SC 1.4.6' };
   }
   const fg = colorToHex(foreground);
   const bg = colorToHex(background);
@@ -98,7 +99,7 @@ export function auditTextContrast(element: Element, view: Window = window): Cont
   return {
     status: ratio >= required ? 'passed' : 'failed', ratio, requiredRatio: required, aaaRatio: aaa,
     foreground: fg, background: bg,
-    message: `${ratio.toFixed(2)}:1 contrast; WCAG AA requires ${required}:1 and AAA requires ${aaa}:1.`,
-    criterion: 'WCAG 2.2 SC 1.4.3',
+    message: `${ratio.toFixed(2)}:1 contrast; WCAG AA (SC 1.4.3) requires ${required}:1 and AAA (SC 1.4.6) requires ${aaa}:1.`,
+    criterionAA: 'WCAG 2.2 SC 1.4.3', criterionAAA: 'WCAG 2.2 SC 1.4.6',
   };
 }
