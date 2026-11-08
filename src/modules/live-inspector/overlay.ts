@@ -338,7 +338,7 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
 
   const onKeyDown = (event: KeyboardEvent): void => {
     if (stopped) return;
-    const target = event.target;
+    const target = event.composedPath()[0] ?? event.target;
     if (target instanceof view.HTMLElement
       && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))) return;
     if (event.key === 'Escape') {
