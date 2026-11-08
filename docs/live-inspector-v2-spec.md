@@ -1,6 +1,6 @@
 # Live Inspector v2 — Product and Technical Specification
 
-**Status:** Phase A core reliability implementation in progress; Phase B–E remain planned.  
+**Status:** Phase A core implementation is on the feature branch; automated verification is pending. Phase B–E remain planned.  
 **Decision:** Both Advanced Inspector and Figma-like Quick Canvas.  
 **Source-code application:** Review required.
 
