@@ -192,6 +192,11 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
     if (geometryFrame || stopped) return;
     geometryFrame = view.requestAnimationFrame(() => {
       geometryFrame = 0;
+      if (!enabled) {
+        highlight.style.display = 'none';
+        tag.style.display = 'none';
+        return;
+      }
       const target = selected?.isConnected ? selected : highlighted;
       if (target?.isConnected) positionHighlight(target);
       else {
