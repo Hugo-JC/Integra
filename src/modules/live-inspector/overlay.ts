@@ -148,7 +148,9 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
   let selected: HTMLElement | SVGElement | null = null;
   let highlighted: Element | null = null;
   let selectionLocked = false;
+  let enabled = true;
   let stopped = false;
+  const previouslyFocused = doc.activeElement instanceof view.HTMLElement ? doc.activeElement : null;
   let geometryFrame = 0;
   let resizeObserver: ResizeObserver | null = null;
 
@@ -298,13 +300,13 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
   };
 
   const onPointerMove = (event: PointerEvent): void => {
-    if (stopped || selectionLocked || isInspectorEvent(event)) return;
+    if (stopped || !enabled || selectionLocked || isInspectorEvent(event)) return;
     const candidate = event.composedPath().find(isElement);
     if (candidate && isInspectable(candidate)) positionHighlight(candidate);
   };
 
   const onClick = (event: MouseEvent): void => {
-    if (stopped || selectionLocked || isInspectorEvent(event)) return;
+    if (stopped || !enabled || selectionLocked || isInspectorEvent(event)) return;
     const candidate = event.composedPath().find(isElement);
     if (!candidate || !isInspectable(candidate)) return;
     event.preventDefault();
@@ -331,6 +333,30 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
     }
   };
 
+  const onKeyDown = (event: KeyboardEvent): void => {
+    if (stopped) return;
+    const target = event.target;
+    if (target instanceof view.HTMLElement
+      && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))) return;
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      stop({ restore: true });
+      previouslyFocused?.isConnected && previouslyFocused.focus();
+      return;
+    }
+    if (event.altKey && event.shiftKey && event.key.toLowerCase() === 'i') {
+      event.preventDefault();
+      enabled = !enabled;
+      panel.hidden = !enabled || !selected;
+      if (!enabled) {
+        highlight.style.display = 'none';
+        tag.style.display = 'none';
+      } else if (selected) {
+        positionHighlight(selected);
+      }
+    }
+  };
+
   const onPanelClick = (event: Event): void => {
     const target = event.target;
     if (!(target instanceof view.Element)) return;
@@ -343,7 +369,10 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
     }
     if (action === 'unlock') {
       selected = null;
+      highlighted = null;
       selectionLocked = false;
+      resizeObserver?.disconnect();
+      resizeObserver?.observe(doc.documentElement);
       panel.hidden = true;
       highlight.style.display = 'none';
       tag.style.display = 'none';
@@ -381,6 +410,7 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
     stopped = true;
     doc.removeEventListener('pointermove', onPointerMove, true);
     doc.removeEventListener('click', onClick, true);
+    doc.removeEventListener('keydown', onKeyDown, true);
     doc.removeEventListener('scroll', scheduleGeometryUpdate, true);
     view.removeEventListener('resize', scheduleGeometryUpdate);
     view.visualViewport?.removeEventListener('resize', scheduleGeometryUpdate);
@@ -393,6 +423,7 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
       for (const [element, original] of originals) restoreElement(element, original);
     }
     host.remove();
+    if (previouslyFocused?.isConnected) previouslyFocused.focus();
   }
 
   resizeObserver = typeof ResizeObserver !== 'undefined'
@@ -404,6 +435,7 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
   shadow.addEventListener('click', onPanelClick);
   doc.addEventListener('pointermove', onPointerMove, true);
   doc.addEventListener('click', onClick, true);
+  doc.addEventListener('keydown', onKeyDown, true);
   doc.addEventListener('scroll', scheduleGeometryUpdate, true);
   view.addEventListener('resize', scheduleGeometryUpdate);
   view.visualViewport?.addEventListener('resize', scheduleGeometryUpdate);
