@@ -146,6 +146,7 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
 
   const originals = new Map<Element, OriginalElementState>();
   let selected: HTMLElement | SVGElement | null = null;
+  let highlighted: Element | null = null;
   let selectionLocked = false;
   let stopped = false;
   let geometryFrame = 0;
@@ -161,10 +162,13 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
 
   const positionHighlight = (element: Element): void => {
     if (!element.isConnected) {
+      highlighted = null;
       highlight.style.display = 'none';
       tag.style.display = 'none';
       return;
     }
+    highlighted = element;
+    resizeObserver?.observe(element);
     const rect = element.getBoundingClientRect();
     highlight.style.display = 'block';
     highlight.style.left = `${Math.max(0, rect.left)}px`;
@@ -181,8 +185,10 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
     if (geometryFrame || stopped) return;
     geometryFrame = view.requestAnimationFrame(() => {
       geometryFrame = 0;
-      if (selected?.isConnected) positionHighlight(selected);
+      const target = selected?.isConnected ? selected : highlighted;
+      if (target?.isConnected) positionHighlight(target);
       else {
+        highlighted = null;
         highlight.style.display = 'none';
         tag.style.display = 'none';
       }
