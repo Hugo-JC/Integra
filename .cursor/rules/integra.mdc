@@ -1,0 +1,6 @@
+---
+description: Integra design direction, implementation and QA protocol
+alwaysApply: true
+---
+
+Read `AGENTS.md` and load the most relevant `.agents/skills/*/SKILL.md` before UI work. Preserve the project's visual identity. Use semantic tokens, accessible native controls, visible focus, responsive layouts and complete interaction states. Do not copy references or force a universal palette. Use `npm run design:route -- "<brief>" --json` for contextual suggestions and `npm run design:qa -- src/ --json` for static checks. Treat weak routes, unknown contrast and unverified visual results explicitly. Live Inspector previews do not write source code.
