@@ -34,7 +34,9 @@ export function parseCssColor(input: string): RgbaColor | null {
     return raw.endsWith('%') ? Math.max(0, Math.min(255, n * 2.55)) : Math.max(0, Math.min(255, n));
   };
   const rgb = parts.slice(0, 3).map(channel);
-  const alpha = parts[3] === undefined ? 1 : Number.parseFloat(parts[3]);
+  const alphaToken = parts[3] ?? '1';
+  const alphaNumber = Number.parseFloat(alphaToken);
+  const alpha = alphaToken.endsWith('%') ? alphaNumber / 100 : alphaNumber;
   if (rgb.some((n) => n === null) || !Number.isFinite(alpha)) return null;
   return { red: rgb[0]!, green: rgb[1]!, blue: rgb[2]!, alpha: Math.max(0, Math.min(1, alpha)) };
 }
