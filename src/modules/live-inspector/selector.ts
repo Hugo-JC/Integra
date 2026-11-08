@@ -23,7 +23,7 @@ export function findUniqueSelector(element: Element, root: ParentNode = document
   let current: Element | null = element;
   while (current && current !== element.ownerDocument.documentElement) {
     const name = tagName(current);
-    const parent = current.parentElement;
+    const parent: Element | null = current.parentElement;
     if (!parent) {
       segments.unshift(name);
       break;
