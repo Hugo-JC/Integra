@@ -13,6 +13,7 @@ type PresetSource = {
   patternCues?: string[];
   verificationStatus?: string;
   lastVerifiedAt?: string | null;
+  verifiedPage?: string | null;
 };
 type Preset = {
   id: string;
@@ -53,9 +54,11 @@ for (const preset of presets.presets) {
     }
   }
   for (const source of preset.sources ?? []) {
+    const statusValid = ['catalog-only', 'verified'].includes(source.verificationStatus ?? '');
+    const catalogOnly = source.verificationStatus === 'catalog-only' && source.lastVerifiedAt === null;
+    const verified = source.verificationStatus === 'verified' && Boolean(source.lastVerifiedAt && source.verifiedPage);
     if (!source.referenceId || !/^https:\/\//i.test(source.url ?? '') ||
-        !source.patternCues?.length || source.verificationStatus !== 'catalog-only' ||
-        source.lastVerifiedAt !== null) {
+        !source.patternCues?.length || !statusValid || !(catalogOnly || verified)) {
       errors.push('Preset ' + preset.id + ' has incomplete or misleading reference metadata.');
     }
   }
@@ -67,8 +70,8 @@ const names = new Set<string>();
 for (const dir of dirs) {
   try {
     const body = readFileSync(join(skillsRoot, dir, 'SKILL.md'), 'utf8');
-    const name = body.match(/^name:\\s*(.+)$/m)?.[1]?.trim();
-    const desc = body.match(/^description:\\s*(.+)$/m)?.[1]?.trim();
+    const name = body.match(/^name:\s*(.+)$/m)?.[1]?.trim();
+    const desc = body.match(/^description:\s*(.+)$/m)?.[1]?.trim();
     if (!name || !desc || name !== dir || names.has(name)) errors.push('Invalid or duplicate skill: ' + dir);
     if (name) names.add(name);
   } catch {
@@ -86,7 +89,10 @@ if (sources.sources.length < 10 || new Set(sources.sources.map((source) => sourc
   errors.push('Reference catalog must have 10+ unique sources.');
 }
 for (const source of sources.sources) {
-  if (!/^https:\/\//i.test(source.url) || !['catalog-only', 'verified'].includes(source.verificationStatus ?? '') ||\n    (source.verificationStatus === 'catalog-only' && source.lastVerifiedAt !== null) ||\n    (source.verificationStatus === 'verified' && (!source.lastVerifiedAt || !source.verifiedPage))) {
+  const statusValid = ['catalog-only', 'verified'].includes(source.verificationStatus ?? '');
+  const catalogOnly = source.verificationStatus === 'catalog-only' && source.lastVerifiedAt === null;
+  const verified = source.verificationStatus === 'verified' && Boolean(source.lastVerifiedAt && source.verifiedPage);
+  if (!/^https:\/\//i.test(source.url) || !statusValid || !(catalogOnly || verified)) {
     errors.push('Reference ' + source.id + ' must be explicitly marked as a catalog lead until inspected.');
   }
 }
@@ -101,6 +107,7 @@ if (patterns.archetypes.length < 10 || new Set(patterns.archetypes.map((item) =>
 const rules = json<{
   evidencePolicy?: { defaultStatus: string; requireObservedEvidence: boolean; severityIsNotProof: boolean };
   severityDefinitions?: Record<string, string>;
+  findingContract?: string[];
   rules: Array<{ id: string; severity: string; requiredEvidence: string; status?: string }>;
 }>('rules/design-quality-rules.json');
 if (!rules.evidencePolicy || rules.evidencePolicy.defaultStatus !== 'candidate' ||
@@ -110,6 +117,7 @@ if (!rules.evidencePolicy || rules.evidencePolicy.defaultStatus !== 'candidate' 
 if (!rules.severityDefinitions || !['P0', 'P1', 'P2', 'P3'].every((key) => rules.severityDefinitions?.[key])) {
   errors.push('Quality rules need definitions for P0–P3 severity.');
 }
+if (!rules.findingContract?.length) errors.push('Quality rules need a structured finding contract.');
 if (rules.rules.length < 20 || new Set(rules.rules.map((rule) => rule.id)).size !== rules.rules.length ||
     rules.rules.some((rule) => !['P0', 'P1', 'P2', 'P3'].includes(rule.severity) ||
       !rule.requiredEvidence || rule.status !== 'heuristic')) {
