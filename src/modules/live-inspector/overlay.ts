@@ -19,11 +19,6 @@ function isElement(value: EventTarget | null): value is Element {
   return Boolean(value && (value as Node).nodeType === 1);
 }
 
-function hasTransparentBackground(value: string): boolean {
-  const color = parseCssColor(value);
-  return !color || color.alpha < 0.999;
-}
-
 function computedValue(element: Element, property: string, doc: Document): string {
   return doc.defaultView?.getComputedStyle(element).getPropertyValue(property).trim() ?? '';
 }
