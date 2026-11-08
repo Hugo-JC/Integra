@@ -1,12 +1,159 @@
 {
-  "id":"editorial-portfolio","name":"Editorial, Publishing & Portfolio","version":"1.0.0",
-  "productContexts":["blogs","magazines","documentation","writer portfolios","photography portfolios","publishing"],
-  "designIntent":{"primaryGoal":"Make long-form content and authored work memorable, readable and easy to navigate.","audienceNeeds":["reading comfort","strong content hierarchy","author identity","discoverable archive"],"personalityAxes":["expressive","considered","editorial"],"visualThesis":"Typography, imagery and composition establish the voice; interface controls stay quiet."},
-  "visualDirection":{"density":"low for featured storytelling; medium for archives and indexes","surfaces":"minimal framing, selective rules and whitespace","colorIntent":"restrained palette with strong foreground/background pairing; links remain identifiable","typography":"display face may contrast with body face; prioritize long-form readability and language glyph support","motion":"subtle transitions; avoid slowing reading or navigation"},
-  "layout":{"pattern":"editorial masthead + featured content + archive/list; portfolio may use a curated project index","spacing":"comfortable line length and vertical rhythm","responsive":"preserve reading measure and image crop intent across widths","contentPriority":["title","author/work identity","content or image","context","related work"]},
-  "components":{"preferred":["article header","table of contents","figure/caption","project feature","archive filter","pagination"],"states":["draft","published","archived","no search results"],"avoid":["decorative UI competing with the content","small gray body text","inconsistent image crops"]},
-  "accessibility":{"minimumTextContrast":"WCAG 2.2 AA","keyboard":"navigation and archive filters remain keyboard accessible","focus":"clear link and control focus","reducedMotion":"avoid parallax or animated text that disrupts reading"},
-  "antiPatterns":["headline as the only accessible label","overly narrow body columns","image-only navigation","unexplained decorative scroll effects"],
-  "references":["apple-hig","govuk-design-system","impeccable","mdn-accessibility"],
-  "notes":["A portfolio should show the author's actual work and role. Never invent projects or outcomes."]
+  "id": "editorial-portfolio",
+  "name": "Editorial, Publishing & Portfolio",
+  "version": "1.1.0",
+  "productContexts": [
+    "blogs",
+    "magazines",
+    "documentation",
+    "writer portfolios",
+    "photography portfolios",
+    "publishing"
+  ],
+  "designIntent": {
+    "primaryGoal": "Make long-form content and authored work memorable, readable and easy to navigate.",
+    "audienceNeeds": [
+      "reading comfort",
+      "strong content hierarchy",
+      "author identity",
+      "discoverable archive"
+    ],
+    "personalityAxes": [
+      "expressive",
+      "considered",
+      "editorial"
+    ],
+    "visualThesis": "Typography, imagery and composition establish the voice; interface controls stay quiet."
+  },
+  "visualDirection": {
+    "density": "low for featured storytelling; medium for archives and indexes",
+    "surfaces": "minimal framing, selective rules and whitespace",
+    "colorIntent": "restrained palette with strong foreground/background pairing; links remain identifiable",
+    "typography": "display face may contrast with body face; prioritize long-form readability and language glyph support",
+    "motion": "subtle transitions; avoid slowing reading or navigation"
+  },
+  "layout": {
+    "pattern": "editorial masthead + featured content + archive/list; portfolio may use a curated project index",
+    "spacing": "comfortable line length and vertical rhythm",
+    "responsive": "preserve reading measure and image crop intent across widths",
+    "contentPriority": [
+      "title",
+      "author/work identity",
+      "content or image",
+      "context",
+      "related work"
+    ]
+  },
+  "components": {
+    "preferred": [
+      "article header",
+      "table of contents",
+      "figure/caption",
+      "project feature",
+      "archive filter",
+      "pagination"
+    ],
+    "states": [
+      "draft",
+      "published",
+      "archived",
+      "no search results"
+    ],
+    "avoid": [
+      "decorative UI competing with the content",
+      "small gray body text",
+      "inconsistent image crops"
+    ]
+  },
+  "accessibility": {
+    "minimumTextContrast": "WCAG 2.2 AA",
+    "keyboard": "navigation and archive filters remain keyboard accessible",
+    "focus": "clear link and control focus",
+    "reducedMotion": "avoid parallax or animated text that disrupts reading"
+  },
+  "antiPatterns": [
+    "headline as the only accessible label",
+    "overly narrow body columns",
+    "image-only navigation",
+    "unexplained decorative scroll effects"
+  ],
+  "references": [
+    "apple-hig",
+    "govuk-design-system",
+    "impeccable",
+    "mdn-accessibility"
+  ],
+  "notes": [
+    "A portfolio should show the author's actual work and role. Never invent projects or outcomes."
+  ],
+  "aiGuidance": {
+    "primaryFlow": "Discover a story or body of work → understand authorship and context → read or inspect → explore related work.",
+    "prioritize": [
+      "The authored work itself and its context",
+      "Typography and content hierarchy suited to the reading task",
+      "Author, date, role, credits and related material when known"
+    ],
+    "confirmOrMarkUnknown": [
+      "Authorship, publication date, project role and image rights",
+      "Whether portfolio claims and outcomes are substantiated",
+      "Language, reading direction and long-form requirements"
+    ],
+    "avoidByDefault": [
+      "Huge hero copy displacing the work",
+      "Invented client logos, awards, outcomes or bylines",
+      "Parallax that interrupts reading"
+    ],
+    "acceptanceChecks": [
+      "Body text remains comfortable at narrow and wide widths",
+      "Authorship and metadata are clear",
+      "Images have contextual alternatives or appropriate decorative treatment"
+    ]
+  },
+  "compositionEscapes": [
+    {
+      "id": "index-led-publication",
+      "when": "Readers need to browse many stories, projects or archive entries.",
+      "composition": "Make a typographic index, category list or carefully ordered archive primary; feature one selected item only when editorial priority is real.",
+      "contentRequirements": [
+        "Real titles, categories, authors or dates",
+        "Consistent ordering and filtering rules",
+        "Clear link destinations"
+      ],
+      "avoid": [
+        "Generic hero plus identical card grid",
+        "Invented publication frequency",
+        "Thumbnails as the only labels"
+      ]
+    },
+    {
+      "id": "reading-led-feature",
+      "when": "One article, essay or long-form story is the primary task.",
+      "composition": "Use a focused title/byline/metadata block followed by a readable column, placing figures, contents and related stories where they support comprehension.",
+      "contentRequirements": [
+        "Authentic content and byline",
+        "Figure captions and sources where needed",
+        "Meaningful heading structure"
+      ],
+      "avoid": [
+        "Too many side panels beside text",
+        "Tiny low-contrast body text",
+        "Animated text that reduces readability"
+      ]
+    },
+    {
+      "id": "work-led-portfolio",
+      "when": "The goal is to evaluate a creator's actual projects, skills and contribution.",
+      "composition": "Use a curated work index leading into case studies; explain each brief, individual role, constraints, decisions and verifiable result.",
+      "contentRequirements": [
+        "Real projects and accurate role attribution",
+        "Artifacts or screenshots with permission",
+        "Outcomes separated from estimates"
+      ],
+      "avoid": [
+        "Fictional clients or fabricated metrics",
+        "Project cards with no work context",
+        "Attributing team results to one person"
+      ]
+    }
+  ]
 }

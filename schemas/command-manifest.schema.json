@@ -4,54 +4,320 @@
   "title": "Integra Command Manifest",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schemaVersion", "name", "description", "invocation", "executionPolicy", "commands"],
+  "required": [
+    "schemaVersion",
+    "name",
+    "description",
+    "invocation",
+    "routingPolicy",
+    "executionPolicy",
+    "commands"
+  ],
   "properties": {
-    "schemaVersion": { "const": "1.0.0" },
-    "name": { "type": "string", "minLength": 1 },
-    "description": { "type": "string", "minLength": 20 },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "name": {
+      "const": "Integra Command System"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 24
+    },
     "invocation": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["orchestrator", "namespace", "bareAliases"],
+      "required": [
+        "orchestrator",
+        "namespace",
+        "bareAliases"
+      ],
       "properties": {
-        "orchestrator": { "const": "/integra" },
-        "namespace": { "const": "/integra:" },
-        "bareAliases": { "enum": ["optional-host-adapter-only"] }
+        "orchestrator": {
+          "const": "/integra"
+        },
+        "namespace": {
+          "const": "/integra:"
+        },
+        "bareAliases": {
+          "const": "optional-host-adapter-only"
+        }
+      }
+    },
+    "routingPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "precedence",
+        "broadOrAmbiguousRequests",
+        "focusedRequests",
+        "modifierBehavior",
+        "missingModifierContext",
+        "unknownRequests"
+      ],
+      "properties": {
+        "precedence": {
+          "type": "array",
+          "minItems": 5,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "broadOrAmbiguousRequests": {
+          "const": "orchestrator"
+        },
+        "focusedRequests": {
+          "const": "unique-longest-whole-phrase-trigger"
+        },
+        "modifierBehavior": {
+          "const": "attach-to-active-workflow-without-replacing-its-context"
+        },
+        "missingModifierContext": {
+          "const": "orchestrator-and-ask-one-focused-question"
+        },
+        "unknownRequests": {
+          "const": "orchestrator"
+        }
       }
     },
     "executionPolicy": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["defaultMode", "sourceMutation", "previewMutation", "approvalScope", "neverInferApprovalFrom"],
+      "required": [
+        "defaultMode",
+        "sourceMutation",
+        "previewMutation",
+        "approvalScope",
+        "neverInferApprovalFrom",
+        "blockedActionsBeforeApproval"
+      ],
       "properties": {
-        "defaultMode": { "const": "review" },
-        "sourceMutation": { "const": "approval-required" },
-        "previewMutation": { "const": "temporary-dom-only" },
-        "approvalScope": { "const": "exact-proposed-diff" },
+        "defaultMode": {
+          "const": "review"
+        },
+        "sourceMutation": {
+          "const": "approval-required"
+        },
+        "previewMutation": {
+          "const": "temporary-dom-only"
+        },
+        "approvalScope": {
+          "const": "exact-proposed-diff"
+        },
         "neverInferApprovalFrom": {
           "type": "array",
           "minItems": 4,
           "uniqueItems": true,
-          "items": { "enum": ["command invocation", "preview acceptance", "generated patch", "test success"] }
+          "items": {
+            "enum": [
+              "command invocation",
+              "preview acceptance",
+              "generated patch",
+              "test success"
+            ]
+          }
+        },
+        "blockedActionsBeforeApproval": {
+          "type": "array",
+          "minItems": 6,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "write-source-files",
+              "apply-source-diff",
+              "commit",
+              "push",
+              "open-pull-request",
+              "merge"
+            ]
+          }
         }
       }
     },
     "commands": {
       "type": "array",
-      "minItems": 1,
+      "minItems": 3,
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["id", "kind", "invocation", "description", "skills", "outputs"],
+        "required": [
+          "id",
+          "kind",
+          "invocation",
+          "description",
+          "whenToUse",
+          "notFor",
+          "triggers",
+          "inputs",
+          "skills",
+          "outputs"
+        ],
         "properties": {
-          "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
-          "kind": { "enum": ["orchestrator", "workflow", "modifier"] },
-          "invocation": { "type": "string", "pattern": "^/integra(?::[a-z][a-z0-9-]*)?$" },
-          "description": { "type": "string", "minLength": 30 },
-          "skills": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" } },
-          "outputs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" } },
-          "sourceMutation": { "enum": ["approval-required", "never"] }
-        }
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*$"
+          },
+          "kind": {
+            "enum": [
+              "orchestrator",
+              "workflow",
+              "modifier"
+            ]
+          },
+          "invocation": {
+            "type": "string",
+            "pattern": "^/integra(?::[a-z][a-z0-9-]*)?$"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 35
+          },
+          "whenToUse": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 20
+            }
+          },
+          "notFor": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 15
+            }
+          },
+          "triggers": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 3
+            }
+          },
+          "inputs": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 10
+            }
+          },
+          "skills": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            }
+          },
+          "outputs": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9-]*$"
+            }
+          },
+          "sourceMutation": {
+            "enum": [
+              "approval-required",
+              "never"
+            ]
+          },
+          "requiresActiveContext": {
+            "type": "boolean"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "orchestrator"
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "properties": {
+                "id": {
+                  "const": "integra"
+                },
+                "invocation": {
+                  "const": "/integra"
+                },
+                "skills": {
+                  "maxItems": 0
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "workflow"
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "required": [
+                "kind"
+              ],
+              "properties": {
+                "invocation": {
+                  "pattern": "^/integra:[a-z][a-z0-9-]*$"
+                },
+                "skills": {
+                  "minItems": 1
+                },
+                "requiresActiveContext": {
+                  "not": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "modifier"
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "required": [
+                "requiresActiveContext"
+              ],
+              "properties": {
+                "invocation": {
+                  "pattern": "^/integra:[a-z][a-z0-9-]*$"
+                },
+                "skills": {
+                  "minItems": 1
+                },
+                "requiresActiveContext": {
+                  "const": true
+                }
+              }
+            }
+          }
+        ]
       }
     }
   }

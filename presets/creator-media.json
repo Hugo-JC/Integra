@@ -1,12 +1,160 @@
 {
-  "id":"creator-media","name":"Creator, Audio & Media Products","version":"1.0.0",
-  "productContexts":["music discovery","podcasts","video creators","streaming interfaces","media libraries"],
-  "designIntent":{"primaryGoal":"Make discovery, playback and library management immediate and understandable.","audienceNeeds":["fast browsing","persistent playback state","clear metadata","accessible media controls"],"personalityAxes":["expressive","immersive","responsive"],"visualThesis":"Media content supplies the emotional identity; controls remain precise and persistent."},
-  "visualDirection":{"density":"medium; dense libraries need compact, scannable rows","surfaces":"content artwork may dominate; player and navigation remain stable","colorIntent":"artwork-led accent can be used carefully, but control labels and playback states need reliable contrast","typography":"metadata hierarchy separates title, creator, album/show and duration","motion":"playback transitions and progress feedback; avoid motion that hides controls"},
-  "layout":{"pattern":"navigation + discovery/library surface + persistent player or media controls","spacing":"balanced cards for discovery and compact rows for large libraries","responsive":"player controls adapt without hiding primary actions or current item","contentPriority":["current media","play/pause and seek","title/creator","queue/library","discovery"]},
-  "components":{"preferred":["media row","artwork card","persistent player","queue drawer","search","library filters"],"states":["playing","paused","buffering","unavailable","offline","empty library"],"avoid":["controls with no accessible names","tiny progress handles","unreadable metadata over artwork"]},
-  "accessibility":{"minimumTextContrast":"WCAG 2.2 AA","keyboard":"media controls, queue and navigation must be keyboard accessible","focus":"playback state is announced and visibly represented","reducedMotion":"animated artwork is optional and can be disabled"},
-  "antiPatterns":["auto-play without clear user intent","artwork color used as the only status cue","unlabeled icon buttons","player controls that shift layout constantly"],
-  "references":["apple-hig","material-3","radix-primitives","impeccable"],
-  "notes":["Do not assume a provider has playback rights or capabilities that its API does not document."]
+  "id": "creator-media",
+  "name": "Creator, Audio & Media Products",
+  "version": "1.1.0",
+  "productContexts": [
+    "music discovery",
+    "podcasts",
+    "video creators",
+    "streaming interfaces",
+    "media libraries"
+  ],
+  "designIntent": {
+    "primaryGoal": "Make discovery, playback and library management immediate and understandable.",
+    "audienceNeeds": [
+      "fast browsing",
+      "persistent playback state",
+      "clear metadata",
+      "accessible media controls"
+    ],
+    "personalityAxes": [
+      "expressive",
+      "immersive",
+      "responsive"
+    ],
+    "visualThesis": "Media content supplies the emotional identity; controls remain precise and persistent."
+  },
+  "visualDirection": {
+    "density": "medium; dense libraries need compact, scannable rows",
+    "surfaces": "content artwork may dominate; player and navigation remain stable",
+    "colorIntent": "artwork-led accent can be used carefully, but control labels and playback states need reliable contrast",
+    "typography": "metadata hierarchy separates title, creator, album/show and duration",
+    "motion": "playback transitions and progress feedback; avoid motion that hides controls"
+  },
+  "layout": {
+    "pattern": "navigation + discovery/library surface + persistent player or media controls",
+    "spacing": "balanced cards for discovery and compact rows for large libraries",
+    "responsive": "player controls adapt without hiding primary actions or current item",
+    "contentPriority": [
+      "current media",
+      "play/pause and seek",
+      "title/creator",
+      "queue/library",
+      "discovery"
+    ]
+  },
+  "components": {
+    "preferred": [
+      "media row",
+      "artwork card",
+      "persistent player",
+      "queue drawer",
+      "search",
+      "library filters"
+    ],
+    "states": [
+      "playing",
+      "paused",
+      "buffering",
+      "unavailable",
+      "offline",
+      "empty library"
+    ],
+    "avoid": [
+      "controls with no accessible names",
+      "tiny progress handles",
+      "unreadable metadata over artwork"
+    ]
+  },
+  "accessibility": {
+    "minimumTextContrast": "WCAG 2.2 AA",
+    "keyboard": "media controls, queue and navigation must be keyboard accessible",
+    "focus": "playback state is announced and visibly represented",
+    "reducedMotion": "animated artwork is optional and can be disabled"
+  },
+  "antiPatterns": [
+    "auto-play without clear user intent",
+    "artwork color used as the only status cue",
+    "unlabeled icon buttons",
+    "player controls that shift layout constantly"
+  ],
+  "references": [
+    "apple-hig",
+    "material-3",
+    "radix-primitives",
+    "impeccable"
+  ],
+  "notes": [
+    "Do not assume a provider has playback rights or capabilities that its API does not document."
+  ],
+  "aiGuidance": {
+    "primaryFlow": "Discover content → inspect creator and metadata → play or preview → manage queue/library → resume listening or viewing.",
+    "prioritize": [
+      "The current media item and its true playback state",
+      "Accessible play, pause, seek, volume and queue controls",
+      "Library identity, creator, source and availability"
+    ],
+    "confirmOrMarkUnknown": [
+      "Provider capabilities, rights and playback availability",
+      "Whether media is local, streamed, preview-only or unavailable",
+      "Autoplay, recommendation and personal-data behavior"
+    ],
+    "avoidByDefault": [
+      "Autoplay without clear user action",
+      "Fake playback progress or unavailable tracks shown as playable",
+      "Artwork making controls or metadata unreadable"
+    ],
+    "acceptanceChecks": [
+      "Playback controls have accessible names and stable focus",
+      "Playing, paused, buffering and unavailable states are distinct",
+      "The current item and queue persist where expected"
+    ]
+  },
+  "compositionEscapes": [
+    {
+      "id": "player-first",
+      "when": "Playback or viewing is the main reason to use the product.",
+      "composition": "Give the current media and essential controls priority; keep queue, metadata and source information accessible without displacing playback.",
+      "contentRequirements": [
+        "A real playable source or clearly labelled preview",
+        "Current item, creator and playback state",
+        "Accessible seek and queue controls"
+      ],
+      "avoid": [
+        "Fake waveforms or progress",
+        "Autoplay without consent",
+        "Controls hidden behind artwork"
+      ]
+    },
+    {
+      "id": "library-first",
+      "when": "Users primarily search, organize, filter or resume a large personal media collection.",
+      "composition": "Use a searchable library with compact media rows and selected-item context; expose the player as a persistent but non-obstructive surface.",
+      "contentRequirements": [
+        "Actual library items and source metadata",
+        "Clear empty, unavailable and offline states",
+        "Sorting and filter behavior"
+      ],
+      "avoid": [
+        "Oversized artwork card for every item",
+        "Assuming every catalog entry is playable",
+        "Unlabelled icon-only actions"
+      ]
+    },
+    {
+      "id": "live-event",
+      "when": "The experience centers on a scheduled stream, premiere, episode or live broadcast.",
+      "composition": "Lead with event/player state, schedule and participation controls; place replay and related content after the live task.",
+      "contentRequirements": [
+        "Verified schedule with timezone",
+        "Actual live, offline or ended state",
+        "Clear replay and notification behavior"
+      ],
+      "avoid": [
+        "Invented viewer counts",
+        "Fake live indicators",
+        "Countdowns without a confirmed time"
+      ]
+    }
+  ]
 }

@@ -1,6 +1,6 @@
 # Integra Command System — Specification
 
-**Status:** Approved design; implementation starts in small, testable slices.  
+**Status:** Command System Phase 1 core implemented on the feature branch; host adapters and command execution remain future work.  
 **Decision:** Hybrid command interface.  
 **Default execution mode:** Review before source mutation.
 
@@ -49,7 +49,7 @@ Every manifest entry defines:
 - Expected output artifact types.
 - Source-mutation policy.
 
-The next implementation slice should add a JSON Schema for this manifest, a TypeScript loader/validator, duplicate-ID and missing-skill checks, and fixtures. Do not build a shell parser or pretend every host supports native slash commands.
+The manifest, JSON Schema and TypeScript validator are now part of the command contract. Phase 1 adds explicit and natural-language request routing, ambiguity handling, modifier inheritance, routing fixtures and a review-only execution plan. This remains a pure routing core: it is not a shell parser, agent executor or proof that every host exposes native slash commands.
 
 ## 4. Routing rules
 
@@ -113,3 +113,8 @@ Do not convert `not_run` or `inconclusive` into `passed`.
 - A dry run produces a plan without modifying source files.
 - A source-writing workflow stops at review until explicit approval.
 - Existing `commands/vocabulary.json` consumers remain compatible during migration.
+
+
+## Phase 1 implementation boundary
+
+The core resolves an invocation or prepares a route and review plan. It does not invoke agents, execute commands, mutate application source or perform host-specific command registration. A host adapter may translate the canonical manifest later, but must preserve the same routing and approval semantics.

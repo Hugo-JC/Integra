@@ -1,12 +1,159 @@
 {
-  "id":"public-service","name":"Public Service & Institutional","version":"1.0.0",
-  "productContexts":["government services","municipal portals","nonprofit services","institutional forms","public information"],
-  "designIntent":{"primaryGoal":"Help people complete important tasks correctly, confidently and with minimal ambiguity.","audienceNeeds":["plain language","predictable flows","transparent requirements","recoverable errors"],"personalityAxes":["clear","trustworthy","inclusive"],"visualThesis":"Clarity, predictable behavior and plain language are the visual identity."},
-  "visualDirection":{"density":"low-to-medium on task pages; information-rich pages use clear section hierarchy","surfaces":"minimal decoration, strong section boundaries and explicit progress","colorIntent":"high contrast, stable link styling and distinct but redundant feedback states","typography":"legible system fonts where appropriate; prioritize reading ease and language coverage","motion":"minimal; never obstruct forms or status feedback"},
-  "layout":{"pattern":"service landing page + task steps + clear form or confirmation state","spacing":"consistent, generous around questions and form controls","responsive":"single-column content with no loss of legal or eligibility information","contentPriority":["what the service does","who can use it","what is needed","action","confirmation/next step"]},
-  "components":{"preferred":["stepper","form field","error summary","hint text","confirmation panel","service navigation"],"states":["not eligible","incomplete","validation error","submitted","needs follow-up"],"avoid":["marketing language in critical instructions","hidden eligibility rules","ambiguous date and number formats"]},
-  "accessibility":{"minimumTextContrast":"WCAG 2.2 AA","keyboard":"complete task without pointer","focus":"visible and predictable focus, with error summary focus management","reducedMotion":"no essential progress depends on transition or animation"},
-  "antiPatterns":["unclear form errors","unexplained acronyms","primary action hidden below unrelated content","color-only validation"],
-  "references":["govuk-design-system","wcag-22","wai-aria-apg","mdn-accessibility"],
-  "notes":["Prefer tested plain language and direct task flows over decorative institutional branding."]
+  "id": "public-service",
+  "name": "Public Service & Institutional",
+  "version": "1.1.0",
+  "productContexts": [
+    "government services",
+    "municipal portals",
+    "nonprofit services",
+    "institutional forms",
+    "public information"
+  ],
+  "designIntent": {
+    "primaryGoal": "Help people complete important tasks correctly, confidently and with minimal ambiguity.",
+    "audienceNeeds": [
+      "plain language",
+      "predictable flows",
+      "transparent requirements",
+      "recoverable errors"
+    ],
+    "personalityAxes": [
+      "clear",
+      "trustworthy",
+      "inclusive"
+    ],
+    "visualThesis": "Clarity, predictable behavior and plain language are the visual identity."
+  },
+  "visualDirection": {
+    "density": "low-to-medium on task pages; information-rich pages use clear section hierarchy",
+    "surfaces": "minimal decoration, strong section boundaries and explicit progress",
+    "colorIntent": "high contrast, stable link styling and distinct but redundant feedback states",
+    "typography": "legible system fonts where appropriate; prioritize reading ease and language coverage",
+    "motion": "minimal; never obstruct forms or status feedback"
+  },
+  "layout": {
+    "pattern": "service landing page + task steps + clear form or confirmation state",
+    "spacing": "consistent, generous around questions and form controls",
+    "responsive": "single-column content with no loss of legal or eligibility information",
+    "contentPriority": [
+      "what the service does",
+      "who can use it",
+      "what is needed",
+      "action",
+      "confirmation/next step"
+    ]
+  },
+  "components": {
+    "preferred": [
+      "stepper",
+      "form field",
+      "error summary",
+      "hint text",
+      "confirmation panel",
+      "service navigation"
+    ],
+    "states": [
+      "not eligible",
+      "incomplete",
+      "validation error",
+      "submitted",
+      "needs follow-up"
+    ],
+    "avoid": [
+      "marketing language in critical instructions",
+      "hidden eligibility rules",
+      "ambiguous date and number formats"
+    ]
+  },
+  "accessibility": {
+    "minimumTextContrast": "WCAG 2.2 AA",
+    "keyboard": "complete task without pointer",
+    "focus": "visible and predictable focus, with error summary focus management",
+    "reducedMotion": "no essential progress depends on transition or animation"
+  },
+  "antiPatterns": [
+    "unclear form errors",
+    "unexplained acronyms",
+    "primary action hidden below unrelated content",
+    "color-only validation"
+  ],
+  "references": [
+    "govuk-design-system",
+    "wcag-22",
+    "wai-aria-apg",
+    "mdn-accessibility"
+  ],
+  "notes": [
+    "Prefer tested plain language and direct task flows over decorative institutional branding."
+  ],
+  "aiGuidance": {
+    "primaryFlow": "Understand the service → check eligibility and requirements → complete the task → review → submit → track outcome.",
+    "prioritize": [
+      "What the service does and who can use it",
+      "Required documents, eligibility and steps before commitment",
+      "Plain-language instructions, error recovery and confirmation"
+    ],
+    "confirmOrMarkUnknown": [
+      "Current requirements and responsible authority",
+      "Accepted documents, fees, deadlines and eligibility criteria",
+      "Whether submission and status data are live or illustrative"
+    ],
+    "avoidByDefault": [
+      "Invented legal claims or eligibility decisions",
+      "Marketing copy in critical service instructions",
+      "Hidden requirements or ambiguous confirmation"
+    ],
+    "acceptanceChecks": [
+      "People can understand eligibility before starting",
+      "Form errors are specific, associated with fields and recoverable",
+      "A review step shows exactly what will be submitted"
+    ]
+  },
+  "compositionEscapes": [
+    {
+      "id": "task-first-service",
+      "when": "People need to find and understand one public or institutional service.",
+      "composition": "Start with the task name and plain-language summary, then order eligibility, requirements, time/cost and the start action by user need.",
+      "contentRequirements": [
+        "Accurate service description and authority",
+        "Verified eligibility and required documents",
+        "Contact/help path for exceptions"
+      ],
+      "avoid": [
+        "Campaign-style hero before service facts",
+        "Unexplained acronyms",
+        "Invented time or cost estimates"
+      ]
+    },
+    {
+      "id": "guided-application",
+      "when": "The central task is completing a multi-step application, declaration or request.",
+      "composition": "Use one coherent step at a time with clear progress, field instructions, an error summary and a final review before submission.",
+      "contentRequirements": [
+        "Actual field definitions and validation rules",
+        "Save/recovery behavior and privacy explanation",
+        "Review and confirmation states"
+      ],
+      "avoid": [
+        "Long undifferentiated form",
+        "Unexplained data collection",
+        "Claiming a submission that did not occur"
+      ]
+    },
+    {
+      "id": "status-tracker",
+      "when": "People need to understand what happened after submission and what they must do next.",
+      "composition": "Present the current verified status and timestamp first, then chronological history, requested actions and contact/appeal route.",
+      "contentRequirements": [
+        "Status definitions from the responsible service",
+        "Accurate timestamp and reference number when relevant",
+        "Action owner and next-step instructions"
+      ],
+      "avoid": [
+        "Fake progress percentages",
+        "Status colors without text",
+        "Completion promises without evidence"
+      ]
+    }
+  ]
 }

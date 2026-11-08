@@ -1,41 +1,56 @@
-import { readFileSync, readdirSync } from 'node:fs';
-import { join } from 'node:path';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { relative, resolve, sep } from 'node:path';
+import Ajv2020 from 'ajv/dist/2020.js';
 
-interface PresetManifest {
+const root = process.cwd();
+const presetRoot = resolve(root, 'presets');
+const errors: string[] = [];
+const readJson = (path: string): unknown => JSON.parse(readFileSync(path, 'utf8'));
+const ajv = new Ajv2020({ allErrors: true, strict: true });
+const presetValidator = ajv.compile(readJson(resolve(root, 'schemas/design-preset.schema.json')));
+const referenceValidator = ajv.compile(readJson(resolve(root, 'schemas/reference-catalog.schema.json')));
+
+const presetManifest = readJson(resolve(presetRoot, 'manifest.json')) as {
   version: string;
   presets: Array<{ id: string; path: string }>;
+};
+const referenceCatalog = readJson(resolve(root, 'references/catalog.json')) as { references: Array<{ id: string }> };
+if (!referenceValidator(referenceCatalog)) {
+  errors.push(...(referenceValidator.errors ?? []).map((item) => 'references/catalog.json: ' + item.instancePath + ' ' + item.message));
 }
+const referenceIds = new Set(referenceCatalog.references.map((item) => item.id));
+const presetIds = new Set<string>();
+const registeredPaths = new Set<string>();
 
-const root = join(process.cwd(), 'presets');
-const manifest = JSON.parse(readFileSync(join(root, 'manifest.json'), 'utf8')) as PresetManifest;
-const errors: string[] = [];
-const ids = new Set<string>();
-
-for (const entry of manifest.presets) {
-  if (ids.has(entry.id)) errors.push(`Duplicate preset id: ${entry.id}`);
-  ids.add(entry.id);
+for (const entry of presetManifest.presets) {
+  if (presetIds.has(entry.id)) errors.push('Duplicate preset id: ' + entry.id);
+  presetIds.add(entry.id);
+  const file = resolve(presetRoot, entry.path);
+  const relativePath = relative(presetRoot, file);
+  if (!entry.path.endsWith('.json') || relativePath.startsWith('..' + sep) || relativePath === '..') {
+    errors.push(entry.id + ': unsafe preset path ' + entry.path);
+    continue;
+  }
+  registeredPaths.add(entry.path);
+  if (!existsSync(file)) { errors.push(entry.id + ': missing preset file ' + entry.path); continue; }
   try {
-    const preset = JSON.parse(readFileSync(join(root, entry.path), 'utf8')) as Record<string, unknown>;
-    if (preset.id !== entry.id) errors.push(`${entry.id}: file id does not match manifest`);
-    for (const key of ['name', 'version', 'productContexts', 'designIntent', 'visualDirection', 'layout', 'components', 'accessibility', 'antiPatterns', 'references']) {
-      if (!(key in preset)) errors.push(`${entry.id}: missing required property "${key}"`);
-    }
-    if (!Array.isArray(preset.productContexts) || preset.productContexts.length === 0) errors.push(`${entry.id}: productContexts must be a non-empty array`);
-  } catch {
-    errors.push(`${entry.id}: cannot read preset file "${entry.path}"`);
+    const preset = readJson(file) as { id: string; references?: string[]; compositionEscapes?: Array<{ id: string }> };
+    if (preset.id !== entry.id) errors.push(entry.id + ': file id does not match manifest');
+    if (!presetValidator(preset)) errors.push(...(presetValidator.errors ?? []).map((item) => entry.id + ': ' + item.instancePath + ' ' + item.message));
+    for (const reference of preset.references ?? []) if (!referenceIds.has(reference)) errors.push(entry.id + ': unknown reference id "' + reference + '"');
+    const escapeIds = (preset.compositionEscapes ?? []).map((item) => item.id);
+    if (new Set(escapeIds).size !== escapeIds.length) errors.push(entry.id + ': composition escape IDs must be unique');
+  } catch (error) {
+    errors.push(entry.id + ': invalid JSON or unreadable preset (' + String(error) + ')');
   }
 }
-
-const files = readdirSync(root);
-for (const file of files) {
-  if (file.endsWith('.json') && file !== 'manifest.json' && !manifest.presets.some((entry) => entry.path === file)) {
-    errors.push(`Unregistered preset file: ${file}`);
-  }
+const allowedSharedFiles = new Set(['manifest.json','catalog.json','design-styles-v3.json','ai-design-engine-v3.json','experience-patterns.json']);
+for (const file of readdirSync(presetRoot)) {
+  if (file.endsWith('.json') && !registeredPaths.has(file) && !allowedSharedFiles.has(file)) errors.push('Unregistered preset file: ' + file);
 }
-
 if (errors.length) {
   console.error('Preset validation failed:\n- ' + errors.join('\n- '));
   process.exitCode = 1;
 } else {
-  console.log(`Validated ${manifest.presets.length} design presets (manifest v${manifest.version}).`);
+  console.log('Validated ' + presetIds.size + ' contextual product profiles, ' + referenceIds.size + ' reference IDs and reference schema.');
 }

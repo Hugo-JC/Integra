@@ -1,21 +1,379 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "policy": "Use references to extract principles and compare interaction patterns. Do not copy source code, assets, copywriting or complete compositions.",
   "references": [
-    {"id":"impeccable","name":"Impeccable","url":"https://github.com/pbakaus/impeccable","category":"agent-design-workflows","useFor":["design command vocabulary","anti-pattern detection","iterative critique","live design iteration"],"adaptation":"Use specialized design intents and deterministic review; keep Integra contracts and evidence explicit.","licenseNote":"Review upstream license and notices before reusing code. This catalog links and documents concepts only."},
-    {"id":"rea","name":"REA — Reverse Engineer Anything","url":"https://github.com/morluto/rea","category":"evidence-investigation","useFor":["evidence-first investigation","adapter boundaries","traceable findings","known limitations"],"adaptation":"Apply the method to permitted UI behavior and references; binary analysis is out of scope.","licenseNote":"Link to upstream documentation; do not copy unrelated implementation."},
-    {"id":"agent-skills-spec","name":"Agent Skills specification","url":"https://github.com/agentskills/agentskills/blob/main/docs/specification.mdx","category":"agent-interoperability","useFor":["portable skills","progressive disclosure","skill validation"],"adaptation":"Canonical skill files live in .agents/skills/."},
-    {"id":"wcag-22","name":"WCAG 2.2","url":"https://www.w3.org/TR/WCAG22/","category":"accessibility-standard","useFor":["contrast","keyboard access","focus appearance","target size"],"adaptation":"Use normative criteria and exceptions; do not claim full-page conformance from partial checks."},
-    {"id":"wai-aria-apg","name":"WAI-ARIA Authoring Practices Guide","url":"https://www.w3.org/WAI/ARIA/apg/","category":"interaction-patterns","useFor":["keyboard behavior","composite widgets","roles and states"],"adaptation":"Prefer native HTML first; use ARIA patterns only when custom widgets are necessary."},
-    {"id":"material-3","name":"Material Design 3","url":"https://m3.material.io/","category":"design-system","useFor":["semantic tokens","adaptive layout","motion","component states"],"adaptation":"Study token and state modeling; do not apply its visual language to every product."},
-    {"id":"apple-hig","name":"Apple Human Interface Guidelines","url":"https://developer.apple.com/design/human-interface-guidelines/","category":"platform-guidance","useFor":["platform conventions","navigation","input and interaction"],"adaptation":"Use when the target is an Apple-platform experience."},
-    {"id":"shopify-polaris","name":"Shopify Polaris","url":"https://polaris.shopify.com/","category":"product-design-system","useFor":["commerce workflows","merchant admin UX","content hierarchy"],"adaptation":"Study task-oriented admin patterns and feedback without replicating branding."},
-    {"id":"fluent-2","name":"Microsoft Fluent 2","url":"https://fluent2.microsoft.design/","category":"design-system","useFor":["density","accessible components","cross-platform behavior"],"adaptation":"Reference for enterprise interaction states and system consistency."},
-    {"id":"govuk-design-system","name":"GOV.UK Design System","url":"https://design-system.service.gov.uk/","category":"service-design-system","useFor":["forms","plain language","error recovery","service journeys"],"adaptation":"Prioritize clarity and task completion for high-consequence service flows."},
-    {"id":"radix-primitives","name":"Radix Primitives","url":"https://www.radix-ui.com/primitives","category":"component-primitives","useFor":["accessible interactions","dialog/menu primitives","keyboard patterns"],"adaptation":"Use primitives where the target stack calls for them; inspect behavior, not just appearance."},
-    {"id":"shadcn","name":"shadcn/ui","url":"https://ui.shadcn.com/","category":"component-implementation","useFor":["composable component patterns","design token integration"],"adaptation":"Treat components as source-owned building blocks; customize rather than accepting defaults wholesale."},
-    {"id":"tailwind","name":"Tailwind CSS","url":"https://tailwindcss.com/docs","category":"styling-tooling","useFor":["utility conventions","responsive utilities","design token integration"],"adaptation":"Respect the target project's actual Tailwind version and config."},
-    {"id":"mdn-accessibility","name":"MDN Accessibility","url":"https://developer.mozilla.org/en-US/docs/Web/Accessibility","category":"implementation-reference","useFor":["semantic HTML","accessible names","keyboard behavior"],"adaptation":"Use primary browser documentation for semantics and APIs."},
-    {"id":"web-vitals","name":"Web Vitals","url":"https://web.dev/articles/vitals","category":"performance","useFor":["loading and responsiveness metrics","field performance"],"adaptation":"Use measured metrics from representative sessions."}
-  ]
+    {
+      "id": "impeccable",
+      "name": "Impeccable",
+      "url": "https://github.com/pbakaus/impeccable",
+      "category": "agent-design-workflows",
+      "useFor": [
+        "design command vocabulary",
+        "anti-pattern detection",
+        "iterative critique",
+        "live design iteration"
+      ],
+      "adaptation": "Use specialized design intents and deterministic review; keep Integra contracts and evidence explicit.",
+      "licenseNote": "Review upstream license and notices before reusing code. This catalog links and documents concepts only.",
+      "authority": "methodology",
+      "evidenceType": "workflow-method",
+      "useWhen": [
+        "A structured design-review workflow, iterative critique or a precise anti-pattern vocabulary is needed."
+      ],
+      "notFor": [
+        "Selecting a product's brand, palette or typography without project context.",
+        "Treating upstream commands as normative UI requirements."
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null
+    },
+    {
+      "id": "rea",
+      "name": "REA — Reverse Engineer Anything",
+      "url": "https://github.com/morluto/rea",
+      "category": "evidence-investigation",
+      "useFor": [
+        "evidence-first investigation",
+        "adapter boundaries",
+        "traceable findings",
+        "known limitations"
+      ],
+      "adaptation": "Apply the method to permitted UI behavior and references; binary analysis is out of scope.",
+      "licenseNote": "Link to upstream documentation; do not copy unrelated implementation.",
+      "authority": "methodology",
+      "evidenceType": "investigation-method",
+      "useWhen": [
+        "An evidence-led investigation plan, traceability or a clear adapter boundary is needed."
+      ],
+      "notFor": [
+        "Treating REA as a visual design system.",
+        "Using techniques beyond permitted access or task scope."
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null
+    },
+    {
+      "id": "agent-skills-spec",
+      "name": "Agent Skills specification",
+      "url": "https://github.com/agentskills/agentskills/blob/main/docs/specification.mdx",
+      "category": "agent-interoperability",
+      "useFor": [
+        "portable skills",
+        "progressive disclosure",
+        "skill validation"
+      ],
+      "adaptation": "Canonical skill files live in .agents/skills/.",
+      "authority": "technical-specification",
+      "evidenceType": "agent-interoperability",
+      "useWhen": [
+        "Designing portable skill metadata, progressive disclosure or host-agnostic skill packaging."
+      ],
+      "notFor": [
+        "Claiming a host loaded a skill without testing that host.",
+        "Deciding product UI styling."
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null
+    },
+    {
+      "id": "wcag-22",
+      "name": "WCAG 2.2",
+      "url": "https://www.w3.org/TR/WCAG22/",
+      "category": "accessibility-standard",
+      "useFor": [
+        "contrast",
+        "keyboard access",
+        "focus appearance",
+        "target size"
+      ],
+      "adaptation": "Use normative criteria and exceptions; do not claim full-page conformance from partial checks.",
+      "authority": "normative-standard",
+      "evidenceType": "normative",
+      "useWhen": [
+        "Assessing a named WCAG 2.2 success criterion or accessibility requirement."
+      ],
+      "notFor": [
+        "Choosing a visual theme or claiming full conformance from a partial check.",
+        "Replacing platform-specific assistive-technology testing."
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null
+    },
+    {
+      "id": "wai-aria-apg",
+      "name": "WAI-ARIA Authoring Practices Guide",
+      "url": "https://www.w3.org/WAI/ARIA/apg/",
+      "category": "interaction-patterns",
+      "useFor": [
+        "keyboard behavior",
+        "composite widgets",
+        "roles and states"
+      ],
+      "adaptation": "Prefer native HTML first; use ARIA patterns only when custom widgets are necessary.",
+      "authority": "official-guidance",
+      "evidenceType": "interaction-pattern",
+      "useWhen": [
+        "Implementing custom composite widgets, roles, keyboard patterns or state behavior."
+      ],
+      "notFor": [
+        "Adding ARIA where native HTML provides the needed semantics.",
+        "Treating a pattern example as a finished production component."
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null
+    },
+    {
+      "id": "material-3",
+      "name": "Material Design 3",
+      "url": "https://m3.material.io/",
+      "category": "design-system",
+      "useFor": [
+        "semantic tokens",
+        "adaptive layout",
+        "motion",
+        "component states"
+      ],
+      "adaptation": "Study token and state modeling; do not apply its visual language to every product.",
+      "authority": "official-design-system",
+      "evidenceType": "design-system-pattern",
+      "useWhen": [
+        "Studying semantic tokens, component states, adaptive layout or motion systems."
+      ],
+      "notFor": [
+        "Applying Material's brand language to unrelated products by default.",
+        "Assuming its components match another stack or platform."
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null
+    },
+    {
+      "id": "apple-hig",
+      "name": "Apple Human Interface Guidelines",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/",
+      "category": "platform-guidance",
+      "useFor": [
+        "platform conventions",
+        "navigation",
+        "input and interaction"
+      ],
+      "adaptation": "Use when the target is an Apple-platform experience.",
+      "authority": "official-platform-guidance",
+      "evidenceType": "platform-convention",
+      "useWhen": [
+        "The target is an Apple platform or must follow its navigation, input and interaction conventions."
+      ],
+      "notFor": [
+        "Treating Apple-specific patterns as universal web requirements.",
+        "Using it as the only authority for a non-Apple platform."
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null
+    },
+    {
+      "id": "shopify-polaris",
+      "name": "Shopify Polaris",
+      "url": "https://polaris.shopify.com/",
+      "category": "product-design-system",
+      "useFor": [
+        "commerce workflows",
+        "merchant admin UX",
+        "content hierarchy"
+      ],
+      "adaptation": "Study task-oriented admin patterns and feedback without replicating branding.",
+      "authority": "official-design-system",
+      "evidenceType": "commerce-workflow",
+      "useWhen": [
+        "Designing merchant/admin workflows, product management, orders or commerce operations."
+      ],
+      "notFor": [
+        "Copying Shopify's visual identity or assuming every storefront has merchant-admin needs.",
+        "Replacing verified local checkout or payment requirements."
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null
+    },
+    {
+      "id": "fluent-2",
+      "name": "Microsoft Fluent 2",
+      "url": "https://fluent2.microsoft.design/",
+      "category": "design-system",
+      "useFor": [
+        "density",
+        "accessible components",
+        "cross-platform behavior"
+      ],
+      "adaptation": "Reference for enterprise interaction states and system consistency.",
+      "authority": "official-design-system",
+      "evidenceType": "enterprise-component-pattern",
+      "useWhen": [
+        "Evaluating enterprise density, cross-platform component states or accessible system consistency."
+      ],
+      "notFor": [
+        "Applying Fluent styling as the default for unrelated products.",
+        "Assuming one density suits every role."
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null
+    },
+    {
+      "id": "govuk-design-system",
+      "name": "GOV.UK Design System",
+      "url": "https://design-system.service.gov.uk/",
+      "category": "service-design-system",
+      "useFor": [
+        "forms",
+        "plain language",
+        "error recovery",
+        "service journeys"
+      ],
+      "adaptation": "Prioritize clarity and task completion for high-consequence service flows.",
+      "authority": "official-design-system",
+      "evidenceType": "public-service-pattern",
+      "useWhen": [
+        "Designing public-service forms, eligibility, plain language, error recovery or consequential journeys."
+      ],
+      "notFor": [
+        "Treating UK policy content as valid in another jurisdiction.",
+        "Copying government branding or claiming legal compliance."
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null
+    },
+    {
+      "id": "radix-primitives",
+      "name": "Radix Primitives",
+      "url": "https://www.radix-ui.com/primitives",
+      "category": "component-primitives",
+      "useFor": [
+        "accessible interactions",
+        "dialog/menu primitives",
+        "keyboard patterns"
+      ],
+      "adaptation": "Use primitives where the target stack calls for them; inspect behavior, not just appearance.",
+      "authority": "official-component-library",
+      "evidenceType": "accessible-component-pattern",
+      "useWhen": [
+        "A React project uses Radix and needs dialogs, menus, popovers or keyboard primitives."
+      ],
+      "notFor": [
+        "Adding Radix without an architectural reason.",
+        "Assuming styling is included or that a primitive replaces product testing."
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null
+    },
+    {
+      "id": "shadcn",
+      "name": "shadcn/ui",
+      "url": "https://ui.shadcn.com/",
+      "category": "component-implementation",
+      "useFor": [
+        "composable component patterns",
+        "design token integration"
+      ],
+      "adaptation": "Treat components as source-owned building blocks; customize rather than accepting defaults wholesale.",
+      "authority": "official-component-library",
+      "evidenceType": "implementation-pattern",
+      "useWhen": [
+        "The project uses shadcn/ui or needs source-owned composable React components and token integration."
+      ],
+      "notFor": [
+        "Assuming shadcn/ui is installed in every project.",
+        "Using defaults wholesale without adapting them."
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null
+    },
+    {
+      "id": "tailwind",
+      "name": "Tailwind CSS",
+      "url": "https://tailwindcss.com/docs",
+      "category": "styling-tooling",
+      "useFor": [
+        "utility conventions",
+        "responsive utilities",
+        "design token integration"
+      ],
+      "adaptation": "Respect the target project's actual Tailwind version and config.",
+      "authority": "official-technical-documentation",
+      "evidenceType": "styling-implementation",
+      "useWhen": [
+        "The inspected project uses Tailwind and its actual version/configuration is known."
+      ],
+      "notFor": [
+        "Writing utility classes for a different styling system.",
+        "Assuming examples from another major version are compatible."
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null
+    },
+    {
+      "id": "mdn-accessibility",
+      "name": "MDN Accessibility",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/Accessibility",
+      "category": "implementation-reference",
+      "useFor": [
+        "semantic HTML",
+        "accessible names",
+        "keyboard behavior"
+      ],
+      "adaptation": "Use primary browser documentation for semantics and APIs.",
+      "authority": "official-technical-documentation",
+      "evidenceType": "web-platform-reference",
+      "useWhen": [
+        "Checking semantic HTML, accessible names, browser behavior or a web API implementation detail."
+      ],
+      "notFor": [
+        "Using MDN instead of normative accessibility criteria or assistive-technology testing.",
+        "Inferring behavior in a browser/version that was not tested."
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null
+    },
+    {
+      "id": "web-vitals",
+      "name": "Web Vitals",
+      "url": "https://web.dev/articles/vitals",
+      "category": "performance",
+      "useFor": [
+        "loading and responsiveness metrics",
+        "field performance"
+      ],
+      "adaptation": "Use measured metrics from representative sessions.",
+      "authority": "official-technical-documentation",
+      "evidenceType": "performance-measurement",
+      "useWhen": [
+        "Interpreting Core Web Vitals definitions or a measured performance report."
+      ],
+      "notFor": [
+        "Making performance claims without representative measurements.",
+        "Treating generic thresholds as proof of a particular site's performance."
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null
+    }
+  ],
+  "usagePolicy": {
+    "selectByQuestion": "Choose a source only when it can answer the exact design, interaction, implementation or quality question being decided.",
+    "sourcePrecedence": "Use normative standards for requirements; official technical/platform documentation for behavior; official design systems for their documented patterns; product examples for directly observed behavior; methodology repositories for process inspiration.",
+    "quantity": "Normally use one to three relevant references. Do not add sources merely to decorate a brief.",
+    "verification": "Every entry is a catalog-only lead until its specific page or section has been inspected. Keep lastVerifiedAt null until live verification is recorded.",
+    "evidence": "Record exact page/section, date, observed behavior, evidence class, confidence and limitation. A URL or title alone is not evidence.",
+    "adaptation": "Extract and adapt a principle to the target product. Never copy source code, assets, copywriting, proprietary components or complete compositions."
+  }
 }

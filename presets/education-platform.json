@@ -1,12 +1,159 @@
 {
-  "id":"education-platform","name":"Education & Learning Platform","version":"1.0.0",
-  "productContexts":["learning management","online courses","school portals","student dashboards","tutoring platforms"],
-  "designIntent":{"primaryGoal":"Help learners understand what to do next and track progress without distraction.","audienceNeeds":["clear instructions","manageable steps","progress feedback","inclusive language"],"personalityAxes":["encouraging","structured","approachable"],"visualThesis":"A guided learning environment where instruction and progress are easy to follow."},
-  "visualDirection":{"density":"low-to-medium for learning content; denser in teacher/admin workspaces","surfaces":"distinct learning content from navigation and progress metadata","colorIntent":"calm base with consistent semantic progress and feedback; test color contrast","typography":"comfortable reading size and line length; clear lesson, prompt and feedback roles","motion":"purposeful progress feedback; no distracting loops"},
-  "layout":{"pattern":"course navigation + lesson content + progress/next-step area","spacing":"generous around learning content, concise around curriculum navigation","responsive":"lesson content remains primary; navigation becomes a clear drawer or step list","contentPriority":["learning objective","lesson content","current progress","next action"]},
-  "components":{"preferred":["course outline","lesson player","stepper","progress indicator","quiz feedback","resource list"],"states":["not started","in progress","completed","locked","needs review","submission error"],"avoid":["gamification that obscures learning goals","ambiguous grading feedback","dense walls of text"]},
-  "accessibility":{"minimumTextContrast":"WCAG 2.2 AA","keyboard":"all learning activities and media controls must support keyboard interaction","focus":"visible focus and predictable return after dialogs","reducedMotion":"no essential lesson information depends on animation"},
-  "antiPatterns":["progress represented by color only","tiny lesson text","unclear quiz feedback","unlabeled media controls"],
-  "references":["govuk-design-system","material-3","wai-aria-apg","mdn-accessibility"],
-  "notes":["Content structure and readability matter more than decorative education-themed illustrations."]
+  "id": "education-platform",
+  "name": "Education & Learning Platform",
+  "version": "1.1.0",
+  "productContexts": [
+    "learning management",
+    "online courses",
+    "school portals",
+    "student dashboards",
+    "tutoring platforms"
+  ],
+  "designIntent": {
+    "primaryGoal": "Help learners understand what to do next and track progress without distraction.",
+    "audienceNeeds": [
+      "clear instructions",
+      "manageable steps",
+      "progress feedback",
+      "inclusive language"
+    ],
+    "personalityAxes": [
+      "encouraging",
+      "structured",
+      "approachable"
+    ],
+    "visualThesis": "A guided learning environment where instruction and progress are easy to follow."
+  },
+  "visualDirection": {
+    "density": "low-to-medium for learning content; denser in teacher/admin workspaces",
+    "surfaces": "distinct learning content from navigation and progress metadata",
+    "colorIntent": "calm base with consistent semantic progress and feedback; test color contrast",
+    "typography": "comfortable reading size and line length; clear lesson, prompt and feedback roles",
+    "motion": "purposeful progress feedback; no distracting loops"
+  },
+  "layout": {
+    "pattern": "course navigation + lesson content + progress/next-step area",
+    "spacing": "generous around learning content, concise around curriculum navigation",
+    "responsive": "lesson content remains primary; navigation becomes a clear drawer or step list",
+    "contentPriority": [
+      "learning objective",
+      "lesson content",
+      "current progress",
+      "next action"
+    ]
+  },
+  "components": {
+    "preferred": [
+      "course outline",
+      "lesson player",
+      "stepper",
+      "progress indicator",
+      "quiz feedback",
+      "resource list"
+    ],
+    "states": [
+      "not started",
+      "in progress",
+      "completed",
+      "locked",
+      "needs review",
+      "submission error"
+    ],
+    "avoid": [
+      "gamification that obscures learning goals",
+      "ambiguous grading feedback",
+      "dense walls of text"
+    ]
+  },
+  "accessibility": {
+    "minimumTextContrast": "WCAG 2.2 AA",
+    "keyboard": "all learning activities and media controls must support keyboard interaction",
+    "focus": "visible focus and predictable return after dialogs",
+    "reducedMotion": "no essential lesson information depends on animation"
+  },
+  "antiPatterns": [
+    "progress represented by color only",
+    "tiny lesson text",
+    "unclear quiz feedback",
+    "unlabeled media controls"
+  ],
+  "references": [
+    "govuk-design-system",
+    "material-3",
+    "wai-aria-apg",
+    "mdn-accessibility"
+  ],
+  "notes": [
+    "Content structure and readability matter more than decorative education-themed illustrations."
+  ],
+  "aiGuidance": {
+    "primaryFlow": "Orient to a learning goal → resume or choose a lesson → study → practice → receive feedback → continue or review.",
+    "prioritize": [
+      "The current learning objective and lesson content",
+      "Progress that accurately reflects completed work",
+      "Feedback, resources and the next meaningful activity"
+    ],
+    "confirmOrMarkUnknown": [
+      "Learner age range, language and reading level when relevant",
+      "Grading, completion and assessment rules",
+      "Whether progress is local, synced or teacher-managed"
+    ],
+    "avoidByDefault": [
+      "Gamification obscuring learning",
+      "Unverified grades, certificates or learner outcomes",
+      "Walls of text without headings or practice checkpoints"
+    ],
+    "acceptanceChecks": [
+      "Learners can identify the current objective and next action",
+      "Lesson content remains primary on small screens",
+      "Feedback explains why an answer is correct or needs review"
+    ]
+  },
+  "compositionEscapes": [
+    {
+      "id": "lesson-first",
+      "when": "The learner arrives to resume or complete a specific lesson.",
+      "composition": "Lead with lesson title, objective and learning content; keep course outline and progress/next-step controls in supporting navigation.",
+      "contentRequirements": [
+        "Real lesson content and objective",
+        "Current progress and next lesson state",
+        "Readable media controls and resources"
+      ],
+      "avoid": [
+        "A marketing dashboard between learner and lesson",
+        "Progress represented only by color",
+        "Autoplay without intent"
+      ]
+    },
+    {
+      "id": "course-map",
+      "when": "The primary task is choosing, planning or navigating a multi-module course.",
+      "composition": "Use a structured course map showing modules, prerequisites and completion states; reveal lesson detail when a step is selected.",
+      "contentRequirements": [
+        "Actual module and prerequisite relationships",
+        "Clear locked, available and completed states",
+        "Linear alternative for assistive technology"
+      ],
+      "avoid": [
+        "Invented course length or certificates",
+        "Decorative progress rings without meaning",
+        "Unexplained locked items"
+      ]
+    },
+    {
+      "id": "practice-first",
+      "when": "The main activity is answering questions, solving exercises or applying knowledge.",
+      "composition": "Focus on one exercise or a coherent short set; keep instructions, response area and feedback together.",
+      "contentRequirements": [
+        "Clear prompt and allowed response format",
+        "Expected answer or rubric supplied by content owner",
+        "Feedback and retry behavior"
+      ],
+      "avoid": [
+        "Ambiguous scoring",
+        "Reward animation obscuring feedback",
+        "Premature answer disclosure when practice is the goal"
+      ]
+    }
+  ]
 }
