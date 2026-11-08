@@ -14,7 +14,11 @@
     "validate:fixtures": "tsx scripts/validate-fixtures.ts",
     "direction:generate": "tsx scripts/direction-generate.ts",
     "direction:validate": "tsx scripts/direction-validate.ts",
-    "check": "npm run typecheck && npm test && npm run validate:fixtures"
+    "check": "npm run typecheck && npm test && npm run validate:fixtures && npm run validate:design-library && npm run validate:agent-skills",
+    "design:route": "tsx scripts/design-route.ts",
+    "design:qa": "tsx scripts/design-qa.ts",
+    "validate:design-library": "tsx scripts/validate-design-library.ts",
+    "validate:agent-skills": "node scripts/validate-agent-skills.mjs"
   },
   "dependencies": {
     "ajv": "^8.20.0",
