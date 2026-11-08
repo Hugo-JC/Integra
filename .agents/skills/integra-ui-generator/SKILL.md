@@ -1,28 +1,32 @@
 ---
 name: integra-ui-generator
-description: Builds new React, TypeScript, Tailwind or framework-native interface components from a concrete brief. Use when generating a screen, section, form, dashboard, card, navigation pattern or interaction.
+description: Generate production-oriented UI components or screens from a brief using contextual presets, semantic tokens and accessible interaction patterns.
 ---
 
 # Integra UI Generator
 
-## Before coding
-1. Inspect package.json, existing components, routing, tokens, CSS conventions and test setup.
-2. Read the relevant Direction Artifact or create a brief with integra-design-direction.
-3. Identify whether the task is a page, reusable component or interaction.
-4. Use the project's actual stack. Do not add Tailwind, shadcn/ui, Radix or animation libraries if they are not justified.
-5. Confirm content and states; do not fill gaps with fake testimonials, statistics or invented product capabilities.
+## Understand before generating
+- Identify the job-to-be-done, primary user, content hierarchy, device context and success action.
+- Inspect existing project tokens and components before introducing new ones.
+- Use `npm run design:route -- "<brief>" --json` as a suggestion, not as an authority.
+- Confirm low-confidence or ambiguous preset routes.
 
-## Implementation rules
-- Use semantic HTML before custom roles.
-- Keep component responsibilities narrow and props typed.
-- Reuse existing tokens and primitives.
-- Make interactive controls accessible by keyboard and give each an accessible name.
-- Implement focus-visible, hover, active, disabled and loading states where relevant.
-- Use real content hierarchy; do not wrap every block in a card.
-- Use deliberate typography roles, spacing and responsive constraints.
-- Respect prefers-reduced-motion.
-- Avoid arbitrary inline styling when the project has a token or utility convention.
-- Preserve existing functionality and avoid gratuitous abstraction.
+## Design quality
+- Establish one clear visual idea; avoid generic dashboard cards, gratuitous gradients, glass effects and excessive rounding.
+- Use meaningful typography hierarchy, intentional whitespace and content-first composition.
+- Prefer semantic color roles and a restrained, intentional accent.
+- Use real product language and plausible content. Never fabricate trust signals.
+- Build responsive layouts from content constraints, not arbitrary device labels.
+- Include accessible labels, focus, keyboard interactions and reduced-motion behavior.
+- Provide coherent loading, empty, error, success and disabled states.
+- Make interactions discoverable and give immediate feedback.
 
-## Review before completion
-Check responsive behavior, overflow, focus order, empty/error states, color contrast and console errors. Run the smallest relevant test first, then the project check. Report any behavior that was not exercised.
+## Implementation
+- Follow the host project's stack and conventions; do not add dependencies for trivial effects.
+- Prefer native HTML and project components; avoid unnecessary wrappers.
+- Keep components composable and types explicit.
+- Add tests for meaningful interactions and state transitions.
+- Use animation only when it clarifies hierarchy or state.
+
+## Final self-check
+Explain the chosen direction, key trade-offs, responsive behavior, accessibility decisions and remaining unknowns. Do not say the result is polished or production-ready without actually verifying it.

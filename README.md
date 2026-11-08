@@ -1,102 +1,109 @@
 # Integra — AI Design Engine v5
 
-**Um motor modular de inteligência de design que transforma contexto em direção visual, ajuda agentes a implementar melhor e verifica resultados com evidências.**
+**Motor modular de direção de design, inteligência visual e qualidade para agentes de IA.** O Integra transforma briefs e contexto em decisões verificáveis; ajuda os agentes a implementar e permite inspecionar e auditar resultados.
 
-Integra não é um gerador de sites nem impõe uma estética universal. É uma camada entre a intenção do produto, o agente que implementa a interface e os mecanismos independentes de qualidade.
+> Esta branch acrescenta uma biblioteca contextual de presets, routing determinístico, skills interoperáveis, QA estático e um Live Inspector de browser. Não afirma que a qualidade visual de um website melhorou sem uma experiência controlada.
 
-## Capacidades
+## O que o Integra faz
 
-| Área | O que entrega | Estado |
-|---|---|---|
-| Context | Normalização de brief, factos, restrições e informação ausente | Implementado |
-| Direction | Direction Artifact determinístico, com proveniência e oito áreas | DL-001 implementado |
-| Presets | Direções contextuais versionadas, sem paleta universal obrigatória | Novo |
-| Agent Skills | Competências portáveis para Gemini CLI, Codex e agentes compatíveis | Novo |
-| Live Inspector | Seleção DOM, preview de estilos, diff e prompt para refatoração | Novo, opt-in |
-| Contrast QA | Estimativa WCAG AA em runtime para cores opacas simples | Novo |
-| Design QA | Findings determinísticos a partir de evidências estruturadas | Novo |
-| Investigation | Catálogo de fontes e registo de evidências/limitações | Fundação |
-| Design Lab | Comparação controlada baseline vs Integra-guided | Contratos e helpers |
-
-## Princípios
-
-1. Contexto antes de estética: audiência, tarefas, conteúdo, plataforma e restrições vêm antes do preset.
-2. Presets como ponto de partida: nunca substituem identidade de marca nem instruções explícitas.
-3. Sem estética universal: #050505 e #3B82F6 não são a paleta obrigatória de todos os produtos. O azul #3B82F6 é a assinatura do overlay do Live Inspector.
-4. Evidence-first: distinguir observação direta, inferência, sugestão e informação desconhecida.
-5. Acessibilidade como requisito: não remover semântica, foco, teclado, contraste ou reduced motion por estética.
-6. Regras explicáveis: cada finding tem regra, evidência, impacto, severidade e verificação.
-7. IA é opcional: o caminho determinístico não depende de API keys, rede ou provider.
-8. Sem mutação silenciosa: Live Inspector altera apenas o DOM em memória; aplicar no código exige revisão explícita.
-
-## Stack
-
-- Node.js 24 + TypeScript strict.
-- JSON Schema para contratos serializáveis.
-- Vitest + tsx para testes e scripts.
-- Browser APIs + Shadow DOM para Live Inspector, sem framework obrigatório.
-- React/Vite são alvos de integração, não dependências do núcleo.
-- Tailwind, shadcn/ui, Radix ou CSS Modules só são usados quando o projeto de destino os justifica.
-
-Não adicionámos dependências runtime para o Live Inspector.
+- **Direction:** converte intenção, contexto e restrições em direção visual rastreável.
+- **Design Intelligence:** 17 estilos, 61 presets de nicho e 14 fontes importadas do AI Design Engine.
+- **Refinement:** verifica problemas objetivos e classifica resultados inconclusivos sem inventar conformidade.
+- **Live Inspector:** seleciona elementos DOM, pré-visualiza alterações e exporta um diff para revisão no código-fonte.
+- **Design QA:** verifica padrões estáticos em JSX/TSX e conduz auditorias independentes.
+- **Investigation:** guia pesquisa baseada em hipóteses, evidências, confiança e limitações.
+- **Design Lab:** compara resultados baseline vs Integra-guided com variáveis controladas.
 
 ## Começar
+
+Requisitos: Node.js 24 e npm 10 ou superior.
 
 ~~~bash
 npm ci
 npm run check
 ~~~
 
-O check inclui typecheck, testes, validação de fixtures, Agent Skills, presets e da biblioteca ADE migrada.
+## Direção e presets
 
-## Direction CLI
+O router usa expressões completas, normaliza acentos e dá prioridade a termos fortes sobre termos genéricos. Empates e correspondências fracas exigem confirmação. O preset é uma sugestão contextual, nunca um tema obrigatório.
 
 ~~~bash
-npm run direction:generate
-npm run direction:generate -- --scenario DL-001 --input ./brief.json --out ./.integra/runs/my-direction.json
-npm run direction:validate -- --input ./.integra/runs/my-direction.json
+npm run design:route -- "SaaS developer AI platform"
+npm run design:route -- "clínica de estética premium" --json
+npm run design:route -- "marketplace de produtos artesanais" --tone calm --json
 ~~~
 
-## Agent Skills
+Os estilos e presets estão em `data/design-library/`. O manifesto preserva a origem e a política de utilização. Referências servem para estudar princípios; não copiar páginas, marcas ou layouts distintivos.
 
-As skills seguem o formato aberto Agent Skills e vivem em .agents/skills/. O Gemini CLI reconhece esta localização como diretório de workspace; agentes compatíveis podem carregar a mesma skill sob demanda.
+## Design QA
 
-- integra-design-direction — transformar o contexto em direção de design.
-- integra-ui-generator — gerar interfaces contextualizadas e implementáveis.
-- integra-refactor-agent — refatorar componentes existentes sem quebrar comportamento.
-- integra-design-qa — auditar qualidade visual e estrutural com evidências.
-- integra-live-inspector — converter inspeções do browser em mudanças rastreáveis.
-- integra-reference-investigator — investigar referências sem copiar implementação ou assets.
-- integra-a11y-audit — auditoria de acessibilidade e WCAG.
-- integra-performance-audit — auditoria de renderização, carregamento e custo de interação.
+~~~bash
+npm run design:qa -- src/
+npm run design:qa -- src/ --json
+npm run design:qa -- src/ --strict
+~~~
 
-O ficheiro GEMINI.md resume as regras gerais para Gemini CLI.
+Regras atuais incluem imagens sem alt, elementos não nativos clicáveis sem semântica/teclado, remoção de outline sem substituto e cores hex hardcoded como sugestão. O scanner é estático: não prova contraste real, responsividade nem qualidade visual.
 
-## Live Inspector
+## Live Inspector (local development only)
 
-Módulo opcional em src/modules/live-inspector/. O runtime destaca elementos com uma borda azul Integra, permite selecionar com o rato e editar classes, cores, radius e padding, calcula uma estimativa de contraste e gera um diff/prompt para um agente.
+O inspector é independente de framework e não acrescenta dependências de runtime. Ativa-o apenas num entrypoint de desenvolvimento (por exemplo, Vite):
 
-Limites importantes: não identifica automaticamente ficheiros TSX a partir do DOM; sourceHint é opcional e explícito. Contraste é inconclusivo para transparências, imagens, gradientes, pseudo-elementos e camadas complexas. As alterações são temporárias e não são escritas no source. Não exponhas o inspector em produção.
+~~~ts
+if (import.meta.env.DEV && import.meta.env.VITE_INTEGRA_LIVE === 'true') {
+  void import('./modules/live-inspector/index.js').then(({ startIntegraInspector }) => {
+    startIntegraInspector();
+  });
+}
+~~~
 
-Ver docs/live-inspector.md. Para verificar a migração da biblioteca antiga, execute `npm run validate:legacy-knowledge`.
+Definir `VITE_INTEGRA_LIVE=true` inicia a seleção. Hover e seleção usam o azul Integra `#3B82F6`; **↑ Pai** sobe na árvore DOM. Podes pré-visualizar classes, cores, tamanho de texto, padding e radius; consultar o contraste; repor o estado; e copiar o DOM diff.
 
-## Presets e referências
+O inspector:
+- Está limitado a localhost por defeito.
+- Não escreve ficheiros, não chama agentes e não envia dados para uma API.
+- Não garante que uma alteração persista após um re-render React/Vue/Svelte.
+- Só oferece um selector DOM best-effort; um caminho de ficheiro só existe quando a aplicação fornece explicitamente `data-integra-file`.
+- Deve ser removido/destruído antes de uma release de produção. Não enfraquecer CSP para o ativar.
 
-- presets/manifest.json — catálogo versionado.
-- presets/*.json — nove direções contextuais.
-- references/catalog.json — sistemas, documentação e ferramentas de referência.
-- references/ade-knowledge/ — biblioteca migrada do AI Design Engine: 61 perfis de nicho, 17 estilos, regras, anti-padrões, playbook, arquétipos e referências.
-- docs/design-quality-standard.md — regras e critérios de qualidade.
-- docs/reference-investigation.md — método evidence-first inspirado em REA.
+Ver [docs/live-inspector.md](docs/live-inspector.md).
 
-## Próximo marco
+## Skills e compatibilidade de agentes
 
-1. Ligar Live Inspector a um adaptador Vite/React que resolva source maps de forma verificável.
-2. Adicionar browser tests com Playwright e auditoria axe-core como dependências opcionais.
-3. Expandir Direction para DL-002 e DL-003 com regras específicas e fixtures.
-4. Criar detetores AST/DOM para anti-padrões que podem ser medidos com fiabilidade.
-5. Executar o piloto DL-001 em workspaces equivalentes e comparar evidências.
+Skills canónicas vivem em `.agents/skills/*/SKILL.md` para partilha entre ferramentas que suportam Agent Skills. O Gemini CLI recebe contexto adicional através de `GEMINI.md` (que importa `AGENTS.md`). Claude Code, Cursor e GitHub Copilot têm ficheiros de entrada curtos que apontam para as mesmas instruções.
 
-## Limites atuais
+Skills incluídas:
+- `integra-direction`
+- `integra-refactor-agent`
+- `integra-ui-generator`
+- `integra-design-qa`
+- `integra-live-inspector`
+- `integra-investigation`
 
-A direção determinística completa continua limitada a DL-001. O Live Inspector é uma fundação browser-only, sem adaptador Vite, persistência de source ou execução de agentes. Design QA avalia evidências estruturadas; ainda não interpreta automaticamente todos os ficheiros TSX. Investigation fornece método, catálogo e contratos, não crawling arbitrário. Não afirmamos melhorias de qualidade antes de as medir no Design Lab.
+## Princípios de qualidade
+
+1. Produto e conteúdo antes da decoração.
+2. Direção visual contextual; nunca uma paleta universal.
+3. Hierarquia tipográfica e espaçamento intencionais.
+4. Componentes semanticamente corretos e acessíveis.
+5. Estados completos e feedback de interação.
+6. Motion com propósito e respeito por reduced-motion.
+7. Performance medida; sem memoização indiscriminada.
+8. Factos, preferências, heurísticas e requisitos separados.
+9. WCAG AA/AAA calculado com cores efetivamente compostas quando possível.
+10. Evidência e confiança acompanham as conclusões.
+
+## Núcleo e limites
+
+O núcleo determinístico continua provider-agnostic e sem API keys. A geração de Direction Artifact continua implementada para DL-001; os restantes cenários precisam de geradores e testes próprios. O Live Inspector é um preview DOM, não um editor de source code. O scanner é heurístico e estático. O runner visual multi-viewport, auto-mutation de projetos e adaptadores externos de investigação permanecem marcos futuros.
+
+## Documentação
+
+- [Arquitetura](docs/architecture.md)
+- [Roadmap](docs/implementation-roadmap.md)
+- [Princípios de design](docs/design-intelligence/quality-principles.md)
+- [Política de referências](docs/design-intelligence/reference-policy.md)
+- [Comandos dos agentes](docs/agent-commands.md)
+- [Live Inspector](docs/live-inspector.md)
+- [Contrato de integração](docs/agent-integration-contract.md)
+- [Protocolo Design Lab](docs/design-experiment-protocol.md)

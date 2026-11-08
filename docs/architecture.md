@@ -20,22 +20,22 @@ Investigation → references, observations, evidence records
 
 ## Módulos
 
-- **Shared contracts:** formatos serializáveis, versionados e provider-independent.
-- **Context:** normaliza factos, restrições e informação ausente; não inventa contexto.
-- **Direction:** gera o Direction Artifact 1.1.0 nas oito áreas obrigatórias. Geração determinística atual: DL-001.
-- **Presets:** nove direções contextuais; nunca substituem requisitos explícitos, marca ou tokens do projeto.
-- **Legacy ADE knowledge:** biblioteca de referência migrada do AI Design Engine anterior, com catálogo de nichos, estilos, regras e referências.
-- **Agent Skills:** procedimentos task-scoped em .agents/skills/, com descoberta compatível com Gemini CLI.
-- **Live Inspector:** módulo browser-only e opt-in em src/modules/live-inspector/. Seleciona elementos, faz preview temporário, gera diff/prompt e estima contraste em casos CSS simples.
-- **Refinement:** avalia observações fornecidas pelo chamador e devolve findings P0–P3 com estados verified/heuristic/inconclusive.
-- **Investigation:** normaliza evidências e limitações; não faz crawling nem chamadas de rede.
-- **Design Lab:** compara execuções controladas; o relatório do agente não constitui prova independente.
+- **Shared contracts:** definem formatos serializáveis, versionados e independentes de fornecedores.
+- **Context:** normaliza contexto estruturado fornecido pelo chamador, preserva a ordem, remove duplicados triviais, valida factos e restrições e regista campos ausentes sem inferir valores.
+- **Direction:** gera decisões de sistema e recomendações contextualizadas nas oito áreas do Direction Artifact; o submódulo `presets` fornece uma sugestão contextual de estilo/nicho, com alternativas e baixa confiança explícitas.
+- **Resolver:** filtra candidatos incompatíveis com restrições rígidas antes de aplicar a precedência de proveniência. Se uma comparação não puder ser feita com segurança, o resultado é inconclusivo.
+- **Artifact validation:** verifica estrutura, semântica, restrições e consistência em quatro camadas ordenadas.
+- **Agent consumer:** interpreta o artefacto e devolve outcomes por decisão e recomendação. O relatório é auto-relatado, não uma prova independente.
+- **Design Lab:** compara execuções com variáveis controladas e avalia os resultados por evidências.
+- **Refinement:** identifica problemas, explica o impacto e recomenda melhorias verificáveis; a auditoria de contraste DOM é uma primeira fatia e não uma auditoria WCAG completa.
+- **Investigation:** integra referências, ferramentas ou fontes externas através de adaptadores opcionais.
+- **Quality Gate:** aplica regras bloqueantes objetivas e conserva resultados inconclusivos e não verificáveis.
 
 ## Direction Artifact
 
 O artefacto contém Visual Identity, Color System, Typography, Layout & Composition, Component Principles, Motion & Interaction, Accessibility e Implementation Guidance. As decisões registam origem e razão; recomendações heurísticas usam [R]. A validação tem quatro camadas: structural, semantic, constraints e consistency.
 
-A geração continua limitada a DL-001. Os restantes cenários precisam de regras e testes específicos.
+src/modules/refinement/audits/ contém verificadores objetivos independentes. src/modules/live-inspector/ é uma ferramenta de browser de desenvolvimento, não parte do núcleo determinístico. src/modules/context/ contém a implementação pura de normalização. src/modules/direction/ contém proveniência, compatibilidade com restrições, geração e validação. src/cli/ fornece fronteiras de comando para workflows locais; não contém regras de design.
 
 ## Presets e legado
 
@@ -47,7 +47,7 @@ references/ade-knowledge/ preserva o corpus legado do AI Design Engine. Os estil
 
 Usa DOM APIs e Shadow DOM, sem dependência de React/Vite/Tailwind. O seletor CSS identifica um elemento renderizado, não um ficheiro TSX. sourceHint só é aceite quando fornecido explicitamente. Source maps, persistência de alterações, keyboard picker completo e browser automation são etapas futuras.
 
-Gradientes, imagens, filtros, pseudo-elementos e camadas complexas são inconclusivos para contraste. O inspector não escreve source, não chama IA e não deve estar ativo em produção.
+A geração determinística do Direction Artifact atualmente cobre DL-001. O router de presets pode funcionar independentemente, mas não implica que todos os cenários tenham geradores completos. Os restantes cenários só serão adicionados quando as suas necessidades justificarem regras específicas. Não há presets globais de estilo.
 
 ## Quality & evidence
 
@@ -56,6 +56,11 @@ auditDesignQuality() avalia apenas observações fornecidas. createDesignEvidenc
 ## Stack
 
 Node.js 24, TypeScript strict, JSON Schema, Vitest, tsx e browser APIs nativas. Playwright, axe-core, TypeScript AST, Vite/React adapters e providers são extensões opcionais; não são dependências do core.
+
+## Live Inspector e Design QA
+
+O Design QA executa heurísticas AST sobre JSX/TSX. Os resultados não substituem testes de browser, avaliação humana ou medições reais.
+O Live Inspector corre no browser do projeto local, opera por cima do DOM e exporta um diff para revisão. Não altera source code, não envia dados a providers e não deve ser ativado em produção.
 
 ## Reprodutibilidade e limites
 

@@ -1,27 +1,15 @@
 # Changelog
 
-## Unreleased
+## Unreleased — Design Intelligence & Live Inspector
 
-### Design intelligence
-- Added eight provider-neutral Agent Skills for direction, UI generation, refactoring, design QA, live inspection, reference investigation, accessibility and performance.
-- Added Gemini CLI project guidance and skill discovery.
-- Added nine contextual, validated design presets.
-- Added design quality standard, evidence-first investigation method and design command vocabulary.
-- Migrated the legacy AI Design Engine's niche profiles, style systems, rules, anti-patterns, archetypes, component catalog, playbook and curated references into a provenance-marked knowledge library.
-
-### Live Inspector
-- Added an opt-in browser inspector using native DOM APIs and Shadow DOM.
-- Added pointer selection and blue Integra overlay (#3B82F6).
-- Added temporary class, color, border-radius and padding previews.
-- Added precise class/style diffs and a coding-agent handoff prompt.
-- Added a WCAG AA contrast estimate for simple opaque/composited CSS backgrounds.
-- Source persistence and source-map resolution remain out of scope; DOM selectors are not source paths.
-
-### Quality
-- Added deterministic P0–P3 findings from explicitly supplied observations.
-- Added evidence record normalization with source, confidence and limitations.
-- Added unit tests and validation scripts for skills and presets.
-- Retained Direction Artifact generation and validation for DL-001.
+- Imported the AI Design Engine's style catalog, niche presets and reference-source metadata with provenance.
+- Added deterministic preset routing with strong/weak matches, ambiguity reporting and explicit fallback confirmation.
+- Added a browser-only Live Inspector with blue DOM selection, parent navigation, utility/style previews, reset and DOM diff export.
+- Added rendered text contrast audit for WCAG 2.2 SC 1.4.3 AA/AAA; uncertain compositing remains inconclusive.
+- Added TypeScript AST-based design QA for common JSX accessibility and token anti-patterns.
+- Added six cross-agent skills and dedicated Gemini, Claude, Cursor and GitHub Copilot entry instructions.
+- Added design intelligence principles, reference policy, command vocabulary and implementation boundaries.
+- Added validators for the imported design library and skill metadata.
 
 ## 0.2.0 — Direction Engine foundation
 

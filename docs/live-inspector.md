@@ -1,76 +1,45 @@
-# Live Inspector
+# Integra Live Inspector
 
-## Purpose
+The Live Inspector is a development-only, browser-side DOM preview tool. It is intentionally separate from the deterministic direction engine.
 
-Integra Live Inspector connects a running browser view with a source-code refactoring workflow. It selects rendered elements, previews safe style changes, computes a precise DOM diff and produces a prompt that an AI coding agent can apply to the real component.
+## Activation (Vite / React example)
 
-It is intentionally a separate browser module. The deterministic Direction core remains independent of DOM and browser APIs.
-
-## Implemented in this branch
-
-- Pointer hover highlight and click-to-select.
-- Blue selection border and badge (#3B82F6).
-- Shadow DOM isolation for the inspector UI.
-- Temporary editing of class names, text/background colors, border radius and padding.
-- Exact class additions/removals and inline-style deltas.
-- Stable best-effort DOM selector.
-- Accessible-name/text preview.
-- WCAG AA contrast estimate for opaque, simple foreground/background colors.
-- Structured change set and AI handoff prompt.
-- Optional callback for an external orchestrator; no remote request is made by default.
-
-## Integration
-
-Add the runtime only to a local development entry point. For Vite + React, the integration can be guarded by the development flag:
+Add this to a development-only entrypoint:
 
 ~~~ts
-import { createIntegraInspector } from './modules/live-inspector/index.js';
-
-if (import.meta.env.DEV) {
-  const inspector = createIntegraInspector({
-    // This is a manually supplied hint, not an automatic source-map result.
-    sourceHint: 'src/App.tsx',
-    onApply: (changes, prompt) => {
-      // Send the result to your coding agent through your own approved workflow.
-      console.info(changes);
-      console.info(prompt);
-    },
+if (import.meta.env.DEV && import.meta.env.VITE_INTEGRA_LIVE === 'true') {
+  void import('./modules/live-inspector/index.js').then(({ startIntegraInspector }) => {
+    startIntegraInspector();
   });
-
-  window.addEventListener('beforeunload', () => inspector.stop());
 }
 ~~~
 
-For non-Vite apps, call the factory from any development-only browser entry point. The source package does not require React or Vite.
+Start Vite with `VITE_INTEGRA_LIVE=true`. Use the actual relative import path for your entrypoint.
 
-## Interaction flow
+## Workflow
+1. Hover a target. The selection outline and badge use Integra blue `#3B82F6`.
+2. Click to lock the element. The click is intercepted so the underlying control does not activate.
+3. Edit Tailwind classes, text/background colors, font size, padding or border radius.
+4. Use **↑ Pai** to select the containing DOM node when a nested element is too small.
+5. Review the selected text's WCAG contrast status. The audit checks WCAG 2.2 SC 1.4.3 (AA) and reports the stricter SC 1.4.6 (AAA) threshold separately. It reports inconclusive when the effective background cannot be established safely.
+6. Reset the selected element, copy the before/after DOM diff, then ask the implementation agent to apply and verify a source-level change.
+7. Destroy the inspector or reload the page to leave preview mode.
 
-1. Start the app locally with the inspector enabled.
-2. Hover the page; the blue outline follows the element under the pointer.
-3. Click to lock/select the element. The panel exposes editable fields.
-4. Preview classes, colors, radius and padding. These affect the live DOM only.
-5. Select more elements if needed; changes are tracked independently.
-6. Generate the diff and prompt. Review the output before giving it to an agent.
-7. The agent locates the real source component, applies the source edit and runs project checks.
-8. Stop the inspector and reload/restore the page before treating the source implementation as complete.
+Keyboard shortcut: `Alt+Shift+I` toggles element picking; `Escape` pauses picking.
 
-## Change-set contract
+## Diff format
+The clipboard report contains:
+- Best-effort DOM selector.
+- Component hint.
+- Optional `data-integra-file` source hint.
+- Exact original and updated class attributes.
+- Exact original and updated style attributes.
+- Reminder that preview does not write source.
 
-Each selected element records selector and tag, accessible name or text excerpt, optional source hint, original and updated classes, added and removed class tokens, changed inline style values, and optional contrast evidence.
-
-A selector is not a source-code location. React component names, TSX paths and line numbers require a real source-map/dev-server adapter or an explicit developer-provided hint. The core does not guess them.
-
-## Accessibility behavior
-
-The contrast helper uses WCAG relative luminance and AA thresholds for normal and large text. It only reports a measurement when it can resolve an opaque foreground and background color. If the selected element uses transparent overlays, images, gradients, blend modes, pseudo-elements or layered surfaces, the result is marked inconclusive or must be independently verified. It does not certify a complete page or full WCAG conformance.
-
-The inspector itself is keyboard-operable through native inputs and buttons; the first release does not yet include a full keyboard element picker. This is a known limitation to address before broad team rollout.
-
-## Safety and non-goals
-
-- Never expose this tool on production pages.
-- Do not weaken Content Security Policy for production to run it.
-- Do not inject code into sites the developer does not own or have permission to test.
-- The inspector does not write files, commit changes, call a model, or run shell commands.
-- Do not automatically trust an AI-produced diff. Review source paths, behavior and tests.
-- Temporary DOM changes are not durable source edits.
+## Boundaries
+- Localhost only by default. `allowRemote: true` is an explicit opt-in for a trusted preview.
+- Does not edit files, invoke shell commands, send content to providers or call an agent.
+- React, Vue and Svelte can overwrite DOM previews on their next render; durable changes belong in source.
+- A DOM selector is not a source path. Add `data-integra-file` only when the application can supply a truthful hint.
+- Inline styles may be blocked by a strict Content Security Policy. Do not weaken CSP in production to enable the inspector.
+- Remove the activation snippet or keep its environment flag disabled in production.

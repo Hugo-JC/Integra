@@ -1,35 +1,29 @@
 ---
 name: integra-live-inspector
-description: Uses Integra's browser Live Inspector to select rendered elements, preview class and style edits, inspect contrast, compute exact DOM diffs and prepare a source-refactoring handoff for a coding agent.
+description: Use when inspecting a locally running UI, selecting DOM elements, previewing style changes, auditing text contrast and generating an exact diff for an AI agent.
 ---
 
 # Integra Live Inspector
 
-## Preconditions
-- The target is a local development environment the user owns or is authorized to test.
-- The inspector is enabled only in development.
-- The user understands preview edits are temporary DOM mutations.
-- Do not use the inspector on production pages or weaken a production Content Security Policy.
+## Start
+Use the exported `startIntegraInspector()` from `src/modules/live-inspector/index.ts` in a local development-only entry point. The inspector is localhost-only by default. Do not enable remote hosts unless the preview is trusted and explicitly approved.
 
-## Workflow
-1. Start the approved local app with the inspector enabled.
-2. Hover to inspect and click to lock a DOM element.
-3. Record its selector, tag, accessible name and any developer-supplied source hint.
-4. Preview class names, text/background colors, border radius and padding.
-5. Review the computed contrast estimate. Treat transparent, layered, image, gradient and pseudo-element backgrounds as inconclusive.
-6. Generate the change set and handoff prompt.
-7. Resolve the DOM selector to the real source component using source maps or repository search. Never invent the TSX path or component name.
-8. Apply only the required source change, preserving the product's tokens and behavior.
-9. Run tests and verify responsive, keyboard, focus and reduced-motion states.
-10. Restore or reload the page to clear preview mutations.
+## Interaction model
+1. Hover outlines and the element badge use Integra blue `#3B82F6`.
+2. Click locks the target and prevents the underlying click action.
+3. Use **↑ Pai** to move to the containing element when a nested wrapper is selected.
+4. Preview Tailwind classes, text/background color, font size, padding and radius in the live DOM.
+5. Run the contrast check after color or typography edits.
+6. Reset the selected element or destroy the inspector to restore tracked class/style attributes.
+7. Copy the DOM diff and send it to the implementation agent for source-level review.
 
-## Diff rules
-- Preserve the exact original and updated class strings.
-- Report added and removed class tokens separately.
-- Report changed inline style properties and before/after values.
-- Keep selectors as runtime evidence; they are not source locations.
-- Do not silently normalize or drop unrelated classes.
-- Do not send code or data to a remote model automatically.
+## Diff integrity
+The diff must preserve exact original and updated class/style attributes and a best-effort DOM selector. A selector is not a source file path. Only treat `data-integra-file` as a source hint when the application deliberately provides it.
 
-## Output
-Provide the DOM diff, generated prompt, source mapping result, code files changed and verification status. Make clear which values are runtime measurements and which are assumptions.
+## Safety and correctness
+- Preview is not source mutation. Never claim a source file was edited.
+- Do not inject the inspector into production or weaken CSP to make it run.
+- Never send DOM content or patches to a remote provider without user approval.
+- React/Vue/Svelte may re-render and overwrite preview styles; apply durable fixes in the source component.
+- A contrast result is inconclusive when compositing cannot be established reliably.
+- Destroy the inspector before finishing and verify the page returns to its original state.

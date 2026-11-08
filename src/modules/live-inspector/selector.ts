@@ -1,68 +1,28 @@
-function escapeAttributeValue(value: string): string {
+function escape(value: string): string {
   return value.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
 }
 
-function tagName(element: Element): string {
-  return element.tagName.toLowerCase();
-}
-
-/** A unique DOM locator is not a source-code location. */
-export function findUniqueSelector(element: Element, root: ParentNode = document): string {
-  const view = element.ownerDocument.defaultView;
-  const cssEscape = view?.CSS?.escape?.bind(view.CSS);
-  if (element.id) {
-    const candidate = cssEscape ? `#${cssEscape(element.id)}` : `[id="${escapeAttributeValue(element.id)}"]`;
-    try {
-      if (root.querySelectorAll(candidate).length === 1) return candidate;
-    } catch {
-      // Continue with a structural selector.
-    }
-  }
-
-  const segments: string[] = [];
+/** Best-effort DOM locator; it is never represented as a source-code path. */
+export function buildElementSelector(element: Element): string {
+  if (element.id) return `#${typeof CSS !== 'undefined' && CSS.escape ? CSS.escape(element.id) : escape(element.id)}`;
+  const explicit = element.getAttribute('data-integra-component') || element.getAttribute('data-testid');
+  if (explicit) return `[${element.hasAttribute('data-integra-component') ? 'data-integra-component' : 'data-testid'}="${escape(explicit)}"]`;
+  const parts: string[] = [];
   let current: Element | null = element;
-  while (current && current !== element.ownerDocument.documentElement) {
-    const name = tagName(current);
+  while (current && current.tagName.toLowerCase() !== 'html') {
+    let segment = current.tagName.toLowerCase();
     const parent: Element | null = current.parentElement;
-    if (!parent) {
-      segments.unshift(name);
-      break;
+    if (parent) {
+      const same = [...parent.children].filter((child) => child.tagName === current?.tagName);
+      if (same.length > 1) segment += `:nth-of-type(${same.indexOf(current) + 1})`;
     }
-    const siblings = [...parent.children].filter((child) => child.tagName === current?.tagName);
-    const index = siblings.indexOf(current) + 1;
-    segments.unshift(`${name}:nth-of-type(${index})`);
-    const candidate = segments.join(' > ');
-    try {
-      if (root.querySelectorAll(candidate).length === 1) return candidate;
-    } catch {
-      // Continue walking toward the root.
-    }
+    parts.unshift(segment);
     current = parent;
+    if (current?.tagName.toLowerCase() === 'body') break;
   }
-  return segments.join(' > ') || tagName(element);
+  return parts.join(' > ');
 }
 
-export function getAccessibleName(element: Element): string {
-  const doc = element.ownerDocument;
-  const labelledBy = element.getAttribute('aria-labelledby');
-  if (labelledBy) {
-    const referencedText = labelledBy.split(/\s+/)
-      .map((id) => doc.getElementById(id)?.textContent?.trim() ?? '')
-      .filter(Boolean)
-      .join(' ');
-    if (referencedText) return referencedText.slice(0, 160);
-  }
-
-  const explicit = element.getAttribute('aria-label')
-    || element.getAttribute('alt')
-    || element.getAttribute('title');
-  if (explicit?.trim()) return explicit.trim().slice(0, 160);
-
-  const labels = 'labels' in element
-    ? Array.from((element as HTMLInputElement).labels ?? []).map((label) => label.textContent?.trim() ?? '').filter(Boolean).join(' ')
-    : '';
-  if (labels) return labels.slice(0, 160);
-
-  const text = (element.textContent ?? '').replace(/\s+/g, ' ').trim();
-  return text.slice(0, 160);
+export function getElementLabel(element: Element): string {
+  return element.getAttribute('data-integra-component') || element.getAttribute('aria-label') || element.tagName.toLowerCase();
 }
