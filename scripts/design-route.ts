@@ -12,7 +12,8 @@ if (toneIndex >= 0) {
   }
   tone = value;
 }
-const query = args.filter((arg, index) => arg !== '--json' && arg !== '--tone' && index !== toneIndex + 1).join(' ').trim();
+const toneValueIndex = toneIndex >= 0 ? toneIndex + 1 : -1;
+const query = args.filter((arg, index) => arg !== '--json' && arg !== '--tone' && index !== toneValueIndex).join(' ').trim();
 if (!query) {
   console.error('Usage: npm run design:route -- "brief" [--tone calm|loud] [--json]');
   process.exit(1);
