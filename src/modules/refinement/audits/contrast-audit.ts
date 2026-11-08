@@ -62,7 +62,7 @@ export function auditTextContrast(element: Element, view: Window = window): Cont
   }
   let foreground = parseCssColor(computed.color);
   if (!foreground) return { status: 'inconclusive', message: 'The foreground color format could not be parsed.', criterion: 'WCAG 2.2 SC 1.4.3' };
-  let background: RgbaColor = { red: 255, green: 255, blue: 255, alpha: 1 };
+  let background: RgbaColor = { red: 0, green: 0, blue: 0, alpha: 0 };
   let current: Element | null = element;
   while (current) {
     const style = view.getComputedStyle(current);
@@ -77,8 +77,12 @@ export function auditTextContrast(element: Element, view: Window = window): Cont
     current = current.parentElement;
   }
   foreground = compositeColors(foreground, background);
-  if (background.alpha < 0.999 || foreground.alpha < 0.999) {
-    return { status: 'inconclusive', message: 'The final background is not opaque; canvas color is not assumed.', criterion: 'WCAG 2.2 SC 1.4.3' };
+  if (background.alpha < 0.999) {
+    return { status: 'inconclusive', message: 'No fully opaque ancestor background was found; the browser canvas color is not assumed.', criterion: 'WCAG 2.2 SC 1.4.3' };
+  }
+  foreground = compositeColors(foreground, background);
+  if (foreground.alpha < 0.999) {
+    return { status: 'inconclusive', message: 'The final text color is not fully opaque after compositing.', criterion: 'WCAG 2.2 SC 1.4.3' };
   }
   const fg = colorToHex(foreground);
   const bg = colorToHex(background);
