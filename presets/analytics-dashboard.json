@@ -1,0 +1,12 @@
+{
+  "id":"analytics-dashboard","name":"Analytics & Data Dashboard","version":"1.0.0",
+  "productContexts":["analytics","reporting","business intelligence","monitoring","metrics dashboards"],
+  "designIntent":{"primaryGoal":"Help users detect meaningful change and act on reliable information.","audienceNeeds":["context for metrics","comparability","filter clarity","data freshness"],"personalityAxes":["analytical","calm","transparent"],"visualThesis":"Data is the primary content; decoration must not compete with it."},
+  "visualDirection":{"density":"medium-to-high, controlled by task and user expertise","surfaces":"charts and tables share clear alignment; panels only when they define a meaningful group","colorIntent":"color encodes series/status consistently; include redundant labels and patterns where needed","typography":"tabular numerals, readable axis labels, explicit units and scales","motion":"animate only meaningful data changes and preserve access to static values"},
+  "layout":{"pattern":"filter/period controls + KPI context + primary visualization + supporting table","spacing":"compact, grid-aligned and consistent between chart and table","responsive":"provide alternative table or summary when charts cannot fit","contentPriority":["question answered","time range","metric value","comparison","source/freshness"]},
+  "components":{"preferred":["KPI summary","chart","data table","date range","filter chips","drilldown","export"],"states":["no data","partial data","stale data","loading","error","filtered"],"avoid":["unlabeled chart axes","3D charts without analytical value","red/green-only encoding"]},
+  "accessibility":{"minimumTextContrast":"WCAG 2.2 AA","keyboard":"filters, data tables and chart summaries must be reachable","focus":"visible focus and selected filters","reducedMotion":"provide stable values and avoid motion-only data comparisons"},
+  "antiPatterns":["metrics without units","charts without a question","truncated labels that hide meaning","color-only series identification"],
+  "references":["fluent-2","material-3","wai-aria-apg","web-vitals"],
+  "notes":["Do not fabricate data. Clearly distinguish zero, missing, stale and unavailable values."]
+}

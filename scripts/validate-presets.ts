@@ -17,7 +17,7 @@ for (const entry of manifest.presets) {
   try {
     const preset = JSON.parse(readFileSync(join(root, entry.path), 'utf8')) as Record<string, unknown>;
     if (preset.id !== entry.id) errors.push(`${entry.id}: file id does not match manifest`);
-    for (const key of ['name', 'version', 'productContexts', 'designIntent', 'visualDirection', 'layout', 'components', 'accessibility']) {
+    for (const key of ['name', 'version', 'productContexts', 'designIntent', 'visualDirection', 'layout', 'components', 'accessibility', 'antiPatterns', 'references']) {
       if (!(key in preset)) errors.push(`${entry.id}: missing required property "${key}"`);
     }
     if (!Array.isArray(preset.productContexts) || preset.productContexts.length === 0) errors.push(`${entry.id}: productContexts must be a non-empty array`);
@@ -26,9 +26,9 @@ for (const entry of manifest.presets) {
   }
 }
 
-const files = readdirSync(join(root, 'presets'));
+const files = readdirSync(root);
 for (const file of files) {
-  if (file.endsWith('.json') && file !== 'manifest.json' && !manifest.presets.some((entry) => entry.path === `presets/${file}`)) {
+  if (file.endsWith('.json') && file !== 'manifest.json' && !manifest.presets.some((entry) => entry.path === file)) {
     errors.push(`Unregistered preset file: ${file}`);
   }
 }

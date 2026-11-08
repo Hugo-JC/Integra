@@ -1,0 +1,12 @@
+{
+  "id":"public-service","name":"Public Service & Institutional","version":"1.0.0",
+  "productContexts":["government services","municipal portals","nonprofit services","institutional forms","public information"],
+  "designIntent":{"primaryGoal":"Help people complete important tasks correctly, confidently and with minimal ambiguity.","audienceNeeds":["plain language","predictable flows","transparent requirements","recoverable errors"],"personalityAxes":["clear","trustworthy","inclusive"],"visualThesis":"Clarity, predictable behavior and plain language are the visual identity."},
+  "visualDirection":{"density":"low-to-medium on task pages; information-rich pages use clear section hierarchy","surfaces":"minimal decoration, strong section boundaries and explicit progress","colorIntent":"high contrast, stable link styling and distinct but redundant feedback states","typography":"legible system fonts where appropriate; prioritize reading ease and language coverage","motion":"minimal; never obstruct forms or status feedback"},
+  "layout":{"pattern":"service landing page + task steps + clear form or confirmation state","spacing":"consistent, generous around questions and form controls","responsive":"single-column content with no loss of legal or eligibility information","contentPriority":["what the service does","who can use it","what is needed","action","confirmation/next step"]},
+  "components":{"preferred":["stepper","form field","error summary","hint text","confirmation panel","service navigation"],"states":["not eligible","incomplete","validation error","submitted","needs follow-up"],"avoid":["marketing language in critical instructions","hidden eligibility rules","ambiguous date and number formats"]},
+  "accessibility":{"minimumTextContrast":"WCAG 2.2 AA","keyboard":"complete task without pointer","focus":"visible and predictable focus, with error summary focus management","reducedMotion":"no essential progress depends on transition or animation"},
+  "antiPatterns":["unclear form errors","unexplained acronyms","primary action hidden below unrelated content","color-only validation"],
+  "references":["govuk-design-system","wcag-22","wai-aria-apg","mdn-accessibility"],
+  "notes":["Prefer tested plain language and direct task flows over decorative institutional branding."]
+}

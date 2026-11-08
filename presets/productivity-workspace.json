@@ -1,0 +1,12 @@
+{
+  "id":"productivity-workspace","name":"Productivity & Personal Workspace","version":"1.0.0",
+  "productContexts":["task managers","notes","planning tools","personal dashboards","project workspaces"],
+  "designIntent":{"primaryGoal":"Help users capture, prioritize and complete work with low friction.","audienceNeeds":["quick scanning","low cognitive load","fast capture","clear progress"],"personalityAxes":["calm","focused","capable"],"visualThesis":"A quiet workspace that keeps the next useful action obvious."},
+  "visualDirection":{"density":"medium; allow a denser compact mode when users manage many items","surfaces":"subtle separation, few elevation levels, strong selected and focused states","colorIntent":"mostly neutral structure with semantic status and a contextual accent","typography":"readable UI scale; clear distinction between task title, metadata and due date","motion":"small feedback for completion, reordering and navigation; respect reduced motion"},
+  "layout":{"pattern":"persistent navigation + contextual list/board + optional detail pane","spacing":"consistent and scannable; list rows need adequate hit areas","responsive":"single-column navigation and detail views on narrow screens","contentPriority":["inbox or current list","next action","status","metadata"]},
+  "components":{"preferred":["task row","list","board column","calendar","quick capture","detail drawer","filter"],"states":["empty inbox","no results","overdue","completed","saving","offline"],"avoid":["too many panels competing for attention","overly playful feedback that delays completion","nested-card overload"]},
+  "accessibility":{"minimumTextContrast":"WCAG 2.2 AA","keyboard":"support predictable navigation and visible focus","focus":"selected, focused and completed states must be distinguishable","reducedMotion":"reordering and transitions need non-animated alternatives"},
+  "antiPatterns":["infinite dashboard widgets","ambiguous completion controls","color-only priority indicators","tiny drag handles without keyboard alternatives"],
+  "references":["impeccable","material-3","fluent-2","wai-aria-apg"],
+  "notes":["Let density respond to workflow complexity instead of treating minimalism as a universal goal."]
+}

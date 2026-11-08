@@ -1,0 +1,12 @@
+{
+  "id":"creator-media","name":"Creator, Audio & Media Products","version":"1.0.0",
+  "productContexts":["music discovery","podcasts","video creators","streaming interfaces","media libraries"],
+  "designIntent":{"primaryGoal":"Make discovery, playback and library management immediate and understandable.","audienceNeeds":["fast browsing","persistent playback state","clear metadata","accessible media controls"],"personalityAxes":["expressive","immersive","responsive"],"visualThesis":"Media content supplies the emotional identity; controls remain precise and persistent."},
+  "visualDirection":{"density":"medium; dense libraries need compact, scannable rows","surfaces":"content artwork may dominate; player and navigation remain stable","colorIntent":"artwork-led accent can be used carefully, but control labels and playback states need reliable contrast","typography":"metadata hierarchy separates title, creator, album/show and duration","motion":"playback transitions and progress feedback; avoid motion that hides controls"},
+  "layout":{"pattern":"navigation + discovery/library surface + persistent player or media controls","spacing":"balanced cards for discovery and compact rows for large libraries","responsive":"player controls adapt without hiding primary actions or current item","contentPriority":["current media","play/pause and seek","title/creator","queue/library","discovery"]},
+  "components":{"preferred":["media row","artwork card","persistent player","queue drawer","search","library filters"],"states":["playing","paused","buffering","unavailable","offline","empty library"],"avoid":["controls with no accessible names","tiny progress handles","unreadable metadata over artwork"]},
+  "accessibility":{"minimumTextContrast":"WCAG 2.2 AA","keyboard":"media controls, queue and navigation must be keyboard accessible","focus":"playback state is announced and visibly represented","reducedMotion":"animated artwork is optional and can be disabled"},
+  "antiPatterns":["auto-play without clear user intent","artwork color used as the only status cue","unlabeled icon buttons","player controls that shift layout constantly"],
+  "references":["apple-hig","material-3","radix-primitives","impeccable"],
+  "notes":["Do not assume a provider has playback rights or capabilities that its API does not document."]
+}
