@@ -1,25 +1,28 @@
 ---
 name: integra-live-inspector
-description: Inspect a local development DOM element, preview style changes, estimate contrast, export an exact diff and prepare an AI refactoring handoff.
+description: Inspect a local development DOM element, preview allowlisted visual changes, estimate contrast, export a structured review handoff and preserve source-code approval boundaries.
 ---
 
-# Integra Live Inspector & Diff Handoff
+# Integra Live Inspector
 
-## Principles
+## Safety contract
 - Local development only; never inject into production or weaken production CSP.
-- Integra blue (#3B82F6) is selection chrome only, never the inspected product's theme.
-- DOM changes are temporary previews. The inspector does not write source files.
-- Export exact differences, not vague styling instructions.
+- Use the canonical `createIntegraInspector()` API through the Vite development adapter.
+- DOM edits are temporary previews. The inspector never writes source files and never contacts an AI provider.
+- A selector, class name or DOM ancestry is not a source-code path.
+- A source hint is caller-provided and unverified; never present it as discovered fact.
+- Source changes require a separate, exact-diff review and explicit user approval. Preview acceptance is not source-edit approval.
 
 ## Workflow
-1. Confirm local dev environment and authorization.
-2. Start the documented Vite dev server. Toggle with Alt+Shift+I; Escape deactivates.
-3. Hover to inspect and click to lock. Ignore the inspector UI and [data-integra-ignore].
-4. Preview background, text color, radius, padding and existing utility classes.
-5. Review contrast estimate. It is not reliable for gradients, opacity, images, filters or complex compositing.
-6. Export getPatch() or toPrompt(); use data-integra-source as a source hint when available.
-7. Locate the real component; never infer a file path from a DOM class.
-8. Apply only the reviewed delta with the refactor skill. Preserve behavior, semantics, tokens and responsive behavior.
-9. Run typecheck, tests and browser/accessibility checks.
+1. Confirm the app is running in a trusted local development environment.
+2. Start the documented Vite dev server. The plugin is development-only (`apply: 'serve'`).
+3. Hover to inspect and click to lock a target. Ignore the inspector UI and `[data-integra-ignore]`.
+4. Preview only supported colors, radius, padding and existing classes. Do not inject arbitrary CSS, HTML or JavaScript.
+5. Review the contrast estimate and its limitations. Gradients, images, opacity, pseudo-elements and complex compositing may be inconclusive.
+6. Export the structured change sets and prompt handoff. Treat selectors as DOM locators only.
+7. Inspect the real repository and resolve the source component from evidence; do not guess paths.
+8. Present the exact proposed source diff, affected files, behavior-preservation notes and verification plan.
+9. Wait for explicit approval of that exact diff before changing source files.
+10. Run typecheck, tests, responsive and accessibility checks; report actual results.
 
-The handoff includes target element, source hint, original/updated classes, exact CSS changes, contrast estimate and acceptance checks. Browser preview is not proof of WCAG conformance or a source-code edit.
+Destroying the inspector restores temporary class/style changes by default. No commit, push, PR or merge is implied by inspection or review approval.
