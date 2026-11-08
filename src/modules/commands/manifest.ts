@@ -63,7 +63,7 @@ export function validateCommandManifest(
 
 export function getCommandManifest(): CommandManifest {
   const result = validateCommandManifest();
-  if (!result.valid) throw new Error(`Invalid Integra command manifest:\\n- ${result.errors.join('\\n- ')}`);
+  if (!result.valid) throw new Error(`Invalid Integra command manifest:\n- ${result.errors.join('\n- ')}`);
   return manifest;
 }
 
@@ -74,7 +74,7 @@ export function listCommands(kind?: CommandDefinition['kind']): CommandDefinitio
 
 /** Resolves only explicit manifest invocations; host adapters own natural-language routing. */
 export function resolveCommand(input: string): CommandResolution | null {
-  const [invocation, ...args] = input.trim().split(/\\s+/);
+  const [invocation, ...args] = input.trim().split(/\s+/);
   if (!invocation) return null;
   const command = getCommandManifest().commands.find((entry) => entry.invocation === invocation);
   return command ? { command, args } : null;
