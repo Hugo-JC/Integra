@@ -148,14 +148,23 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
   let selected: HTMLElement | SVGElement | null = null;
   let selectionLocked = false;
   let stopped = false;
+  let geometryFrame = 0;
+  let resizeObserver: ResizeObserver | null = null;
 
   const isInspectorEvent = (event: Event): boolean => event.composedPath().includes(host);
   const isInspectable = (element: Element): element is HTMLElement | SVGElement => {
     const ignored = new Set(['HTML', 'BODY', 'SCRIPT', 'STYLE', 'LINK', 'META', 'HEAD']);
-    return !ignored.has(element.tagName) && 'style' in element && !element.closest('[data-integra-inspector="true"]');
+    return !ignored.has(element.tagName)
+      && 'style' in element
+      && !element.closest('[data-integra-inspector="true"], [data-integra-ignore]');
   };
 
   const positionHighlight = (element: Element): void => {
+    if (!element.isConnected) {
+      highlight.style.display = 'none';
+      tag.style.display = 'none';
+      return;
+    }
     const rect = element.getBoundingClientRect();
     highlight.style.display = 'block';
     highlight.style.left = `${Math.max(0, rect.left)}px`;
@@ -166,6 +175,18 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
     tag.style.left = `${Math.max(0, rect.left)}px`;
     tag.style.top = `${Math.max(4, rect.top - 25)}px`;
     tag.textContent = `<${element.tagName.toLowerCase()}>`;
+  };
+
+  const scheduleGeometryUpdate = (): void => {
+    if (geometryFrame || stopped) return;
+    geometryFrame = view.requestAnimationFrame(() => {
+      geometryFrame = 0;
+      if (selected?.isConnected) positionHighlight(selected);
+      else {
+        highlight.style.display = 'none';
+        tag.style.display = 'none';
+      }
+    });
   };
 
   const currentComputed = (element: Element): Record<string, string> => {
@@ -198,6 +219,8 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
   const selectElement = (element: HTMLElement | SVGElement): void => {
     selected = element;
     selectionLocked = true;
+    resizeObserver?.disconnect();
+    resizeObserver?.observe(element);
     if (!originals.has(element)) {
       originals.set(element, {
         snapshot: createSnapshot(element, doc, options.sourceHint),
@@ -225,6 +248,7 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
     targetSelector.textContent = original.snapshot.selector;
     updateContrast(element);
     positionHighlight(element);
+    scheduleGeometryUpdate();
     panel.hidden = false;
     status.textContent = 'Elemento selecionado. As alterações ainda não foram escritas no código-fonte.';
   };
@@ -348,6 +372,12 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
     stopped = true;
     doc.removeEventListener('pointermove', onPointerMove, true);
     doc.removeEventListener('click', onClick, true);
+    doc.removeEventListener('scroll', scheduleGeometryUpdate, true);
+    view.removeEventListener('resize', scheduleGeometryUpdate);
+    view.visualViewport?.removeEventListener('resize', scheduleGeometryUpdate);
+    view.visualViewport?.removeEventListener('scroll', scheduleGeometryUpdate);
+    resizeObserver?.disconnect();
+    if (geometryFrame) view.cancelAnimationFrame(geometryFrame);
     shadow.removeEventListener('input', onInput);
     shadow.removeEventListener('click', onPanelClick);
     if (stopOptions.restore !== false) {
@@ -356,10 +386,19 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
     host.remove();
   }
 
+  resizeObserver = typeof ResizeObserver !== 'undefined'
+    ? new ResizeObserver(scheduleGeometryUpdate)
+    : null;
+  resizeObserver?.observe(doc.documentElement);
+
   shadow.addEventListener('input', onInput);
   shadow.addEventListener('click', onPanelClick);
   doc.addEventListener('pointermove', onPointerMove, true);
   doc.addEventListener('click', onClick, true);
+  doc.addEventListener('scroll', scheduleGeometryUpdate, true);
+  view.addEventListener('resize', scheduleGeometryUpdate);
+  view.visualViewport?.addEventListener('resize', scheduleGeometryUpdate);
+  view.visualViewport?.addEventListener('scroll', scheduleGeometryUpdate);
   doc.body.append(host);
   panel.hidden = false;
 
