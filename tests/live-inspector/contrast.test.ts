@@ -12,7 +12,9 @@ describe('Live Inspector contrast utilities', () => {
   it('reports AA and AAA thresholds separately', () => {
     expect(evaluateContrast('#767676','#ffffff')).toMatchObject({aaNormal:true,aaaNormal:false,aaLarge:true});
   });
-  it('returns null for unsupported color syntax', () => {
+  it('returns null for unsupported or translucent color syntax', () => {
     expect(contrastRatio('var(--ink)','#fff')).toBeNull();
+    expect(contrastRatio('rgba(0, 0, 0, 0.5)','#fff')).toBeNull();
+    expect(contrastRatio('#00000080','#fff')).toBeNull();
   });
 });
