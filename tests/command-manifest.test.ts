@@ -9,7 +9,7 @@ import {
 describe('Integra command manifest', () => {
   it('validates the canonical manifest and referenced skills', () => {
     const result = validateCommandManifest();
-    expect(result.valid, result.errors.join('\\n')).toBe(true);
+    expect(result.valid, result.errors.join('\n')).toBe(true);
   });
 
   it('defines one orchestrator, workflows and modifiers as separate kinds', () => {
