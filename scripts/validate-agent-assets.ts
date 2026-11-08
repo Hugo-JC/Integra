@@ -80,13 +80,13 @@ if (!readFileSync(resolve(root, 'GEMINI.md'), 'utf8').includes('.agents/skills/'
 }
 
 const sources = json<{
-  sources: Array<{ id: string; url: string; verificationStatus?: string; lastVerifiedAt?: string | null }>;
+  sources: Array<{ id: string; url: string; verificationStatus?: string; lastVerifiedAt?: string | null; verifiedPage?: string | null }>;
 }>('docs/references/sources.json');
 if (sources.sources.length < 10 || new Set(sources.sources.map((source) => source.id)).size !== sources.sources.length) {
   errors.push('Reference catalog must have 10+ unique sources.');
 }
 for (const source of sources.sources) {
-  if (!/^https:\/\//i.test(source.url) || source.verificationStatus !== 'catalog-only' || source.lastVerifiedAt !== null) {
+  if (!/^https:\/\//i.test(source.url) || !['catalog-only', 'verified'].includes(source.verificationStatus ?? '') ||\n    (source.verificationStatus === 'catalog-only' && source.lastVerifiedAt !== null) ||\n    (source.verificationStatus === 'verified' && (!source.lastVerifiedAt || !source.verifiedPage))) {
     errors.push('Reference ' + source.id + ' must be explicitly marked as a catalog lead until inspected.');
   }
 }
