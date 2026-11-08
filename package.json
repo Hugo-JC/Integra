@@ -2,28 +2,19 @@
   "name": "integra",
   "version": "0.2.0",
   "private": true,
-  "description": "Integra AI Design Engine v5 — deterministic design direction and evaluation foundation",
+  "description": "Integra AI Design Engine v5 — design direction, live inspection and evidence-based quality tooling",
   "type": "module",
-  "engines": {
-    "node": ">=24 <27",
-    "npm": ">=10"
-  },
+  "engines": { "node": ">=24 <27", "npm": ">=10" },
   "scripts": {
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "validate:fixtures": "tsx scripts/validate-fixtures.ts",
+    "validate:skills": "tsx scripts/validate-skills.ts",
+    "validate:presets": "tsx scripts/validate-presets.ts",
     "direction:generate": "tsx scripts/direction-generate.ts",
     "direction:validate": "tsx scripts/direction-validate.ts",
-    "check": "npm run typecheck && npm test && npm run validate:fixtures"
+    "check": "npm run typecheck && npm test && npm run validate:fixtures && npm run validate:skills && npm run validate:presets"
   },
-  "dependencies": {
-    "ajv": "^8.20.0",
-    "ajv-formats": "^3.0.1"
-  },
-  "devDependencies": {
-    "@types/node": "^24.0.0",
-    "tsx": "^4.23.15",
-    "typescript": "^5.9.0",
-    "vitest": "^5.0.5"
-  }
+  "dependencies": { "ajv": "^8.20.0", "ajv-formats": "^3.0.1" },
+  "devDependencies": { "@types/node": "^24.0.0", "tsx": "^4.23.15", "typescript": "^5.9.0", "vitest": "^5.0.5" }
 }
