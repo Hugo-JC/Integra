@@ -1,12 +1,159 @@
 {
-  "id":"community-gaming","name":"Gaming & Community","version":"1.0.0",
-  "productContexts":["gaming communities","guilds","game companion tools","esports portals","fan communities"],
-  "designIntent":{"primaryGoal":"Help members find people, events, updates and shared activities quickly.","audienceNeeds":["clear identity","live status","safe communication","event discovery"],"personalityAxes":["energetic","social","playful"],"visualThesis":"Expressive community identity balanced with clear moderation, status and navigation."},
-  "visualDirection":{"density":"medium-to-high in activity feeds and member lists","surfaces":"separate social content, controls and moderation actions without excessive nesting","colorIntent":"brand accent plus accessible status tokens; never rely on color alone for presence or rank","typography":"distinct display voice with readable small-screen body and metadata","motion":"feedback for reactions, live events and state transitions; no flashing or unavoidable loops"},
-  "layout":{"pattern":"community navigation + feed/events + member or detail sidebar","spacing":"compact lists with clear grouping and strong control hit areas","responsive":"prioritize feed and current event; secondary panels move into navigation","contentPriority":["community identity","current activity","events","member actions","moderation"]},
-  "components":{"preferred":["activity feed","event card","member row","role badge","channel list","moderation menu"],"states":["online","offline","live","scheduled","removed","reported"],"avoid":["status conveyed only by glow/color","ambiguous report/block actions","visual noise obscuring safety controls"]},
-  "accessibility":{"minimumTextContrast":"WCAG 2.2 AA","keyboard":"all community navigation and moderation actions must be reachable","focus":"modals and menus manage focus correctly","reducedMotion":"disable flashing, pulsing and non-essential animated backgrounds"},
-  "antiPatterns":["rank or role communicated only by color","unmoderated actions without confirmation","low contrast over busy artwork"],
-  "references":["fluent-2","wai-aria-apg","radix-primitives","impeccable"],
-  "notes":["Make reporting, blocking and moderation paths discoverable and understandable."]
+  "id": "community-gaming",
+  "name": "Gaming & Community",
+  "version": "1.1.0",
+  "productContexts": [
+    "gaming communities",
+    "guilds",
+    "game companion tools",
+    "esports portals",
+    "fan communities"
+  ],
+  "designIntent": {
+    "primaryGoal": "Help members find people, events, updates and shared activities quickly.",
+    "audienceNeeds": [
+      "clear identity",
+      "live status",
+      "safe communication",
+      "event discovery"
+    ],
+    "personalityAxes": [
+      "energetic",
+      "social",
+      "playful"
+    ],
+    "visualThesis": "Expressive community identity balanced with clear moderation, status and navigation."
+  },
+  "visualDirection": {
+    "density": "medium-to-high in activity feeds and member lists",
+    "surfaces": "separate social content, controls and moderation actions without excessive nesting",
+    "colorIntent": "brand accent plus accessible status tokens; never rely on color alone for presence or rank",
+    "typography": "distinct display voice with readable small-screen body and metadata",
+    "motion": "feedback for reactions, live events and state transitions; no flashing or unavoidable loops"
+  },
+  "layout": {
+    "pattern": "community navigation + feed/events + member or detail sidebar",
+    "spacing": "compact lists with clear grouping and strong control hit areas",
+    "responsive": "prioritize feed and current event; secondary panels move into navigation",
+    "contentPriority": [
+      "community identity",
+      "current activity",
+      "events",
+      "member actions",
+      "moderation"
+    ]
+  },
+  "components": {
+    "preferred": [
+      "activity feed",
+      "event card",
+      "member row",
+      "role badge",
+      "channel list",
+      "moderation menu"
+    ],
+    "states": [
+      "online",
+      "offline",
+      "live",
+      "scheduled",
+      "removed",
+      "reported"
+    ],
+    "avoid": [
+      "status conveyed only by glow/color",
+      "ambiguous report/block actions",
+      "visual noise obscuring safety controls"
+    ]
+  },
+  "accessibility": {
+    "minimumTextContrast": "WCAG 2.2 AA",
+    "keyboard": "all community navigation and moderation actions must be reachable",
+    "focus": "modals and menus manage focus correctly",
+    "reducedMotion": "disable flashing, pulsing and non-essential animated backgrounds"
+  },
+  "antiPatterns": [
+    "rank or role communicated only by color",
+    "unmoderated actions without confirmation",
+    "low contrast over busy artwork"
+  ],
+  "references": [
+    "fluent-2",
+    "wai-aria-apg",
+    "radix-primitives",
+    "impeccable"
+  ],
+  "notes": [
+    "Make reporting, blocking and moderation paths discoverable and understandable."
+  ],
+  "aiGuidance": {
+    "primaryFlow": "Discover a community or event → understand activity and rules → participate → manage identity and safety.",
+    "prioritize": [
+      "The current event, discussion or activity that matters to the member",
+      "Identity, roles and presence with redundant labels",
+      "Reporting, blocking, moderation and safety affordances"
+    ],
+    "confirmOrMarkUnknown": [
+      "Community rules, age requirements and moderation model",
+      "Whether presence, membership and event status are live",
+      "Permissions for invites, posting and moderation"
+    ],
+    "avoidByDefault": [
+      "Glow as the only presence signal",
+      "Unmoderated destructive actions",
+      "Fake member counts, activity or tournament results"
+    ],
+    "acceptanceChecks": [
+      "Report, block and moderation actions are discoverable",
+      "Status uses text or icons as well as color",
+      "Keyboard navigation works across feeds and dialogs"
+    ]
+  },
+  "compositionEscapes": [
+    {
+      "id": "event-first",
+      "when": "A tournament, game night, launch or community event drives the current visit.",
+      "composition": "Lead with event state, schedule and participation action; include teams, rules and supporting details only when confirmed.",
+      "contentRequirements": [
+        "Real event name, schedule and timezone",
+        "Accurate eligibility, rules and join state",
+        "Cancelled and full-capacity states"
+      ],
+      "avoid": [
+        "Fake live badges or participant counts",
+        "Unverified prize pools or rankings",
+        "Countdowns without a real schedule"
+      ]
+    },
+    {
+      "id": "activity-first",
+      "when": "The main task is following ongoing discussion, updates or member contributions.",
+      "composition": "Make the activity stream primary, with clear author/time context and contextual moderation actions; keep discovery and member lists secondary.",
+      "contentRequirements": [
+        "Actual posts or labelled sample data",
+        "Author, timestamp and thread context",
+        "Reporting and moderation behavior"
+      ],
+      "avoid": [
+        "Engagement metrics without sources",
+        "Color-only role or presence indicators",
+        "Infinite feeds with no orientation"
+      ]
+    },
+    {
+      "id": "channel-discovery",
+      "when": "Users need to find a server, guild, group, channel or shared activity area.",
+      "composition": "Organize discovery around topic, game, language or activity; show rules, membership requirements and recent activity before joining.",
+      "contentRequirements": [
+        "Real categories and eligibility rules",
+        "Current membership and access state",
+        "Search and empty results"
+      ],
+      "avoid": [
+        "Join buttons hiding requirements",
+        "Fake member counts or endorsements",
+        "Decorative channel tiles without distinction"
+      ]
+    }
+  ]
 }

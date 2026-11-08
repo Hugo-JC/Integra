@@ -1,29 +1,49 @@
 ---
 name: integra-ui-generator
-description: Generate polished React and TypeScript interface components from abstract product requests. Use for cards, dashboards, navigation, forms, menus, tables, empty states and dialogs.
+description: Generate production-ready React + TypeScript UI (components, screens, forms, tables, dialogs, empty states) from a product need and an approved direction. Use when building new interface code; not for refactoring existing components or reviewing finished work.
 ---
 
 # Integra UI Generator
 
-## Before JSX
-- Determine component job, user, information, primary action and data states.
-- Inspect existing stack, tokens, component library and nearby components.
-- Reuse installed systems such as shadcn/ui when present; do not install a library for one component.
-- Ask only for missing facts that materially block implementation; otherwise state assumptions.
+Build interface code that is semantic, accessible, responsive and specific to the product, in the project's own stack. Read `docs/ai-context-contract.md` and `docs/ai-guides/preset-reference-escape-routing.md` when presets, references or composition alternatives affect implementation.
+
+## Use when / not when
+
+- Use: new component or screen from a brief or Direction Artifact.
+- Not: restructuring existing code (`integra-refactor-agent`), auditing (`integra-design-qa`), choosing the full product direction (`integra-design-direction`).
+
+## Before the first line of JSX
+
+1. Name the component's job, user, data, primary action and states.
+2. Inspect stack, tokens, component library and nearby components; match conventions.
+3. Reuse installed systems (shadcn/ui, Radix) when present; add a dependency only for a concrete need.
+4. If a Direction Artifact exists, read all eight sections and obey hard constraints; [R] items are advisory.
+5. Read the relevant structured product profile's `aiGuidance` and candidate `compositionEscapes`. The domain profile informs task flow; it does not override the deterministic style route or Direction Artifact.
+6. Choose composition only when its `when` condition matches and its `contentRequirements` can be satisfied with real or explicitly labelled demo content. Record the selected escape ID and rationale.
+7. Ask only about facts that block implementation; otherwise state assumptions in one line.
 
 ## Build rules
-1. Use semantic HTML and the simplest structure that supports the behavior.
-2. Establish hierarchy through content order, type, spacing, alignment and contrast before decoration.
-3. Use semantic tokens (surface, text, border, accent, focus and status roles) mapped to the project's syntax.
-4. Reuse type and spacing scales; avoid arbitrary values when tokens exist.
-5. Keep one clear primary action per local context.
-6. Never fabricate metrics, testimonials, reviews, customer logos or performance claims.
-7. Cover loading, empty, error, disabled, hover, active and focus states where relevant.
-8. Make layouts responsive from content constraints, not by shrinking desktop columns.
-9. Respect reduced motion; motion must communicate state or feedback.
-10. Prefer transform/opacity for simple transitions. Avoid scroll hijacking and expensive effects without clear value.
-11. Add ARIA only where native semantics are insufficient.
-12. Deliver complete, type-safe code, tests and necessary token additions.
 
-## Visual quality gate
-Review narrow mobile and desktop. Remove gratuitous gradients, oversized headings, nested cards, excessive rounding, repeated icons and purposeless shadows. Keep a distinctive concept rather than generic decoration.
+- Native semantic elements first; ARIA only where native semantics fall short.
+- Hierarchy through order, type, spacing and contrast before decoration.
+- Semantic tokens, not one-off values; no arbitrary hex when tokens exist.
+- One primary action per local context; secondary actions visibly quieter.
+- Cover loading, empty, error, disabled, hover, active and focus-visible. Empty states explain and offer a next step.
+- Responsive from content pressure, not by shrinking desktop; no horizontal overflow at the supplied viewports.
+- Motion communicates state; prefer transform/opacity; honor `prefers-reduced-motion`.
+- Never fabricate metrics, testimonials, logos, reviews, stock, schedules, legal claims or product capabilities; label demo data as fictional.
+- Strict TypeScript: typed props, discriminated unions for states, no `any`.
+- Do not default to a marketing hero, three-card grid, KPI strip, decorative gradient or glass card. Do not ban a pattern universally; justify it by the product task and real content.
+- If no composition escape fits, create a neutral task-first structure rather than forcing an archetype.
+
+## Deliverable
+
+Complete code, types, token additions when necessary, a regression test where behavior exists, and a short note: selected profile/escape, assumptions, states covered, and what was NOT verified.
+
+## Signature touch: "State gallery"
+
+Ship a tiny story/fixture (or test) that renders every state of the component side by side. If a state cannot be shown, it is not done.
+
+## Visual gate
+
+Check narrow mobile and desktop. Remove gratuitous gradients, oversized headings, nested cards, excessive rounding, repeated icons and purposeless shadows. Run `npm run design:qa -- src/ --json` when the script and target exist; report the output honestly and never claim it passed if it was not run.

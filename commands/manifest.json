@@ -12,7 +12,20 @@
     "sourceMutation": "approval-required",
     "previewMutation": "temporary-dom-only",
     "approvalScope": "exact-proposed-diff",
-    "neverInferApprovalFrom": ["command invocation", "preview acceptance", "generated patch", "test success"]
+    "neverInferApprovalFrom": [
+      "command invocation",
+      "preview acceptance",
+      "generated patch",
+      "test success"
+    ],
+    "blockedActionsBeforeApproval": [
+      "write-source-files",
+      "apply-source-diff",
+      "commit",
+      "push",
+      "open-pull-request",
+      "merge"
+    ]
   },
   "commands": [
     {
@@ -21,177 +34,765 @@
       "invocation": "/integra",
       "description": "Understand the request, inspect project context, select and sequence the smallest useful set of workflows, then present a reviewable plan.",
       "skills": [],
-      "outputs": ["execution-plan", "selected-workflows", "review-summary"],
-      "sourceMutation": "approval-required"
+      "outputs": [
+        "execution-plan",
+        "selected-workflows",
+        "review-summary"
+      ],
+      "sourceMutation": "approval-required",
+      "whenToUse": [
+        "Use for broad, cross-stage or end-to-end product work that may require several specialist workflows.",
+        "Use when the desired outcome is clear but discovery, design, implementation and QA still need sequencing."
+      ],
+      "notFor": [
+        "Do not replace a clearly focused specialist workflow.",
+        "Do not treat orchestration as permission to edit source."
+      ],
+      "triggers": [
+        "complete product workflow",
+        "complete saas application",
+        "full application",
+        "end-to-end implementation",
+        "projeto completo",
+        "aplicação completa",
+        "site completo",
+        "do início ao fim"
+      ],
+      "inputs": [
+        "User goal, intended users and explicit constraints",
+        "Repository guidance and current product state when available"
+      ]
     },
     {
       "id": "shape",
       "kind": "workflow",
       "invocation": "/integra:shape",
       "description": "Clarify user needs, task flows, constraints and information architecture before visual direction or implementation.",
-      "skills": ["integra-design-direction"],
-      "outputs": ["ux-brief", "information-architecture", "open-questions"]
+      "skills": [
+        "integra-design-direction"
+      ],
+      "outputs": [
+        "ux-brief",
+        "information-architecture",
+        "open-questions"
+      ],
+      "whenToUse": [
+        "Use when the user task, journey, navigation or information architecture is not clear.",
+        "Use before visual direction when content and tasks need structuring."
+      ],
+      "notFor": [
+        "Do not use for a fully specified component that only needs implementation.",
+        "Do not substitute it for a visual critique."
+      ],
+      "triggers": [
+        "information architecture",
+        "user flow",
+        "task flow",
+        "mapear fluxo",
+        "arquitetura de informação",
+        "estruturar navegação"
+      ],
+      "inputs": [
+        "Product purpose and primary audience",
+        "Known user tasks, content groups and constraints"
+      ]
     },
     {
       "id": "direction",
       "kind": "workflow",
       "invocation": "/integra:direction",
       "description": "Create a contextual visual thesis, experience archetype, design principles and token direction.",
-      "skills": ["integra-design-direction"],
-      "outputs": ["direction-artifact", "token-plan", "visual-acceptance-criteria"]
+      "skills": [
+        "integra-design-direction"
+      ],
+      "outputs": [
+        "direction-artifact",
+        "token-plan",
+        "visual-acceptance-criteria"
+      ],
+      "whenToUse": [
+        "Use to define a visual thesis, product-specific design brief, archetype and token direction.",
+        "Use when the current interface lacks a coherent visual system."
+      ],
+      "notFor": [
+        "Do not use when only one already-specified component needs implementation.",
+        "Do not use for a narrow technical research question."
+      ],
+      "triggers": [
+        "visual direction",
+        "direção visual",
+        "design brief",
+        "sistema visual",
+        "direção de design",
+        "token direction"
+      ],
+      "inputs": [
+        "Product context, audience and primary task",
+        "Existing brand assets, tokens and restrictions",
+        "Platform and accessibility requirements"
+      ]
     },
     {
       "id": "investigate",
       "kind": "workflow",
       "invocation": "/integra:investigate",
       "description": "Research references, patterns or technical questions and separate verified evidence from interpretation.",
-      "skills": ["integra-investigation"],
-      "outputs": ["evidence-report", "reference-set", "recommendations"]
+      "skills": [
+        "integra-investigation"
+      ],
+      "outputs": [
+        "evidence-report",
+        "reference-set",
+        "recommendations"
+      ],
+      "whenToUse": [
+        "Use when a design or technical decision needs evidence from references or official documentation.",
+        "Use to compare specific interfaces or inspect a concrete interaction pattern."
+      ],
+      "notFor": [
+        "Do not research generic inspiration when local evidence already answers the question.",
+        "Do not reproduce a competitor's page, copy, assets or brand identity."
+      ],
+      "triggers": [
+        "investigar referências",
+        "pesquisar referências",
+        "compare design references",
+        "analisar site de referência",
+        "verificar padrão de interface",
+        "documentação oficial"
+      ],
+      "inputs": [
+        "Narrow research question and target behavior",
+        "Permitted URLs, screenshots or named sources",
+        "Current product context and decision to support"
+      ]
     },
     {
       "id": "generate",
       "kind": "workflow",
       "invocation": "/integra:generate",
       "description": "Generate a new UI component or screen from an approved brief and direction.",
-      "skills": ["integra-ui-generator", "integra-design-system"],
-      "outputs": ["proposed-source-diff", "implementation-notes", "verification-plan"]
+      "skills": [
+        "integra-ui-generator",
+        "integra-design-system"
+      ],
+      "outputs": [
+        "proposed-source-diff",
+        "implementation-notes",
+        "verification-plan"
+      ],
+      "whenToUse": [
+        "Use to implement one sufficiently specified UI component, screen or interaction.",
+        "Use when the brief and visual direction are clear enough to produce a reviewable implementation."
+      ],
+      "notFor": [
+        "Do not use alone for an end-to-end product request with unresolved stages.",
+        "Do not use when substantial existing behavior must be preserved; choose refactor."
+      ],
+      "triggers": [
+        "create ui component",
+        "generate component",
+        "build ui component",
+        "gerar componente",
+        "criar componente",
+        "criar ecrã",
+        "implementar interface"
+      ],
+      "inputs": [
+        "Approved brief or clear component purpose",
+        "Target framework, stack and local conventions",
+        "Content, interaction states and acceptance criteria"
+      ]
     },
     {
       "id": "refactor",
       "kind": "workflow",
       "invocation": "/integra:refactor",
       "description": "Improve existing UI code while preserving behavior, semantics, project conventions and public APIs.",
-      "skills": ["integra-refactor-agent", "integra-design-system"],
-      "outputs": ["proposed-source-diff", "behavior-preservation-report", "test-results"]
+      "skills": [
+        "integra-refactor-agent",
+        "integra-design-system"
+      ],
+      "outputs": [
+        "proposed-source-diff",
+        "behavior-preservation-report",
+        "test-results"
+      ],
+      "whenToUse": [
+        "Use to improve existing UI code while preserving behavior, semantics and public interfaces.",
+        "Use for maintainability, component boundaries and targeted cleanup."
+      ],
+      "notFor": [
+        "Do not use to create a new screen from scratch.",
+        "Do not treat critique as authorization to modify source."
+      ],
+      "triggers": [
+        "refactor existing component",
+        "refactor existing code",
+        "refatorar componente existente",
+        "melhorar código existente",
+        "preservar comportamento"
+      ],
+      "inputs": [
+        "Existing source files and relevant tests",
+        "Behavioral invariants, public APIs and call sites",
+        "Project conventions and approved scope"
+      ]
     },
     {
       "id": "critique",
       "kind": "workflow",
       "invocation": "/integra:critique",
       "description": "Review a page or component for product clarity, hierarchy, usability and visual consistency.",
-      "skills": ["integra-design-qa"],
-      "outputs": ["ranked-findings", "evidence", "recommendations"]
+      "skills": [
+        "integra-design-qa"
+      ],
+      "outputs": [
+        "ranked-findings",
+        "evidence",
+        "recommendations"
+      ],
+      "whenToUse": [
+        "Use for focused review of product clarity, content hierarchy, composition or visual consistency.",
+        "Use when the user wants findings before deciding whether to modify code."
+      ],
+      "notFor": [
+        "Do not substitute for a full technical, accessibility or performance audit.",
+        "Do not classify subjective style preference as a defect without context."
+      ],
+      "triggers": [
+        "critique the interface",
+        "criticar interface",
+        "review visual hierarchy",
+        "avaliar hierarquia visual",
+        "criticar a composição",
+        "review interface"
+      ],
+      "inputs": [
+        "Target page, component or screenshot",
+        "Primary user task and relevant product context"
+      ]
     },
     {
       "id": "audit",
       "kind": "workflow",
       "invocation": "/integra:audit",
       "description": "Run a broad quality review covering responsive behavior, interaction states, accessibility signals and performance risks.",
-      "skills": ["integra-design-qa", "integra-accessibility-audit", "integra-performance-audit"],
-      "outputs": ["quality-report", "severity-ranked-findings", "verification-status"]
+      "skills": [
+        "integra-design-qa",
+        "integra-accessibility-audit",
+        "integra-performance-audit"
+      ],
+      "outputs": [
+        "quality-report",
+        "severity-ranked-findings",
+        "verification-status"
+      ],
+      "whenToUse": [
+        "Use for a broad review of responsive behavior, interaction states, accessibility signals and performance risks.",
+        "Use when multiple quality dimensions should be assessed together."
+      ],
+      "notFor": [
+        "Do not use when the only requested scope is accessibility.",
+        "Do not claim global WCAG or performance conformance from partial static checks."
+      ],
+      "triggers": [
+        "full quality audit",
+        "auditoria de qualidade",
+        "audit the whole interface",
+        "auditar a interface inteira",
+        "auditoria geral da interface",
+        "review interface"
+      ],
+      "inputs": [
+        "Target source or running page",
+        "Relevant viewports and interaction states",
+        "Available automated checks and measured performance evidence"
+      ]
     },
     {
       "id": "accessibility",
       "kind": "workflow",
       "invocation": "/integra:accessibility",
       "description": "Perform a focused accessibility review with evidence, impact and actionable remediation.",
-      "skills": ["integra-accessibility-audit"],
-      "outputs": ["accessibility-report", "contrast-evidence", "remediation-plan"]
+      "skills": [
+        "integra-accessibility-audit"
+      ],
+      "outputs": [
+        "accessibility-report",
+        "contrast-evidence",
+        "remediation-plan"
+      ],
+      "whenToUse": [
+        "Use when semantics, keyboard operation, accessible names, focus or contrast are the primary concern.",
+        "Use for a focused accessibility audit and evidence-backed remediation plan."
+      ],
+      "notFor": [
+        "Do not use for a broad visual critique with no accessibility question.",
+        "Do not claim page-wide WCAG conformance from incomplete evidence."
+      ],
+      "triggers": [
+        "accessibility audit",
+        "auditoria de acessibilidade",
+        "keyboard navigation",
+        "navegação por teclado",
+        "wcag audit",
+        "contraste e foco"
+      ],
+      "inputs": [
+        "Target UI and relevant interaction states",
+        "Accessibility target and supported input modes",
+        "Actual foreground/background pairs when contrast is assessed"
+      ]
     },
     {
       "id": "system",
       "kind": "workflow",
       "invocation": "/integra:system",
       "description": "Identify repeated patterns and define or refine tokens, components and usage guidance.",
-      "skills": ["integra-design-system"],
-      "outputs": ["system-inventory", "token-proposal", "component-guidance"]
+      "skills": [
+        "integra-design-system"
+      ],
+      "outputs": [
+        "system-inventory",
+        "token-proposal",
+        "component-guidance"
+      ],
+      "whenToUse": [
+        "Use when repeated UI patterns should become shared components, tokens or usage rules.",
+        "Use to inventory an existing design system or define its component contracts."
+      ],
+      "notFor": [
+        "Do not abstract a one-off element without evidence of reuse.",
+        "Do not replace an established system without a migration plan."
+      ],
+      "triggers": [
+        "design system",
+        "sistema de design",
+        "tokens and components",
+        "biblioteca de componentes",
+        "extrair componentes reutilizáveis"
+      ],
+      "inputs": [
+        "Existing components, tokens and documentation",
+        "Repeated UI examples and behavioral invariants",
+        "Stack and component-library constraints"
+      ]
     },
     {
       "id": "live",
       "kind": "workflow",
       "invocation": "/integra:live",
       "description": "Inspect a local development page, preview reversible DOM changes and prepare a structured source-code handoff.",
-      "skills": ["integra-live-inspector"],
-      "outputs": ["inspection-session", "preview-diff", "review-package"],
-      "sourceMutation": "never"
+      "skills": [
+        "integra-live-inspector"
+      ],
+      "outputs": [
+        "inspection-session",
+        "preview-diff",
+        "review-package"
+      ],
+      "sourceMutation": "never",
+      "whenToUse": [
+        "Use to inspect a locally running development page and preview reversible DOM-level alternatives.",
+        "Use when visual inspection can clarify a later source-code proposal."
+      ],
+      "notFor": [
+        "Do not use as a source-code editor or assume previews persist through framework rendering.",
+        "Do not inspect production or remote pages without explicit permission."
+      ],
+      "triggers": [
+        "inspect live dom",
+        "inspect running page",
+        "inspector ao vivo",
+        "inspecionar dom local",
+        "preview dom",
+        "inspecionar página em execução"
+      ],
+      "inputs": [
+        "Local development URL and current viewport",
+        "Target element or specific visual question",
+        "Permitted temporary preview scope"
+      ]
     },
     {
       "id": "polish",
       "kind": "modifier",
       "invocation": "/integra:polish",
       "description": "Perform a focused finishing pass for consistency, spacing, typography and interaction feedback.",
-      "skills": ["integra-design-qa"],
-      "outputs": ["focused-recommendations"]
+      "skills": [
+        "integra-design-qa"
+      ],
+      "outputs": [
+        "focused-recommendations"
+      ],
+      "whenToUse": [
+        "Use as a finishing pass after the hierarchy and core behavior are sound.",
+        "Use for consistency, spacing, typography and interaction-feedback refinement."
+      ],
+      "notFor": [
+        "Do not conceal unresolved information architecture or functional problems.",
+        "Do not turn a focused pass into an unrequested redesign."
+      ],
+      "triggers": [
+        "polish",
+        "polir interface",
+        "refinar acabamento",
+        "acabamento visual"
+      ],
+      "inputs": [
+        "Active target and approved direction",
+        "Existing constraints, tokens and known findings"
+      ],
+      "requiresActiveContext": true
     },
     {
       "id": "distill",
       "kind": "modifier",
       "invocation": "/integra:distill",
       "description": "Remove complexity that does not improve the user task, clarity or system consistency.",
-      "skills": ["integra-design-qa", "integra-refactor-agent"],
-      "outputs": ["simplification-proposal"]
+      "skills": [
+        "integra-design-qa",
+        "integra-refactor-agent"
+      ],
+      "outputs": [
+        "simplification-proposal"
+      ],
+      "whenToUse": [
+        "Use when the active interface contains unnecessary complexity or competing elements.",
+        "Use to simplify a flow while preserving required content and capabilities."
+      ],
+      "notFor": [
+        "Do not remove required content just to make the screen minimal.",
+        "Do not change the product scope."
+      ],
+      "triggers": [
+        "distill",
+        "simplify interface",
+        "simplificar interface",
+        "reduzir complexidade",
+        "reduzir ruído visual"
+      ],
+      "inputs": [
+        "Active target and information hierarchy",
+        "Essential user tasks and content that must remain"
+      ],
+      "requiresActiveContext": true
     },
     {
       "id": "bolder",
       "kind": "modifier",
       "invocation": "/integra:bolder",
       "description": "Increase visual distinctiveness without sacrificing clarity, accessibility or product fit.",
-      "skills": ["integra-design-direction", "integra-design-qa"],
-      "outputs": ["visual-adjustment-proposal"]
+      "skills": [
+        "integra-design-direction",
+        "integra-design-qa"
+      ],
+      "outputs": [
+        "visual-adjustment-proposal"
+      ],
+      "whenToUse": [
+        "Use when the direction feels generic and needs more product-specific character.",
+        "Use when distinctiveness can increase without reducing clarity or accessibility."
+      ],
+      "notFor": [
+        "Do not apply expressive styling when restraint is explicitly requested.",
+        "Do not sacrifice task clarity for novelty."
+      ],
+      "triggers": [
+        "bolder",
+        "more distinctive",
+        "mais personalidade",
+        "mais ousado",
+        "mais distintivo"
+      ],
+      "inputs": [
+        "Active direction and product context",
+        "Brand constraints and acceptable expressive range"
+      ],
+      "requiresActiveContext": true
     },
     {
       "id": "quieter",
       "kind": "modifier",
       "invocation": "/integra:quieter",
       "description": "Reduce visual competition while preserving information hierarchy and discoverability.",
-      "skills": ["integra-design-qa"],
-      "outputs": ["visual-adjustment-proposal"]
+      "skills": [
+        "integra-design-qa"
+      ],
+      "outputs": [
+        "visual-adjustment-proposal"
+      ],
+      "whenToUse": [
+        "Use when visual competition distracts from primary content or action.",
+        "Use to reduce noise while retaining hierarchy and discoverability."
+      ],
+      "notFor": [
+        "Do not hide critical status, warnings, focus or navigation.",
+        "Do not remove brand identity without a product reason."
+      ],
+      "triggers": [
+        "quieter",
+        "less visual noise",
+        "mais discreto",
+        "reduzir competição visual",
+        "menos ruído visual"
+      ],
+      "inputs": [
+        "Active target and current hierarchy",
+        "Primary task and essential emphasis"
+      ],
+      "requiresActiveContext": true
     },
     {
       "id": "colorize",
       "kind": "modifier",
       "invocation": "/integra:colorize",
       "description": "Improve semantic color roles and evaluate contrast with explicit confidence limits.",
-      "skills": ["integra-design-system", "integra-accessibility-audit"],
-      "outputs": ["color-token-proposal", "contrast-evidence"]
+      "skills": [
+        "integra-design-system",
+        "integra-accessibility-audit"
+      ],
+      "outputs": [
+        "color-token-proposal",
+        "contrast-evidence"
+      ],
+      "whenToUse": [
+        "Use to refine semantic color roles, themes and state feedback.",
+        "Use when palette application needs adjustment without replacing product identity."
+      ],
+      "notFor": [
+        "Do not invent new brand colors when project tokens exist.",
+        "Do not claim contrast compliance without actual rendered color-pair evidence."
+      ],
+      "triggers": [
+        "colorize",
+        "refine semantic colors",
+        "melhorar paleta",
+        "ajustar cores semânticas",
+        "refinar cores"
+      ],
+      "inputs": [
+        "Existing color tokens and themes",
+        "Actual foreground/background combinations",
+        "Brand constraints and state semantics"
+      ],
+      "requiresActiveContext": true
     },
     {
       "id": "typeset",
       "kind": "modifier",
       "invocation": "/integra:typeset",
       "description": "Refine typography roles, scale, line height, measure and readability.",
-      "skills": ["integra-design-system", "integra-design-qa"],
-      "outputs": ["typography-proposal"]
+      "skills": [
+        "integra-design-system",
+        "integra-design-qa"
+      ],
+      "outputs": [
+        "typography-proposal"
+      ],
+      "whenToUse": [
+        "Use to refine typography roles, scale, measure, line height and readability.",
+        "Use when text hierarchy or reading comfort is the requested design problem."
+      ],
+      "notFor": [
+        "Do not choose fonts before checking available assets and licensing.",
+        "Do not use oversized display type as a substitute for hierarchy."
+      ],
+      "triggers": [
+        "typeset",
+        "refine typography",
+        "ajustar tipografia",
+        "hierarquia tipográfica",
+        "melhorar legibilidade do texto"
+      ],
+      "inputs": [
+        "Current type tokens and available fonts",
+        "Real content lengths and language",
+        "Target viewports and reading context"
+      ],
+      "requiresActiveContext": true
     },
     {
       "id": "layout",
       "kind": "modifier",
       "invocation": "/integra:layout",
       "description": "Improve composition, spacing, alignment, grouping and information density.",
-      "skills": ["integra-design-qa"],
-      "outputs": ["layout-proposal"]
+      "skills": [
+        "integra-design-qa"
+      ],
+      "outputs": [
+        "layout-proposal"
+      ],
+      "whenToUse": [
+        "Use to change composition, spacing, grouping, alignment or information density.",
+        "Use when content is clear but the current arrangement is not serving the task."
+      ],
+      "notFor": [
+        "Do not reorder information architecture without understanding the user task.",
+        "Do not impose a fixed grid or hero pattern regardless of content."
+      ],
+      "triggers": [
+        "improve layout",
+        "layout refinement",
+        "ajustar espaçamento",
+        "melhorar composição",
+        "reorganizar layout"
+      ],
+      "inputs": [
+        "Current content order and layout",
+        "Viewport, density and interaction requirements",
+        "Existing responsive constraints"
+      ],
+      "requiresActiveContext": true
     },
     {
       "id": "animate",
       "kind": "modifier",
       "invocation": "/integra:animate",
       "description": "Propose meaningful motion and state feedback while respecting reduced-motion preferences.",
-      "skills": ["integra-ui-generator", "integra-accessibility-audit"],
-      "outputs": ["motion-specification"]
+      "skills": [
+        "integra-ui-generator",
+        "integra-accessibility-audit"
+      ],
+      "outputs": [
+        "motion-specification"
+      ],
+      "whenToUse": [
+        "Use when motion communicates state, continuity or interaction feedback.",
+        "Use when the user requests purposeful animation."
+      ],
+      "notFor": [
+        "Do not add decorative loops, scroll hijacking or motion that delays primary actions.",
+        "Do not ignore prefers-reduced-motion."
+      ],
+      "triggers": [
+        "animate",
+        "add meaningful motion",
+        "adicionar movimento com propósito",
+        "refinar animações",
+        "feedback animado"
+      ],
+      "inputs": [
+        "Target interaction and state transitions",
+        "Motion preferences and reduced-motion fallback"
+      ],
+      "requiresActiveContext": true
     },
     {
       "id": "adapt",
       "kind": "modifier",
       "invocation": "/integra:adapt",
       "description": "Review and adapt the experience across viewport sizes, pointer types and input modes.",
-      "skills": ["integra-design-qa"],
-      "outputs": ["responsive-findings", "adaptation-proposal"]
+      "skills": [
+        "integra-design-qa"
+      ],
+      "outputs": [
+        "responsive-findings",
+        "adaptation-proposal"
+      ],
+      "whenToUse": [
+        "Use to adapt the experience across viewport sizes, touch, pointer and input modes.",
+        "Use when the user requests mobile, tablet or desktop adaptation."
+      ],
+      "notFor": [
+        "Do not merely shrink desktop columns without reprioritizing content.",
+        "Do not assume one viewport represents all users."
+      ],
+      "triggers": [
+        "adapt responsive",
+        "responsive adaptation",
+        "adaptar para mobile",
+        "adaptar responsividade",
+        "layout responsivo"
+      ],
+      "inputs": [
+        "Target viewport range and device assumptions",
+        "Content priorities and supported input modes"
+      ],
+      "requiresActiveContext": true
     },
     {
       "id": "harden",
       "kind": "modifier",
       "invocation": "/integra:harden",
       "description": "Strengthen empty, loading, error, overflow, keyboard and edge-case states.",
-      "skills": ["integra-refactor-agent", "integra-design-qa"],
-      "outputs": ["resilience-findings", "hardening-proposal"]
+      "skills": [
+        "integra-refactor-agent",
+        "integra-design-qa"
+      ],
+      "outputs": [
+        "resilience-findings",
+        "hardening-proposal"
+      ],
+      "whenToUse": [
+        "Use to strengthen empty, loading, error, disabled, overflow and keyboard states.",
+        "Use when known edge cases or recovery paths need attention."
+      ],
+      "notFor": [
+        "Do not invent speculative flows without product evidence.",
+        "Do not change core behavior without an approved specification."
+      ],
+      "triggers": [
+        "harden ui",
+        "edge cases",
+        "cobrir estados de erro",
+        "reforçar estados de interface",
+        "tratar casos limite"
+      ],
+      "inputs": [
+        "Known states, failure modes and current behavior",
+        "Expected recovery and accessibility requirements"
+      ],
+      "requiresActiveContext": true
     },
     {
       "id": "extract",
       "kind": "modifier",
       "invocation": "/integra:extract",
       "description": "Find repeated UI patterns that are candidates for reusable components or design tokens.",
-      "skills": ["integra-design-system"],
-      "outputs": ["pattern-inventory", "extraction-proposal"]
+      "skills": [
+        "integra-design-system"
+      ],
+      "outputs": [
+        "pattern-inventory",
+        "extraction-proposal"
+      ],
+      "whenToUse": [
+        "Use when repeated structures are candidates for shared components, patterns or tokens.",
+        "Use when a reusable system should be derived from multiple existing screens."
+      ],
+      "notFor": [
+        "Do not abstract one-off elements without stable shared behavior.",
+        "Do not create abstractions that obscure the codebase."
+      ],
+      "triggers": [
+        "extract reusable components",
+        "extract design tokens",
+        "extrair componentes reutilizáveis",
+        "extrair tokens",
+        "identificar padrões repetidos"
+      ],
+      "inputs": [
+        "Representative repeated UI examples",
+        "Visual and behavioral invariants",
+        "Existing module and design-system boundaries"
+      ],
+      "requiresActiveContext": true
     }
-  ]
+  ],
+  "routingPolicy": {
+    "precedence": [
+      "exact-invocation",
+      "broad-request",
+      "unique-longest-whole-phrase-trigger",
+      "active-context-modifier",
+      "orchestrator-fallback"
+    ],
+    "broadOrAmbiguousRequests": "orchestrator",
+    "focusedRequests": "unique-longest-whole-phrase-trigger",
+    "modifierBehavior": "attach-to-active-workflow-without-replacing-its-context",
+    "missingModifierContext": "orchestrator-and-ask-one-focused-question",
+    "unknownRequests": "orchestrator"
+  }
 }

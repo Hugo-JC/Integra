@@ -1,24 +1,32 @@
-# Agent Command Vocabulary
+# Integra Command System
 
-These are reusable task names for humans and coding agents. They are workflows, not a claim that a slash-command runtime or multi-agent orchestrator is already installed.
+The canonical definitions live in [`commands/manifest.json`](../commands/manifest.json). This index does not install native slash commands in the host agent.
 
-| Command | Purpose | Skill |
+| Invocation | Kind | Purpose |
 |---|---|---|
-| `integra:shape` | Clarify user, task, constraints and information architecture | direction |
-| `integra:direction` | Produce a contextual visual direction and token plan | direction |
-| `integra:generate` | Build a component or screen from a brief | ui-generator |
-| `integra:refactor` | Improve an existing component without breaking behavior | refactor-agent |
-| `integra:critique` | Review hierarchy, content and product clarity | design-qa |
-| `integra:audit` | Run objective static and accessibility checks | design-qa |
-| `integra:polish` | Refine spacing, type, consistency and feedback | ui-generator |
-| `integra:harden` | Review edge cases, errors, overflow and keyboard use | refactor-agent |
-| `integra:adapt` | Review responsive behavior and narrow viewports | design-qa |
-| `integra:investigate` | Research a reference or behavior with evidence | investigation |
-| `integra:live` | Inspect a local page and export a DOM diff | live-inspector |
+| `/integra` | Orchestrator | Coordinate broad, unknown or multi-stage requests. |
+| `/integra:shape` | Workflow | Clarify users, tasks, flows and information architecture. |
+| `/integra:direction` | Workflow | Define visual thesis, design principles and tokens. |
+| `/integra:investigate` | Workflow | Research references and record evidence. |
+| `/integra:generate` | Workflow | Implement one specified component or screen. |
+| `/integra:refactor` | Workflow | Improve existing code while preserving behavior. |
+| `/integra:critique` | Workflow | Review clarity, hierarchy and visual consistency. |
+| `/integra:audit` | Workflow | Review broad quality dimensions. |
+| `/integra:accessibility` | Workflow | Perform focused accessibility review. |
+| `/integra:system` | Workflow | Inventory tokens, components and repeated patterns. |
+| `/integra:live` | Workflow | Inspect a local page and create a reversible DOM preview. |
+| `/integra:polish` … `/integra:extract` | Modifier | Refine the active workflow without replacing its target or constraints. |
 
-## Suggested handoff
-1. Direction agent creates a brief and documents decisions.
-2. Implementation agent generates/refactors code and reports files changed.
-3. Independent QA agent reviews source and rendered behavior.
-4. Live Inspector is used to explore visual alternatives, not as a substitute for source edits.
-5. Human reviews findings and approves the final changes.
+## Routing
+
+- Exact namespaced invocation takes precedence.
+- Broad requests route to the orchestrator.
+- A focused workflow is selected only by a unique longest whole-phrase trigger.
+- Equal-specificity matches are ambiguous; never choose randomly.
+- Modifiers inherit the active workflow. With no active target, ask one focused question.
+- Unknown requests remain with the orchestrator.
+- Agents without native slash-command support must retain natural-language routing.
+
+## Review boundary
+
+The default mode is **review**. Read-only inspection and analysis are permitted within the user's request. DOM previews are temporary. Writing source files requires explicit approval of the exact proposed diff. Invocation, preview acceptance, a generated patch or passing test is not approval. Commits, pushes, PR creation and merge require separate authorization.

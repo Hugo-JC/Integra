@@ -1,21 +1,59 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "selectionPolicy": [
-    "Project requirements and existing brand tokens always win.",
-    "Choose a preset by product context and user task, not by a style adjective alone.",
-    "If two presets fit, explain the trade-off and preserve alternatives.",
-    "Presets describe principles and optional palette directions; they do not force exact tokens.",
-    "When context is insufficient, return a neutral structure and ask one focused question only if the missing fact blocks design."
+    "Explicit user instructions, verified project behavior, existing approved tokens and hard technical constraints always override preset guidance.",
+    "Select the domain profile by product context and primary user task, not by style adjectives.",
+    "Treat aiGuidance as task constraints and decision prompts; do not copy profile content mechanically.",
+    "Select a composition escape only when its when condition matches the actual task and its contentRequirements can be met with real or explicitly labelled mock content.",
+    "If multiple escapes fit, compare their trade-offs against task completion, content, interaction and responsive constraints; do not choose randomly.",
+    "If no escape fits, compose a task-led structure without forcing a named archetype or generic hero.",
+    "Presets describe contextual principles and options. They do not mandate exact colors, fonts, tokens or components.",
+    "Do not invent metrics, reviews, customer logos, legal claims, availability, product capabilities or research."
   ],
   "presets": [
-    {"id":"developer-tools","path":"developer-tools.json"},
-    {"id":"productivity-workspace","path":"productivity-workspace.json"},
-    {"id":"commerce-storefront","path":"commerce-storefront.json"},
-    {"id":"analytics-dashboard","path":"analytics-dashboard.json"},
-    {"id":"education-platform","path":"education-platform.json"},
-    {"id":"editorial-portfolio","path":"editorial-portfolio.json"},
-    {"id":"creator-media","path":"creator-media.json"},
-    {"id":"community-gaming","path":"community-gaming.json"},
-    {"id":"public-service","path":"public-service.json"}
-  ]
+    {
+      "id": "developer-tools",
+      "path": "developer-tools.json"
+    },
+    {
+      "id": "productivity-workspace",
+      "path": "productivity-workspace.json"
+    },
+    {
+      "id": "commerce-storefront",
+      "path": "commerce-storefront.json"
+    },
+    {
+      "id": "analytics-dashboard",
+      "path": "analytics-dashboard.json"
+    },
+    {
+      "id": "education-platform",
+      "path": "education-platform.json"
+    },
+    {
+      "id": "editorial-portfolio",
+      "path": "editorial-portfolio.json"
+    },
+    {
+      "id": "creator-media",
+      "path": "creator-media.json"
+    },
+    {
+      "id": "community-gaming",
+      "path": "community-gaming.json"
+    },
+    {
+      "id": "public-service",
+      "path": "public-service.json"
+    }
+  ],
+  "catalogRole": {
+    "purpose": "Nine structured product-domain profiles for task flow, information priority, content requirements, accessibility checks and context-conditioned composition alternatives.",
+    "notAStyleRouter": true,
+    "styleSelectionAuthority": "data/design-library/local-presets.json via src/modules/direction/presets/router.ts",
+    "advisoryDiscoveryCatalog": "presets/catalog.json via src/modules/direction/preset-catalog.ts",
+    "canonicalProfiles": "presets/manifest.json and the listed files",
+    "instruction": "Select a domain profile by the actual product and primary user task. Do not use a domain profile to override the deterministic style route, existing project tokens or explicit user constraints."
+  }
 }

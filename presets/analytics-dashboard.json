@@ -1,12 +1,161 @@
 {
-  "id":"analytics-dashboard","name":"Analytics & Data Dashboard","version":"1.0.0",
-  "productContexts":["analytics","reporting","business intelligence","monitoring","metrics dashboards"],
-  "designIntent":{"primaryGoal":"Help users detect meaningful change and act on reliable information.","audienceNeeds":["context for metrics","comparability","filter clarity","data freshness"],"personalityAxes":["analytical","calm","transparent"],"visualThesis":"Data is the primary content; decoration must not compete with it."},
-  "visualDirection":{"density":"medium-to-high, controlled by task and user expertise","surfaces":"charts and tables share clear alignment; panels only when they define a meaningful group","colorIntent":"color encodes series/status consistently; include redundant labels and patterns where needed","typography":"tabular numerals, readable axis labels, explicit units and scales","motion":"animate only meaningful data changes and preserve access to static values"},
-  "layout":{"pattern":"filter/period controls + KPI context + primary visualization + supporting table","spacing":"compact, grid-aligned and consistent between chart and table","responsive":"provide alternative table or summary when charts cannot fit","contentPriority":["question answered","time range","metric value","comparison","source/freshness"]},
-  "components":{"preferred":["KPI summary","chart","data table","date range","filter chips","drilldown","export"],"states":["no data","partial data","stale data","loading","error","filtered"],"avoid":["unlabeled chart axes","3D charts without analytical value","red/green-only encoding"]},
-  "accessibility":{"minimumTextContrast":"WCAG 2.2 AA","keyboard":"filters, data tables and chart summaries must be reachable","focus":"visible focus and selected filters","reducedMotion":"provide stable values and avoid motion-only data comparisons"},
-  "antiPatterns":["metrics without units","charts without a question","truncated labels that hide meaning","color-only series identification"],
-  "references":["fluent-2","material-3","wai-aria-apg","web-vitals"],
-  "notes":["Do not fabricate data. Clearly distinguish zero, missing, stale and unavailable values."]
+  "id": "analytics-dashboard",
+  "name": "Analytics & Data Dashboard",
+  "version": "1.1.0",
+  "productContexts": [
+    "analytics",
+    "reporting",
+    "business intelligence",
+    "monitoring",
+    "metrics dashboards"
+  ],
+  "designIntent": {
+    "primaryGoal": "Help users detect meaningful change and act on reliable information.",
+    "audienceNeeds": [
+      "context for metrics",
+      "comparability",
+      "filter clarity",
+      "data freshness"
+    ],
+    "personalityAxes": [
+      "analytical",
+      "calm",
+      "transparent"
+    ],
+    "visualThesis": "Data is the primary content; decoration must not compete with it."
+  },
+  "visualDirection": {
+    "density": "medium-to-high, controlled by task and user expertise",
+    "surfaces": "charts and tables share clear alignment; panels only when they define a meaningful group",
+    "colorIntent": "color encodes series/status consistently; include redundant labels and patterns where needed",
+    "typography": "tabular numerals, readable axis labels, explicit units and scales",
+    "motion": "animate only meaningful data changes and preserve access to static values"
+  },
+  "layout": {
+    "pattern": "filter/period controls + KPI context + primary visualization + supporting table",
+    "spacing": "compact, grid-aligned and consistent between chart and table",
+    "responsive": "provide alternative table or summary when charts cannot fit",
+    "contentPriority": [
+      "question answered",
+      "time range",
+      "metric value",
+      "comparison",
+      "source/freshness"
+    ]
+  },
+  "components": {
+    "preferred": [
+      "KPI summary",
+      "chart",
+      "data table",
+      "date range",
+      "filter chips",
+      "drilldown",
+      "export"
+    ],
+    "states": [
+      "no data",
+      "partial data",
+      "stale data",
+      "loading",
+      "error",
+      "filtered"
+    ],
+    "avoid": [
+      "unlabeled chart axes",
+      "3D charts without analytical value",
+      "red/green-only encoding"
+    ]
+  },
+  "accessibility": {
+    "minimumTextContrast": "WCAG 2.2 AA",
+    "keyboard": "filters, data tables and chart summaries must be reachable",
+    "focus": "visible focus and selected filters",
+    "reducedMotion": "provide stable values and avoid motion-only data comparisons"
+  },
+  "antiPatterns": [
+    "metrics without units",
+    "charts without a question",
+    "truncated labels that hide meaning",
+    "color-only series identification"
+  ],
+  "references": [
+    "fluent-2",
+    "material-3",
+    "wai-aria-apg",
+    "web-vitals"
+  ],
+  "notes": [
+    "Do not fabricate data. Clearly distinguish zero, missing, stale and unavailable values."
+  ],
+  "aiGuidance": {
+    "primaryFlow": "Ask a question → choose scope and time range → detect change → inspect contributing records → decide or export.",
+    "prioritize": [
+      "The question each visualization answers",
+      "Time range, filters, units, source and data freshness",
+      "A table or record-level explanation behind summary metrics"
+    ],
+    "confirmOrMarkUnknown": [
+      "Metric definitions, aggregation, timezone and refresh frequency",
+      "Whether values are measured, estimated, sampled or synthetic",
+      "Permissions and export/drill-down behavior"
+    ],
+    "avoidByDefault": [
+      "KPI tiles without a decision or comparison",
+      "3D charts without analytical value",
+      "Invented values, units, benchmarks or trend narratives"
+    ],
+    "acceptanceChecks": [
+      "Charts have a question, units, labelled axes and clear range",
+      "Zero, missing, stale and unavailable values are distinct",
+      "A table or accessible summary exposes underlying data"
+    ]
+  },
+  "compositionEscapes": [
+    {
+      "id": "anomaly-first",
+      "when": "The main job is finding exceptions, unexpected change or operational risk.",
+      "composition": "Start with an exception queue or annotated time series, then show contributing dimensions, baseline and source records for the selected anomaly.",
+      "contentRequirements": [
+        "Actual anomaly definition and threshold",
+        "Baseline, time window and comparison scope",
+        "Traceable contributing records"
+      ],
+      "avoid": [
+        "Invented alerts or thresholds",
+        "Red/green-only severity encoding",
+        "Declaring causation from correlation"
+      ]
+    },
+    {
+      "id": "metric-narrative",
+      "when": "The user needs to understand one important business or product question over time.",
+      "composition": "Build around one primary metric, its time range and a relevant comparison; place annotations beside the evidence they explain.",
+      "contentRequirements": [
+        "Metric definition and unit",
+        "Time period, comparison method and source",
+        "Annotations tied to verified context"
+      ],
+      "avoid": [
+        "A wall of unrelated KPIs",
+        "Narrative unsupported by data",
+        "Truncated axis labels"
+      ]
+    },
+    {
+      "id": "table-first",
+      "when": "Users work with large datasets, exact values, filtering or record-level follow-up.",
+      "composition": "Use a searchable, sortable table as the main canvas; retain a compact summary only for scope, totals or selected-row context.",
+      "contentRequirements": [
+        "Stable row identity and column definitions",
+        "Sort, filter and pagination semantics",
+        "Responsive and keyboard-accessible behavior"
+      ],
+      "avoid": [
+        "Chart-first layouts hiding exact values",
+        "Unlabelled icon-only actions",
+        "Unworkable horizontal overflow"
+      ]
+    }
+  ]
 }

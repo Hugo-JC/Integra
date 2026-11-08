@@ -1,28 +1,43 @@
-<!-- Migrated from ai-design-engine/03-references/reference-router.md. External browsing/adapters are not implied by this document. -->
+# Reference and Preset Router — historical import
 
-# Router de Referências Local-First
+**This file is an archive pointer, not an executable router specification.** The canonical current rules are:
 
-## Escada de referências v3.1
+- `docs/ai-context-contract.md`
+- `docs/ai-guides/preset-reference-escape-routing.md`
+- `presets/README.md`
+- `src/modules/direction/presets/router.ts`
 
-Prioridade: referências fornecidas pelo utilizador → conectores → biblioteca pessoal [BETA, opt-in] → captura individual por URL → dossiês offline. Use `node tools/route.js "<pedido>" --context --refs`; no máximo três referências no total. Falhas de acesso não bloqueiam o trabalho. Registe o padrão extraído e o que não copiar; nunca replique uma página.
+## Current runtime behavior
 
-Use `local-presets.json` como catálogo de referência offline. Os presets descrevem princípios de composição e pistas de pesquisa, não réplicas de sites, textos, assets ou sistemas proprietários. Consulte também `layout-archetypes.md`, `personality-extractor.md`, `curated-references.md` e `02-styles-and-tokens/design-styles.json` quando estiverem disponíveis localmente.
+The current deterministic style route is `routeDesignPreset()`, exposed by:
 
-## Encaminhamento determinístico (v3: executável)
+```bash
+npm run design:route -- "Landing page para uma cafetaria" --json
+```
 
-O algoritmo está implementado em `tools/route.js`; `node tools/route.js "<pedido>" --context` devolve o resultado, o brief e o pacote de contexto. O texto abaixo é a especificação que o código cumpre (e que os testes em `tests/route.test.js` verificam).
+It:
+1. normalizes case, diacritics and punctuation and matches complete phrases;
+2. checks `match_terms` first and `weak_terms` only when no strong term matched;
+3. uses the longest matching phrase within the active tier;
+4. reports equally specific competing presets as `ambiguous`, low confidence and requiring confirmation;
+5. reports weak-only matches as low confidence and requiring confirmation;
+6. returns a provisional `clean_editorial` fallback with confirmation required when there is no match;
+7. applies the first matching `when_any` variant condition from the chosen preset.
 
-1. Identifique o **nicho principal**: o produto, serviço, público ou atividade que a página representa. Adjetivos de tom (“premium”, “moderno”, “agressivo”) não são nicho (lista em `non_niche_terms`).
-2. **Normalização:** minúsculas, sem acentos, pontuação → espaço. A comparação é por **palavra/expressão inteira** (nunca por substring: “bar” não casa com “barato”) e tolera plural regular (`+s`, `+es`).
-3. **Seleção do preset:** vence a expressão coincidente **mais específica** (mais caracteres normalizados); empate → o primeiro preset do array. Exemplo: “clínica de saúde” → `clinic-healthcare` (“clinica”, 7) e não `wellness-health-beauty` (“saude”, 5).
-4. **Variante:** só se uma expressão de `when_any` estiver no pedido; havendo várias, a primeira listada.
-5. **Sem preset:** pontuar as `keywords` de `design-styles.json` (ignorando `non_niche_terms`). Melhor pontuação (>0) decide; empate → ordem do catálogo; pontuação 0 → `fallback`. O caminho (`preset`, `keywords` ou `fallback`) e a razão ficam no brief. _(Isto resolve a contradição da v2, em que o router mandava para o fallback e o extrator mandava escolher por parecer.)_
-6. **Tom:** ajusta só a intensidade (ver `personality-extractor.md`); nunca troca o nicho.
-7. Use apenas IDs de padrão de `layout-archetypes.md`. Escolha a estrutura que o conteúdo real suporta (H5 exige um produto reconhecível); `hero_alternatives` lista outras opções válidas para o nicho. Registe `style_id`, arquétipo de hero e justificação no DESIGN BRIEF.
-8. Aplique `principles` e `pattern_cues` como abstrações. Use `sources[].url` para estudar princípios públicos, nunca para copiar layouts, imagens, textos, identidade ou componentes proprietários.
+The runtime does **not** score the `keywords` from `design-styles.json` when no niche matches. Do not use the old tie-break rule that selected the first preset or the style whose description "felt right".
 
-## MCP e pesquisa externa
+## Three different catalogs
 
-O catálogo local é suficiente para uma primeira decisão e deve ser o caminho padrão. Não faça pesquisas externas só para confirmar o nicho, selecionar um estilo já mapeado ou preencher referências genéricas. Use uma fonte MCP externa apenas quando estiver disponível, autorizada e realmente útil para uma necessidade concreta não respondida localmente, como verificar um padrão público atual ou localizar documentação específica. Limite a pesquisa a essa questão; se o acesso falhar, não estiver autorizado ou não acrescentar valor, continue com o catálogo local sem bloquear o trabalho.
+- `data/design-library/local-presets.json` + `design-styles.json`: deterministic niche-to-style route and its tokens.
+- `presets/catalog.json`: advisory discovery over migrated niche knowledge. A returned candidate is not a confirmed match.
+- `presets/manifest.json` + its nine structured domain profiles: task flows, content priority, constraints, anti-patterns, acceptance checks and composition alternatives. This layer does not select the visual style.
 
-Uma pesquisa externa pode acrescentar uma URL ou uma pista de padrão, mas não altera a regra de seleção: nicho principal, variante explicitamente pedida, tokens locais e padrões válidos determinam o resultado. Informe no brief quando a decisão foi inteiramente local ou quando uma consulta externa útil a complementou.
+The historical data below this directory may be consulted for provenance or a research lead. It does not override these current sources.
+
+## Reference selection
+
+Select one to three sources for a specific unresolved question. Prefer normative standards for requirements, official docs for technical behavior and directly inspected product pages for observed UI behavior. A source catalog entry, URL, title or screenshot alone cannot prove hidden behavior or current live content.
+
+Record source ID, verification status, exact page/section inspected, access date, evidence class, confidence, limitation and an original adaptation. Extract a principle, not a copy of the source's layout, code, assets, copy or brand identity.
+
+Do not use old paths such as `node tools/route.js`, `--context --refs` or former source-repository command names in Integra.

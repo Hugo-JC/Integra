@@ -1,12 +1,163 @@
 {
-  "id":"developer-tools","name":"Developer Tools & Technical Products","version":"1.0.0",
-  "productContexts":["API platforms","developer portals","documentation","observability","security tools","code editors"],
-  "designIntent":{"primaryGoal":"Make complex capabilities discoverable, trustworthy and fast to operate.","audienceNeeds":["precise terminology","high information density","copyable code","clear system status"],"personalityAxes":["technical","confident","precise"],"visualThesis":"A focused workbench where hierarchy and system feedback matter more than decoration."},
-  "visualDirection":{"density":"medium-to-high","surfaces":"quiet neutral surfaces with clear borders and deliberately elevated critical areas","colorIntent":"semantic status colors; one restrained brand accent; code blocks use a readable syntax theme","typography":"high-legibility sans for UI, monospace for code and identifiers, tabular numerals for metrics","motion":"fast state feedback; avoid decorative motion in operational flows"},
-  "layout":{"pattern":"navigation + work area + optional inspector/detail panel","spacing":"compact rhythm with consistent 4px/8px steps","responsive":"collapse secondary panels before compressing the primary workspace","contentPriority":["current task","system status","primary action","supporting detail"]},
-  "components":{"preferred":["command palette","tabs","data table","code block","inline alert","filter bar","split pane"],"states":["loading","empty","error","copied","running","success","permission denied"],"avoid":["marketing-style hero inside an operational screen","decorative dashboard cards with no action","tiny low-contrast metadata"]},
-  "accessibility":{"minimumTextContrast":"WCAG 2.2 AA","keyboard":"all navigation, tabs, menus and command actions must be keyboard reachable","focus":"persistent visible focus ring, never color-only status","reducedMotion":"no essential information conveyed only through motion"},
-  "antiPatterns":["fake terminal output","syntax color used as the only meaning cue","hidden destructive actions","unlabeled icon-only controls"],
-  "references":["impeccable","material-3","radix-primitives","tailwind","mdn-accessibility"],
-  "notes":["Do not make every developer product dark. Theme choice belongs to product context and user preference."]
+  "id": "developer-tools",
+  "name": "Developer Tools & Technical Products",
+  "version": "1.1.0",
+  "productContexts": [
+    "API platforms",
+    "developer portals",
+    "documentation",
+    "observability",
+    "security tools",
+    "code editors"
+  ],
+  "designIntent": {
+    "primaryGoal": "Make complex capabilities discoverable, trustworthy and fast to operate.",
+    "audienceNeeds": [
+      "precise terminology",
+      "high information density",
+      "copyable code",
+      "clear system status"
+    ],
+    "personalityAxes": [
+      "technical",
+      "confident",
+      "precise"
+    ],
+    "visualThesis": "A focused workbench where hierarchy and system feedback matter more than decoration."
+  },
+  "visualDirection": {
+    "density": "medium-to-high",
+    "surfaces": "quiet neutral surfaces with clear borders and deliberately elevated critical areas",
+    "colorIntent": "semantic status colors; one restrained brand accent; code blocks use a readable syntax theme",
+    "typography": "high-legibility sans for UI, monospace for code and identifiers, tabular numerals for metrics",
+    "motion": "fast state feedback; avoid decorative motion in operational flows"
+  },
+  "layout": {
+    "pattern": "navigation + work area + optional inspector/detail panel",
+    "spacing": "compact rhythm with consistent 4px/8px steps",
+    "responsive": "collapse secondary panels before compressing the primary workspace",
+    "contentPriority": [
+      "current task",
+      "system status",
+      "primary action",
+      "supporting detail"
+    ]
+  },
+  "components": {
+    "preferred": [
+      "command palette",
+      "tabs",
+      "data table",
+      "code block",
+      "inline alert",
+      "filter bar",
+      "split pane"
+    ],
+    "states": [
+      "loading",
+      "empty",
+      "error",
+      "copied",
+      "running",
+      "success",
+      "permission denied"
+    ],
+    "avoid": [
+      "marketing-style hero inside an operational screen",
+      "decorative dashboard cards with no action",
+      "tiny low-contrast metadata"
+    ]
+  },
+  "accessibility": {
+    "minimumTextContrast": "WCAG 2.2 AA",
+    "keyboard": "all navigation, tabs, menus and command actions must be keyboard reachable",
+    "focus": "persistent visible focus ring, never color-only status",
+    "reducedMotion": "no essential information conveyed only through motion"
+  },
+  "antiPatterns": [
+    "fake terminal output",
+    "syntax color used as the only meaning cue",
+    "hidden destructive actions",
+    "unlabeled icon-only controls"
+  ],
+  "references": [
+    "impeccable",
+    "material-3",
+    "radix-primitives",
+    "tailwind",
+    "mdn-accessibility"
+  ],
+  "notes": [
+    "Do not make every developer product dark. Theme choice belongs to product context and user preference."
+  ],
+  "aiGuidance": {
+    "primaryFlow": "Discover capability → inspect status → configure or invoke → interpret output → diagnose and recover.",
+    "prioritize": [
+      "The active developer task and current environment",
+      "Real code, request configuration, logs, output and status",
+      "Precise terminology, copyable examples and actionable errors"
+    ],
+    "confirmOrMarkUnknown": [
+      "Supported runtimes, providers and versions",
+      "Authentication scopes, permissions and destructive side effects",
+      "Whether logs, metrics and integrations are real or sample data"
+    ],
+    "avoidByDefault": [
+      "Marketing hero inside an operational workspace",
+      "Fake terminal output or invented service status",
+      "Generic KPI cards unrelated to a developer task"
+    ],
+    "acceptanceChecks": [
+      "The primary operation is reachable without a marketing preamble",
+      "Code and output are selectable and understandable without syntax color alone",
+      "Errors explain cause, location and a safe next step"
+    ]
+  },
+  "compositionEscapes": [
+    {
+      "id": "command-workbench",
+      "when": "The primary task is executing commands, editing configuration, testing APIs or running a tool.",
+      "composition": "Use a focused command or editor surface with a visible environment and execution state; place the result beside or below the action and keep secondary configuration contextual.",
+      "contentRequirements": [
+        "A real command, request, editor or operation",
+        "Actual output or clearly labelled sample output",
+        "Environment and execution state"
+      ],
+      "avoid": [
+        "Decorative fake terminal windows",
+        "Unlabelled snippets presented as executable",
+        "Promising results before a run"
+      ]
+    },
+    {
+      "id": "observability-timeline",
+      "when": "The main task is diagnosing events, deployments, incidents or changing system behavior.",
+      "composition": "Lead with a time-ordered event stream or annotated timeline, then expose filters and a selected-event detail view; summarize only measurements that answer the diagnostic question.",
+      "contentRequirements": [
+        "Timestamps with timezone rules",
+        "Event source, status and filter semantics",
+        "Real or explicitly synthetic records"
+      ],
+      "avoid": [
+        "Invented uptime or incident metrics",
+        "Color-only status labels",
+        "Charts without range, units or source"
+      ]
+    },
+    {
+      "id": "docs-and-console",
+      "when": "Users alternate between learning an API or configuration and trying it immediately.",
+      "composition": "Pair structured explanation with a copyable example; add a runnable console only when a real execution environment exists.",
+      "contentRequirements": [
+        "Accurate documentation and code examples",
+        "Known execution environment or static-example label",
+        "Clear distinction between instructions and results"
+      ],
+      "avoid": [
+        "Pretending an unimplemented console is live",
+        "Huge decorative code panels",
+        "Unverified API capabilities"
+      ]
+    }
+  ]
 }

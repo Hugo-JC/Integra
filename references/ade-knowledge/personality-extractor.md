@@ -1,41 +1,37 @@
-<!-- Migrated from ai-design-engine/03-references/personality-extractor.md. Use as an optional analysis guide, not as a source of invented brand facts. -->
+# Personality and Tone Extraction — historical import
 
-# Guia de Extração de Personalidade e Tom do Prompt (v3)
+**Canonical rules:** `docs/ai-context-contract.md` and `docs/ai-guides/preset-reference-escape-routing.md`.
 
-A IA lê o pedido e separa duas coisas que antes se misturavam:
+## Separate product niche from visual tone
 
-- **Nicho** (o que é o produto, quem o usa) → decide o `style_id`. Fonte única: `03-references/local-presets.json`, executada por `node tools/route.js`.
-- **Tom** (adjetivos do pedido) → ajusta a **intensidade** (`calm`, `balanced`, `loud`) e detalhes de tipografia e movimento. **Nunca troca o nicho.**
+- **Niche** identifies what the product/service is and the task it supports. It is resolved by the current deterministic route in `data/design-library/local-presets.json`.
+- **Tone** describes the expressive intensity requested by the user. It can influence the accepted style direction but must never change the product niche or override existing design tokens.
+- **Domain profile** is a separate decision: choose one of the nine structured `presets/*.json` profiles by primary user task and content, not by visual adjective.
+- **Composition escape** is another separate decision: select it by task and available content, not by visual tone alone.
 
-> v3: a antiga tabela “Nicho → `style_id`” foi removida deste ficheiro porque duplicava `local-presets.json` e já tinha divergido dele. `node tools/lint-repo.js` falha se ela reaparecer.
-
-## Tabela de tom → intensidade e detalhes
-
-Lista completa e executável em `local-presets.json` → `tones`. Resumo:
-
-| Tom (palavras no pedido)                                                                                  | Intensidade               | O que ajusta                                                                                                   |
-| :-------------------------------------------------------------------------------------------------------- | :------------------------ | :------------------------------------------------------------------------------------------------------------- |
-| agressivo, ousado, explosivo, energético, jovem, rápido, irreverente, rebelde, intenso, vibrante, atitude | `loud`                    | Accent até 25% da superfície, tipografia de display maior, movimento mais marcado, contraste de cor mais forte |
-| calmo, acolhedor, elegante, sereno, minimalista, sofisticado, suave, discreto, tranquilo                  | `calm`                    | Accent até 10%, mais espaço negativo, movimento mínimo, tipografia mais contida                                |
-| (nenhum ou empate)                                                                                        | a do estilo (`intensity`) | —                                                                                                              |
-
-## Regras de aplicação
-
-1. **Nunca improvisar paleta.** Com um `style_id`, usar cores, raio e fontes do token. Só mudar se o utilizador pedir cores ou fontes específicas. Sem cores pedidas, pode usar-se um `accent_alternatives` do estilo.
-2. **Modo (dark/light):** seguir o campo `mode` do estilo; a variante do outro modo só se o pedido a sugerir (`variants[].when_any`).
-3. **Nicho sem preset:** o router pontua as `keywords` dos estilos (ignorando adjetivos de tom listados em `non_niche_terms`); a melhor pontuação decide e a razão vai para o brief. Sem pontuação, usa-se o `fallback`. Nunca sortear.
-4. **Conflito entre palavras-chave** (ex.: “agressivo” + “bancário”): o nicho decide o estilo; o tom só ajusta a intensidade. (O router tem um teste automático para isto.)
-5. **Cor do produto ≠ accent de UI.** Se o produto tem cor própria (lata, embalagem), declare-a no brief; ela não conta para o limite de accent.
-
-## Regra de ouro da personalidade
-
-Se o utilizador pede “uma landing page para o meu estúdio de tatuagem”, a IA nunca entrega uma página azul corporativa com botões redondos de banco: adota o tom escuro, artesanal, com tipografia forte e alto contraste (`dark_craft_ink`). Se pede “refrigerantes energéticos”, a embalagem é o herói (`loud_beverage_dark`, H5), não um hero com “texto à esquerda + imagem à direita”.
-
-## Como correr
+## Current route and CLI
 
 ```bash
-node tools/route.js "Landing page para um estúdio de tatuagem"            # resumo
-node tools/route.js "<pedido>" --brief                                    # esqueleto do DESIGN BRIEF
-node tools/route.js "<pedido>" --context                                  # brief + tokens + arquétipos + dossiê
-node tools/route.js "<pedido>" --json                                     # tudo, para scripts
+npm run design:route -- "Landing page para um estúdio de tatuagem" --json
+npm run design:route -- "Landing page para uma cafetaria" --tone calm --json
+npm run design:route -- "Developer dashboard" --tone loud
 ```
+
+The CLI accepts `calm` and `loud`. A style can have a stored default `balanced` intensity, but `balanced` is not a supported CLI tone override.
+
+The route checks strong niche terms before weak terms. Equally strong matches and weak-only matches require confirmation. With no match it returns a provisional neutral `clean_editorial` fallback and also requires confirmation. It does not select a style by guessing from keywords.
+
+## Application rules
+
+1. Respect explicit user instructions, verified project behavior and existing approved tokens before applying a preset.
+2. Explain why the niche route fits the actual product and primary task.
+3. Treat style colors, fonts, radii and accent values as candidates; validate them against the project, language, platform and accessibility.
+4. If the user requests a specific color or font, account for it without silently damaging contrast or consistency.
+5. Distinguish product/brand imagery from UI accent roles; do not apply arbitrary percentage quotas.
+6. Use a structured domain profile to understand the user flow, important content, states, unknowns and acceptance checks.
+7. Choose a composition alternative only when its condition and content requirements are met.
+8. Record uncertainty. Never let "premium", "modern", "aggressive", "minimal" or another style adjective replace the product niche.
+
+## Provenance
+
+This file preserves selected concepts from the original AI Design Engine. Old commands such as `node tools/route.js`, `node tools/lint-repo.js` and old paths are not current Integra commands.

@@ -1,30 +1,31 @@
 ---
 name: integra-design-qa
-description: Independently review a page, flow or component for product UX, visual quality, responsiveness, accessibility and implementation discipline.
+description: Independently review a page, flow or component for product UX, visual quality, responsiveness, accessibility and implementation discipline, producing ranked evidence-backed findings (P0-P3). Use for critique and audit; not for generating or editing UI.
 ---
 
 # Integra Design QA
 
-Review against the brief, real tasks, tokens and observable evidence. Do not report a taste preference as a defect without context.
+Review against the brief, real tasks, tokens and observable evidence. A taste preference is not a defect without context; a trigger match is a candidate, not a finding.
 
 ## Multi-agent protocol
-When independent agents are available, assign focused passes: (1) product/UX, (2) visual system/responsive, (3) accessibility/interaction, (4) implementation/evidence. Give each the same brief and artifact; require evidence; deduplicate and rank findings. If only one agent is available, perform sequential passes and label the review single-agent—never pretend independent reviewers ran.
+With independent agents, assign focused passes (product/UX, visual+responsive, accessibility+interaction, implementation+evidence), give each the same brief and artifact, require evidence, then deduplicate and rank. With a single agent, run the passes sequentially and **label the review single-agent**; never imply independent reviewers ran.
 
-## Review passes
-1. Product/UX: user goal, hierarchy, navigation, content, trust and task completion.
-2. Visual: type, spacing, semantic colors, surfaces, borders, elevation, icons and personality.
-3. Responsive: narrow/medium/wide behavior, overflow, navigation and touch usability.
-4. Accessibility: semantics, keyboard, focus, names, form errors, contrast, zoom/reflow and reduced motion.
-5. Implementation: boundaries, types, state coverage, errors, dependencies, performance and duplicated styles.
-6. Evidence: inspect code, run checks and inspect the rendered page when a browser exists.
+## Passes
+1. Product/UX: goal, hierarchy, navigation, content, trust, task completion.
+2. Visual: type, spacing, semantic colors, surfaces, elevation, icons, personality.
+3. Responsive: narrow/medium/wide, overflow, navigation, touch.
+4. Accessibility: semantics, keyboard, focus, names, errors, contrast, zoom/reflow, reduced motion (see `integra-accessibility-audit` for depth).
+5. Implementation: boundaries, types, state coverage, errors, duplication, performance.
+6. Evidence: run checks; inspect the rendered page when a browser exists. Otherwise mark `not_run`.
 
 ## Severity
-- P0 blocker: core task impossible, data loss or severe accessibility/security issue.
-- P1 high: major flow or common interaction materially broken.
-- P2 medium: noticeable usability/consistency issue with a workaround.
-- P3 polish: useful craft refinement, not a blocker.
+P0 blocker (core task impossible, data loss, severe a11y/security) · P1 major (major flow or common interaction broken) · P2 medium (workaround exists) · P3 polish. Severity is not proof and not a visual score.
 
 ## Finding contract
-Include ID, severity, location, evidence (selector/file/line/screenshot), user impact, recommendation, verification method and status: verified, unverified, not_run or inconclusive.
+ID, rule ID, location (selector/file:line), observed evidence, expected criterion, actual behavior, user impact, severity rationale, recommendation, verification method, status (`verified` / `heuristic` / `inconclusive` / `not_run`).
 
-Never claim WCAG conformance from one contrast ratio. Separate objective checks from visual ratings. Order fixes by impact and effort.
+## Output
+Ranked findings, then a short "what works well" list (evidence-backed, so strengths are not lost in a refactor), then limitations.
+
+## Signature touch: "Confidence ledger"
+End with a three-column table: Verified / Heuristic / Not run. Never move an item to Verified without evidence. Never claim WCAG conformance from one ratio or an automated scan.
