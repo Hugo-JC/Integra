@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "Integra Design Intelligence Library",
+  "version": "1.0.0",
+  "origin": {
+    "repository": "https://github.com/Hugo-JC/ai-design-engine",
+    "files": [
+      "02-styles-and-tokens/design-styles.json",
+      "03-references/local-presets.json",
+      "03-references/reference-sources.json"
+    ]
+  },
+  "counts": {
+    "styles": 17,
+    "nichePresets": 61,
+    "referenceSources": 14
+  },
+  "policy": "Presets are contextual starting points, not mandatory visual templates. Always preserve explicit brand constraints, accessibility requirements, product context and user intent. Do not copy complete reference layouts."
+}

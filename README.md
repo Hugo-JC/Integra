@@ -1,110 +1,103 @@
 # Integra — AI Design Engine v5
 
-**Um motor modular para transformar briefs e contexto em direção de design estruturada, rastreável e verificável — pronta para ser consumida por agentes externos.**
+**Motor modular de direção de design, inteligência visual e qualidade para agentes de IA.** O Integra transforma briefs e contexto em decisões verificáveis; ajuda os agentes a implementar e permite inspecionar e auditar resultados.
 
-> **Estado atual:** fundação determinística da Phase 2 concluída para DL-001. O Direction Artifact 1.1.0 é gerado sem IA e validado em quatro camadas. Esta branch acrescenta ferramentas de CLI, contratos de integração com agentes e formatos para experiências controladas.
+> Esta branch acrescenta uma biblioteca contextual de presets, routing determinístico, skills interoperáveis, QA estático e um Live Inspector de browser. Não afirma que a qualidade visual de um website melhorou sem uma experiência controlada.
 
-## O que é o Integra?
+## O que o Integra faz
 
-Integra não é um gerador de sites nem um editor visual. É uma camada de direção e qualidade entre a intenção do projeto e o agente que implementa a interface.
-
-- **Direction:** transforma objetivos e contexto em decisões e recomendações visuais aplicáveis.
-- **Refinement:** identifica problemas verificáveis e recomenda melhorias específicas.
-- **Investigation:** recolhe contexto e evidências através de adaptadores opcionais.
-- **V5 Design Lab:** testa cenários e compara resultados sem confundir recomendações com correções comprovadas.
-
-O objetivo é reduzir improviso e padrões genéricos, sem impor uma estética universal ou inventar informação ausente.
-
-## Princípios
-
-1. Regras determinísticas são a base; IA é enriquecimento opcional.
-2. O mesmo contexto normalizado e a mesma versão do motor produzem o mesmo artefacto.
-3. Factos, restrições explícitas, preferências e heurísticas são tratados de forma distinta.
-4. Texto livre preserva intenção; restrições bloqueantes usam estrutura tipada.
-5. Informação ausente fica em missingInformation, nunca é inventada.
-6. Decisões preservam proveniência: brief > rule > ai > default.
-7. WCAG estabelecido não se confunde com recomendações heurísticas [R].
-8. Relatórios de autoavaliação de agentes não substituem verificação independente.
-9. O núcleo não depende de API keys, rede ou ferramentas de browser.
-
-## Stack e requisitos
-
-- TypeScript e Node.js numa arquitetura modular monolítica.
-- Node.js 24 e npm 10 ou superior.
-- JSON Schema 2020-12 para contratos serializáveis.
-- React + TypeScript é o primeiro contexto de integração, sem obrigar todos os projetos a usar essa stack.
+- **Direction:** converte intenção, contexto e restrições em direção visual rastreável.
+- **Design Intelligence:** 17 estilos, 61 presets de nicho e 14 fontes importadas do AI Design Engine.
+- **Refinement:** verifica problemas objetivos e classifica resultados inconclusivos sem inventar conformidade.
+- **Live Inspector:** seleciona elementos DOM, pré-visualiza alterações e exporta um diff para revisão no código-fonte.
+- **Design QA:** verifica padrões estáticos em JSX/TSX e conduz auditorias independentes.
+- **Investigation:** guia pesquisa baseada em hipóteses, evidências, confiança e limitações.
+- **Design Lab:** compara resultados baseline vs Integra-guided com variáveis controladas.
 
 ## Começar
+
+Requisitos: Node.js 24 e npm 10 ou superior.
 
 ~~~bash
 npm ci
 npm run check
 ~~~
 
-## Direction CLI
+## Direção e presets
 
-Gerar o artefacto DL-001 a partir do fixture incluído:
-
-~~~bash
-npm run direction:generate
-~~~
-
-O output por defeito é escrito em .integra/runs/direction/DL-001.json (pasta ignorada pelo Git).
-
-Usar um input próprio:
+O router usa expressões completas, normaliza acentos e dá prioridade a termos fortes sobre termos genéricos. Empates e correspondências fracas exigem confirmação. O preset é uma sugestão contextual, nunca um tema obrigatório.
 
 ~~~bash
-npm run direction:generate -- --scenario DL-001 --input ./brief.json --out ./.integra/runs/my-direction.json
+npm run design:route -- "SaaS developer AI platform"
+npm run design:route -- "clínica de estética premium" --json
+npm run design:route -- "marketplace de produtos artesanais" --tone calm --json
 ~~~
 
-O input pode ser o objeto DirectionContextInput ou um fixture com a propriedade directionContext.
+Os estilos e presets estão em `data/design-library/`. O manifesto preserva a origem e a política de utilização. Referências servem para estudar princípios; não copiar páginas, marcas ou layouts distintivos.
 
-Escrever o JSON diretamente no stdout:
+## Design QA
 
 ~~~bash
-npm run direction:generate -- --stdout
+npm run design:qa -- src/
+npm run design:qa -- src/ --json
+npm run design:qa -- src/ --strict
 ~~~
 
-Validar um artefacto existente:
+Regras atuais incluem imagens sem alt, elementos não nativos clicáveis sem semântica/teclado, remoção de outline sem substituto e cores hex hardcoded como sugestão. O scanner é estático: não prova contraste real, responsividade nem qualidade visual.
 
-~~~bash
-npm run direction:validate -- --input ./.integra/runs/my-direction.json
+## Live Inspector (local development only)
+
+O inspector é independente de framework e não acrescenta dependências de runtime. Ativa-o apenas num entrypoint de desenvolvimento (por exemplo, Vite):
+
+~~~ts
+if (import.meta.env.DEV && import.meta.env.VITE_INTEGRA_LIVE === 'true') {
+  void import('./modules/live-inspector/index.js').then(({ startIntegraInspector }) => {
+    startIntegraInspector();
+  });
+}
 ~~~
 
-A validação usa as quatro camadas já existentes. Exit codes: 0 passed, 1 failed, 2 inconclusive ou com diagnóstico de geração que exige revisão.
+Definir `VITE_INTEGRA_LIVE=true` inicia a seleção. Hover e seleção usam o azul Integra `#3B82F6`; **↑ Pai** sobe na árvore DOM. Podes pré-visualizar classes, cores, tamanho de texto, padding e radius; consultar o contraste; repor o estado; e copiar o DOM diff.
 
-## O que já está implementado
+O inspector:
+- Está limitado a localhost por defeito.
+- Não escreve ficheiros, não chama agentes e não envia dados para uma API.
+- Não garante que uma alteração persista após um re-render React/Vue/Svelte.
+- Só oferece um selector DOM best-effort; um caminho de ficheiro só existe quando a aplicação fornece explicitamente `data-integra-file`.
+- Deve ser removido/destruído antes de uma release de produção. Não enfraquecer CSP para o ativar.
 
-- Cinco cenários documentados, briefs, manifests e fixtures.
-- Schemas para cenários, relatórios, findings e Direction Artifact.
-- Context contracts e normalizador com diagnósticos, limites, Unicode NFC e deduplicação estável.
-- Factos tipados para viewports, acessibilidade, idioma, tokens e conteúdo.
-- Restrições estruturadas hard/soft e resolver com precedence.
-- Geração determinística DL-001 nas oito áreas do artefacto.
-- Serialização canónica e identidade estável sem timestamp.
-- Validação estrutural, semântica, de restrições e consistência.
-- CLI para gerar e validar direções sem IA.
-- Contract de consumo do agente e Direction Consumption Report.
-- Schema de experiências pareadas baseline vs Integra-guided.
-- GitHub Actions para typecheck, testes e validação de fixtures.
+Ver [docs/live-inspector.md](docs/live-inspector.md).
 
-## Próximo marco: First Agent Pilot
+## Skills e compatibilidade de agentes
 
-A primeira experiência real deve executar o mesmo agente com o mesmo brief e configuração em dois workspaces equivalentes: baseline e Integra-guided. A única diferença intencional será a presença do Direction Artifact. Outputs, hashes, screenshots e resultados por critério ficam registados.
+Skills canónicas vivem em `.agents/skills/*/SKILL.md` para partilha entre ferramentas que suportam Agent Skills. O Gemini CLI recebe contexto adicional através de `GEMINI.md` (que importa `AGENTS.md`). Claude Code, Cursor e GitHub Copilot têm ficheiros de entrada curtos que apontam para as mesmas instruções.
 
-Consultar:
+Skills incluídas:
+- `integra-direction`
+- `integra-refactor-agent`
+- `integra-ui-generator`
+- `integra-design-qa`
+- `integra-live-inspector`
+- `integra-investigation`
 
-- docs/implementation-roadmap.md — roadmap oficial.
-- docs/architecture.md — fronteiras e fluxo dos módulos.
-- docs/agent-integration-contract.md — como agentes consomem e reportam a direção.
-- docs/design-experiment-protocol.md — protocolo do primeiro teste controlado.
-- examples/agent-consumer/AGENT-INSTRUCTIONS.md — exemplo de instruções para um agente externo.
+## Princípios de qualidade
 
-## Limites atuais
+1. Produto e conteúdo antes da decoração.
+2. Direção visual contextual; nunca uma paleta universal.
+3. Hierarquia tipográfica e espaçamento intencionais.
+4. Componentes semanticamente corretos e acessíveis.
+5. Estados completos e feedback de interação.
+6. Motion com propósito e respeito por reduced-motion.
+7. Performance medida; sem memoização indiscriminada.
+8. Factos, preferências, heurísticas e requisitos separados.
+9. WCAG AA/AAA calculado com cores efetivamente compostas quando possível.
+10. Evidência e confiança acompanham as conclusões.
 
-A geração determinística está implementada apenas para DL-001. Ainda não existem extração automática de briefs Markdown, AI Provider Layer, runner de browser, avaliação visual automática ou mutação de projetos React. A implementação de um agente externo e a eficácia da direção ainda precisam de ser testadas com experiências reais.
+## Núcleo e limites
 
-## Mapa rápido
+O núcleo determinístico continua provider-agnostic e sem API keys. A geração de Direction Artifact continua implementada para DL-001; os restantes cenários precisam de geradores e testes próprios. O Live Inspector é um preview DOM, não um editor de source code. O scanner é heurístico e estático. O runner visual multi-viewport, auto-mutation de projetos e adaptadores externos de investigação permanecem marcos futuros.
+
+## Documentação
 
 - docs/ — arquitetura, decisões, contratos e roadmap.
 - schemas/ — contratos JSON versionados.

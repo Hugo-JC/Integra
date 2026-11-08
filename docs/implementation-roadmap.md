@@ -1,12 +1,10 @@
 # Roadmap do Integra
 
-Última atualização: 30/10/2026.
+Última atualização: 08/11/2026.
 
-## Direção do produto
+## Direção
 
-Integra é um motor provider-agnostic de direção e qualidade de design. Converte briefs e contexto estruturado em artefactos de direção rastreáveis; depois permite que agentes externos os consumam e que o Design Lab avalie os resultados com evidências.
-
-Integra não é um gerador de sites, um editor visual ou um conjunto de prompts. O núcleo deve permanecer determinístico, testável e útil sem fornecedores externos.
+Integra transforma contexto em direção visual rastreável, ajuda agentes a implementar e verifica resultados com evidências. Não é apenas um gerador de sites ou uma coleção de prompts.
 
 ## Fase 1 — Contracts & Design Lab foundation
 
@@ -44,6 +42,19 @@ A fase está concluída para a primeira fatia funcional, não para todos os cen�
 
 Critério de conclusão: o artefacto pode ser gerado, validado, entregue a um agente externo e associado a um relatório de consumo validável.
 
+## Fase 2.2 — Design Intelligence & Browser Preview
+
+**Implementação inicial nesta branch; precisa de validação em Node 24 e browser real.**
+
+- Biblioteca migrada do AI Design Engine: estilos, presets, fontes, regras, anti-patterns, playbook, arquétipos e catálogo.
+- Router determinístico com termos fortes/fracos, variantes condicionais, alternativas e confirmação em fallback/ambiguidade.
+- Skills interoperáveis em `.agents/skills/` e contextos para Gemini, Claude Code, Cursor e GitHub Copilot.
+- QA estático AST para regras JSX/TSX selecionadas.
+- Live Inspector local: seleção DOM azul, navegação ao pai, preview de classes/estilos, reset e exportação de diff.
+- Auditoria de contraste de texto WCAG 2.2 1.4.3 com estados passed/failed/inconclusive.
+
+Não declarar conformidade WCAG global nem persistência das edições do Live Inspector. O preview altera apenas o DOM; mudanças duráveis são feitas no código-fonte após revisão do agente.
+
 ## Marco seguinte — First Agent Pilot
 
 1. Escolher um brief DL-001 e congelar o seu SHA-256.
@@ -65,32 +76,13 @@ Não alterar o motor com base numa impressão isolada. Primeiro recolher evidên
 - Limpar workspaces de forma segura.
 
 ## Fase 4 — Refinement & evaluators
-
-- Acessibilidade automatizada com limites explícitos e referências WCAG.
-- Verificação de conteúdo obrigatório, claims e estados de interação.
-- Avaliação de responsividade com browser/DOM quando disponível.
-- Findings com evidências, severidade, impacto e correções verificáveis.
-- Deteção de regressões contra baselines aprovadas.
-- Estados not-verifiable e inconclusive sempre que a evidência não permite concluir.
+Adapter DOM/browser, axe-core opcional, TypeScript AST, responsive tests, findings baseados em evidências e deteção de regressões.
 
 ## Fase 5 — Scenario coverage
+Implementar DL-002, DL-003 e DL-005 com regras e fixtures específicas. DL-004 continua como avaliação de interfaces genéricas.
 
-- DL-002 Productivity Dashboard.
-- DL-003 Education Platform.
-- DL-005 Existing React Project.
-- DL-004 permanece centrado em avaliação de interfaces genéricas, não em impor uma direção criativa universal.
-
-Cada cenário exige contexto, regras, critérios e fixtures próprios. Não criar geradores só para aumentar a contagem.
-
-## Fase 6 — AI Provider Layer & Investigation
-
-- Porta única para pedidos de sugestões.
-- Adaptadores provider-agnostic, timeouts e validação de payloads.
-- Fallback determinístico quando a IA falhar ou devolver dados inválidos.
-- IA nunca ultrapassa hard constraints nem decisões explícitas do brief.
-- Adaptadores opcionais para referências, documentação e ferramentas externas, com proveniência.
-
-Esta fase vem depois do primeiro piloto e da definição das necessidades reais. Não introduzir IA antes de provar o fluxo determinístico.
+## Fase 6 — Investigation adapters & optional AI
+Adapters autorizados para fontes externas; providers opcionais com timeout, cancelamento, validação, fallback determinístico e respeito por hard constraints.
 
 ## Release gates
 
