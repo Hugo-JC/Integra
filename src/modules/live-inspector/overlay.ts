@@ -65,7 +65,7 @@ function createSnapshot(element: Element, doc: Document, sourceHint?: string): L
     tagName: element.tagName,
     accessibleName: getAccessibleName(element),
     originalClasses: element.getAttribute('class') ?? '',
-    ...(sourceHint ? { componentHint: sourceHint } : {}),
+    ...((sourceHint ?? element.getAttribute('data-integra-source')) ? { componentHint: sourceHint ?? element.getAttribute('data-integra-source')! } : {}),
   };
 }
 
@@ -80,8 +80,8 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
   if (!view) throw new Error('Integra Live Inspector requires an active browser window.');
   if (!doc.body) throw new Error('Integra Live Inspector must start after document.body is available.');
 
-  const requestedAccent = options.accentColor ?? '${accent}';
-  const accent = typeof CSS !== 'undefined' && CSS.supports('color', requestedAccent) ? requestedAccent : '${accent}';
+  const requestedAccent = options.accentColor ?? '#3B82F6';
+  const accent = typeof CSS !== 'undefined' && CSS.supports('color', requestedAccent) ? requestedAccent : '#3B82F6';
   if (options.ignoreSelector) {
     try {
       doc.createElement('div').matches(options.ignoreSelector);
