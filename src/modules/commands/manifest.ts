@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs';
-import { isAbsolute, relative, resolve, sep } from 'node:path';
-import Ajv2020 from 'ajv/dist/2020.js';
+import { resolve } from 'node:path';
+import { Ajv2020 } from 'ajv/dist/2020.js';
+import type { ErrorObject } from 'ajv';
 import manifestJson from '../../../commands/manifest.json' with { type: 'json' };
 import schemaJson from '../../../schemas/command-manifest.schema.json' with { type: 'json' };
 import type { CommandDefinition, CommandManifest, CommandResolution } from './types.js';
@@ -18,8 +19,10 @@ export interface ManifestValidation { valid:boolean; errors:string[]; }
 export function validateCommandManifest(candidate:unknown=manifest,root=process.cwd()):ManifestValidation {
   const errors:string[]=[];
   if (!validateSchema(candidate)) {
-    errors.push(...(validateSchema.errors??[]).map((error)=>`${error.instancePath||'/'} ${error.message??'is invalid'}`));
-    return {valid:false,errors};
+    errors.push(...(validateSchema.errors ?? []).map((error: ErrorObject) =>
+      `${error.instancePath || '/'} ${error.message ?? 'is invalid'}`,
+    ));
+    return { valid: false, errors };
   }
   const value=candidate as CommandManifest;
   const ids=new Set<string>(), invocations=new Set<string>();

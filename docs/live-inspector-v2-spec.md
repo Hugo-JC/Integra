@@ -1,6 +1,6 @@
 # Live Inspector v2 — Product and Technical Specification
 
-**Status:** Approved direction; implementation not yet started.  
+**Status:** Phase A core implementation is on the feature branch; automated verification is pending. Phase B–E remain planned.  
 **Decision:** Both Advanced Inspector and Figma-like Quick Canvas.  
 **Source-code application:** Review required.
 

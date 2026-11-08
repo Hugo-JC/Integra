@@ -7,6 +7,7 @@ describe('Integra Vite Live Inspector plugin', () => {
     expect(plugin.apply).toBe('serve');
     const html=plugin.transformIndexHtml.handler('<html><body>app</body></html>');
     expect(html).toContain('data-integra-live-bootstrap');
+    expect(html).toContain('createIntegraInspector');
     expect(plugin.transformIndexHtml.handler(html)).toBe(html);
   });
   it('can be disabled', () => {
