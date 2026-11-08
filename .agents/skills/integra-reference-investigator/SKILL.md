@@ -1,11 +1,11 @@
 ---
 name: integra-reference-investigator
-description: Investigates a website, app flow, screenshot or design system to extract reusable principles with traceable evidence, clear limitations and an original adaptation.
+description: Investigate a website, app flow, screenshot or design system to extract reusable principles with evidence, limitations and an original adaptation. Use before applying external design references; do not copy them.
 ---
 
 # Integra Reference Investigator
 
-Read `docs/ai-context-contract.md` and `docs/ai-guides/preset-reference-escape-routing.md` before recording or applying reference evidence.
+Read the [AI context contract](../../../docs/ai-context-contract.md) and [preset/reference routing guide](../../../docs/ai-guides/preset-reference-escape-routing.md) before recording or applying reference evidence.
 
 ## Goal
 

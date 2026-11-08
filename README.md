@@ -70,7 +70,7 @@ Ver [docs/live-inspector.md](docs/live-inspector.md).
 
 ## Skills e compatibilidade de agentes
 
-Skills canónicas vivem em `.agents/skills/*/SKILL.md` para partilha entre ferramentas que suportam Agent Skills. O Gemini CLI recebe contexto adicional através de `GEMINI.md` (que importa `AGENTS.md`). Claude Code, Cursor e GitHub Copilot têm ficheiros de entrada curtos que apontam para as mesmas instruções.
+Skills canónicas vivem em `.agents/skills/*/SKILL.md` no formato Agent Skills. Codex, Gemini CLI, Cursor e superfícies compatíveis do GitHub Copilot descobrem esse diretório; Claude Code requer um link em `.claude/skills/`. `AGENTS.md`, `GEMINI.md` e `CLAUDE.md` continuam a fornecer contexto do projeto, mas não instalam Skills automaticamente. Consulte [compatibilidade, instalação e validação por host](docs/agent-compatibility.md).
 
 Skills canónicas:
 - `integra-ux-shape` — enquadramento de tarefas, fluxos, IA e estados.

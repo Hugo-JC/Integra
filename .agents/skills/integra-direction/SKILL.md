@@ -1,6 +1,6 @@
 ---
 name: integra-direction
-description: Use when a project or UI needs a contextual visual direction, design tokens, layout principles or implementation brief before code changes.
+description: Create contextual visual direction, design tokens, layout principles and an implementation brief. Use when starting a project or redesign before code changes; do not impose a house aesthetic.
 ---
 
 # Integra Direction

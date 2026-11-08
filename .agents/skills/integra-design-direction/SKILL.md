@@ -1,11 +1,11 @@
 ---
 name: integra-design-direction
-description: Create a distinctive, product-specific visual direction (thesis, tokens, composition, states) before any UI code. Use for new pages, redesigns, visual personality, token plans and layout decisions; not for pixel-level polish of finished screens.
+description: Create a distinctive, product-specific visual direction (thesis, tokens, composition, states) before UI code. Use for new pages, redesigns, visual personality, token plans and layout decisions; not for pixel-level polish of finished screens.
 ---
 
 # Integra Design Direction
 
-Turn product intent into a direction another agent can implement without guessing. Start from users, task and constraints, never from a fashionable style. Follow `docs/ai-context-contract.md` and `docs/ai-guides/preset-reference-escape-routing.md` whenever presets, references or quality rules influence a decision.
+Turn product intent into a direction another agent can implement without guessing. Start from users, task and constraints, never from a fashionable style. Follow the [AI context contract](../../../docs/ai-context-contract.md) and [preset/reference routing guide](../../../docs/ai-guides/preset-reference-escape-routing.md) whenever presets, references or quality rules influence a decision.
 
 ## Use when / not when
 

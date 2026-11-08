@@ -5,7 +5,7 @@ description: Research design patterns, component behavior and references with tr
 
 # Integra Investigation
 
-Follow `docs/ai-context-contract.md`, `docs/reference-investigation.md` and `docs/ai-guides/preset-reference-escape-routing.md`. These define source precedence, evidence classes, catalog verification status and how references support the actual product decision.
+Follow the [AI context contract](../../../docs/ai-context-contract.md), [reference investigation guide](../../../docs/reference-investigation.md) and [preset/reference routing guide](../../../docs/ai-guides/preset-reference-escape-routing.md). These define source precedence, evidence classes, catalog verification status and how references support the actual product decision.
 
 ## Workflow
 

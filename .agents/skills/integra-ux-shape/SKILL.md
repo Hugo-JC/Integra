@@ -1,13 +1,14 @@
 ---
 name: integra-ux-shape
-description: Shape a product surface before visual direction or code: clarify users, jobs, task flows, information architecture, screen states and success signals. Use for new flows, navigation and content structure; not for visual styling, component implementation or code review.
+description: >-
+  Shape a product surface before visual direction or code: clarify users, jobs, task flows, information architecture, screen states and success signals. Use for new flows, navigation and content structure; not for visual styling, component implementation or code review.
 ---
 
 # Integra UX Shape
 
 Turn an ambiguous product request into a task-first structure that later direction and implementation work can follow. Do not choose colors, type, components or code in this skill.
 
-Read `docs/ai-context-contract.md` when it exists in the workspace. Otherwise apply the same rules: explicit user instruction > project constraints > observed facts > platform and accessibility requirements > references > presets > judgment.
+Read the [AI context contract](../../../docs/ai-context-contract.md) when it exists in the workspace. Otherwise apply the same rules: explicit user instruction > project constraints > observed facts > platform and accessibility requirements > references > presets > judgment.
 
 ## Use when / not when
 
