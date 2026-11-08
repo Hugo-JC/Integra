@@ -5,7 +5,7 @@ description: Generate production-ready React + TypeScript UI (components, screen
 
 # Integra UI Generator
 
-Build interface code that is semantic, accessible, responsive and specific to the product, in the project's own stack. Read `docs/ai-context-contract.md` and `docs/ai-guides/preset-reference-escape-routing.md` when presets, references or composition alternatives affect implementation.
+Build interface code that is semantic, accessible, responsive and specific to the product, in the project's own stack. Read the [AI context contract](../../../docs/ai-context-contract.md) and [preset/reference routing guide](../../../docs/ai-guides/preset-reference-escape-routing.md) when presets, references or composition alternatives affect implementation.
 
 ## Use when / not when
 

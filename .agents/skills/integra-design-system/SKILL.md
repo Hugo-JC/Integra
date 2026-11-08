@@ -1,6 +1,6 @@
 ---
 name: integra-design-system
-description: Create, document or evolve a product design system (semantic tokens, components, variants, states, usage guidance) from existing UI or a brief. Use for token audits, component APIs and migration notes; never impose one theme across products.
+description: Create, document or evolve a product design system (semantic tokens, components, variants, states and usage guidance). Use for token audits, component APIs and migration notes; never impose a visual theme across products.
 ---
 
 # Integra Design System Engineering

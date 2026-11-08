@@ -1,6 +1,6 @@
 ---
 name: integra-live-inspector
-description: Inspect a local development DOM element, preview allowlisted visual changes, estimate contrast, export a structured review handoff and preserve source-code approval boundaries.
+description: Inspect a local development DOM element, preview reversible allowlisted visual changes, estimate contrast and export a review handoff. Use when inspecting a running local UI; never write source code or use in production.
 ---
 
 # Integra Live Inspector
