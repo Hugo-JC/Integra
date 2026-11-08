@@ -33,11 +33,13 @@ export function findUniqueSelector(element: Element, doc: Document = element.own
   const parts: string[] = [];
   let current: Element | null = element;
   while (current && current.tagName.toLowerCase() !== 'html') {
-    let segment = current.tagName.toLowerCase();
-    const parentElement = current.parentElement;
+    const currentElement: Element = current;
+    let segment = currentElement.tagName.toLowerCase();
+    const parentElement: Element | null = currentElement.parentElement;
     if (parentElement) {
-      const sameTag = [...parentElement.children].filter((child) => child.tagName === current.tagName);
-      if (sameTag.length > 1) segment += `:nth-of-type(${sameTag.indexOf(current) + 1})`;
+      const currentTag = currentElement.tagName;
+      const sameTag = [...parentElement.children].filter((child) => child.tagName === currentTag);
+      if (sameTag.length > 1) segment += `:nth-of-type(${sameTag.indexOf(currentElement) + 1})`;
     }
     parts.unshift(segment);
     const candidate = parts.join(' > ');

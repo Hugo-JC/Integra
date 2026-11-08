@@ -448,10 +448,13 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
   function setActive(value: boolean): void {
     if (stopped) return;
     enabled = value;
-    panel.hidden = !enabled || !selected;
+    const activePanel = panel!;
+    const activeHighlight = highlight!;
+    const activeTag = tag!;
+    activePanel.hidden = !enabled || !selected;
     if (!enabled) {
-      highlight.style.display = 'none';
-      tag.style.display = 'none';
+      activeHighlight.style.display = 'none';
+      activeTag.style.display = 'none';
     } else if (selected) {
       positionHighlight(selected);
     }

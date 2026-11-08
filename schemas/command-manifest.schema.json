@@ -254,6 +254,7 @@
                   "const": "/integra"
                 },
                 "skills": {
+                  "type": "array",
                   "maxItems": 0
                 }
               }
@@ -276,9 +277,11 @@
               ],
               "properties": {
                 "invocation": {
+                  "type": "string",
                   "pattern": "^/integra:[a-z][a-z0-9-]*$"
                 },
                 "skills": {
+                  "type": "array",
                   "minItems": 1
                 },
                 "requiresActiveContext": {
@@ -306,9 +309,11 @@
               ],
               "properties": {
                 "invocation": {
+                  "type": "string",
                   "pattern": "^/integra:[a-z][a-z0-9-]*$"
                 },
                 "skills": {
+                  "type": "array",
                   "minItems": 1
                 },
                 "requiresActiveContext": {

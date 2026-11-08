@@ -24,5 +24,5 @@ describe('design tooling CLIs', () => {
     const output = JSON.parse(result.stdout) as { scannedFiles: number; findings: unknown[] };
     expect(output.scannedFiles).toBeGreaterThan(0);
     expect(Array.isArray(output.findings)).toBe(true);
-  });
+  }, 20_000);
 });

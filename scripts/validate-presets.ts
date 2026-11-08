@@ -1,15 +1,22 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { relative, resolve, sep } from 'node:path';
 import type { ErrorObject } from 'ajv';
-import Ajv2020 from 'ajv/dist/2020.js';
+import { Ajv2020 } from 'ajv/dist/2020.js';
 
 const root = process.cwd();
 const presetRoot = resolve(root, 'presets');
 const errors: string[] = [];
 const readJson = (path: string): unknown => JSON.parse(readFileSync(path, 'utf8'));
+const readSchema = (path: string): object => {
+  const schema = readJson(path);
+  if (typeof schema !== 'object' || schema === null || Array.isArray(schema)) {
+    throw new Error(path + ' must contain a JSON schema object');
+  }
+  return schema;
+};
 const ajv = new Ajv2020({ allErrors: true, strict: true });
-const presetSchema = readJson(resolve(root, 'schemas/design-preset.schema.json'));
-const referenceSchema = readJson(resolve(root, 'schemas/reference-catalog.schema.json'));
+const presetSchema = readSchema(resolve(root, 'schemas/design-preset.schema.json'));
+const referenceSchema = readSchema(resolve(root, 'schemas/reference-catalog.schema.json'));
 const presetValidator = ajv.compile(presetSchema);
 const referenceValidator = ajv.compile(referenceSchema);
 
