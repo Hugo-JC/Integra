@@ -1,0 +1,12 @@
+{
+  "id":"education-platform","name":"Education & Learning Platform","version":"1.0.0",
+  "productContexts":["learning management","online courses","school portals","student dashboards","tutoring platforms"],
+  "designIntent":{"primaryGoal":"Help learners understand what to do next and track progress without distraction.","audienceNeeds":["clear instructions","manageable steps","progress feedback","inclusive language"],"personalityAxes":["encouraging","structured","approachable"],"visualThesis":"A guided learning environment where instruction and progress are easy to follow."},
+  "visualDirection":{"density":"low-to-medium for learning content; denser in teacher/admin workspaces","surfaces":"distinct learning content from navigation and progress metadata","colorIntent":"calm base with consistent semantic progress and feedback; test color contrast","typography":"comfortable reading size and line length; clear lesson, prompt and feedback roles","motion":"purposeful progress feedback; no distracting loops"},
+  "layout":{"pattern":"course navigation + lesson content + progress/next-step area","spacing":"generous around learning content, concise around curriculum navigation","responsive":"lesson content remains primary; navigation becomes a clear drawer or step list","contentPriority":["learning objective","lesson content","current progress","next action"]},
+  "components":{"preferred":["course outline","lesson player","stepper","progress indicator","quiz feedback","resource list"],"states":["not started","in progress","completed","locked","needs review","submission error"],"avoid":["gamification that obscures learning goals","ambiguous grading feedback","dense walls of text"]},
+  "accessibility":{"minimumTextContrast":"WCAG 2.2 AA","keyboard":"all learning activities and media controls must support keyboard interaction","focus":"visible focus and predictable return after dialogs","reducedMotion":"no essential lesson information depends on animation"},
+  "antiPatterns":["progress represented by color only","tiny lesson text","unclear quiz feedback","unlabeled media controls"],
+  "references":["govuk-design-system","material-3","wai-aria-apg","mdn-accessibility"],
+  "notes":["Content structure and readability matter more than decorative education-themed illustrations."]
+}
