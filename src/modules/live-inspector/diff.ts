@@ -41,7 +41,7 @@ export function createElementChangeSet(input: {
           contrastRatio: input.contrast.ratio,
           contrastRequired: input.contrast.requiredRatio,
           contrastPass: input.contrast.passesAA,
-          contrastNote: 'Runtime estimate from computed foreground and nearest opaque ancestor background; verify complex layering, images, gradients and pseudo-elements independently.',
+          contrastNote: 'Runtime estimate from computed foreground and composited opaque CSS backgrounds; gradients, images, pseudo-elements, filters and complex layering remain inconclusive.',
         }
       : {
           contrastNote: 'Contrast could not be measured reliably. Transparent, image, gradient or layered backgrounds require manual rendered-state verification.',

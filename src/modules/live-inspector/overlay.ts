@@ -1,5 +1,5 @@
 import { calculateLiveContrast } from './contrast.js';
-import { colorToHex, parseCssColor } from './color.js';
+import { colorToHex, parseCssColor, compositeColors } from './color.js';
 import { createElementChangeSet, synthesizeLivePrompt } from './diff.js';
 import { getAccessibleName, findUniqueSelector } from './selector.js';
 import type { IntegraLiveInspectorController, IntegraLiveInspectorOptions, LiveEditableProperty, LiveElementChangeSet, LiveElementSnapshot } from './types.js';
@@ -8,6 +8,7 @@ interface OriginalElementState {
   snapshot: LiveElementSnapshot;
   originalStyleAttribute: string | null;
   originalClasses: string;
+  originalComputedStyles: Record<string, string>;
 }
 
 const EDITABLE_PROPERTIES: LiveEditableProperty[] = ['color', 'background-color', 'border-radius', 'padding'];
@@ -21,24 +22,39 @@ function hasTransparentBackground(value: string): boolean {
   return !color || color.alpha < 0.999;
 }
 
-function readStyleAttribute(doc: Document, styleAttribute: string | null): Record<string, string> {
-  const probe = doc.createElement('div');
-  if (styleAttribute !== null) probe.setAttribute('style', styleAttribute);
-  return Object.fromEntries(EDITABLE_PROPERTIES.map((property) => [property, probe.style.getPropertyValue(property).trim()]));
-}
-
 function computedValue(element: Element, property: string, doc: Document): string {
   return doc.defaultView?.getComputedStyle(element).getPropertyValue(property).trim() ?? '';
 }
 
-function nearestOpaqueBackground(element: Element, doc: Document): string | null {
+function resolveCompositedBackground(element: Element, doc: Document): string | null {
+  const transparentLayers: NonNullable<ReturnType<typeof parseCssColor>>[] = [];
   let current: Element | null = element;
+  let opaqueBase: NonNullable<ReturnType<typeof parseCssColor>> | null = null;
+
+  // A gradient/image/blend mode changes the rendered backdrop; do not report a guessed ratio.
   while (current) {
-    const value = computedValue(current, 'background-color', doc);
-    if (value && !hasTransparentBackground(value)) return value;
+    const image = computedValue(current, 'background-image', doc);
+    const blend = computedValue(current, 'background-blend-mode', doc);
+    if ((image && image !== 'none') || (blend && blend !== 'normal')) return null;
+
+    const opacity = Number.parseFloat(computedValue(current, 'opacity', doc));
+    if (Number.isFinite(opacity) && opacity < 0.999) return null;
+
+    const parsed = parseCssColor(computedValue(current, 'background-color', doc));
+    if (parsed && parsed.alpha >= 0.999) {
+      opaqueBase = parsed;
+      break;
+    }
+    if (parsed && parsed.alpha > 0) transparentLayers.push(parsed);
     current = current.parentElement;
   }
-  return null;
+
+  if (!opaqueBase) return null;
+  let result = opaqueBase;
+  for (const layer of transparentLayers.reverse()) {
+    result = compositeColors(layer, result);
+  }
+  return colorToHex(result);
 }
 
 function createSnapshot(element: Element, doc: Document, sourceHint?: string): LiveElementSnapshot {
@@ -60,6 +76,7 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
   const doc = document;
   const view = doc.defaultView;
   if (!view) throw new Error('Integra Live Inspector requires an active browser window.');
+  if (!doc.body) throw new Error('Integra Live Inspector must start after document.body is available.');
 
   const host = doc.createElement('div');
   host.id = 'integra-inspector-ui';
@@ -164,7 +181,7 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
 
   const updateContrast = (element: Element): void => {
     const values = currentComputed(element);
-    const background = nearestOpaqueBackground(element, doc);
+    const background = resolveCompositedBackground(element, doc);
     const result = background
       ? calculateLiveContrast(values.color, background, Number.parseFloat(values['font-size']), Number.parseInt(values['font-weight'], 10))
       : null;
@@ -184,6 +201,7 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
         snapshot: createSnapshot(element, doc, options.sourceHint),
         originalStyleAttribute: element.getAttribute('style'),
         originalClasses: element.getAttribute('class') ?? '',
+        originalComputedStyles: currentComputed(element),
       });
     }
     const original = originals.get(element);
@@ -223,16 +241,11 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
     else element.setAttribute('style', original.originalStyleAttribute);
   };
 
-  const readInlineStyles = (element: Element): Record<string, string> => {
-    const styled = element as HTMLElement;
-    return Object.fromEntries(EDITABLE_PROPERTIES.map((property) => [property, styled.style.getPropertyValue(property).trim()]));
-  };
-
   const buildChangeSets = (): LiveElementChangeSet[] => {
     const changes: LiveElementChangeSet[] = [];
     for (const [element, original] of originals) {
       const updatedClasses = element.getAttribute('class') ?? '';
-      const contrastBackground = nearestOpaqueBackground(element, doc);
+      const contrastBackground = resolveCompositedBackground(element, doc);
       const computed = currentComputed(element);
       const contrast = contrastBackground
         ? calculateLiveContrast(computed.color, contrastBackground, Number.parseFloat(computed['font-size']), Number.parseInt(computed['font-weight'], 10))
@@ -240,8 +253,8 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
       const change = createElementChangeSet({
         target: original.snapshot,
         updatedClasses,
-        beforeStyles: readStyleAttribute(doc, original.originalStyleAttribute),
-        afterStyles: readInlineStyles(element),
+        beforeStyles: original.originalComputedStyles,
+        afterStyles: currentComputed(element),
         contrast,
       });
       if (change.addedClasses.length || change.removedClasses.length || change.styleChanges.length) changes.push(change);

@@ -43,8 +43,26 @@ export function findUniqueSelector(element: Element, root: ParentNode = document
 }
 
 export function getAccessibleName(element: Element): string {
-  const explicit = element.getAttribute('aria-label') || element.getAttribute('alt') || element.getAttribute('title');
+  const doc = element.ownerDocument;
+  const labelledBy = element.getAttribute('aria-labelledby');
+  if (labelledBy) {
+    const referencedText = labelledBy.split(/\s+/)
+      .map((id) => doc.getElementById(id)?.textContent?.trim() ?? '')
+      .filter(Boolean)
+      .join(' ');
+    if (referencedText) return referencedText.slice(0, 160);
+  }
+
+  const explicit = element.getAttribute('aria-label')
+    || element.getAttribute('alt')
+    || element.getAttribute('title');
   if (explicit?.trim()) return explicit.trim().slice(0, 160);
+
+  const labels = 'labels' in element
+    ? Array.from((element as HTMLInputElement).labels ?? []).map((label) => label.textContent?.trim() ?? '').filter(Boolean).join(' ')
+    : '';
+  if (labels) return labels.slice(0, 160);
+
   const text = (element.textContent ?? '').replace(/\s+/g, ' ').trim();
   return text.slice(0, 160);
 }
