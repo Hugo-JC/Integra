@@ -125,3 +125,32 @@ test('lifecycle commands reuse a custom target recorded at init', async (t) => {
   assert.equal(await f.cli('remove', 'integra'), 0);
   await assert.rejects(lstat(join(f.project, '.claude/skills/integra/SKILL.md')));
 });
+
+test('removing one skill keeps shared context referenced by another skill', async (t) => {
+  const f = await fixture(t);
+  assert.equal(await f.cli('init'), 0);
+  assert.equal(await f.cli('remove', 'integra'), 0);
+  assert.ok(await readFile(join(f.project, 'docs/context.md'), 'utf8'));
+  const state = JSON.parse(await readFile(join(f.project, '.integra/install-manifest.json'), 'utf8'));
+  assert.deepEqual(Object.keys(state.skills), ['integra-design-direction']);
+  assert.deepEqual(state.managedFiles['docs/context.md'].owners, ['integra-design-direction']);
+});
+
+test('update refreshes a changed bundled file from a newer bundle version', async (t) => {
+  const f = await fixture(t);
+  assert.equal(await f.cli('init', 'integra'), 0);
+  const contextPath = join(f.resources, 'docs/context.md');
+  const updatedContent = '# Updated shared context\\n';
+  await writeFile(contextPath, updatedContent);
+  const manifestPath = join(f.resources, 'bundle.json');
+  const bundle = JSON.parse(await readFile(manifestPath, 'utf8'));
+  const { createHash } = await import('node:crypto');
+  const bytes = Buffer.from(updatedContent);
+  const entry = bundle.files.find((item) => item.path === 'docs/context.md');
+  entry.size = bytes.byteLength;
+  entry.sha256 = createHash('sha256').update(bytes).digest('hex');
+  bundle.packageVersion = '0.2.0';
+  await writeFile(manifestPath, JSON.stringify(bundle, null, 2) + '\\n');
+  assert.equal(await f.cli('update'), 0);
+  assert.equal(await readFile(join(f.project, 'docs/context.md'), 'utf8'), updatedContent);
+});
