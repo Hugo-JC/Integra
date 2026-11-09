@@ -140,7 +140,7 @@ test('update refreshes a changed bundled file from a newer bundle version', asyn
   const f = await fixture(t);
   assert.equal(await f.cli('init', 'integra'), 0);
   const contextPath = join(f.resources, 'docs/context.md');
-  const updatedContent = '# Updated shared context\\n';
+  const updatedContent = '# Updated shared context\n';
   await writeFile(contextPath, updatedContent);
   const manifestPath = join(f.resources, 'bundle.json');
   const bundle = JSON.parse(await readFile(manifestPath, 'utf8'));
@@ -150,7 +150,7 @@ test('update refreshes a changed bundled file from a newer bundle version', asyn
   entry.size = bytes.byteLength;
   entry.sha256 = createHash('sha256').update(bytes).digest('hex');
   bundle.packageVersion = '0.2.0';
-  await writeFile(manifestPath, JSON.stringify(bundle, null, 2) + '\\n');
+  await writeFile(manifestPath, JSON.stringify(bundle, null, 2) + '\n');
   assert.equal(await f.cli('update'), 0);
   assert.equal(await readFile(join(f.project, 'docs/context.md'), 'utf8'), updatedContent);
 });
