@@ -1,49 +1,68 @@
 ---
 name: integra-ui-generator
-description: Generate production-ready React + TypeScript UI (components, screens, forms, tables, dialogs, empty states) from a product need and an approved direction. Use when building new interface code; not for refactoring existing components or reviewing finished work.
+description: Build new production-oriented frontend screens, components and interactions from a product brief and approved direction. Use for new UI implementation; not for refactoring existing components or reviewing completed interfaces.
 ---
 
 # Integra UI Generator
 
-Build interface code that is semantic, accessible, responsive and specific to the product, in the project's own stack. Read the [AI context contract](../../../docs/ai-context-contract.md) and [preset/reference routing guide](../../../docs/ai-guides/preset-reference-escape-routing.md) when presets, references or composition alternatives affect implementation.
+## Mission
 
-## Use when / not when
+Translate an approved product and visual direction into working interface code that fits the existing stack. Deliver functional, accessible and responsive UI—not an isolated visual mockup disconnected from the application.
 
-- Use: new component or screen from a brief or Direction Artifact.
-- Not: restructuring existing code (`integra-refactor-agent`), auditing (`integra-design-qa`), choosing the full product direction (`integra-design-direction`).
+## Preconditions and scope
 
-## Before the first line of JSX
+Identify the component/screen responsibility, user task, primary action, data contract, neighboring components, framework, language, build system, package constraints, tokens, installed component libraries, supported viewports/input modes, relevant states and approval status.
 
-1. Name the component's job, user, data, primary action and states.
-2. Inspect stack, tokens, component library and nearby components; match conventions.
-3. Reuse installed systems (shadcn/ui, Radix) when present; add a dependency only for a concrete need.
-4. If a Direction Artifact exists, read all eight sections and obey hard constraints; [R] items are advisory.
-5. Read the relevant structured product profile's `aiGuidance` and candidate `compositionEscapes`. The domain profile informs task flow; it does not override the deterministic style route or Direction Artifact.
-6. Choose composition only when its `when` condition matches and its `contentRequirements` can be satisfied with real or explicitly labelled demo content. Record the selected escape ID and rationale.
-7. Ask only about facts that block implementation; otherwise state assumptions in one line.
+If the direction is missing, do not invent a complete brand system by default. State a reversible implementation assumption or route to `integra-design-direction` when the choice is consequential.
 
-## Build rules
+## Inspect before building
 
-- Native semantic elements first; ARIA only where native semantics fall short.
-- Hierarchy through order, type, spacing and contrast before decoration.
-- Semantic tokens, not one-off values; no arbitrary hex when tokens exist.
-- One primary action per local context; secondary actions visibly quieter.
-- Cover loading, empty, error, disabled, hover, active and focus-visible. Empty states explain and offer a next step.
-- Responsive from content pressure, not by shrinking desktop; no horizontal overflow at the supplied viewports.
-- Motion communicates state; prefer transform/opacity; honor `prefers-reduced-motion`.
-- Never fabricate metrics, testimonials, logos, reviews, stock, schedules, legal claims or product capabilities; label demo data as fictional.
-- Strict TypeScript: typed props, discriminated unions for states, no `any`.
-- Do not default to a marketing hero, three-card grid, KPI strip, decorative gradient or glass card. Do not ban a pattern universally; justify it by the product task and real content.
-- If no composition escape fits, create a neutral task-first structure rather than forcing an archetype.
+1. Read project instructions and existing code conventions.
+2. Find reusable components and verify their actual APIs before using them.
+3. Check available dependencies before proposing a new one.
+4. Read relevant Direction Artifact sections and distinguish hard constraints from advisory recommendations.
+5. Use domain profiles for task flow and structured composition only when their conditions and real-content requirements match.
+6. Inspect existing routes, state management, data fetching and error handling before adding parallel mechanisms.
+7. Confirm scripts in the current `package.json`; never assume a repository command exists because a Skill mentions it.
+
+## Build procedure
+
+1. Model component purpose, inputs, outputs, events and states.
+2. Define semantic structure before styling.
+3. Use native HTML and platform conventions first; add ARIA only where necessary.
+4. Reuse semantic tokens and established component APIs.
+5. Choose layout from content and task priority, not a default marketing template.
+6. Implement the primary action and all consequential states.
+7. Include loading, empty, validation, disabled, success and recoverable error paths as appropriate.
+8. Ensure keyboard operation, visible focus, accessible names and non-color state cues.
+9. Design responsive behavior from content pressure and input mode; do not just shrink desktop.
+10. Use motion only to communicate state or continuity; respect `prefers-reduced-motion`.
+11. Use typed props and explicit state models. Avoid `any` and fabricated data.
+12. Label demo/mock data clearly and never invent product claims, users, reviews, stock or metrics.
+
+## Visual craft
+
+- Establish hierarchy through order, type, spacing and deliberate color roles.
+- Use a strong visual decision when the product and surface mode support it; do not confuse distinction with decoration.
+- Avoid automatic hero + KPI + three cards + gradient composition.
+- Avoid nested surfaces, repeated icons and arbitrary rounded containers unless they improve grouping or affordance.
+- Do not impose the Integra inspector color as the product's accent.
+- If no archetype fits, compose directly from task requirements.
+
+## Verification
+
+When available, run focused tests and typecheck; run repository Design QA; inspect narrow and wide rendered layouts; test real interaction states; run accessibility checks on actual output; verify network/asset failures and browser console issues.
+
+If a tool is unavailable, provide a manual verification plan and mark the check `not_run`. Never call generated code production-ready solely because it compiles.
 
 ## Deliverable
 
-Complete code, types, token additions when necessary, a regression test where behavior exists, and a short note: selected profile/escape, assumptions, states covered, and what was NOT verified.
+Complete implementation in requested files, types and tests where behavior warrants them; summary of reused components/tokens, assumptions, states covered, commands run, visual/accessibility checks and remaining limitations.
 
-## Signature touch: "State gallery"
+## Signature: state gallery
 
-Ship a tiny story/fixture (or test) that renders every state of the component side by side. If a state cannot be shown, it is not done.
+Create a story, fixture or test that makes consequential states observable. If a state cannot be demonstrated, explain how it is verified.
 
-## Visual gate
+## Done when
 
-Check narrow mobile and desktop. Remove gratuitous gradients, oversized headings, nested cards, excessive rounding, repeated icons and purposeless shadows. Run `npm run design:qa -- src/ --json` when the script and target exist; report the output honestly and never claim it passed if it was not run.
+The UI fits the project, the primary task works, states are covered, responsive and keyboard behavior are considered, no fabricated content is presented as real, and verification status is honest.

@@ -1,28 +1,44 @@
 ---
 name: integra-live-inspector
-description: Inspect a local development DOM element, preview reversible allowlisted visual changes, estimate contrast and export a review handoff. Use when inspecting a running local UI; never write source code or use in production.
+description: Inspect a trusted local development page, select DOM elements, preview reversible allowlisted visual changes and export a structured handoff. Use for live visual iteration; never treat DOM previews as source edits or use in production.
 ---
 
 # Integra Live Inspector
 
+## Purpose and limits
+
+Use the running browser page to understand the rendered element and evaluate temporary alternatives. The inspector is a DOM-level preview tool, not a source editor, browser automation guarantee or proof of final application behavior.
+
 ## Safety contract
-- Local development only; never inject into production or weaken production CSP.
-- Use the canonical `createIntegraInspector()` API through the Vite development adapter.
-- DOM edits are temporary previews. The inspector never writes source files and never contacts an AI provider.
-- A selector, class name or DOM ancestry is not a source-code path.
-- A source hint is caller-provided and unverified; never present it as discovered fact.
-- Source changes require a separate, exact-diff review and explicit user approval. Preview acceptance is not source-edit approval.
+
+- Use only a trusted local development environment and the documented Vite development adapter.
+- Never inject the inspector into production or weaken production CSP.
+- Use the canonical `createIntegraInspector()` API; do not invent APIs or arbitrary console snippets.
+- Temporary preview changes are allowlisted and reversible.
+- Never inject arbitrary HTML, JavaScript, remote scripts or unreviewed CSS.
+- The inspector does not write source files or contact an AI provider.
+- A DOM selector, class, element ancestry or React component label is not proof of a source file.
+- A caller-provided source hint remains unverified until matched to the repository.
+- Preview acceptance is not approval to modify source.
 
 ## Workflow
-1. Confirm the app is running in a trusted local development environment.
-2. Start the documented Vite dev server. The plugin is development-only (`apply: 'serve'`).
-3. Hover to inspect and click to lock a target. Ignore the inspector UI and `[data-integra-ignore]`.
-4. Preview only supported colors, radius, padding and existing classes. Do not inject arbitrary CSS, HTML or JavaScript.
-5. Review the contrast estimate and its limitations. Gradients, images, opacity, pseudo-elements and complex compositing may be inconclusive.
-6. Export the structured change sets and prompt handoff. Treat selectors as DOM locators only.
-7. Inspect the real repository and resolve the source component from evidence; do not guess paths.
-8. Present the exact proposed source diff, affected files, behavior-preservation notes and verification plan.
-9. Wait for explicit approval of that exact diff before changing source files.
-10. Run typecheck, tests, responsive and accessibility checks; report actual results.
 
-Destroying the inspector restores temporary class/style changes by default. No commit, push, PR or merge is implied by inspection or review approval.
+1. Confirm the page is local, in development mode and within the user's authorized scope.
+2. Start the project's documented dev server only when authorized and the command is known.
+3. Inspect the element's role, content, parent context, computed styles, viewport and relevant states.
+4. Ignore inspector chrome and elements explicitly marked `[data-integra-ignore]`.
+5. Preview only supported color, radius, padding and existing-class operations.
+6. Record before/after values and the exact target selector. Note when framework re-rendering may reset the preview.
+7. Inspect contrast output critically. Gradients, images, transparency, pseudo-elements and complex compositing may be inconclusive.
+8. Export the structured change set and prompt handoff. Keep DOM locators distinct from source locations.
+9. Search the real repository and resolve the responsible source component from evidence; never guess a path from a selector.
+10. If a persistent change is requested, prepare a source diff, explain behavior impact and tests, then obtain approval for that exact diff.
+11. After approved source changes, run relevant checks and compare the actual rendered result again.
+
+## Output
+
+Provide the inspected target, viewport and state; preview operations; contrast/evidence limitations; source mapping status; and next-step diff or test plan.
+
+## Restoration
+
+Destroying the inspector restores temporary classes/styles by default. Do not promise persistence through framework renders. No commit, push, PR or merge is implied.

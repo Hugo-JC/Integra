@@ -1,31 +1,18 @@
 ---
 name: integra-direction
-description: Create contextual visual direction, design tokens, layout principles and an implementation brief. Use when starting a project or redesign before code changes; do not impose a house aesthetic.
+description: Legacy compatibility alias for integra-design-direction. Use only when an existing project, command or user explicitly references the old name; defer all direction work to the canonical integra-design-direction workflow.
 ---
 
-# Integra Direction
+# Integra Direction — legacy alias
 
-## Goal
-Turn product intent into a specific, coherent and implementable design direction. Do not default to a house aesthetic.
+This skill name is retained for backwards compatibility only.
 
-## Workflow
-1. Read the user's brief, existing product UI, brand assets, constraints and current implementation.
-2. Separate facts, explicit requirements, preferences, assumptions and missing information.
-3. Run `npm run design:route -- "<brief>" --json` when the design library is available.
-4. Treat `fallback`, `ambiguous` or low-confidence results as questions to resolve, not silent instructions.
-5. Select a direction that fits the product, audience, content, device and existing brand.
-6. Define semantic color, type, spacing, radius, elevation, motion and interaction tokens.
-7. Describe page hierarchy, key components, responsive behavior, states and accessibility.
-8. Record rationale and source provenance for important decisions.
+The canonical workflow is `integra-design-direction`. When this alias is invoked:
 
-## Non-negotiables
-- Never force the library's example palette on an unrelated product.
-- Never copy a reference website or its distinctive composition. Extract principles and patterns.
-- Preserve explicit brand and product requirements unless the user approves a change.
-- Prefer semantic tokens over one-off classes; justify exceptions.
-- Do not invent product claims, testimonials, metrics or content.
-- Include loading, empty, error, success, disabled and focus states where applicable.
-- WCAG checks are objective gates; visual taste remains contextual.
+1. Preserve the user's original request and target.
+2. Read or invoke `integra-design-direction` when that skill is available.
+3. Do not create a second direction process or conflicting design rules.
+4. If the canonical skill cannot be loaded, use its locally available project guidance and disclose the limitation.
+5. Do not change project source merely because the alias was invoked.
 
-## Deliverable
-Return a compact direction brief with: product intent, audience, visual personality, tokens, composition, component principles, responsive rules, accessibility and implementation constraints.
+This file intentionally stays short so the canonical skill remains the single source of truth.

@@ -84,6 +84,7 @@ Skills canónicas:
 - `integra-investigation` — investigação de referências e documentação.
 - `integra-reference-investigator` — extração de princípios de referências.
 - `integra-live-inspector` — inspeção DOM local e preview reversível.
+- `integra-colorize` — estratégia de cor, tokens semânticos e verificação de contraste.
 
 `integra-direction` permanece como alias legado até ser consolidada em `integra-design-direction`.
 
@@ -123,7 +124,7 @@ O núcleo determinístico continua provider-agnostic e sem API keys. A geração
 
 Integra distributes portable Agent Skills from `.agents/skills/`. Gemini CLI, Codex, Claude Code, Cursor and other compatible agents can read the relevant skill through their workspace conventions; `GEMINI.md` describes Gemini-specific routing.
 
-Included skills: `integra-design-direction`, `integra-ui-generator`, `integra-refactor-agent`, `integra-design-qa`, `integra-accessibility-audit`, `integra-investigation`, `integra-design-system` and `integra-live-inspector`.
+The `integra` skill is the orchestration entry point. Specialist skills include `integra-ux-shape`, `integra-design-direction`, `integra-ui-generator`, `integra-refactor-agent`, `integra-design-qa`, `integra-accessibility-audit`, `integra-performance-audit`, `integra-investigation`, `integra-reference-investigator`, `integra-design-system`, `integra-colorize` and `integra-live-inspector`. `integra-direction` remains a legacy alias.
 
 ### Local design intelligence
 The predecessor AI Design Engine v3 niche/style catalogs are preserved in `presets/`. Discover offline candidates with:

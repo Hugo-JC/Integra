@@ -1,5 +1,10 @@
 # Unreleased
 
+- Expanded the Integra orchestrator and specialist Agent Skills with clearer scope, inputs, step-by-step workflows, evidence contracts, handoffs, verification criteria and approval boundaries.
+- Added the dedicated `integra-colorize` skill, an original adaptation informed by Impeccable's colorize principles, with semantic color roles, surface modes, theme strategy and rendered contrast evidence.
+- Routed `/integra:colorize` to the new specialist skill and added contextual routing coverage.
+- Updated agent guidance, compatibility documentation, command index, vocabulary and distribution resource inventory.
+
 - Added eight portable Agent Skills, including refactoring, UI generation, design QA, accessibility and Live Inspector workflows.
 - Migrated AI Design Engine v3 niche presets and style tokens; added offline preset discovery.
 - Added contextual experience archetypes, evidence-led quality rules and prompt vocabulary.

@@ -44,9 +44,11 @@ These are Integra project workflows, not generic design recipes. For repository-
 GitHub Copilot CLI can preview and install repository skills with the `gh skill` command (GitHub CLI 2.90.0 or later, currently documented as public preview). Preview skill contents before installing, and preserve the linked `docs/` context if you install an Integra skill outside this checkout. For example:
 
 ```sh
-gh skill preview Hugo-JC/Integra integra-design-direction
-gh skill install Hugo-JC/Integra integra-design-direction
+gh skill preview Hugo-JC/Integra integra-colorize
+gh skill install Hugo-JC/Integra integra-colorize
 ```
+
+The Colorize workflow is a standalone specialist skill. It is routed by `/integra:colorize` and preserves existing product identity; it is not a brand-redesign command.
 
 In the Copilot app, skills configured for repositories or Copilot CLI are managed under **Customize > Skills**. Copilot personal skills for cloud sessions require separate dotfiles or account setup; project paths do not automatically configure personal or cloud environments.
 
