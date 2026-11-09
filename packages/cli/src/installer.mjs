@@ -137,7 +137,7 @@ function emptyState(bundle, targetDir) {
   };
 }
 
-async function readState(cwd, bundle, targetDir) {
+async function readState(cwd, bundle, targetDir = null) {
   const stateAbsolute = resolveInside(cwd, STATE_PATH);
   await assertNoSymlinks(cwd, STATE_PATH);
   try {
@@ -145,7 +145,7 @@ async function readState(cwd, bundle, targetDir) {
     if (parsed.schemaVersion !== STATE_SCHEMA || !parsed.skills || !parsed.managedFiles) {
       throw new Error('Unsupported installer manifest. Back it up and inspect it before continuing.');
     }
-    if (parsed.targetDir !== targetDir) throw new Error('Integra is already installed at "' + parsed.targetDir + '". Use that same --target path.');
+    if (targetDir && parsed.targetDir !== targetDir) throw new Error('Integra is already installed at "' + parsed.targetDir + '". Use that same --target path.');
     for (const [path, entry] of Object.entries(parsed.managedFiles)) {
       safeRelative(path);
       safeRelative(entry.sourcePath);
@@ -153,7 +153,7 @@ async function readState(cwd, bundle, targetDir) {
     }
     return parsed;
   } catch (error) {
-    if (error?.code === 'ENOENT') return emptyState(bundle, targetDir);
+    if (error?.code === 'ENOENT') return emptyState(bundle, targetDir ?? DEFAULT_TARGET);
     throw error;
   }
 }
@@ -395,12 +395,13 @@ async function doctor(cwd, state, bundle, io) {
 
 function parseArguments(args) {
   const [command = 'help', ...rest] = args;
-  const options = { target: DEFAULT_TARGET, dryRun: false, names: [] };
+  const options = { target: DEFAULT_TARGET, targetSpecified: false, dryRun: false, names: [] };
   for (let index = 0; index < rest.length; index += 1) {
     const value = rest[index];
     if (value === '--target') {
       if (!rest[index + 1]) throw new Error('--target requires a relative directory path.');
       options.target = safeRelative(rest[++index]);
+      options.targetSpecified = true;
     } else if (value === '--dry-run') options.dryRun = true;
     else if (value === '--help' || value === '-h') return { command: 'help', ...options };
     else if (value.startsWith('-')) throw new Error('Unknown option: ' + value);
@@ -437,10 +438,10 @@ export async function runCli(args, {
       return 0;
     }
     if (!['init', 'add', 'list', 'doctor', 'update', 'remove'].includes(parsed.command)) throw new Error('Unknown command: ' + parsed.command);
-    const targetDir = parsed.target;
     const bundle = await loadBundle(resourcesDir);
     const projectRoot = resolve(cwd);
-    const state = await readState(projectRoot, bundle, targetDir);
+    const state = await readState(projectRoot, bundle, parsed.targetSpecified ? parsed.target : null);
+    const targetDir = state.targetDir;
     if (parsed.command === 'list') {
       listSkills(state, bundle, io);
       return 0;
