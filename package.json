@@ -9,7 +9,7 @@
     "npm": ">=10"
   },
   "scripts": {
-    "test": "vitest run",
+    "test": "vitest run tests",
     "typecheck": "tsc --noEmit",
     "validate:fixtures": "tsx scripts/validate-fixtures.ts",
     "validate:skills": "tsx scripts/validate-skills.ts",
