@@ -33,7 +33,9 @@
       "kind": "orchestrator",
       "invocation": "/integra",
       "description": "Understand the request, inspect project context, select and sequence the smallest useful set of workflows, then present a reviewable plan.",
-      "skills": [],
+      "skills": [
+        "integra"
+      ],
       "outputs": [
         "execution-plan",
         "selected-workflows",
