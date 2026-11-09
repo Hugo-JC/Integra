@@ -36,7 +36,7 @@
     },
     {
       "name": "colorize",
-      "intent": "Improve semantic color roles and validate contrast."
+      "intent": "Introduce strategic semantic color while preserving the product identity; define action, focus, selection, status and data roles, then verify rendered contrast."
     },
     {
       "name": "typeset",
