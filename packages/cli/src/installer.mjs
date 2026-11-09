@@ -137,6 +137,59 @@ function emptyState(bundle, targetDir) {
   };
 }
 
+const SHARED_ROOTS = ['docs', 'presets', 'data', 'references', 'rules', 'commands', 'schemas'];
+
+function isSharedPath(path) {
+  return SHARED_ROOTS.some((root) => path.startsWith(root + '/'));
+}
+
+function validateState(parsed) {
+  const targetDir = safeRelative(parsed.targetDir);
+  for (const [name, skill] of Object.entries(parsed.skills)) {
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(name) || !skill || typeof skill.expectedHashes !== 'object') {
+      throw new Error('Invalid installed skill record: ' + name);
+    }
+    for (const [path, hash] of Object.entries(skill.expectedHashes)) {
+      safeRelative(path);
+      if (!/^[a-f0-9]{64}$/.test(hash)) throw new Error('Invalid expected hash: ' + path);
+      if (!path.startsWith(targetDir + '/' + name + '/') && !isSharedPath(path)) {
+        throw new Error('Installer manifest contains a path outside its allowed resource roots: ' + path);
+      }
+    }
+    if (!Array.isArray(skill.externalFiles) || skill.externalFiles.some((path) => !Object.hasOwn(skill.expectedHashes, path))) {
+      throw new Error('Invalid external-file list for skill: ' + name);
+    }
+  }
+  for (const [path, entry] of Object.entries(parsed.managedFiles)) {
+    safeRelative(path);
+    const sourcePath = safeRelative(entry.sourcePath);
+    if (!Array.isArray(entry.owners) || !entry.owners.length || new Set(entry.owners).size !== entry.owners.length ||
+        !/^[a-f0-9]{64}$/.test(entry.sha256)) throw new Error('Invalid managed-file record: ' + path);
+    if (sourcePath.startsWith('.agents/skills/')) {
+      const match = sourcePath.match(/^\.agents\/skills\/([a-z0-9-]+)\/(.+)$/);
+      if (!match) throw new Error('Invalid skill resource source path: ' + sourcePath);
+      const expectedDestination = safeRelative(targetDir + '/' + match[1] + '/' + match[2]);
+      if (path !== expectedDestination || entry.owners.length !== 1 || entry.owners[0] !== match[1]) {
+        throw new Error('Managed skill path does not match its source and owner: ' + path);
+      }
+    } else if (!isSharedPath(sourcePath) || path !== sourcePath) {
+      throw new Error('Managed context path does not match an allowed source: ' + path);
+    }
+    for (const owner of entry.owners) {
+      if (!parsed.skills[owner] || parsed.skills[owner].expectedHashes?.[path] === undefined) {
+        throw new Error('Managed file references an unknown skill owner: ' + path);
+      }
+    }
+  }
+  for (const [name, skill] of Object.entries(parsed.skills)) {
+    for (const path of Object.keys(skill.expectedHashes)) {
+      const managed = parsed.managedFiles[path];
+      if (managed && !managed.owners.includes(name)) throw new Error('Skill ownership is inconsistent for: ' + path);
+    }
+  }
+  return targetDir;
+}
+
 async function readState(cwd, bundle, targetDir = null) {
   const stateAbsolute = resolveInside(cwd, STATE_PATH);
   await assertNoSymlinks(cwd, STATE_PATH);
@@ -145,12 +198,9 @@ async function readState(cwd, bundle, targetDir = null) {
     if (parsed.schemaVersion !== STATE_SCHEMA || !parsed.skills || !parsed.managedFiles) {
       throw new Error('Unsupported installer manifest. Back it up and inspect it before continuing.');
     }
-    if (targetDir && parsed.targetDir !== targetDir) throw new Error('Integra is already installed at "' + parsed.targetDir + '". Use that same --target path.');
-    for (const [path, entry] of Object.entries(parsed.managedFiles)) {
-      safeRelative(path);
-      safeRelative(entry.sourcePath);
-      if (!Array.isArray(entry.owners) || !/^[a-f0-9]{64}$/.test(entry.sha256)) throw new Error('Invalid managed-file record: ' + path);
-    }
+    const storedTarget = validateState(parsed);
+    if (targetDir && storedTarget !== targetDir) throw new Error('Integra is already installed at "' + storedTarget + '". Use that same --target path.');
+    parsed.targetDir = storedTarget;
     return parsed;
   } catch (error) {
     if (error?.code === 'ENOENT') return emptyState(bundle, targetDir ?? DEFAULT_TARGET);
@@ -188,6 +238,24 @@ async function installOne(cwd, state, bundle, name, targetDir, io, dryRun) {
     return false;
   }
   const expected = expectedFilesFor(bundle, name, targetDir);
+  if (state.skills[name]) {
+    const previous = state.skills[name].expectedHashes ?? {};
+    const sameFiles = Object.keys(previous).length === expected.length &&
+      expected.every((file) => previous[file.path] === file.sha256);
+    if (!sameFiles) {
+      io.error(name + ' is already recorded with an older bundle; run integra update instead.');
+      return false;
+    }
+    for (const file of expected) {
+      const current = await fileHash(resolveInside(cwd, file.path));
+      if (current !== file.sha256) {
+        io.error('Preserved local change or missing file for ' + name + ': ' + file.path);
+        return false;
+      }
+    }
+    io.log(name + ' is already installed and unchanged.');
+    return true;
+  }
   const planned = [];
   const external = [];
   const conflicts = [];
@@ -296,6 +364,44 @@ async function updateInstalled(cwd, state, bundle, io, dryRun) {
     await atomicWrite(cwd, path, bundled.content);
     record.sha256 = bundled.sha256;
     updated += 1;
+  }
+  for (const [name, skill] of Object.entries(nextState.skills)) {
+    if (!bundle.skills[name]) {
+      io.error('Installed skill is no longer present in this bundle: ' + name);
+      conflicts += 1;
+      continue;
+    }
+    for (const file of expectedFilesFor(bundle, name, nextState.targetDir)) {
+      if (Object.hasOwn(skill.expectedHashes, file.path)) continue;
+      const managed = nextState.managedFiles[file.path];
+      await assertNoSymlinks(cwd, file.path);
+      const absolute = resolveInside(cwd, file.path);
+      const current = await fileHash(absolute);
+      if (managed) {
+        if (current !== managed.sha256 || managed.sha256 !== file.sha256) {
+          io.error('Cannot add updated shared resource without overwriting local changes: ' + file.path);
+          conflicts += 1;
+          continue;
+        }
+        if (!managed.owners.includes(name)) managed.owners.push(name);
+      } else if (current !== null) {
+        if (current !== file.sha256) {
+          io.error('Cannot add new resource because an unmanaged file exists: ' + file.path);
+          conflicts += 1;
+          continue;
+        }
+        skill.externalFiles.push(file.path);
+      } else if (dryRun) {
+        io.log('Would add new resource ' + file.path);
+        updated += 1;
+        continue;
+      } else {
+        await atomicWrite(cwd, file.path, file.content);
+        nextState.managedFiles[file.path] = { sourcePath: file.sourcePath, sha256: file.sha256, owners: [name] };
+        updated += 1;
+      }
+      skill.expectedHashes[file.path] = file.sha256;
+    }
   }
   if (!dryRun) {
     for (const skill of Object.values(nextState.skills)) {
