@@ -247,6 +247,7 @@ async function installOne(cwd, state, bundle, name, targetDir, io, dryRun) {
       return false;
     }
     for (const file of expected) {
+      await assertNoSymlinks(cwd, file.path);
       const current = await fileHash(resolveInside(cwd, file.path));
       if (current !== file.sha256) {
         io.error('Preserved local change or missing file for ' + name + ': ' + file.path);
@@ -473,6 +474,11 @@ function listSkills(state, bundle, io) {
 async function doctor(cwd, state, bundle, io) {
   const issues = [];
   for (const [name, skill] of Object.entries(state.skills)) {
+    if (bundle.skills[name]) {
+      for (const file of expectedFilesFor(bundle, name, state.targetDir)) {
+        if (!Object.hasOwn(skill.expectedHashes ?? {}, file.path)) issues.push('Not installed or unresolved conflict: ' + file.path);
+      }
+    }
     for (const [path, expected] of Object.entries(skill.expectedHashes ?? {})) {
       const managed = state.managedFiles[path];
       await assertNoSymlinks(cwd, path);
