@@ -115,3 +115,13 @@ test('bundle tampering is rejected before installation', async (t) => {
   assert.equal(await f.cli('init', 'integra'), 1);
   assert.match(f.errors.join('\n'), /Bundle integrity check failed/);
 });
+
+test('lifecycle commands reuse a custom target recorded at init', async (t) => {
+  const f = await fixture(t);
+  assert.equal(await f.cli('init', 'integra', '--target', '.claude/skills'), 0);
+  assert.ok(await readFile(join(f.project, '.claude/skills/integra/SKILL.md'), 'utf8'));
+  assert.equal(await f.cli('doctor'), 0);
+  assert.equal(await f.cli('update'), 0);
+  assert.equal(await f.cli('remove', 'integra'), 0);
+  await assert.rejects(lstat(join(f.project, '.claude/skills/integra/SKILL.md')));
+});
