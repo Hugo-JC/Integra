@@ -258,7 +258,8 @@
                   "minItems": 1,
                   "items": {
                     "const": "integra"
-                  }
+                  },
+                  "type": "array"
                 }
               }
             }
