@@ -1,6 +1,6 @@
 # Distribution contract
 
-**Status:** initial contract for the Integra distribution foundation.
+**Status:** implemented distribution foundation and CLI MVP (initial release candidate).
 
 ## Canonical source
 
@@ -52,9 +52,25 @@ A future installer manifest should record:
 
 Updates must compare the installed baseline, new release and current local file. Removal may delete only files that are still identified as installer-managed; user changes must be preserved or explicitly reviewed.
 
-## Non-goals of this foundation
+## Implemented distribution tooling
 
-This document does not claim that an npm package, installer, update engine, host activation test or security scanner has already been implemented. Those are separate milestones.
+The initial CLI implementation lives in `packages/cli`, independently from the private repository package.
+
+- `scripts/build-distribution.mjs` creates a resource-closed bundle from canonical skills and shared context directories.
+- The bundler validates skill frontmatter and local Markdown links, rejects symlinks, and records SHA-256 hashes and file sizes.
+- The CLI exposes `init`, `add`, `list`, `doctor`, `update` and `remove`.
+- Installation state lives in `.integra/install-manifest.json` and records package version, expected hashes, managed paths and skill ownership.
+- Shared context files are reference-counted so removing one skill does not remove resources still used by another.
+- Updates preserve local modifications; removal deletes only unchanged installer-managed files.
+- Installation does not execute scripts, install dependencies or claim that a host has activated a skill.
+
+The root package remains private. The npm candidate is `packages/cli` (package name `integra-cli`); it has not been published, and package-name availability has not been verified.
+
+## Remaining validation boundaries
+
+This is an initial CLI MVP, not yet a public release. CI tests exercise the bundler and installer against temporary projects. Before publishing, validate npm package contents with `npm pack --dry-run`, run end-to-end tests on Windows/macOS/Linux, verify the package name and registry metadata, and test discovery in each supported agent host/version.
+
+Repository npm scripts and source runtime modules are intentionally not bundled. Skills that mention those commands still require a full Integra checkout for that functionality.
 
 ## Current resource inventory
 
