@@ -9,19 +9,23 @@
     "npm": ">=10"
   },
   "scripts": {
-    "test": "vitest run",
+    "test": "vitest run tests",
     "typecheck": "tsc --noEmit",
     "validate:fixtures": "tsx scripts/validate-fixtures.ts",
     "validate:skills": "tsx scripts/validate-skills.ts",
     "validate:presets": "tsx scripts/validate-presets.ts",
     "direction:generate": "tsx scripts/direction-generate.ts",
     "direction:validate": "tsx scripts/direction-validate.ts",
-    "check": "npm run typecheck && npm test && npm run validate:fixtures && npm run validate:skills && npm run validate:presets && npm run validate:agent-assets && npm run validate:commands",
+    "check": "npm run typecheck && npm test && npm run validate:fixtures && npm run validate:skills && npm run validate:presets && npm run validate:agent-assets && npm run validate:commands && npm run distribution:check",
     "direction:presets": "tsx scripts/direction-presets.ts",
     "validate:agent-assets": "tsx scripts/validate-agent-assets.ts",
     "validate:commands": "tsx scripts/validate-command-manifest.ts",
     "design:route": "tsx scripts/design-route.ts",
-    "design:qa": "tsx scripts/design-qa.ts"
+    "design:qa": "tsx scripts/design-qa.ts",
+    "distribution:build": "node scripts/build-distribution.mjs",
+    "distribution:test": "node --test packages/cli/test/*.test.mjs",
+    "distribution:check": "npm run distribution:build && npm run distribution:test && npm run distribution:pack",
+    "distribution:pack": "npm pack --dry-run ./packages/cli"
   },
   "dependencies": {
     "ajv": "^8.20.0",

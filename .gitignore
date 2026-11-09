@@ -16,3 +16,6 @@ artifacts/**
 
 # Local browser inspector runtime data
 .integra/live/**
+
+# Generated npm distribution bundle
+packages/cli/resources/

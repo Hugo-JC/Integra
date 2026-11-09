@@ -1,0 +1,20 @@
+{
+  "name": "integra-cli",
+  "version": "0.1.0",
+  "description": "Install and manage Integra Agent Skills in project workspaces.",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "bin": { "integra": "./bin/integra.js" },
+  "files": ["bin/", "src/", "resources/", "README.md"],
+  "scripts": {
+    "prepack": "node ../../scripts/build-distribution.mjs",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hugo-JC/Integra.git",
+    "directory": "packages/cli"
+  },
+  "keywords": ["agent-skills", "design-engineering", "integra", "cli"]
+}
