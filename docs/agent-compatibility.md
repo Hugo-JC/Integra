@@ -1,6 +1,6 @@
 # Agent Skill compatibility and installation
 
-Integra keeps `.agents/skills/<skill-name>/SKILL.md` as the canonical source for its 12 existing skills. Each skill uses the open Agent Skills format: a directory, YAML frontmatter with `name` and `description`, and Markdown instructions. Supporting files are linked relative to the skill directory and validated locally.
+Integra keeps `.agents/skills/<skill-name>/SKILL.md` as the canonical source for its Agent Skills. The `integra` skill is the orchestration entry point; specialist skills provide focused workflows. Each skill uses the open Agent Skills format: a directory, YAML frontmatter with `name` and `description`, and Markdown instructions. Supporting files are linked relative to the skill directory and validated locally.
 
 ## Host discovery
 
@@ -16,7 +16,7 @@ These are documented discovery paths, not a claim that a host is installed, enab
 
 ## Use the skills in this checkout
 
-Codex, Gemini CLI, Cursor and supported GitHub Copilot surfaces can discover the checked-in `.agents/skills/` directory without copying it. Open the repository as the workspace and confirm discovery using the host-specific method above.
+Codex, Gemini CLI, Cursor and supported GitHub Copilot surfaces can discover the checked-in `.agents/skills/` directory without copying it. Start with `$integra` for broad or cross-stage requests, or invoke a specialist skill directly for focused work. Open the repository as the workspace and confirm discovery using the host-specific method above.
 
 For Claude Code, create a project-local `.claude/skills/` directory and link the selected skill to its canonical source. From the repository root, POSIX shells can use:
 
