@@ -33,7 +33,9 @@
       "kind": "orchestrator",
       "invocation": "/integra",
       "description": "Understand the request, inspect project context, select and sequence the smallest useful set of workflows, then present a reviewable plan.",
-      "skills": [],
+      "skills": [
+        "integra"
+      ],
       "outputs": [
         "execution-plan",
         "selected-workflows",
@@ -69,7 +71,7 @@
       "invocation": "/integra:shape",
       "description": "Clarify user needs, task flows, constraints and information architecture before visual direction or implementation.",
       "skills": [
-        "integra-design-direction"
+        "integra-ux-shape"
       ],
       "outputs": [
         "ux-brief",
@@ -548,34 +550,45 @@
       "id": "colorize",
       "kind": "modifier",
       "invocation": "/integra:colorize",
-      "description": "Improve semantic color roles and evaluate contrast with explicit confidence limits.",
+      "description": "Introduce or refine strategic, semantic color while preserving the product's established identity and verifying meaningful contrast.",
       "skills": [
-        "integra-design-system",
-        "integra-accessibility-audit"
+        "integra-colorize"
       ],
       "outputs": [
-        "color-token-proposal",
-        "contrast-evidence"
+        "color-strategy",
+        "semantic-token-proposal",
+        "contrast-evidence",
+        "state-color-map"
       ],
       "whenToUse": [
-        "Use to refine semantic color roles, themes and state feedback.",
-        "Use when palette application needs adjustment without replacing product identity."
+        "Use when an existing interface is monochromatic, visually flat or lacks purposeful color hierarchy.",
+        "Use when action, selection, focus, status, theme or data colors need a coherent semantic system.",
+        "Use to improve a palette without replacing the product's established visual identity."
       ],
       "notFor": [
-        "Do not invent new brand colors when project tokens exist.",
-        "Do not claim contrast compliance without actual rendered color-pair evidence."
+        "Do not use as a substitute for a new visual direction or brand redesign.",
+        "Do not add decorative color without a hierarchy, semantic or product-atmosphere purpose.",
+        "Do not claim WCAG contrast compliance without measured rendered color-pair evidence."
       ],
       "triggers": [
         "colorize",
+        "add strategic color",
+        "introduce purposeful color",
+        "colorize monochrome interface",
+        "make interface less monochromatic",
         "refine semantic colors",
+        "improve color palette",
         "melhorar paleta",
+        "adicionar cor à interface",
+        "dar cor à interface",
         "ajustar cores semânticas",
         "refinar cores"
       ],
       "inputs": [
-        "Existing color tokens and themes",
-        "Actual foreground/background combinations",
-        "Brand constraints and state semantics"
+        "Target screen or component and surface mode (Persuade, Operate, Read or Experience)",
+        "Confirmed brand colors, current tokens and theme configuration",
+        "Actual foreground/background combinations and relevant UI states",
+        "Product context, accessibility requirements and intended color role"
       ],
       "requiresActiveContext": true
     },

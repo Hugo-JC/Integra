@@ -15,6 +15,7 @@ The canonical definitions live in [`commands/manifest.json`](../commands/manifes
 | `/integra:accessibility` | Workflow | Perform focused accessibility review. |
 | `/integra:system` | Workflow | Inventory tokens, components and repeated patterns. |
 | `/integra:live` | Workflow | Inspect a local page and create a reversible DOM preview. |
+| `/integra:colorize` | Modifier | Introduce strategic semantic color while preserving the active target, identity and constraints. |
 | `/integra:polish` … `/integra:extract` | Modifier | Refine the active workflow without replacing its target or constraints. |
 
 ## Routing

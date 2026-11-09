@@ -15,6 +15,7 @@ Integra is a product-contextual design direction and quality toolkit. Read `AGEN
 ## Skill routing
 
 - Canonical workspace skills: `.agents/skills/*/SKILL.md`.
+- UX/IA shaping: `integra-ux-shape`.
 - New direction: `integra-design-direction`.
 - New component: `integra-ui-generator`.
 - Existing TSX refactor: `integra-refactor-agent`.
@@ -22,6 +23,7 @@ Integra is a product-contextual design direction and quality toolkit. Read `AGEN
 - Accessibility: `integra-accessibility-audit`.
 - External references: `integra-investigation` and `integra-reference-investigator`.
 - Tokens/components: `integra-design-system`.
+- Strategic color refinement: `integra-colorize`.
 - Local DOM preview: `integra-live-inspector`.
 
 ## Project constraints

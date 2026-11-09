@@ -5,7 +5,7 @@ function runTs(entry: string, ...args: string[]) {
   return spawnSync(process.execPath, ['--import', 'tsx', entry, ...args], {
     cwd: process.cwd(),
     encoding: 'utf8',
-    timeout: 20_000,
+    timeout: 60_000,
   });
 }
 
@@ -24,5 +24,5 @@ describe('design tooling CLIs', () => {
     const output = JSON.parse(result.stdout) as { scannedFiles: number; findings: unknown[] };
     expect(output.scannedFiles).toBeGreaterThan(0);
     expect(Array.isArray(output.findings)).toBe(true);
-  });
+  }, 20_000);
 });

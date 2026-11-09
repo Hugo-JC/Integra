@@ -1,4 +1,5 @@
 export type LiveStyleProperty = 'background-color' | 'color' | 'border-radius' | 'padding';
+export type LiveEditableProperty = LiveStyleProperty;
 
 export interface LiveStyleChange {
   property: LiveStyleProperty;
@@ -87,4 +88,59 @@ export interface LiveInspectorHandle {
   getPatch(): LiveInspectorPatch | null;
   toPrompt(): string | null;
   destroy(options?: { restoreChanges?: boolean }): void;
+}
+
+/** Stable DOM identity snapshot. A selector is never a source-code path. */
+export interface LiveElementSnapshot {
+  selector: string;
+  tagName: string;
+  accessibleName: string;
+  originalClasses: string;
+  componentHint?: string;
+}
+
+export interface LiveContrastEvidence {
+  ratio: number;
+  requiredRatio: number;
+  passesAA: boolean;
+  isLargeText: boolean;
+  level: 'AA' | 'Fail';
+}
+
+export interface LiveElementChangeSet {
+  schemaVersion: '1.0.0';
+  target: LiveElementSnapshot;
+  originalClasses: string;
+  updatedClasses: string;
+  addedClasses: string[];
+  removedClasses: string[];
+  styleChanges: LiveStyleChange[];
+  evidence: {
+    contrastRatio?: number;
+    contrastRequired?: number;
+    contrastPass?: boolean;
+    contrastNote: string;
+  };
+}
+
+export interface IntegraLiveInspectorOptions {
+  title?: string;
+  panelTitle?: string;
+  sourceHint?: string;
+  accentColor?: string;
+  enabled?: boolean;
+  keyboardShortcut?: boolean;
+  ignoreSelector?: string;
+  onSelectionChange?: (element: HTMLElement | null) => void;
+  onChange?: (changes: LiveElementChangeSet[]) => void;
+  onApply?: (changes: LiveElementChangeSet[], prompt: string) => void;
+}
+
+export interface IntegraLiveInspectorController {
+  isActive(): boolean;
+  setActive(active: boolean): void;
+  getSelectedElement(): HTMLElement | SVGElement | null;
+  getChangeSets(): LiveElementChangeSet[];
+  getPrompt(): string;
+  stop(options?: { restore?: boolean }): void;
 }

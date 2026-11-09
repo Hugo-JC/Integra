@@ -70,15 +70,23 @@ Ver [docs/live-inspector.md](docs/live-inspector.md).
 
 ## Skills e compatibilidade de agentes
 
-Skills canónicas vivem em `.agents/skills/*/SKILL.md` para partilha entre ferramentas que suportam Agent Skills. O Gemini CLI recebe contexto adicional através de `GEMINI.md` (que importa `AGENTS.md`). Claude Code, Cursor e GitHub Copilot têm ficheiros de entrada curtos que apontam para as mesmas instruções.
+Skills canónicas vivem em `.agents/skills/*/SKILL.md` no formato Agent Skills. Codex, Gemini CLI, Cursor e superfícies compatíveis do GitHub Copilot descobrem esse diretório; Claude Code requer um link em `.claude/skills/`. `AGENTS.md`, `GEMINI.md` e `CLAUDE.md` continuam a fornecer contexto do projeto, mas não instalam Skills automaticamente. Consulte [compatibilidade, instalação e validação por host](docs/agent-compatibility.md).
 
-Skills incluídas:
-- `integra-direction`
-- `integra-refactor-agent`
-- `integra-ui-generator`
-- `integra-design-qa`
-- `integra-live-inspector`
-- `integra-investigation`
+Skills canónicas:
+- `integra-ux-shape` — enquadramento de tarefas, fluxos, IA e estados.
+- `integra-design-direction` — direção visual, tokens e composição.
+- `integra-design-system` — tokens, componentes, variantes e migração.
+- `integra-ui-generator` — geração de UI React/TypeScript.
+- `integra-refactor-agent` — refactor seguro com preservação de comportamento.
+- `integra-design-qa` — revisão UX, visual e responsiva com findings.
+- `integra-accessibility-audit` — auditoria WCAG 2.2 com evidência.
+- `integra-performance-audit` — diagnóstico de performance com medições.
+- `integra-investigation` — investigação de referências e documentação.
+- `integra-reference-investigator` — extração de princípios de referências.
+- `integra-live-inspector` — inspeção DOM local e preview reversível.
+- `integra-colorize` — estratégia de cor, tokens semânticos e verificação de contraste.
+
+`integra-direction` permanece como alias legado até ser consolidada em `integra-design-direction`.
 
 ## Princípios de qualidade
 
@@ -116,7 +124,7 @@ O núcleo determinístico continua provider-agnostic e sem API keys. A geração
 
 Integra distributes portable Agent Skills from `.agents/skills/`. Gemini CLI, Codex, Claude Code, Cursor and other compatible agents can read the relevant skill through their workspace conventions; `GEMINI.md` describes Gemini-specific routing.
 
-Included skills: `integra-design-direction`, `integra-ui-generator`, `integra-refactor-agent`, `integra-design-qa`, `integra-accessibility-audit`, `integra-investigation`, `integra-design-system` and `integra-live-inspector`.
+The `integra` skill is the orchestration entry point. Specialist skills include `integra-ux-shape`, `integra-design-direction`, `integra-ui-generator`, `integra-refactor-agent`, `integra-design-qa`, `integra-accessibility-audit`, `integra-performance-audit`, `integra-investigation`, `integra-reference-investigator`, `integra-design-system`, `integra-colorize` and `integra-live-inspector`. `integra-direction` remains a legacy alias.
 
 ### Local design intelligence
 The predecessor AI Design Engine v3 niche/style catalogs are preserved in `presets/`. Discover offline candidates with:

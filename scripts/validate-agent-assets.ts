@@ -1,5 +1,6 @@
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, resolve } from 'node:path';
+import { validateSkills } from './skill-validation.js';
 
 const root = process.cwd();
 const errors: string[] = [];
@@ -66,18 +67,7 @@ for (const preset of presets.presets) {
 
 const skillsRoot = resolve(root, '.agents/skills');
 const dirs = readdirSync(skillsRoot).filter((name) => statSync(join(skillsRoot, name)).isDirectory());
-const names = new Set<string>();
-for (const dir of dirs) {
-  try {
-    const body = readFileSync(join(skillsRoot, dir, 'SKILL.md'), 'utf8');
-    const name = body.match(/^name:\s*(.+)$/m)?.[1]?.trim();
-    const desc = body.match(/^description:\s*(.+)$/m)?.[1]?.trim();
-    if (!name || !desc || name !== dir || names.has(name)) errors.push('Invalid or duplicate skill: ' + dir);
-    if (name) names.add(name);
-  } catch {
-    errors.push('Missing skill: ' + dir);
-  }
-}
+errors.push(...validateSkills(skillsRoot, root).errors);
 if (!readFileSync(resolve(root, 'GEMINI.md'), 'utf8').includes('.agents/skills/')) {
   errors.push('GEMINI.md must point to canonical skills.');
 }

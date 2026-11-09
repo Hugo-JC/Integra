@@ -38,6 +38,7 @@ Also read `docs/ai-context-contract.md` for source precedence, fact/assumption c
 
 Read the relevant canonical task skill under `.agents/skills/<skill-name>/SKILL.md`. Skills are procedural guidance, not proof that a host loaded them and not authorization to modify a project.
 
+- UX/IA shaping: `integra-ux-shape`.
 - New direction/redesign: `integra-design-direction`.
 - New UI component: `integra-ui-generator`.
 - Existing TSX refactor: `integra-refactor-agent`.
@@ -45,6 +46,7 @@ Read the relevant canonical task skill under `.agents/skills/<skill-name>/SKILL.
 - Accessibility: `integra-accessibility-audit`.
 - External research: `integra-investigation` and `integra-reference-investigator`.
 - Tokens/components: `integra-design-system`.
+- Strategic color refinement: `integra-colorize`.
 - Local DOM inspection: `integra-live-inspector`.
 
 Use `GEMINI.md` for Gemini CLI-specific routing. If independent agents are unavailable, label sequential QA as single-agent.

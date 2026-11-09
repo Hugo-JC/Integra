@@ -21,8 +21,8 @@ export function integraLiveInspectorPlugin(options: IntegraLiveInspectorPluginOp
       handler(html) {
         if (!enabled || html.includes('data-integra-live-bootstrap')) return html;
         const bootstrap = `<script type="module" data-integra-live-bootstrap>
-import { createLiveInspector } from ${JSON.stringify(entry)};
-if (!window.__INTEGRA_LIVE_INSPECTOR__) window.__INTEGRA_LIVE_INSPECTOR__ = createLiveInspector();
+import { createIntegraInspector } from ${JSON.stringify(entry)};
+if (!window.__INTEGRA_LIVE_INSPECTOR__) window.__INTEGRA_LIVE_INSPECTOR__ = createIntegraInspector();
 </script>`;
         return html.includes('</body>') ? html.replace('</body>', bootstrap + '\n</body>') : html + '\n' + bootstrap;
       }

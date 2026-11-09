@@ -1,31 +1,71 @@
 ---
 name: integra-design-qa
-description: Independently review a page, flow or component for product UX, visual quality, responsiveness, accessibility and implementation discipline, producing ranked evidence-backed findings (P0-P3). Use for critique and audit; not for generating or editing UI.
+description: Review an existing interface or flow for product UX, visual quality, responsive behavior, interaction completeness and implementation risks. Use for critique and evidence-backed audits before or after changes; do not generate a new design by default.
 ---
 
 # Integra Design QA
 
-Review against the brief, real tasks, tokens and observable evidence. A taste preference is not a defect without context; a trigger match is a candidate, not a finding.
+## Mission
+
+Evaluate whether the existing interface serves its users and product task clearly, consistently and reliably. Produce findings that another engineer can reproduce and prioritize. QA is an evidence process, not a taste score or permission to redesign.
+
+## Scope contract
+
+Before reviewing, identify target routes/components, primary user task, expected behavior, viewport range, themes, available states, stack and requested depth. Inspect project conventions and the actual rendered page when available.
+
+If no brief exists, infer only from visible evidence and label assumptions. Do not invent users, requirements or expected product behavior.
+
+## Review passes
+
+1. **Task and UX:** purpose, hierarchy, navigation, terminology, content completeness, trust, task completion and recovery.
+2. **Visual craft:** composition, typography, spacing, alignment, density, contrast, color roles, surfaces, elevation, imagery and icon consistency.
+3. **Responsive behavior:** narrow, medium and wide screens; overflow, clipping, wrapping, navigation, touch targets and content priority.
+4. **Interaction states:** hover, focus, active, selected, disabled, loading, empty, error, success, pending and destructive confirmation.
+5. **Accessibility signals:** semantic elements, accessible names, keyboard, focus visibility, non-color cues, reduced motion and contrast.
+6. **Implementation quality:** component boundaries, types, duplication, state modeling, async errors, asset loading and measurable performance risk.
+7. **Evidence:** run repository checks and inspect the actual rendered result when tools exist. Record what was unavailable or skipped.
 
 ## Multi-agent protocol
-With independent agents, assign focused passes (product/UX, visual+responsive, accessibility+interaction, implementation+evidence), give each the same brief and artifact, require evidence, then deduplicate and rank. With a single agent, run the passes sequentially and **label the review single-agent**; never imply independent reviewers ran.
 
-## Passes
-1. Product/UX: goal, hierarchy, navigation, content, trust, task completion.
-2. Visual: type, spacing, semantic colors, surfaces, elevation, icons, personality.
-3. Responsive: narrow/medium/wide, overflow, navigation, touch.
-4. Accessibility: semantics, keyboard, focus, names, errors, contrast, zoom/reflow, reduced motion (see `integra-accessibility-audit` for depth).
-5. Implementation: boundaries, types, state coverage, errors, duplication, performance.
-6. Evidence: run checks; inspect the rendered page when a browser exists. Otherwise mark `not_run`.
+Only use independent passes when the host genuinely supports independent agents. Give each reviewer the same target and brief, request location-specific evidence, then deduplicate. If one agent performs several passes, call it a sequential single-agent review; never imply independent review occurred.
 
 ## Severity
-P0 blocker (core task impossible, data loss, severe a11y/security) · P1 major (major flow or common interaction broken) · P2 medium (workaround exists) · P3 polish. Severity is not proof and not a visual score.
 
-## Finding contract
-ID, rule ID, location (selector/file:line), observed evidence, expected criterion, actual behavior, user impact, severity rationale, recommendation, verification method, status (`verified` / `heuristic` / `inconclusive` / `not_run`).
+- **P0 — Blocker:** primary task impossible, data loss, serious security issue or severe access barrier.
+- **P1 — Major:** common flow or important interaction is broken or materially misleading.
+- **P2 — Moderate:** workaround exists, but friction or inconsistency is meaningful.
+- **P3 — Polish:** low-impact refinement with a clear contextual benefit.
+
+Severity expresses impact, not confidence. Rank by severity and user impact; present confidence separately.
+
+## Finding schema
+
+For every finding include:
+- stable ID and relevant rule/criterion;
+- exact location (route, selector, component or file:line);
+- observed behavior and evidence;
+- expected outcome and why it matters;
+- affected user/task;
+- severity and confidence;
+- recommended smallest effective fix;
+- reproduction steps;
+- verification method and status.
+
+Use statuses `verified`, `heuristic`, `inconclusive` and `not_run`. Do not call an unmeasured suspicion verified.
+
+## Change boundary
+
+A critique request authorizes inspection and reporting only. Do not edit source code unless the user separately approves the exact proposed change. Preserve positive patterns; do not rewrite working UI to satisfy personal taste.
 
 ## Output
-Ranked findings, then a short "what works well" list (evidence-backed, so strengths are not lost in a refactor), then limitations.
 
-## Signature touch: "Confidence ledger"
-End with a three-column table: Verified / Heuristic / Not run. Never move an item to Verified without evidence. Never claim WCAG conformance from one ratio or an automated scan.
+1. Scope and environment.
+2. Executive summary with number of findings by severity/status.
+3. Ranked findings.
+4. Evidence-backed strengths to preserve.
+5. Verification ledger: Verified / Heuristic / Inconclusive / Not run.
+6. Limitations and a focused next step.
+
+## Signature: confidence ledger
+
+For each high-impact finding, state both severity and confidence. Never conflate a severe potential issue with a confirmed defect; never claim page-wide accessibility or performance compliance from partial checks.
