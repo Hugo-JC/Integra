@@ -58,27 +58,33 @@ This document does not claim that an npm package, installer, update engine, host
 
 ## Current resource inventory
 
-This inventory records dependencies explicitly referenced by the current skill instructions. It is a starting point for packaging, not a claim that every transitive runtime dependency has been closed.
+This inventory records dependencies explicitly referenced by the current skill instructions. It is an instruction-level inventory, not proof that every transitive runtime dependency, host permission or project context is available.
 
-| Skill | Explicit repository dependencies |
+| Skill | Explicit dependencies or optional capabilities |
 |---|---|
-| `integra` | The specialist skill directories it routes to; include those skills in an orchestration bundle. |
-| `integra-design-direction` | `docs/ai-context-contract.md`, `docs/ai-guides/preset-reference-escape-routing.md`, `presets/manifest.json`; `design:route` and `direction:presets` npm scripts. |
-| `integra-investigation` | `docs/ai-context-contract.md`, `docs/reference-investigation.md`, `docs/ai-guides/preset-reference-escape-routing.md`. |
-| `integra-reference-investigator` | `docs/ai-context-contract.md`, `docs/ai-guides/preset-reference-escape-routing.md`. |
-| `integra-ui-generator` | `docs/ai-context-contract.md`, `docs/ai-guides/preset-reference-escape-routing.md`; optional `design:qa` npm script. |
-| `integra-ux-shape` | `docs/ai-context-contract.md`. |
-| `integra-accessibility-audit` | Optional `design:qa` npm script. |
-| `integra-direction` (legacy alias) | `design:route` npm script. |
-| `integra-refactor-agent` | `typecheck` npm script. |
+| `integra` | Routes to named specialist skills; an orchestration bundle must include the specialist directories it advertises. |
+| `integra-design-direction` | Optional repository commands `design:route` and `direction:presets`; use only after confirming they exist in the current checkout. |
+| `integra-ui-generator` | Existing project stack, dependencies, tokens and components; optional repository Design QA when available. |
+| `integra-refactor-agent` | Project tests, typecheck and local conventions; commands vary by project. |
+| `integra-design-qa` | Browser/rendered-page access and project checks when available; otherwise disclose untested dimensions. |
+| `integra-accessibility-audit` | Browser and assistive-technology checks when available; automated tools are optional evidence. |
+| `integra-performance-audit` | Profilers, browser measurements or field data when available. |
+| `integra-investigation` | Access to external sources when research is requested; no local package dependency. |
+| `integra-reference-investigator` | Authorized access to a reference page, repository or supplied artifact. |
+| `integra-design-system` | Existing tokens, component source and theme configuration in the target project. |
+| `integra-colorize` | Existing brand/tokens and rendered color pairs for measured contrast; no mandatory external script. |
+| `integra-live-inspector` | Integra Live Inspector module and documented Vite development adapter; local development only. |
+| `integra-ux-shape` | Product, task, route and data context supplied or observable in the target project. |
+| `integra-direction` (legacy alias) | Defers to `integra-design-direction`; no separate runtime dependency. |
 
-Other specialist instructions currently have no explicit relative Markdown resource links or npm-script references. That does not prove they have no contextual or host-level requirements.
+The current canonical skill files keep their procedural guidance inside each skill directory and do not link to root-level `docs/` resources. Some workflows still describe optional capabilities that exist only in a full Integra checkout. A standalone installer must distinguish portable instruction from available executable tooling.
 
-### Packaging implications
+## Packaging implications
 
-- A bundle containing `integra` must include the specialist skills that are advertised by its routing table, or clearly report unavailable routes.
-- A skill that references repository documentation must either carry those documents in its package-relative structure or be installed in a declared full-context layout.
-- A skill that recommends `npm run ...` must not imply that the command is available in an arbitrary consumer project. The installer must either supply the required Integra tooling in a supported package mode or mark that command as repository-only guidance.
-- `npm run` references are guidance, not permission to execute scripts during installation or skill invocation.
+- A bundle containing `integra` must include the specialist skills advertised by its routing table, or clearly report unavailable routes.
+- A copied specialist skill should remain understandable without root-level Integra documentation; optional tooling must be described as optional and checked before use.
+- A Skill that recommends a repository command must not imply that command exists in an arbitrary consumer project.
+- Installation must never execute packaged scripts merely because a Skill documents them.
+- Host capability, browser access, project dependencies and external research access are runtime capabilities, not files that the skill installer can guarantee.
 
-The inventory should be regenerated or re-reviewed whenever a skill's links, commands or referenced data change.
+Re-review this inventory whenever a skill adds a required reference, script, asset or host capability.
