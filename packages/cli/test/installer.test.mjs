@@ -151,6 +151,6 @@ test('update refreshes a changed bundled file from a newer bundle version', asyn
   entry.sha256 = createHash('sha256').update(bytes).digest('hex');
   bundle.packageVersion = '0.2.0';
   await writeFile(manifestPath, JSON.stringify(bundle, null, 2) + '\n');
-  assert.equal(await f.cli('update'), 0);
+  assert.equal(await f.cli('update'), 0, f.errors.join('\\n'));
   assert.equal(await readFile(join(f.project, 'docs/context.md'), 'utf8'), updatedContent);
 });
