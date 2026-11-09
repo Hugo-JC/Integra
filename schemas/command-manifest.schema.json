@@ -254,8 +254,11 @@
                   "const": "/integra"
                 },
                 "skills": {
-                  "type": "array",
-                  "maxItems": 0
+                  "maxItems": 1,
+                  "minItems": 1,
+                  "items": {
+                    "const": "integra"
+                  }
                 }
               }
             }
