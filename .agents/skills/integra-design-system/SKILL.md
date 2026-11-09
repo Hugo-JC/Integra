@@ -1,6 +1,6 @@
 ---
 name: integra-design-system
-description: Create, document, audit or evolve a product design system: semantic tokens, component contracts, variants, themes, states, governance and migrations. Use when patterns must remain consistent across multiple screens; never impose a universal Integra theme.
+description: "Create, document, audit or evolve a product design system: semantic tokens, component contracts, variants, themes, states, governance and migrations. Use when patterns must remain consistent across multiple screens; never impose a universal Integra theme."
 ---
 
 # Integra Design System Engineering
