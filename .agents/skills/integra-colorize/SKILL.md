@@ -145,7 +145,7 @@ If a color has no stable role, meaningful atmospheric function or testable purpo
 
 ## Attribution
 
-This is an original Integra adaptation informed by the color strategy principles in Impeccable's `colorize` reference. It does not reproduce Impeccable's implementation or reference text.
+This file is a modified Integra adaptation informed by the color strategy principles in Impeccable's `colorize` reference. The adapted guidance retains the upstream Apache-2.0 license obligations; see [third-party notices](../../../docs/third-party-notices.md) and [the license text](../../../licenses/IMPECCABLE-APACHE-2.0.txt).
 
 Reference: https://github.com/pbakaus/impeccable/blob/main/skill/reference/colorize.md
 Impeccable project: https://github.com/pbakaus/impeccable

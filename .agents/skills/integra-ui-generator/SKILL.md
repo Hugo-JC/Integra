@@ -36,7 +36,7 @@ If the direction is missing, do not invent a complete brand system by default. S
 7. Include loading, empty, validation, disabled, success and recoverable error paths as appropriate.
 8. Ensure keyboard operation, visible focus, accessible names and non-color state cues.
 9. Design responsive behavior from content pressure and input mode; do not just shrink desktop.
-10. Use motion only to communicate state or continuity; respect `prefers-reduced-motion`.
+10. Use motion only to communicate state or continuity; respect `prefers-reduced-motion`. When motion is a central requirement, follow `integra-animate` for the motion thesis, sequence, timing, interruption behavior and reduced-motion alternative instead of inventing ad-hoc effects.
 11. Use typed props and explicit state models. Avoid `any` and fabricated data.
 12. Label demo/mock data clearly and never invent product claims, users, reviews, stock or metrics.
 
