@@ -25,7 +25,8 @@
     "distribution:build": "node scripts/build-distribution.mjs",
     "distribution:test": "node --test packages/cli/test/*.test.mjs",
     "distribution:check": "npm run distribution:build && npm run distribution:test && npm run distribution:pack",
-    "distribution:pack": "npm pack --dry-run ./packages/cli"
+    "distribution:pack": "npm pack --dry-run ./packages/cli",
+    "distribution:smoke": "node scripts/test-cli-tarball.mjs"
   },
   "dependencies": {
     "ajv": "^8.20.0",

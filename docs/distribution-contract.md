@@ -66,9 +66,11 @@ The initial CLI implementation lives in `packages/cli`, independently from the p
 
 The root package remains private. The npm candidate is `packages/cli` (package name `integra-cli`); it has not been published, and package-name availability has not been verified.
 
-## Remaining validation boundaries
+## Validation boundaries
 
-This is an initial CLI MVP, not yet a public release. CI tests exercise the bundler and installer against temporary projects. Before publishing, validate npm package contents with `npm pack --dry-run`, run end-to-end tests on Windows/macOS/Linux, verify the package name and registry metadata, and test discovery in each supported agent host/version.
+The repository includes an isolated tarball smoke command (`npm run distribution:smoke`) and a CI matrix for the CLI distribution on Ubuntu, Windows and macOS with Node.js 20 and 24. These checks cover packaging and installation, not discovery or activation in agent hosts. CI results must be checked for the actual commit before reporting matrix coverage as passed.
+
+Before publishing, follow [`docs/releasing.md`](releasing.md): verify npm package name and registry metadata, inspect the exact tarball, and test discovery in each supported agent host/version. The CLI remains an initial release candidate until a maintainer completes those release steps.
 
 Repository npm scripts and source runtime modules are intentionally not bundled. Skills that mention those commands still require a full Integra checkout for that functionality.
 
