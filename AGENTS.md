@@ -47,6 +47,7 @@ Read the relevant canonical task skill under `.agents/skills/<skill-name>/SKILL.
 - External research: `integra-investigation` and `integra-reference-investigator`.
 - Tokens/components: `integra-design-system`.
 - Strategic color refinement: `integra-colorize`.
+- Purposeful transitions, micro-interactions and motion systems: `integra-animate`.
 - Local DOM inspection: `integra-live-inspector`.
 
 Use `GEMINI.md` for Gemini CLI-specific routing. If independent agents are unavailable, label sequential QA as single-agent.
