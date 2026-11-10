@@ -91,51 +91,33 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
   const shadow = host.attachShadow({ mode: 'open' });
   shadow.innerHTML = `
     <style>
-      :host { all: initial; color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
-      * { box-sizing: border-box; }
-      #highlight { position: fixed; display: none; border: 2px solid ${accent}; border-radius: 3px; background: rgba(59,130,246,.07); pointer-events: none; }
-      #tag { position: fixed; display: none; max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 4px 7px; border-radius: 5px 5px 5px 0; color: #fff; background: rgba(7,10,18,.9); box-shadow: 0 6px 18px rgba(0,0,0,.28); pointer-events: none; }
-      #panel { position: fixed; top: 16px; right: 16px; width: min(360px, calc(100vw - 32px)); max-height: calc(100vh - 32px); overflow: auto; padding: 16px; border: 1px solid #30343b; border-radius: 14px; background: rgba(10,13,20,.96); box-shadow: 0 19px 52px rgba(0,0,0,.42); color:#f5f7fb; pointer-events: auto; }
-      #panel[hidden] { display:none; }
-      .head { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px; }
-      .brand { display:flex; align-items:center; gap:8px; font-weight:700; letter-spacing:-.02em; }
-      .mark { width:9px; height:9px; border-radius:3px; background:${accent}; box-shadow:0 0 0 3px rgba(59,130,246,.16); }
-      button { border:1px solid #343b46; border-radius:7px; background:#171c25; color:#f4f6f8; padding:7px 10px; cursor:pointer; font:inherit; }
-      button:hover { border-color:${accent}; }
-      button.primary { border-color:${accent}; background:${accent}; }
-      label { display:block; margin:12px 0 5px; color:#abb4c2; font-size:11px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; }
-      input { width:100%; min-width:0; border:1px solid #343b46; border-radius:7px; padding:8px; background:#141922; color:#f4f6f8; font:12px ui-monospace,monospace; }
-      input[type=color] { height:36px; padding:3px; }
-      .grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-      .muted { color:#9ba5b4; font-size:11px; line-height:1.5; overflow-wrap:anywhere; }
-      .target { padding:9px; background:#141922; border:1px solid #272f3b; border-radius:8px; overflow-wrap:anywhere; }
-      .contrast { margin-top:12px; padding:9px; border-radius:8px; background:#141922; border:1px solid #303846; line-height:1.5; }
-      .actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
-      #status { min-height:16px; margin-top:10px; color:#93c5fd; font-size:11px; }
-      .rule { border:0; border-top:1px solid #252d38; margin:14px 0; }
-      #instructions { margin:0 0 12px; color:#aeb7c4; font-size:11px; line-height:1.5; }
+:host{all:initial;color-scheme:dark;font-family:Inter,ui-sans-serif,system-ui,sans-serif;font-size:13px}*{box-sizing:border-box}
+#highlight{position:fixed;display:none;border:2px solid #3B82F6;border-radius:5px;background:rgba(59,130,246,.075);box-shadow:0 0 0 1px #fff,0 0 0 5px rgba(59,130,246,.12);pointer-events:none}
+#tag{position:fixed;display:none;max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:5px 8px;border:1px solid #3b82f6;border-radius:6px;color:#eff6ff;background:#10264a;font:11px ui-monospace,monospace;pointer-events:none}
+#panel{position:fixed;top:14px;right:14px;width:min(388px,calc(100vw - 28px));max-height:calc(100vh - 28px);overflow:auto;border:1px solid #27364b;border-radius:16px;background:rgba(10,16,27,.97);box-shadow:0 24px 72px rgba(0,0,0,.46);color:#e8eef8;pointer-events:auto;backdrop-filter:blur(18px);scrollbar-width:thin;scrollbar-color:#34445d transparent}#panel[hidden]{display:none}
+.head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 15px 12px;border-bottom:1px solid #243247}.brand{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:750;letter-spacing:-.025em}.mark{display:grid;place-items:center;width:27px;height:27px;border:1px solid #3b82f6;border-radius:8px;background:linear-gradient(145deg,#1d4ed8,#2563eb);color:white;font-size:14px}.head-actions{display:flex;gap:6px}
+button{min-height:30px;border:1px solid #30415a;border-radius:8px;background:#152238;color:#dce8fa;padding:6px 9px;cursor:pointer;font:600 11px inherit}button:hover{border-color:#60a5fa;background:#1b3150}button:focus-visible,input:focus-visible{outline:2px solid #60a5fa;outline-offset:2px}button.primary{border-color:#2563eb;background:#2563eb;color:#fff}
+.modebar{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin:12px 14px;padding:4px;border:1px solid #26364d;border-radius:10px;background:#0b1423}.modebar button{border-color:transparent;background:transparent;color:#8fa4c1}.modebar button[aria-pressed=true]{border-color:#2e5fa5;background:#17345d;color:#eff6ff}
+.content{padding:0 14px 14px}#instructions{margin:0 0 10px;color:#9fb0c8;font-size:11px;line-height:1.5}.target{padding:11px;border:1px solid #2b466a;border-radius:11px;background:linear-gradient(135deg,rgba(29,78,216,.18),rgba(15,23,42,.6));overflow-wrap:anywhere}.target strong{display:block;color:#f4f8ff;font-size:12px}
+.muted{color:#8ea1bd;font-size:10px;line-height:1.5;overflow-wrap:anywhere}.eyebrow{display:block;margin:14px 0 6px;color:#91a6c3;font-size:9px;font-weight:750;letter-spacing:.12em;text-transform:uppercase}
+label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:700;text-transform:uppercase}input{width:100%;min-width:0;border:1px solid #30415a;border-radius:8px;padding:8px 9px;background:#0d1829;color:#eef5ff;font:11px ui-monospace,monospace}input[type=color]{height:35px;padding:3px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px}.quick-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.quick-grid button{min-height:38px;text-align:left;padding:8px 10px}.quick-grid button span{display:block;color:#8fa4c1;font-size:9px;font-weight:500;margin-top:2px}
+.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:9px}.metric{padding:8px 7px;border:1px solid #26364d;border-radius:8px;background:#0d1829}.metric b{display:block;color:#e8f1ff;font-size:12px;font-variant-numeric:tabular-nums}.metric span{display:block;margin-top:2px;color:#8499b6;font-size:9px}
+.contrast{margin-top:10px;padding:10px;border:1px solid #30415a;border-radius:9px;background:#0d1829;color:#b8c8dd;font-size:10px;line-height:1.55}.actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:13px}.actions button{flex:1}#status{min-height:16px;margin-top:10px;color:#93c5fd;font-size:10px;line-height:1.5}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}@media(prefers-contrast:more){#panel{border:2px solid #93c5fd}button,input{border-color:#93c5fd}}@media(max-width:520px){#panel{top:auto;right:8px;bottom:8px;left:8px;width:auto;max-height:min(72vh,620px);border-radius:14px}}
     </style>
     <div id="highlight" aria-hidden="true"></div>
     <div id="tag" aria-hidden="true"></div>
-    <section id="panel" role="dialog" aria-label="Integra Live Inspector">
-      <div class="head"><div class="brand"><span class="mark"></span><span id="title">Integra Live Inspector</span></div><button type="button" data-action="close" aria-label="Fechar inspector">Fechar</button></div>
-      <p id="instructions">Passe o rato sobre um elemento e clique para o selecionar. As alterações são pré-visualizações temporárias no DOM.</p>
-      <div class="target"><strong id="target-name">Nenhum elemento selecionado</strong><div id="target-selector" class="muted">Aguardando seleção…</div></div>
-      <label for="classes">Classes do elemento</label>
-      <input id="classes" data-field="classes" type="text" spellcheck="false" autocomplete="off" placeholder="className / Tailwind utilities">
-      <div class="grid">
-        <div><label for="text-color">Cor do texto</label><input id="text-color" data-field="color" type="color" value="#ffffff"></div>
-        <div><label for="surface-color">Cor de fundo</label><input id="surface-color" data-field="background-color" type="color" value="#111111"></div>
-        <div><label for="radius">Border radius (px)</label><input id="radius" data-field="border-radius" type="number" min="0" max="64" step="1"></div>
-        <div><label for="padding">Padding (px)</label><input id="padding" data-field="padding" type="number" min="0" max="128" step="1"></div>
-      </div>
-      <div class="contrast" id="contrast" aria-live="polite">O contraste será calculado após selecionar um elemento.</div>
-      <hr class="rule">
-      <div class="muted">A seleção usa o azul Integra ${accent}. O tema da interface analisada não é alterado automaticamente.</div>
-      <div class="actions"><button type="button" data-action="unlock">Escolher outro</button><button type="button" data-action="reset">Reverter elemento</button><button type="button" class="primary" data-action="apply">Aplicar sugestão</button></div>
-      <div id="status" role="status" aria-live="polite"></div>
-    </section>
-  `;
+    <section id="panel" data-mode="quick" role="dialog" aria-label="Integra Live Workbench">
+      <div class="head"><div class="brand"><span class="mark">✳</span><span id="title">Integra Live</span></div><div class="head-actions"><button type="button" data-action="unlock" title="Selecionar elemento">Pick</button><button type="button" data-action="close" aria-label="Fechar inspector">×</button></div></div>
+      <div class="modebar" role="group" aria-label="Modo do inspector"><button type="button" data-action="mode-quick" aria-pressed="true">Quick Canvas</button><button type="button" data-action="mode-advanced" aria-pressed="false">Inspector</button></div>
+      <div class="content"><p id="instructions">Ativa o picker, aponta e seleciona. Pré-visualiza alterações sem tocar no código-fonte.</p>
+      <div class="target"><strong id="target-name">Nenhum elemento selecionado</strong><div id="target-selector" class="muted">Usa Pick e clica num elemento da página.</div></div>
+      <div class="metric-grid"><div class="metric"><b id="metric-size">—</b><span>Dimensões</span></div><div class="metric"><b id="metric-display">—</b><span>Display</span></div><div class="metric"><b id="metric-font">—</b><span>Fonte</span></div></div>
+      <div id="quick-tools"><span class="eyebrow">Ajustes rápidos</span><div class="quick-grid"><button type="button" data-action="quick-radius">Radius +<span>Suavizar cantos</span></button><button type="button" data-action="quick-padding">Padding +<span>Mais espaço interno</span></button><button type="button" data-action="quick-color">Azul Integra<span>Preview de destaque</span></button><button type="button" data-action="quick-reset">Repor preview<span>Restaurar elemento</span></button></div></div>
+      <div id="advanced-tools" hidden><span class="eyebrow">Estrutura e classes</span><label for="classes">Classes do elemento</label><input id="classes" data-field="classes" type="text" spellcheck="false" autocomplete="off" placeholder="className / Tailwind utilities"><span class="eyebrow">Estilo visual</span><div class="grid"><div><label for="text-color">Cor do texto</label><input id="text-color" data-field="color" type="color" value="#ffffff"></div><div><label for="surface-color">Cor de fundo</label><input id="surface-color" data-field="background-color" type="color" value="#111111"></div><div><label for="radius">Border radius (px)</label><input id="radius" data-field="border-radius" type="number" min="0" max="64" step="1"></div><div><label for="padding">Padding (px)</label><input id="padding" data-field="padding" type="number" min="0" max="128" step="1"></div></div></div>
+      <div class="contrast" id="contrast" aria-live="polite">Seleciona um elemento para avaliar o contraste.</div><div class="actions"><button type="button" data-action="unlock">Selecionar</button><button type="button" data-action="reset">Reverter</button><button type="button" class="primary" data-action="apply">Exportar diff</button></div><div id="status" role="status" aria-live="polite"></div><p class="muted">Azul Integra · Preview temporário · Alt + Shift + I alterna · Esc restaura e fecha</p></div>
+    </section>  `;
 
   const highlight = shadow.querySelector<HTMLElement>('#highlight');
   const tag = shadow.querySelector<HTMLElement>('#tag');
@@ -158,6 +140,8 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
   let stopped = false;
   const previouslyFocused = doc.activeElement instanceof view.HTMLElement ? doc.activeElement : null;
   let geometryFrame = 0;
+  let pointerFrame = 0;
+  let pendingPointerTarget: Element | null = null;
   let resizeObserver: ResizeObserver | null = null;
 
   const isInspectorEvent = (event: Event): boolean => event.composedPath().includes(host);
@@ -255,6 +239,13 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
     const original = originals.get(element);
     if (!original) return;
     const values = currentComputed(element);
+    const rect = element.getBoundingClientRect();
+    const metricSize = shadow.querySelector<HTMLElement>('#metric-size');
+    const metricDisplay = shadow.querySelector<HTMLElement>('#metric-display');
+    const metricFont = shadow.querySelector<HTMLElement>('#metric-font');
+    if (metricSize) metricSize.textContent = `${Math.round(rect.width)} × ${Math.round(rect.height)}`;
+    if (metricDisplay) metricDisplay.textContent = view.getComputedStyle(element).display;
+    if (metricFont) metricFont.textContent = `${Math.round(Number.parseFloat(values['font-size']) || 0)}px`;
     const classInput = shadow.querySelector<HTMLInputElement>('[data-field="classes"]');
     if (classInput) classInput.value = element.getAttribute('class') ?? '';
     for (const property of ['color', 'background-color'] as const) {
@@ -317,7 +308,15 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
   const onPointerMove = (event: PointerEvent): void => {
     if (stopped || !enabled || selectionLocked || isInspectorEvent(event)) return;
     const candidate = event.composedPath().find(isElement);
-    if (candidate && isInspectable(candidate)) positionHighlight(candidate);
+    if (!candidate || !isInspectable(candidate)) return;
+    pendingPointerTarget = candidate;
+    if (pointerFrame) return;
+    pointerFrame = view.requestAnimationFrame(() => {
+      pointerFrame = 0;
+      const target = pendingPointerTarget;
+      pendingPointerTarget = null;
+      if (!stopped && enabled && !selectionLocked && target?.isConnected) positionHighlight(target);
+    });
   };
 
   const onClick = (event: MouseEvent): void => {
@@ -382,6 +381,32 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
       stop({ restore: true });
       return;
     }
+    if (action === 'mode-quick' || action === 'mode-advanced') {
+      const mode = action === 'mode-advanced' ? 'advanced' : 'quick';
+      panel.dataset.mode = mode;
+      const quick = shadow.querySelector<HTMLElement>('#quick-tools');
+      const advanced = shadow.querySelector<HTMLElement>('#advanced-tools');
+      const qb = shadow.querySelector<HTMLButtonElement>('[data-action="mode-quick"]');
+      const ab = shadow.querySelector<HTMLButtonElement>('[data-action="mode-advanced"]');
+      if (quick) quick.hidden = mode !== 'quick';
+      if (advanced) advanced.hidden = mode !== 'advanced';
+      qb?.setAttribute('aria-pressed', String(mode === 'quick'));
+      ab?.setAttribute('aria-pressed', String(mode === 'advanced'));
+      return;
+    }
+    if (action === 'quick-radius' || action === 'quick-padding' || action === 'quick-color') {
+      if (!selected) { status.textContent = 'Seleciona primeiro um elemento com Pick.'; return; }
+      const current = currentComputed(selected);
+      if (action === 'quick-radius') applyProperty('border-radius', `${Math.min(24, (Number.parseFloat(current['border-radius']) || 0) + 4)}px`);
+      if (action === 'quick-padding') applyProperty('padding', `${Math.min(64, (Number.parseFloat(current.padding) || 0) + 4)}px`);
+      if (action === 'quick-color') applyProperty('background-color', accent);
+      status.textContent = 'Preview atualizado. Podes reverter ou exportar o diff.';
+      return;
+    }
+    if (action === 'quick-reset') {
+      if (selected) { const original = originals.get(selected); if (original) restoreElement(selected, original); selectElement(selected); status.textContent = 'Preview restaurado.'; }
+      return;
+    }
     if (action === 'unlock') {
       selected = null;
       highlighted = null;
@@ -434,6 +459,8 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
     view.visualViewport?.removeEventListener('scroll', scheduleGeometryUpdate);
     resizeObserver?.disconnect();
     if (geometryFrame) view.cancelAnimationFrame(geometryFrame);
+    if (pointerFrame) view.cancelAnimationFrame(pointerFrame);
+    pendingPointerTarget = null;
     shadow.removeEventListener('input', onInput);
     shadow.removeEventListener('click', onPanelClick);
     if (stopOptions.restore !== false) {

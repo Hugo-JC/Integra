@@ -45,9 +45,9 @@ npm run design:qa -- src/ --strict
 
 Regras atuais incluem imagens sem alt, elementos não nativos clicáveis sem semântica/teclado, remoção de outline sem substituto e cores hex hardcoded como sugestão. O scanner é estático: não prova contraste real, responsividade nem qualidade visual.
 
-## Live Inspector (local development only)
+## Live Workbench (local development only)
 
-O inspector é independente de framework e não acrescenta dependências de runtime. Ativa-o apenas num entrypoint de desenvolvimento (por exemplo, Vite):
+O Live Workbench oferece Quick Canvas para ajustes rápidos e Inspector para diagnóstico detalhado. É independente de framework e não acrescenta dependências de runtime. Ativa-o apenas num entrypoint de desenvolvimento (por exemplo, Vite):
 
 ~~~ts
 if (import.meta.env.DEV && import.meta.env.VITE_INTEGRA_LIVE === 'true') {
@@ -57,7 +57,7 @@ if (import.meta.env.DEV && import.meta.env.VITE_INTEGRA_LIVE === 'true') {
 }
 ~~~
 
-Definir `VITE_INTEGRA_LIVE=true` inicia a seleção. Hover e seleção usam o azul Integra `#3B82F6`; **↑ Pai** sobe na árvore DOM. Podes pré-visualizar classes, cores, tamanho de texto, padding e radius; consultar o contraste; repor o estado; e copiar o DOM diff.
+Usa `Alt + Shift + I` para abrir/fechar rapidamente o Live depois de registar o plugin. Hover e seleção usam o azul Integra `#3B82F6`; **↑ Pai** sobe na árvore DOM. Podes pré-visualizar classes, cores, tamanho de texto, padding e radius; consultar o contraste; repor o estado; e copiar o DOM diff.
 
 O inspector:
 - Está limitado a localhost por defeito.

@@ -1,42 +1,29 @@
-# Integra Live Inspector
+# Integra Live Workbench
 
-A development-only browser inspector for selecting DOM elements, previewing allowlisted styles/classes, estimating contrast and exporting a structured handoff. It never writes project files.
+A development-only browser workbench for fast DOM inspection, visual preview and source handoff. It uses the canonical inspector API, a blue interaction system and a dependency-free Shadow DOM overlay.
 
-## Vite setup
+## Fastest way to open
+1. Register the Vite plugin once.
+2. Start or reuse the app's normal development server.
+3. Open the local app URL.
+4. Press **Alt + Shift + I** to toggle Live.
+5. Press **Escape** to close and restore temporary previews.
 
 ```ts
-// vite.config.ts
 import { defineConfig } from 'vite';
 import { integraLiveInspectorPlugin } from './src/modules/live-inspector/vite-plugin';
-
-export default defineConfig({
-  plugins: [integraLiveInspectorPlugin()]
-});
+export default defineConfig({ plugins: [integraLiveInspectorPlugin()] });
 ```
 
-The plugin uses `apply: 'serve'`; production builds do not inject the inspector. It loads the canonical `createIntegraInspector()` API from the module entry. Toggle capture with Alt+Shift+I and close/restore with Escape.
+The adapter uses `apply: 'serve'`; production builds do not inject it. It does not start a second server.
 
-## Source hints
+## Modes
+- **Quick Canvas:** element picking, dimensions, common visual adjustments and one-click reset.
+- **Inspector:** classes, text/surface colors, radius, padding, contrast estimate and diff export.
+- Blue `#3B82F6` belongs to inspector chrome only.
 
-Add `data-integra-source="src/components/Example.tsx"` to a development element only when a stable hint is known. A source hint is caller-provided metadata, not inferred or verified source mapping.
+## Performance
+Pointer geometry is coalesced to one animation-frame callback. Scroll, resize and viewport updates share a geometry scheduler. No polling timer, external API, React dependency or full-page scan is required. Shadow DOM isolates the overlay. Teardown cancels frames, disconnects observers, removes listeners and restores original attributes.
 
-## Programmatic use
-
-```ts
-import { createIntegraInspector } from './src/modules/live-inspector';
-
-const inspector = createIntegraInspector();
-const changes = inspector.getChangeSets();
-const prompt = inspector.getPrompt();
-inspector.stop(); // restores the original class/style attributes by default
-```
-
-The legacy `createLiveInspector()` function remains temporarily available for compatibility. New integrations should use `createIntegraInspector()`.
-
-## Current boundaries
-
-- Preview changes are temporary DOM mutations only; source files are never written.
-- The inspector UI is isolated in Shadow DOM and excluded from target selection.
-- Contrast is only estimated for supported opaque solid colors. Alpha, gradients, images, filters, pseudo-elements and complex compositing are inconclusive.
-- DOM selectors are not source paths. Review the actual repository before proposing a source diff.
-- Source edits require explicit approval of the exact proposed diff.
+## Boundaries
+Local development only. No source writes, AI-provider calls, CSP weakening or arbitrary HTML/JS injection. DOM selectors are not source mappings; source hints are user-provided and unverified. Contrast is an estimate, not a complete WCAG audit.

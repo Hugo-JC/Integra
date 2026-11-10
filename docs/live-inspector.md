@@ -1,43 +1,29 @@
-# Live Inspector
+# Integra Live Workbench
 
-Integra Live Inspector is a development-only DOM inspection and temporary preview tool. The Vite adapter boots the canonical v2 API from the module entry point.
+A development-only browser workbench for fast DOM inspection, visual preview and source handoff. It uses the canonical inspector API, a blue interaction system and a dependency-free Shadow DOM overlay.
 
-## Vite
-
-Register `integraLiveInspectorPlugin()` in `vite.config.ts`. The plugin declares `apply: 'serve'`, so production builds do not inject the inspector. Keep it on trusted local development origins and never weaken production CSP to enable it.
-
-## Programmatic use
+## Fastest way to open
+1. Register the Vite plugin once.
+2. Start or reuse the app's normal development server.
+3. Open the local app URL.
+4. Press **Alt + Shift + I** to toggle Live.
+5. Press **Escape** to close and restore temporary previews.
 
 ```ts
-import { createIntegraInspector } from './src/modules/live-inspector';
-
-const inspector = createIntegraInspector({
-  title: 'Integra Live Inspector',
-  sourceHint: 'src/components/Hero.tsx', // optional, user-provided and unverified
-});
-
-const changes = inspector.getChangeSets();
-const prompt = inspector.getPrompt();
-inspector.stop(); // restores temporary DOM previews by default
+import { defineConfig } from 'vite';
+import { integraLiveInspectorPlugin } from './src/modules/live-inspector/vite-plugin';
+export default defineConfig({ plugins: [integraLiveInspectorPlugin()] });
 ```
 
-The older `createLiveInspector()` API remains available for compatibility. New integrations should use `createIntegraInspector()`, which is also the API injected by the Vite adapter.
+The adapter uses `apply: 'serve'`; production builds do not inject it. It does not start a second server.
 
-## Current capabilities
+## Modes
+- **Quick Canvas:** element picking, dimensions, common visual adjustments and one-click reset.
+- **Inspector:** classes, text/surface colors, radius, padding, contrast estimate and diff export.
+- Blue `#3B82F6` belongs to inspector chrome only.
 
-- Hover highlight and click-to-select, isolated in Shadow DOM.
-- Temporary preview of text/background colors, border radius, padding and existing classes.
-- Best-effort unique DOM selector and accessible-name snapshot.
-- Contrast estimate for supported solid colors; inconclusive cases are explicitly reported.
-- Exact class/style delta and a structured prompt handoff.
-- Scroll, viewport resize and observed element-size changes reposition the highlight.
-- Teardown removes listeners/observers and restores original class/style attributes by default.
+## Performance
+Pointer geometry is coalesced to one animation-frame callback. Scroll, resize and viewport updates share a geometry scheduler. No polling timer, external API, React dependency or full-page scan is required. Shadow DOM isolates the overlay. Teardown cancels frames, disconnects observers, removes listeners and restores original attributes.
 
-## Safety and limitations
-
-- No source files are written, no AI provider is contacted, and no source path is inferred from a selector or class name.
-- A source hint is metadata supplied by the caller, not verified source mapping.
-- User-provided labels are rendered as text; accent colors are validated before use in CSS.
-- Invalid `ignoreSelector` values fail with a clear configuration error.
-- Gradients, images, pseudo-elements, filters, opacity and complex compositing can make contrast inconclusive. A displayed ratio is not a complete WCAG audit.
-- The Advanced Inspector and Quick Canvas interfaces are planned to share one preview engine; the current phase establishes the canonical core and adapter, not the final dual-mode UI.
+## Boundaries
+Local development only. No source writes, AI-provider calls, CSP weakening or arbitrary HTML/JS injection. DOM selectors are not source mappings; source hints are user-provided and unverified. Contrast is an estimate, not a complete WCAG audit.
