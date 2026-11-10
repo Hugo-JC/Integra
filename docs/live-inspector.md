@@ -27,3 +27,7 @@ Pointer geometry is coalesced to one animation-frame callback. Scroll, resize an
 
 ## Boundaries
 Local development only. No source writes, AI-provider calls, CSP weakening or arbitrary HTML/JS injection. DOM selectors are not source mappings; source hints are user-provided and unverified. Contrast is an estimate, not a complete WCAG audit.
+
+## Preview history
+
+Live keeps a bounded history of up to 100 reversible preview operations per session. Use **Undo** / **Redo** in the workbench, or **Ctrl/Cmd + Z** and **Ctrl/Cmd + Shift + Z** when focus is outside editable fields. Consecutive edits to the same property are coalesced into one history step. A new edit after undo clears the redo branch. History is session-only and never writes source files; closing Live restores the original DOM attributes by default.

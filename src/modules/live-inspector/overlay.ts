@@ -1,5 +1,6 @@
 import { calculateLiveContrast } from './contrast.js';
 import { restoreElementAttributes } from './dom.js';
+import { createLivePreviewHistory } from './history.js';
 import { colorToHex, parseCssColor, compositeColors } from './color.js';
 import { createElementChangeSet, synthesizeLivePrompt } from './diff.js';
 import { getAccessibleName, findUniqueSelector } from './selector.js';
@@ -116,7 +117,7 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
       <div class="metric-grid"><div class="metric"><b id="metric-size">—</b><span>Dimensões</span></div><div class="metric"><b id="metric-display">—</b><span>Display</span></div><div class="metric"><b id="metric-font">—</b><span>Fonte</span></div></div>
       <div id="quick-tools"><span class="eyebrow">Ajustes rápidos</span><div class="quick-grid"><button type="button" data-action="quick-radius">Radius +<span>Suavizar cantos</span></button><button type="button" data-action="quick-padding">Padding +<span>Mais espaço interno</span></button><button type="button" data-action="quick-color">Azul Integra<span>Preview de destaque</span></button><button type="button" data-action="quick-reset">Repor preview<span>Restaurar elemento</span></button></div></div>
       <div id="advanced-tools" hidden><span class="eyebrow">Estrutura e classes</span><label for="classes">Classes do elemento</label><input id="classes" data-field="classes" type="text" spellcheck="false" autocomplete="off" placeholder="className / Tailwind utilities"><span class="eyebrow">Estilo visual</span><div class="grid"><div><label for="text-color">Cor do texto</label><input id="text-color" data-field="color" type="color" value="#ffffff"></div><div><label for="surface-color">Cor de fundo</label><input id="surface-color" data-field="background-color" type="color" value="#111111"></div><div><label for="radius">Border radius (px)</label><input id="radius" data-field="border-radius" type="number" min="0" max="64" step="1"></div><div><label for="padding">Padding (px)</label><input id="padding" data-field="padding" type="number" min="0" max="128" step="1"></div></div></div>
-      <div class="contrast" id="contrast" aria-live="polite">Seleciona um elemento para avaliar o contraste.</div><div class="actions"><button type="button" data-action="unlock">Selecionar</button><button type="button" data-action="reset">Reverter</button><button type="button" class="primary" data-action="apply">Exportar diff</button></div><div id="status" role="status" aria-live="polite"></div><p class="muted">Azul Integra · Preview temporário · Alt + Shift + I alterna · Esc restaura e fecha</p></div>
+      <div class="contrast" id="contrast" aria-live="polite">Seleciona um elemento para avaliar o contraste.</div><div class="actions"><button type="button" data-action="undo" disabled aria-label="Desfazer última alteração">↶ Undo</button><button type="button" data-action="redo" disabled aria-label="Refazer alteração">↷ Redo</button><button type="button" data-action="unlock">Selecionar</button><button type="button" data-action="reset">Repor</button><button type="button" class="primary" data-action="apply">Exportar diff</button></div><div id="status" role="status" aria-live="polite"></div><p class="muted">Azul Integra · Preview temporário · Alt + Shift + I alterna · Esc restaura e fecha</p></div>
     </section>  `;
 
   const highlight = shadow.querySelector<HTMLElement>('#highlight');
@@ -131,8 +132,20 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
     throw new Error('Integra Live Inspector could not initialize its shadow UI.');
   }
   title.textContent = options.title ?? options.panelTitle ?? 'Integra Live Inspector';
+  const undoButton = shadow.querySelector<HTMLButtonElement>('[data-action="undo"]');
+  const redoButton = shadow.querySelector<HTMLButtonElement>('[data-action="redo"]');
 
   const originals = new Map<Element, OriginalElementState>();
+  const history = createLivePreviewHistory<Element>(100);
+  const captureAttributes = (element: Element) => ({ classAttribute: element.getAttribute('class'), styleAttribute: element.getAttribute('style') });
+  const refreshHistoryControls = (): void => {
+    if (undoButton) undoButton.disabled = !history.canUndo();
+    if (redoButton) redoButton.disabled = !history.canRedo();
+  };
+  const recordHistory = (element: Element, before: ReturnType<typeof captureAttributes>, label: string): void => {
+    history.record(element, before, captureAttributes(element), label);
+    refreshHistoryControls();
+  };
   let selected: HTMLElement | SVGElement | null = null;
   let highlighted: Element | null = null;
   let selectionLocked = false;
@@ -271,7 +284,9 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
 
   const applyProperty = (property: LiveEditableProperty, value: string): void => {
     if (!selected) return;
+    const before = captureAttributes(selected);
     selected.style.setProperty(property, value, 'important');
+    recordHistory(selected, before, property);
     updateContrast(selected);
     positionHighlight(selected);
     notifyChanges();
@@ -334,8 +349,10 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
     if (!(target instanceof view.HTMLInputElement)) return;
     const property = target.dataset.field;
     if (property === 'classes' && selected) {
+      const before = captureAttributes(selected);
       if (target.value.trim()) selected.setAttribute('class', target.value);
       else selected.removeAttribute('class');
+      recordHistory(selected, before, 'classes');
       positionHighlight(selected);
       notifyChanges();
       return;
@@ -353,6 +370,15 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
     const target = event.composedPath()[0] ?? event.target;
     if (target instanceof view.HTMLElement
       && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))) return;
+    if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'z') {
+      const canHandle = event.shiftKey ? history.canRedo() : history.canUndo();
+      if (canHandle) {
+        event.preventDefault();
+        if (event.shiftKey) redoPreview();
+        else undoPreview();
+      }
+      return;
+    }
     if (event.key === 'Escape') {
       event.preventDefault();
       stop({ restore: true });
@@ -404,9 +430,18 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
       return;
     }
     if (action === 'quick-reset') {
-      if (selected) { const original = originals.get(selected); if (original) restoreElement(selected, original); selectElement(selected); status.textContent = 'Preview restaurado.'; }
+      if (selected) {
+        const original = originals.get(selected);
+        const before = captureAttributes(selected);
+        if (original) restoreElement(selected, original);
+        recordHistory(selected, before, 'reset');
+        selectElement(selected);
+        status.textContent = 'Preview restaurado. Podes desfazer esta ação.';
+      }
       return;
     }
+    if (action === 'undo') { undoPreview(); return; }
+    if (action === 'redo') { redoPreview(); return; }
     if (action === 'unlock') {
       selected = null;
       highlighted = null;
@@ -421,7 +456,9 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
     }
     if (action === 'reset' && selected) {
       const original = originals.get(selected);
+      const before = captureAttributes(selected);
       if (original) restoreElement(selected, original);
+      recordHistory(selected, before, 'reset');
       selectElement(selected);
       status.textContent = 'Pré-visualização deste elemento revertida.';
       notifyChanges();
@@ -446,6 +483,24 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
       }
     }
   };
+
+  function undoPreview(): void {
+    const operation = history.undo();
+    if (!operation) return;
+    restoreElementAttributes(operation.target, operation.snapshot);
+    selectElement(operation.target as HTMLElement | SVGElement);
+    status!.textContent = `Desfeito: ${operation.label}.`;
+    refreshHistoryControls();
+  }
+
+  function redoPreview(): void {
+    const operation = history.redo();
+    if (!operation) return;
+    restoreElementAttributes(operation.target, operation.snapshot);
+    selectElement(operation.target as HTMLElement | SVGElement);
+    status!.textContent = `Refeito: ${operation.label}.`
+    refreshHistoryControls();
+  }
 
   function stop(stopOptions: { restore?: boolean } = {}): void {
     if (stopped) return;
@@ -503,6 +558,7 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
   view.visualViewport?.addEventListener('scroll', scheduleGeometryUpdate);
   doc.body.append(host);
   panel.hidden = !enabled;
+  refreshHistoryControls();
 
   const notifyChanges = (): void => options.onChange?.(buildChangeSets());
 
