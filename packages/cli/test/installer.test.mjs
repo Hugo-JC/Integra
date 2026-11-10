@@ -11,7 +11,7 @@ async function fixture(t) {
   const resources = join(root, 'resources');
   const project = join(root, 'project');
   await mkdir(project);
-  for (const directory of ['.agents/skills/integra', '.agents/skills/integra-design-direction', 'docs', 'presets', 'data', 'references', 'rules', 'commands', 'schemas']) {
+  for (const directory of ['.agents/skills/integra', '.agents/skills/integra-design-direction', 'docs', 'presets', 'data', 'references', 'rules', 'commands', 'schemas', 'licenses']) {
     await mkdir(join(root, directory), { recursive: true });
   }
   await writeFile(join(root, '.agents/skills/integra/SKILL.md'), '---\nname: integra\ndescription: Main workflow.\n---\nSee [context](../../../docs/context.md).\n');
