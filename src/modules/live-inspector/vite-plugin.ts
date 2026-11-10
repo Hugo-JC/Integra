@@ -21,8 +21,16 @@ export function integraLiveInspectorPlugin(options: IntegraLiveInspectorPluginOp
       handler(html) {
         if (!enabled || html.includes('data-integra-live-bootstrap')) return html;
         const bootstrap = `<script type="module" data-integra-live-bootstrap>
-import { createIntegraInspector } from ${JSON.stringify(entry)};
-if (!window.__INTEGRA_LIVE_INSPECTOR__) window.__INTEGRA_LIVE_INSPECTOR__ = createIntegraInspector({ enabled: false });
+const shortcut = (event) => {
+  if (!event.altKey || !event.shiftKey || event.key.toLowerCase() !== 'i') return;
+  window.removeEventListener('keydown', shortcut, true);
+  import(${JSON.stringify(entry)}).then(({ createIntegraInspector }) => {
+    if (!window.__INTEGRA_LIVE_INSPECTOR__) {
+      window.__INTEGRA_LIVE_INSPECTOR__ = createIntegraInspector();
+    }
+  }).catch((error) => console.error('[Integra Live] Failed to load inspector:', error));
+};
+window.addEventListener('keydown', shortcut, true);
 </script>`;
         return html.includes('</body>') ? html.replace('</body>', bootstrap + '\n</body>') : html + '\n' + bootstrap;
       }
