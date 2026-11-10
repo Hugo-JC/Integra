@@ -10,14 +10,14 @@ describe('Integra Vite Live Inspector plugin', () => {
     expect(html).toContain('createIntegraInspector');
     expect(html).toContain('window.addEventListener(\'keydown\', shortcut, true)');
     expect(html).toContain('import(');
-    expect(html).toContain('event.altKey && !');
+    expect(html).toContain('!event.altKey || !');
     expect(plugin.transformIndexHtml.handler(html)).toBe(html);
   });
   it('does not eagerly load the inspector module before the shortcut', () => {
     const plugin=integraLiveInspectorPlugin();
     const html=plugin.transformIndexHtml.handler('<body></body>');
     expect(html).toContain('window.removeEventListener');
-    expect(html).toContain('import(\'/src/modules/live-inspector/index.ts\')');
+    expect(html).toContain('import("/src/modules/live-inspector/index.ts")');
     expect(html).not.toContain('import { createIntegraInspector }');
   });
   it('can be disabled', () => {
