@@ -52,6 +52,12 @@ The Colorize workflow is a standalone specialist skill. It is routed by `/integr
 
 In the Copilot app, skills configured for repositories or Copilot CLI are managed under **Customize > Skills**. Copilot personal skills for cloud sessions require separate dotfiles or account setup; project paths do not automatically configure personal or cloud environments.
 
+## Distribution with `integra-cli`
+
+The npm package installs the bundled canonical skill directories and the linked shared context files into a caller-selected relative target. The default is `.agents/skills/`; a host-specific target such as `.claude/skills/` can be selected explicitly. The installer does not configure user profiles, host permissions or trust, and does not activate or verify a skill in any host. Skills that refer to repository-only commands or runtime modules still need a full Integra checkout for those capabilities.
+
+The package and its isolated tarball smoke test verify that bundled files can be installed and their recorded integrity checked; they do not prove host discovery or workflow behavior. Confirm each host using its current documented command or UI after installation. No host activation matrix has been run as part of package validation.
+
 ## Validate before use
 
 Run the repository validator:

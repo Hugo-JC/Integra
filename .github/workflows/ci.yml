@@ -28,3 +28,25 @@ jobs:
 
       - name: Run complete project checks
         run: npm run check
+
+  distribution:
+    name: CLI distribution (Node ${{ matrix.node-version }}, ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node-version: [20, 24]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Verify CLI tests, package contents and isolated tarball install
+        run: |
+          npm run distribution:check
+          npm run distribution:smoke

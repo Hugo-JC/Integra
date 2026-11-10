@@ -51,7 +51,7 @@ describe("Direction CLI executable workflow", () => {
     } finally {
       rmSync(workspace, { recursive: true, force: true });
     }
-  }, 20_000);
+  }, 60_000);
 
   it("does not export an artifact when a hard constraint leaves a generation diagnostic", () => {
     const workspace = mkdtempSync(
@@ -89,5 +89,5 @@ describe("Direction CLI executable workflow", () => {
     } finally {
       rmSync(workspace, { recursive: true, force: true });
     }
-  }, 20_000);
+  }, 60_000);
 });

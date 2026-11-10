@@ -10,6 +10,8 @@ The bundler rejects symlinks, validates skill frontmatter and confirms every loc
 
 The package `prepack` lifecycle builds resources before npm creates the tarball. Generated `packages/cli/resources/` output is not committed.
 
+For local package validation, `npm run distribution:check` runs the CLI tests and inspects the npm package contents. `npm run distribution:smoke` packs the CLI, installs that tarball offline into a temporary prefix, then runs `init` and `doctor` in a separate temporary project. Both temporary directories are removed when the smoke test finishes.
+
 ## CLI contract
 
 | Command | Behavior |
@@ -33,4 +35,4 @@ The default target is `.agents/skills/`; `--target` selects another relative ski
 - Repository npm scripts and source runtime modules are not included.
 - The CLI does not claim that a host has loaded or activated a skill.
 - Host-specific directories are caller-selected through `--target`; discovery is not guaranteed for every host/version.
-- This is an initial npm package candidate. No package has been published and npm name availability is not claimed.
+- This is an initial npm package candidate. No package has been published; registry name availability must be checked as part of release preparation.

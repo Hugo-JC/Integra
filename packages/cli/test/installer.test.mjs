@@ -68,7 +68,7 @@ test('symlink targets are rejected', async (t) => {
   const f = await fixture(t);
   const outside = join(f.root, 'outside');
   await mkdir(outside);
-  await symlink(outside, join(f.project, '.agents'));
+  await symlink(outside, join(f.project, '.agents'), process.platform === 'win32' ? 'junction' : 'dir');
   assert.equal(await f.cli('add', 'integra'), 1);
   assert.match(f.errors.join('\n'), /Symlink|Unsafe directory/);
 });
