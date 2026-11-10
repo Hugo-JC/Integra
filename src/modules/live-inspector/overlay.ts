@@ -371,9 +371,12 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
     if (target instanceof view.HTMLElement
       && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))) return;
     if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'z') {
-      event.preventDefault();
-      if (event.shiftKey) redoPreview();
-      else undoPreview();
+      const canHandle = event.shiftKey ? history.canRedo() : history.canUndo();
+      if (canHandle) {
+        event.preventDefault();
+        if (event.shiftKey) redoPreview();
+        else undoPreview();
+      }
       return;
     }
     if (event.key === 'Escape') {
@@ -488,7 +491,6 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
     selectElement(operation.target as HTMLElement | SVGElement);
     status.textContent = `Desfeito: ${operation.label}.`;
     refreshHistoryControls();
-    notifyChanges();
   }
 
   function redoPreview(): void {
@@ -498,7 +500,6 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
     selectElement(operation.target as HTMLElement | SVGElement);
     status.textContent = `Refeito: ${operation.label}.`;
     refreshHistoryControls();
-    notifyChanges();
   }
 
   function stop(stopOptions: { restore?: boolean } = {}): void {
