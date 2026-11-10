@@ -40,7 +40,7 @@ Label each input Fact, Constraint, Preference, Assumption or Unknown. Ask only w
 5. **Keep catalog layers separate.** Use niche discovery as advisory evidence. Select structured domain profiles by primary user task, not style adjective. Experience archetypes are composition references, not universal templates. A preset never overrides explicit product constraints or the Direction Artifact.
 6. **Define hierarchy and composition.** Decide primary content, primary action, supporting regions, density, alignment, grid behavior, image role, navigation, and responsive transformation. Select a composition option only when its content requirements can be met.
 7. **Define visual language.** Specify semantic colors, type roles, spacing, radius, elevation, borders, icon style, imagery and motion. Reuse existing tokens and preserve confirmed brand commitments.
-8. **Define states.** Include hover, focus-visible, active, selected, disabled, loading, empty, error, success and reduced-motion behavior when relevant.
+8. **Define states and motion intent.** Include hover, focus-visible, active, selected, disabled, loading, empty, error and success. State where motion communicates feedback or continuity, where static feedback is preferable, and how reduced-motion is preserved. Hand detailed timing, choreography and implementation to `integra-animate` when motion is a material part of the task.
 9. **Define responsive behavior.** Explain what changes at narrow, medium and wide widths: ordering, visibility, navigation, density, controls and overflow. Do not merely scale desktop down.
 10. **Evaluate alternatives.** For consequential choices, compare at most two viable alternatives and name the trade-off. Avoid fake variety.
 11. **Record evidence and provenance.** A URL or catalog title is not inspection. Record exact source/section, access date, evidence type, confidence, limitations and how the principle is adapted.
@@ -66,7 +66,7 @@ Deliver:
 5. selected domain profile/archetype and why it fits;
 6. hierarchy and composition;
 7. semantic token plan and type roles;
-8. responsive transformations and interaction states;
+8. responsive transformations, interaction states and motion intent;
 9. accessibility constraints and evidence needs;
 10. implementation acceptance checks and approval boundary.
 

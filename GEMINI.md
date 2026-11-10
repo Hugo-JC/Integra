@@ -24,6 +24,7 @@ Integra is a product-contextual design direction and quality toolkit. Read `AGEN
 - External references: `integra-investigation` and `integra-reference-investigator`.
 - Tokens/components: `integra-design-system`.
 - Strategic color refinement: `integra-colorize`.
+- Motion design and interaction feedback: `integra-animate`.
 - Local DOM preview: `integra-live-inspector`.
 
 ## Project constraints

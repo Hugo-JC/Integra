@@ -663,21 +663,25 @@
       "id": "animate",
       "kind": "modifier",
       "invocation": "/integra:animate",
-      "description": "Propose meaningful motion and state feedback while respecting reduced-motion preferences.",
+      "description": "Design purposeful motion for state feedback, continuity and authored moments; specify timing, interruption, reduced-motion alternatives and performance verification.",
       "skills": [
+        "integra-animate",
         "integra-ui-generator",
-        "integra-accessibility-audit"
+        "integra-accessibility-audit",
+        "integra-performance-audit"
       ],
       "outputs": [
         "motion-specification"
       ],
       "whenToUse": [
-        "Use when motion communicates state, continuity or interaction feedback.",
-        "Use when the user requests purposeful animation."
+        "Use when a transition, interaction or state change needs motion that clarifies cause, consequence, hierarchy or spatial continuity.",
+        "Use when the user explicitly requests animation, motion design, micro-interactions or a motion system.",
+        "Use to evaluate an existing animation for timing, accessibility, interruption behavior or rendering cost."
       ],
       "notFor": [
-        "Do not add decorative loops, scroll hijacking or motion that delays primary actions.",
-        "Do not ignore prefers-reduced-motion."
+        "Do not add motion merely to decorate empty space or imitate a reference.",
+        "Do not delay primary actions, hide essential content until animation completes, hijack scrolling or force nonessential loops.",
+        "Do not treat prefers-reduced-motion as an optional afterthought or claim performance without measurement."
       ],
       "triggers": [
         "animate",
@@ -687,8 +691,9 @@
         "feedback animado"
       ],
       "inputs": [
-        "Target interaction and state transitions",
-        "Motion preferences and reduced-motion fallback"
+        "Target surface, interaction/state transition and intended user outcome",
+        "Existing motion tokens, libraries, platform constraints and product direction",
+        "Reduced-motion preferences, target devices and performance budget"
       ],
       "requiresActiveContext": true
     },

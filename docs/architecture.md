@@ -71,3 +71,11 @@ O artefacto direciona um agente de implementação; não prova que o site criado
 `.agents/skills/` is the canonical Agent Skills directory. `.agents/skills/integra/` is the orchestration entry point; specialist directories provide focused workflows. `GEMINI.md` and `AGENTS.md` route host agents. The preset catalog migrates AI Design Engine v3 niche/style knowledge and exposes deterministic offline discovery. Presets and experience archetypes are contextual references, not universal templates.
 
 Live Inspector is an optional browser adapter. It uses Vite `apply: 'serve'`, Shadow DOM, temporary DOM previews and a serializable diff. It does not mutate source code, resolve source maps or become a production runtime dependency.
+
+## Camada de Agent Skills e motion
+
+`.agents/skills/` é a fonte canónica de instruções portáteis. A skill `integra` coordena o trabalho; as skills especialistas tratam uma capacidade por vez. O manifesto em `commands/manifest.json` liga intenções e modificadores às skills corretas, sem prometer que todos os hosts registam comandos nativos automaticamente.
+
+`integra-animate` é a especialista para motion design e engenharia de interação. Produz uma Motion Brief com tese, momento focal, continuidade, feedback, orçamento, timing, easing, comportamento interrompível, alternativa para `prefers-reduced-motion` e plano de verificação. A implementação reutiliza o stack existente; não adiciona uma biblioteca por defeito.
+
+Motion é uma camada de orientação, não um runtime adicional. O bundle do `integra-cli` inclui a skill e os avisos/licenças de terceiros, mas não inclui os binários, scripts ou dependências do Impeccable.

@@ -1,150 +1,120 @@
-# Integra — AI Design Engine v5
+# Integra
 
-**Motor modular de direção de design, inteligência visual e qualidade para agentes de IA.** O Integra transforma briefs e contexto em decisões verificáveis; ajuda os agentes a implementar e permite inspecionar e auditar resultados.
+**Integra é um toolkit de design engineering e Agent Skills para orientar agentes de IA na criação, evolução e avaliação de interfaces.** Combina contexto de produto, direção visual, sistemas de design, implementação, inspeção local e QA baseado em evidências.
 
-> Esta branch acrescenta uma biblioteca contextual de presets, routing determinístico, skills interoperáveis, QA estático e um Live Inspector de browser. Não afirma que a qualidade visual de um website melhorou sem uma experiência controlada.
+O objetivo não é impor um tema ou gerar interfaces genéricas. É ajudar o agente a compreender o produto, fazer escolhas justificadas, executar o trabalho certo e apresentar o que realmente verificou.
 
-## O que o Integra faz
+## Instalação rápida
 
-- **Direction:** converte intenção, contexto e restrições em direção visual rastreável.
-- **Design Intelligence:** 17 estilos, 61 presets de nicho e 14 fontes importadas do AI Design Engine.
-- **Refinement:** verifica problemas objetivos e classifica resultados inconclusivos sem inventar conformidade.
-- **Live Inspector:** seleciona elementos DOM, pré-visualiza alterações e exporta um diff para revisão no código-fonte.
-- **Design QA:** verifica padrões estáticos em JSX/TSX e conduz auditorias independentes.
-- **Investigation:** guia pesquisa baseada em hipóteses, evidências, confiança e limitações.
-- **Design Lab:** compara resultados baseline vs Integra-guided com variáveis controladas.
-
-## Começar
-
-Requisitos: Node.js 24 e npm 10 ou superior.
-
-~~~bash
-npm ci
-npm run check
-~~~
-
-## Direção e presets
-
-O router usa expressões completas, normaliza acentos e dá prioridade a termos fortes sobre termos genéricos. Empates e correspondências fracas exigem confirmação. O preset é uma sugestão contextual, nunca um tema obrigatório.
-
-~~~bash
-npm run design:route -- "SaaS developer AI platform"
-npm run design:route -- "clínica de estética premium" --json
-npm run design:route -- "marketplace de produtos artesanais" --tone calm --json
-~~~
-
-Os estilos e presets estão em `data/design-library/`. O manifesto preserva a origem e a política de utilização. Referências servem para estudar princípios; não copiar páginas, marcas ou layouts distintivos.
-
-## Design QA
-
-~~~bash
-npm run design:qa -- src/
-npm run design:qa -- src/ --json
-npm run design:qa -- src/ --strict
-~~~
-
-Regras atuais incluem imagens sem alt, elementos não nativos clicáveis sem semântica/teclado, remoção de outline sem substituto e cores hex hardcoded como sugestão. O scanner é estático: não prova contraste real, responsividade nem qualidade visual.
-
-## Live Inspector (local development only)
-
-O inspector é independente de framework e não acrescenta dependências de runtime. Ativa-o apenas num entrypoint de desenvolvimento (por exemplo, Vite):
-
-~~~ts
-if (import.meta.env.DEV && import.meta.env.VITE_INTEGRA_LIVE === 'true') {
-  void import('./modules/live-inspector/index.js').then(({ startIntegraInspector }) => {
-    startIntegraInspector();
-  });
-}
-~~~
-
-Definir `VITE_INTEGRA_LIVE=true` inicia a seleção. Hover e seleção usam o azul Integra `#3B82F6`; **↑ Pai** sobe na árvore DOM. Podes pré-visualizar classes, cores, tamanho de texto, padding e radius; consultar o contraste; repor o estado; e copiar o DOM diff.
-
-O inspector:
-- Está limitado a localhost por defeito.
-- Não escreve ficheiros, não chama agentes e não envia dados para uma API.
-- Não garante que uma alteração persista após um re-render React/Vue/Svelte.
-- Só oferece um selector DOM best-effort; um caminho de ficheiro só existe quando a aplicação fornece explicitamente `data-integra-file`.
-- Deve ser removido/destruído antes de uma release de produção. Não enfraquecer CSP para o ativar.
-
-Ver [docs/live-inspector.md](docs/live-inspector.md).
-
-## Skills e compatibilidade de agentes
-
-Skills canónicas vivem em `.agents/skills/*/SKILL.md` no formato Agent Skills. Codex, Gemini CLI, Cursor e superfícies compatíveis do GitHub Copilot descobrem esse diretório; Claude Code requer um link em `.claude/skills/`. `AGENTS.md`, `GEMINI.md` e `CLAUDE.md` continuam a fornecer contexto do projeto, mas não instalam Skills automaticamente. Consulte [compatibilidade, instalação e validação por host](docs/agent-compatibility.md).
-
-Skills canónicas:
-- `integra-ux-shape` — enquadramento de tarefas, fluxos, IA e estados.
-- `integra-design-direction` — direção visual, tokens e composição.
-- `integra-design-system` — tokens, componentes, variantes e migração.
-- `integra-ui-generator` — geração de UI React/TypeScript.
-- `integra-refactor-agent` — refactor seguro com preservação de comportamento.
-- `integra-design-qa` — revisão UX, visual e responsiva com findings.
-- `integra-accessibility-audit` — auditoria WCAG 2.2 com evidência.
-- `integra-performance-audit` — diagnóstico de performance com medições.
-- `integra-investigation` — investigação de referências e documentação.
-- `integra-reference-investigator` — extração de princípios de referências.
-- `integra-live-inspector` — inspeção DOM local e preview reversível.
-- `integra-colorize` — estratégia de cor, tokens semânticos e verificação de contraste.
-
-`integra-direction` permanece como alias legado até ser consolidada em `integra-design-direction`.
-
-## Princípios de qualidade
-
-1. Produto e conteúdo antes da decoração.
-2. Direção visual contextual; nunca uma paleta universal.
-3. Hierarquia tipográfica e espaçamento intencionais.
-4. Componentes semanticamente corretos e acessíveis.
-5. Estados completos e feedback de interação.
-6. Motion com propósito e respeito por reduced-motion.
-7. Performance medida; sem memoização indiscriminada.
-8. Factos, preferências, heurísticas e requisitos separados.
-9. WCAG AA/AAA calculado com cores efetivamente compostas quando possível.
-10. Evidência e confiança acompanham as conclusões.
-
-## Núcleo e limites
-
-O núcleo determinístico continua provider-agnostic e sem API keys. A geração de Direction Artifact continua implementada para DL-001; os restantes cenários precisam de geradores e testes próprios. O Live Inspector é um preview DOM, não um editor de source code. O scanner é heurístico e estático. O runner visual multi-viewport, auto-mutation de projetos e adaptadores externos de investigação permanecem marcos futuros.
-
-## Documentação
-
-- docs/ — arquitetura, decisões, contratos e roadmap.
-- schemas/ — contratos JSON versionados.
-- scenarios/ — os cinco cenários do V5 Design Lab.
-- fixtures/ — dados e exemplos de referência.
-- src/contracts/ — formatos partilhados.
-- src/modules/context/ — normalização e validação do contexto.
-- src/modules/direction/ — proveniência, resolver, geração e validação.
-- src/cli/ — fronteira de aplicação para comandos locais.
-- src/lab/ — helpers de avaliação.
-- scripts/ — CLI e validação de fixtures.
-- tests/ — testes unitários e de contrato.
-
-
-## Agent Skills, design knowledge and Live Inspector
-
-Integra distributes portable Agent Skills from `.agents/skills/`. Gemini CLI, Codex, Claude Code, Cursor and other compatible agents can read the relevant skill through their workspace conventions; `GEMINI.md` describes Gemini-specific routing.
-
-The `integra` skill is the orchestration entry point. Specialist skills include `integra-ux-shape`, `integra-design-direction`, `integra-ui-generator`, `integra-refactor-agent`, `integra-design-qa`, `integra-accessibility-audit`, `integra-performance-audit`, `integra-investigation`, `integra-reference-investigator`, `integra-design-system`, `integra-colorize` and `integra-live-inspector`. `integra-direction` remains a legacy alias.
-
-### Local design intelligence
-The predecessor AI Design Engine v3 niche/style catalogs are preserved in `presets/`. Discover offline candidates with:
+O pacote npm é `integra-cli`. Num projeto onde pretendes instalar as skills:
 
 ```bash
-npm run direction:presets -- "fintech para pagamentos em Angola"
+npx integra-cli init
+npx integra-cli add integra-animate
+npx integra-cli list
+npx integra-cli doctor
 ```
 
-Matches are advisory and subordinate to explicit brief facts, hard constraints and the existing product identity. The repository also includes contextual experience archetypes, evidence-led quality rules and agent prompt vocabulary.
+O destino predefinido é `.agents/skills/`. Para escolher outro diretório relativo:
 
-### Live Inspector (Vite development only)
-```ts
-import { defineConfig } from 'vite';
-import { integraLiveInspectorPlugin } from './src/modules/live-inspector/vite-plugin';
-export default defineConfig({ plugins: [integraLiveInspectorPlugin()] });
+```bash
+npx integra-cli init --target .claude/skills
 ```
 
-Use `Alt + Shift + I` to toggle. Hover and click to select an element, preview color/spacing/class changes, then export an exact diff and agent prompt. The blue outline (`#3B82F6`) is reserved for inspector chrome. Vite integration runs only with `apply: 'serve'`; the preview never writes source files.
+Consulta o [guia do CLI](packages/cli/README.md) para os comandos `add`, `update`, `remove` e para o contrato de instalação. O CLI instala skills e contexto partilhado; não instala o runtime do repositório nem ativa automaticamente uma skill em todos os hosts.
 
-Contrast output is a limited estimate for solid colors—not a complete WCAG audit. Gradients, images, transparency and compositing need rendered accessibility verification.
+## O que o Integra oferece
 
-### Reference policy
-Impeccable informs command-oriented critique/live workflows; REA informs evidence-oriented investigation and adapter boundaries (REA is not treated as a design system). W3C, WAI-ARIA APG, MDN, React, Vite, Tailwind, Radix, shadcn/ui, Material, Apple HIG, Carbon and Polaris are indexed in `docs/references/sources.json`. References are for study and adaptation, not copying.
+- **Direção contextual:** transforma objetivos, utilizadores, conteúdo e restrições numa tese visual implementável.
+- **Design intelligence:** roteamento de estilos e descoberta contextual de presets, sempre subordinados ao brief e à identidade do produto.
+- **Agent Skills portáteis:** instruções especialistas para UX, direção, sistemas, geração, refactor, motion, cor, investigação e QA.
+- **Quality engineering:** auditorias heurísticas, acessibilidade e performance com evidência, confiança e limitações explícitas.
+- **Live Inspector:** inspeção local de DOM e preview temporário/reversível para preparar um handoff ao código-fonte.
+- **CLI independente:** instalação, atualização, diagnóstico e remoção de skills sem executar scripts incluídos no bundle.
+
+## Catálogo de skills
+
+| Área | Skill | Responsabilidade |
+|---|---|---|
+| Orquestração | `integra` | Entender o pedido e selecionar o workflow mínimo adequado |
+| UX e estrutura | `integra-ux-shape` | Jobs, fluxos, navegação, IA e estados |
+| Direção visual | `integra-design-direction` | Tese visual, composição, identidade e decisões de design |
+| Sistema | `integra-design-system` | Tokens, componentes, variantes, temas e governação |
+| Cor | `integra-colorize` | Cor semântica, hierarquia, temas e contraste |
+| Motion | `integra-animate` | Transições, micro-interações, timing, reduced motion e performance |
+| Implementação | `integra-ui-generator` | Novos ecrãs, componentes e interações |
+| Manutenção | `integra-refactor-agent` | Refactor com preservação do comportamento |
+| Revisão | `integra-design-qa` | UX, qualidade visual, estados e responsividade |
+| Acessibilidade | `integra-accessibility-audit` | Auditoria WCAG com evidência por critério |
+| Performance | `integra-performance-audit` | Medição e diagnóstico de gargalos |
+| Investigação | `integra-investigation` | Pesquisa técnica e de produto baseada em fontes |
+| Referências | `integra-reference-investigator` | Observação e adaptação original de referências |
+| Inspeção | `integra-live-inspector` | Preview de DOM local e handoff para source |
+
+`integra-direction` é mantida como alias legado de `integra-design-direction` para compatibilidade. Os nomes canónicos seguem o padrão `integra-<capacidade>`; não renomeamos skills já distribuídas sem uma estratégia de migração.
+
+## Comandos e routing
+
+O catálogo `commands/manifest.json` descreve comandos, modificadores, gatilhos, skills, inputs, outputs e política de alteração de source. Entre os modificadores estão `/integra:colorize` e `/integra:animate`.
+
+O manifesto é agnóstico ao host. A sua presença não significa que Codex, Gemini CLI, Cursor, Claude Code ou Copilot tenham registado comandos nativos automaticamente. A descoberta e a invocação dependem do suporte e da configuração de cada host.
+
+## Princípios de funcionamento
+
+1. **Produto antes da decoração:** começa pelo trabalho do utilizador, conteúdo e contexto.
+2. **Direção original:** referências informam princípios; não são copiadas como páginas, assets ou identidade.
+3. **Menor workflow útil:** não chamar todas as skills quando uma especialista basta.
+4. **Decisões rastreáveis:** separar factos, restrições, preferências, pressupostos e desconhecidos.
+5. **Acessibilidade desde o início:** semântica, teclado, foco, contraste, estados e reduced motion.
+6. **Motion com propósito:** cada animação comunica estado, continuidade, feedback ou uma intenção visual clara.
+7. **Evidência antes de claims:** `not_run`, `inconclusive` e heurísticas nunca são convertidos em `passed`.
+8. **Alterações seguras:** preservar trabalho existente e exigir aprovação do diff exato antes de editar source.
+
+## Arquitetura
+
+O core determinístico é provider-agnostic. Os módulos de contexto, direção, presets, investigação, refinamento, QA e Live Inspector comunicam através de contratos explícitos. As Agent Skills são a camada de instruções para os agentes; o CLI empacota as skills canónicas e os recursos de contexto necessários para as instalar noutros projetos.
+
+Consulte:
+- [Arquitetura](docs/architecture.md)
+- [Compatibilidade e instalação por host](docs/agent-compatibility.md)
+- [Contrato de contexto de IA](docs/ai-context-contract.md)
+- [Contrato de integração dos agentes](docs/agent-integration-contract.md)
+- [Avisos e licenças de terceiros](docs/third-party-notices.md)
+
+## Desenvolvimento e validação
+
+Para desenvolver o repositório completo:
+
+- Node.js 24 e npm 10 ou superior.
+- Instala dependências e executa a suite de verificação:
+
+```bash
+npm ci
+npm run check
+npm run distribution:check
+npm run distribution:smoke
+```
+
+Para validar apenas as skills:
+
+```bash
+npm run validate:skills
+npm run validate:agent-assets
+```
+
+O validador verifica frontmatter, nomes, limites do formato e links locais. O bundler verifica recursos e integridade antes de criar o bundle do CLI. Estes checks não provam que um host específico carregou ou executou uma skill.
+
+## Limites importantes
+
+- O CLI não executa scripts do bundle e não instala o runtime de desenvolvimento do repositório.
+- Instalar uma skill não garante que um host a tenha descoberto, ativado ou seguido.
+- O Live Inspector é apenas para desenvolvimento local; não edita source nem deve ser usado em produção.
+- O Design QA contém heurísticas; não substitui revisão humana nem testes reais no browser.
+- Uma auditoria parcial não prova conformidade WCAG global.
+- Uma recomendação de performance sem medições não é um ganho comprovado.
+
+## Licenças e atribuição
+
+O Integra é distribuído sob MIT. A skill `integra-animate` e a adaptação existente de `integra-colorize` incorporam orientação adaptada do Impeccable, licenciado sob Apache-2.0. O bundle inclui o texto integral dessa licença e os avisos necessários em [docs/third-party-notices.md](docs/third-party-notices.md) e [licenses/](licenses/).
+
+O Integra não incorpora o CLI, os binários, a extensão de browser, os scripts ou as dependências runtime do Impeccable.
