@@ -489,7 +489,7 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
     if (!operation) return;
     restoreElementAttributes(operation.target, operation.snapshot);
     selectElement(operation.target as HTMLElement | SVGElement);
-    status.textContent = `Desfeito: ${operation.label}.`;
+    status!.textContent = `Desfeito: ${operation.label}.`;
     refreshHistoryControls();
   }
 
@@ -498,7 +498,7 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
     if (!operation) return;
     restoreElementAttributes(operation.target, operation.snapshot);
     selectElement(operation.target as HTMLElement | SVGElement);
-    status.textContent = `Refeito: ${operation.label}.`;
+    status!.textContent = `Refeito: ${operation.label}.`
     refreshHistoryControls();
   }
 
