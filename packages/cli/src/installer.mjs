@@ -137,7 +137,7 @@ function emptyState(bundle, targetDir) {
   };
 }
 
-const SHARED_ROOTS = ['docs', 'presets', 'data', 'references', 'rules', 'commands', 'schemas'];
+const SHARED_ROOTS = ['docs', 'presets', 'data', 'references', 'rules', 'commands', 'schemas', 'licenses'];
 
 function isSharedPath(path) {
   return SHARED_ROOTS.some((root) => path.startsWith(root + '/'));
