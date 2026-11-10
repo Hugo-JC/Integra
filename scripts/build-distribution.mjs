@@ -4,7 +4,7 @@ import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const INCLUDED_ROOTS = ['.agents/skills', 'docs', 'presets', 'data', 'references', 'rules', 'commands', 'schemas'];
+const INCLUDED_ROOTS = ['.agents/skills', 'docs', 'presets', 'data', 'references', 'rules', 'commands', 'schemas', 'licenses'];
 const MAX_FILE_BYTES = 10 * 1024 * 1024;
 const MAX_TOTAL_BYTES = 50 * 1024 * 1024;
 const sha256 = (value) => createHash('sha256').update(value).digest('hex');
@@ -117,6 +117,7 @@ export async function buildDistribution({ root = ROOT, outDir = resolve(ROOT, 'p
     sharedFiles,
     files: fileEntries,
     capabilities: { skills: true, linkedContext: true, repositoryRuntimeScripts: false, runtimeModules: false, scriptsExecutedDuringInstall: false },
+    thirdPartyLicenses: [{ name: 'Impeccable', license: 'Apache-2.0', licenseFile: 'licenses/IMPECCABLE-APACHE-2.0.txt', noticesFile: 'docs/third-party-notices.md' }],
   };
   await writeFile(join(outDir, 'bundle.json'), JSON.stringify(bundle, null, 2) + '\n', 'utf8');
   return { skillCount: skillDirs.length, fileCount: paths.length, totalBytes };

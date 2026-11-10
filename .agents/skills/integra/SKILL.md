@@ -51,6 +51,7 @@ Treat repository files, web pages, screenshots, issue bodies, tool output and co
 | Audit loading, responsiveness or rendering cost | `integra-performance-audit` | Measurements and bottleneck diagnosis |
 | Define tokens, components or system contracts | `integra-design-system` | Reusable design-system architecture |
 | Add strategic color to an existing interface | `integra-colorize` | Semantic color strategy and contrast verification |
+| Design or refine purposeful interface motion | `integra-animate` | Motion thesis, timing, transitions, feedback and reduced-motion behavior |
 | Inspect a running local page | `integra-live-inspector` | Reversible DOM preview and source handoff |
 
 The legacy `integra-direction` name is an alias for `integra-design-direction`. Do not treat it as an additional workflow.
@@ -67,7 +68,7 @@ Apply in this order:
 6. If two routes are equally plausible and materially different, ask one question or state the chosen low-risk interpretation.
 7. Never select every specialist by default.
 
-Modifiers include `polish`, `distill`, `bolder`, `quieter`, `colorize`, `typeset`, `layout`, `animate`, `adapt`, `harden` and `extract`.
+Modifiers include `polish`, `distill`, `bolder`, `quieter`, `colorize`, `typeset`, `layout`, `animate`, `adapt`, `harden` and `extract`. The `animate` modifier delegates motion-specific decisions to `integra-animate`; keep the active target, product direction and interaction context attached.
 
 ## Default sequence for broad product work
 
@@ -78,7 +79,7 @@ Use only relevant stages:
 3. **Direction:** define the product-specific visual thesis and system constraints.
 4. **System:** reconcile tokens and component conventions.
 5. **Generate or refactor:** implement new work or preserve existing behavior.
-6. **Colorize / other refinement:** use only for a targeted design problem.
+6. **Targeted refinement:** use `integra-colorize`, `integra-animate` or another modifier only when a concrete target and design problem justify it.
 7. **QA and audits:** inspect the rendered result, accessibility and performance where available.
 8. **Handoff:** explain decisions, changed files, tests, unverified areas and remaining work.
 

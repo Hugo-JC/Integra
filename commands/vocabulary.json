@@ -48,7 +48,7 @@
     },
     {
       "name": "animate",
-      "intent": "Add meaningful state feedback and respect reduced motion."
+      "intent": "Design purposeful motion for feedback, state and spatial continuity; specify timing, easing, interruption, reduced-motion alternatives and performance verification."
     },
     {
       "name": "adapt",
