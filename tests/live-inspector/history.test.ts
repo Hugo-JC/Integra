@@ -56,3 +56,32 @@ describe('Live preview history', () => {
     expect(() => createLivePreviewHistory(0)).toThrow(RangeError);
   });
 });
+
+  it('keeps operations for different targets in one global undo order', () => {
+    const history = createLivePreviewHistory<object>();
+    const first = {};
+    const second = {};
+    const empty = { classAttribute: null, styleAttribute: null };
+    const firstEdit = { classAttribute: 'first', styleAttribute: null };
+    const secondEdit = { classAttribute: 'second', styleAttribute: null };
+
+    history.record(first, empty, firstEdit, 'classes');
+    history.record(second, empty, secondEdit, 'classes');
+
+    expect(history.undo()).toEqual({ target: second, snapshot: empty, label: 'classes' });
+    expect(history.undo()).toEqual({ target: first, snapshot: empty, label: 'classes' });
+    expect(history.redo()).toEqual({ target: first, snapshot: firstEdit, label: 'classes' });
+    expect(history.redo()).toEqual({ target: second, snapshot: secondEdit, label: 'classes' });
+  });
+
+  it('clears both stacks explicitly', () => {
+    const history = createLivePreviewHistory<object>();
+    const target = {};
+    const before = { classAttribute: null, styleAttribute: null };
+    const after = { classAttribute: 'changed', styleAttribute: null };
+    history.record(target, before, after, 'classes');
+    history.undo();
+    history.clear();
+    expect(history.canUndo()).toBe(false);
+    expect(history.canRedo()).toBe(false);
+  });
