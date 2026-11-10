@@ -55,7 +55,6 @@ describe('Live preview history', () => {
     expect(history.undo()).toBeNull();
     expect(() => createLivePreviewHistory(0)).toThrow(RangeError);
   });
-});
 
   it('keeps operations for different targets in one global undo order', () => {
     const history = createLivePreviewHistory<object>();
@@ -85,3 +84,4 @@ describe('Live preview history', () => {
     expect(history.canUndo()).toBe(false);
     expect(history.canRedo()).toBe(false);
   });
+});
