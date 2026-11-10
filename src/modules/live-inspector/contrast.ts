@@ -6,18 +6,19 @@ function channel(value: number): number { return Math.min(255, Math.max(0, value
 
 export function parseColor(input: string): RGBColor | null {
   const value = input.trim().toLowerCase();
-  const hex = value.match(/^#([\da-f]{3,4}|[\da-f]{6}|[\da-f]{8})$/i);
+  const hex = value.match(/^#([\da-f]{3}|[\da-f]{6})$/i);
   if (hex) {
     let digits = hex[1];
-    if (digits.length === 3 || digits.length === 4) digits = [...digits.slice(0, 3)].map((x) => x + x).join('');
-    else if (digits.length === 8) digits = digits.slice(0, 6);
+    if (digits.length === 3) digits = [...digits].map((x) => x + x).join('');
     return { r: parseInt(digits.slice(0,2),16), g: parseInt(digits.slice(2,4),16), b: parseInt(digits.slice(4,6),16) };
   }
-  const rgb = value.match(/^rgba?\((.*)\)$/);
+  const rgb = value.match(/^rgb\((.*)\)$/);
   if (!rgb) return null;
-  const values = rgb[1].replace(/\s*\/\s*[^,\s]+\s*$/, '').split(/[\s,]+/).filter(Boolean).slice(0,3);
+  if (rgb[1].includes('/')) return null;
+  const values = rgb[1].split(/[\s,]+/).filter(Boolean);
   if (values.length !== 3) return null;
   const parsed = values.map((v) => {
+    if (!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)%?$/.test(v)) return NaN;
     const n = Number.parseFloat(v);
     return Number.isFinite(n) ? channel(v.endsWith('%') ? n * 2.55 : n) : NaN;
   });

@@ -16,5 +16,8 @@ describe('Live Inspector contrast utilities', () => {
     expect(contrastRatio('var(--ink)','#fff')).toBeNull();
     expect(contrastRatio('rgba(0, 0, 0, 0.5)','#fff')).toBeNull();
     expect(contrastRatio('#00000080','#fff')).toBeNull();
+    expect(parseColor('#0008')).toBeNull();
+    expect(parseColor('rgb(0 0 0 / 50%)')).toBeNull();
+    expect(parseColor('rgb(0 0 0)')).toEqual({r:0,g:0,b:0});
   });
 });
