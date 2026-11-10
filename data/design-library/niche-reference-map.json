@@ -1,0 +1,991 @@
+{
+  "schemaVersion": "1.0.0",
+  "sourceCatalog": "data/design-library/visual-sources.json",
+  "policy": "Niche mappings are research shortlists. They do not prove that a source was inspected or that its design suits the current task.",
+  "niches": [
+    {
+      "nicheId": "coffee-artisan-food",
+      "sourceIds": [
+        "blue-bottle",
+        "siteinspire",
+        "one-page-love",
+        "pexels"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "coffee artisan food website examples",
+        "coffee artisan food product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "wellness-health-beauty",
+      "sourceIds": [
+        "aesop",
+        "siteinspire",
+        "mobbin",
+        "unsplash"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "wellness health beauty website examples",
+        "wellness health beauty product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "fashion-commerce",
+      "sourceIds": [
+        "siteinspire",
+        "behance",
+        "pinterest",
+        "unsplash"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "fashion commerce website examples",
+        "fashion commerce product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "saas-developer-ai",
+      "sourceIds": [
+        "linear",
+        "vercel",
+        "github-primer",
+        "shadcn-ui"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "saas developer ai website examples",
+        "saas developer ai product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "fintech-enterprise",
+      "sourceIds": [
+        "stripe",
+        "fluent-2",
+        "carbon",
+        "mobbin"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "fintech enterprise website examples",
+        "fintech enterprise product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "real-estate-marketplace",
+      "sourceIds": [
+        "airbnb",
+        "zillow",
+        "mobbin",
+        "polaris"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "real estate marketplace website examples",
+        "real estate marketplace product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "portfolio-editorial-education",
+      "sourceIds": [
+        "khan-academy",
+        "duolingo",
+        "mobbin",
+        "govuk"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "portfolio editorial education website examples",
+        "portfolio editorial education product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "community-gaming",
+      "sourceIds": [
+        "discord",
+        "twitch",
+        "itch-io",
+        "recent",
+        "behance"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "community gaming website examples",
+        "community gaming product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "tattoo-barber-nightlife",
+      "sourceIds": [
+        "siteinspire",
+        "land-book",
+        "mobbin",
+        "component-gallery"
+      ],
+      "mappingStatus": "general-shortlist",
+      "rationale": "Generic discovery shortlist because no sufficiently specific niche mapping was curated. Narrow it by the actual page type, platform and user task before use.",
+      "searchQueries": [
+        "tattoo barber nightlife website examples",
+        "tattoo barber nightlife product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "crypto-web3-youth",
+      "sourceIds": [
+        "siteinspire",
+        "land-book",
+        "mobbin",
+        "component-gallery"
+      ],
+      "mappingStatus": "general-shortlist",
+      "rationale": "Generic discovery shortlist because no sufficiently specific niche mapping was curated. Narrow it by the actual page type, platform and user task before use.",
+      "searchQueries": [
+        "crypto web3 youth website examples",
+        "crypto web3 youth product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "restaurant-hospitality",
+      "sourceIds": [
+        "siteinspire",
+        "land-book",
+        "mobbin",
+        "component-gallery"
+      ],
+      "mappingStatus": "general-shortlist",
+      "rationale": "Generic discovery shortlist because no sufficiently specific niche mapping was curated. Narrow it by the actual page type, platform and user task before use.",
+      "searchQueries": [
+        "restaurant hospitality website examples",
+        "restaurant hospitality product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "beverage-packaging-loud",
+      "sourceIds": [
+        "blue-bottle",
+        "siteinspire",
+        "one-page-love",
+        "pexels"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "beverage packaging loud website examples",
+        "beverage packaging loud product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "hardware-engineering-architecture",
+      "sourceIds": [
+        "carbon",
+        "fluent-2",
+        "land-book",
+        "a1-gallery"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "hardware engineering architecture website examples",
+        "hardware engineering architecture product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "clinic-healthcare",
+      "sourceIds": [
+        "aesop",
+        "siteinspire",
+        "mobbin",
+        "unsplash"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "clinic healthcare website examples",
+        "clinic healthcare product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "beauty-cosmetics-skincare",
+      "sourceIds": [
+        "aesop",
+        "siteinspire",
+        "mobbin",
+        "unsplash"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "beauty cosmetics skincare website examples",
+        "beauty cosmetics skincare product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "jewelry-watches-luxury",
+      "sourceIds": [
+        "siteinspire",
+        "behance",
+        "pinterest",
+        "unsplash"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "jewelry watches luxury website examples",
+        "jewelry watches luxury product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "consumer-electronics-gadgets",
+      "sourceIds": [
+        "carbon",
+        "fluent-2",
+        "land-book",
+        "a1-gallery"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "consumer electronics gadgets website examples",
+        "consumer electronics gadgets product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "home-decor-furniture",
+      "sourceIds": [
+        "siteinspire",
+        "behance",
+        "pinterest",
+        "unsplash"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "home decor furniture website examples",
+        "home decor furniture product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "grocery-farm-fresh-produce",
+      "sourceIds": [
+        "blue-bottle",
+        "siteinspire",
+        "one-page-love",
+        "pexels"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "grocery farm fresh produce website examples",
+        "grocery farm fresh produce product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "books-publishing-bookstore",
+      "sourceIds": [
+        "siteinspire",
+        "land-book",
+        "mobbin",
+        "component-gallery"
+      ],
+      "mappingStatus": "general-shortlist",
+      "rationale": "Generic discovery shortlist because no sufficiently specific niche mapping was curated. Narrow it by the actual page type, platform and user task before use.",
+      "searchQueries": [
+        "books publishing bookstore website examples",
+        "books publishing bookstore product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "toys-kids-products",
+      "sourceIds": [
+        "siteinspire",
+        "behance",
+        "pinterest",
+        "unsplash"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "toys kids products website examples",
+        "toys kids products product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "pet-care-veterinary",
+      "sourceIds": [
+        "aesop",
+        "siteinspire",
+        "mobbin",
+        "unsplash"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "pet care veterinary website examples",
+        "pet care veterinary product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "florist-gifts-flowers",
+      "sourceIds": [
+        "blue-bottle",
+        "siteinspire",
+        "one-page-love",
+        "pexels"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "florist gifts flowers website examples",
+        "florist gifts flowers product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "wine-spirits-cellar",
+      "sourceIds": [
+        "blue-bottle",
+        "siteinspire",
+        "one-page-love",
+        "pexels"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "wine spirits cellar website examples",
+        "wine spirits cellar product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "bakery-patisserie-sweets",
+      "sourceIds": [
+        "blue-bottle",
+        "siteinspire",
+        "one-page-love",
+        "pexels"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "bakery patisserie sweets website examples",
+        "bakery patisserie sweets product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "handmade-crafts-candles",
+      "sourceIds": [
+        "siteinspire",
+        "behance",
+        "pinterest",
+        "unsplash"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "handmade crafts candles website examples",
+        "handmade crafts candles product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "sports-outdoor-gear",
+      "sourceIds": [
+        "nike",
+        "strava",
+        "mobbin",
+        "unsplash"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "sports outdoor gear website examples",
+        "sports outdoor gear product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "fitness-gym-training",
+      "sourceIds": [
+        "nike",
+        "strava",
+        "mobbin",
+        "unsplash"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "fitness gym training website examples",
+        "fitness gym training product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "yoga-pilates-meditation-studio",
+      "sourceIds": [
+        "nike",
+        "strava",
+        "mobbin",
+        "unsplash"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "yoga pilates meditation studio website examples",
+        "yoga pilates meditation studio product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "spa-salon-aesthetics",
+      "sourceIds": [
+        "aesop",
+        "siteinspire",
+        "mobbin",
+        "unsplash"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "spa salon aesthetics website examples",
+        "spa salon aesthetics product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "mental-health-coaching-therapy",
+      "sourceIds": [
+        "aesop",
+        "siteinspire",
+        "mobbin",
+        "unsplash"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "mental health coaching therapy website examples",
+        "mental health coaching therapy product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "pharmacy-health-products",
+      "sourceIds": [
+        "aesop",
+        "siteinspire",
+        "mobbin",
+        "unsplash"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "pharmacy health products website examples",
+        "pharmacy health products product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "law-firm-legal",
+      "sourceIds": [
+        "stripe",
+        "fluent-2",
+        "carbon",
+        "mobbin"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "law firm legal website examples",
+        "law firm legal product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "accounting-consulting-business",
+      "sourceIds": [
+        "stripe",
+        "fluent-2",
+        "carbon",
+        "mobbin"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "accounting consulting business website examples",
+        "accounting consulting business product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "marketing-creative-agency",
+      "sourceIds": [
+        "siteinspire",
+        "behance",
+        "fonts-in-use",
+        "one-page-love"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "marketing creative agency website examples",
+        "marketing creative agency product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "photography-video-studio",
+      "sourceIds": [
+        "siteinspire",
+        "behance",
+        "fonts-in-use",
+        "one-page-love"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "photography video studio website examples",
+        "photography video studio product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "construction-trades-home-services",
+      "sourceIds": [
+        "carbon",
+        "fluent-2",
+        "land-book",
+        "a1-gallery"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "construction trades home services website examples",
+        "construction trades home services product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "logistics-transport-delivery",
+      "sourceIds": [
+        "airbnb",
+        "zillow",
+        "mobbin",
+        "polaris"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "logistics transport delivery website examples",
+        "logistics transport delivery product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "automotive-dealer-workshop",
+      "sourceIds": [
+        "airbnb",
+        "zillow",
+        "mobbin",
+        "polaris"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "automotive dealer workshop website examples",
+        "automotive dealer workshop product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "energy-solar-sustainability",
+      "sourceIds": [
+        "carbon",
+        "fluent-2",
+        "land-book",
+        "a1-gallery"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "energy solar sustainability website examples",
+        "energy solar sustainability product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "agriculture-agritech-farm",
+      "sourceIds": [
+        "carbon",
+        "fluent-2",
+        "land-book",
+        "a1-gallery"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "agriculture agritech farm website examples",
+        "agriculture agritech farm product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "school-university-institutional",
+      "sourceIds": [
+        "khan-academy",
+        "duolingo",
+        "mobbin",
+        "govuk"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "school university institutional website examples",
+        "school university institutional product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "online-courses-edtech",
+      "sourceIds": [
+        "khan-academy",
+        "duolingo",
+        "mobbin",
+        "govuk"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "online courses edtech website examples",
+        "online courses edtech product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "language-school-tutoring",
+      "sourceIds": [
+        "khan-academy",
+        "duolingo",
+        "mobbin",
+        "govuk"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "language school tutoring website examples",
+        "language school tutoring product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "kindergarten-childcare",
+      "sourceIds": [
+        "khan-academy",
+        "duolingo",
+        "mobbin",
+        "govuk"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "kindergarten childcare website examples",
+        "kindergarten childcare product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "nonprofit-ngo-charity",
+      "sourceIds": [
+        "discord",
+        "twitch",
+        "itch-io",
+        "recent",
+        "behance"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "nonprofit ngo charity website examples",
+        "nonprofit ngo charity product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "church-faith-community",
+      "sourceIds": [
+        "discord",
+        "twitch",
+        "itch-io",
+        "recent",
+        "behance"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "church faith community website examples",
+        "church faith community product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "government-municipality-public",
+      "sourceIds": [
+        "govuk",
+        "carbon",
+        "material-3",
+        "mobbin"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "government municipality public website examples",
+        "government municipality public product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "events-conference-festival",
+      "sourceIds": [
+        "discord",
+        "twitch",
+        "itch-io",
+        "recent",
+        "behance"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "events conference festival website examples",
+        "events conference festival product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "music-artist-band-label",
+      "sourceIds": [
+        "discord",
+        "twitch",
+        "itch-io",
+        "recent",
+        "behance"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "music artist band label website examples",
+        "music artist band label product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "film-production-studio",
+      "sourceIds": [
+        "discord",
+        "twitch",
+        "itch-io",
+        "recent",
+        "behance"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "film production studio website examples",
+        "film production studio product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "podcast-media-newsletter",
+      "sourceIds": [
+        "discord",
+        "twitch",
+        "itch-io",
+        "recent",
+        "behance"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "podcast media newsletter website examples",
+        "podcast media newsletter product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "indie-game-studio",
+      "sourceIds": [
+        "discord",
+        "twitch",
+        "itch-io",
+        "recent",
+        "behance"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "indie game studio website examples",
+        "indie game studio product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "hotel-resort-travel-agency",
+      "sourceIds": [
+        "airbnb",
+        "zillow",
+        "mobbin",
+        "polaris"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "hotel resort travel agency website examples",
+        "hotel resort travel agency product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "food-delivery-takeaway-truck",
+      "sourceIds": [
+        "blue-bottle",
+        "siteinspire",
+        "one-page-love",
+        "pexels"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "food delivery takeaway truck website examples",
+        "food delivery takeaway truck product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "wedding-private-events",
+      "sourceIds": [
+        "siteinspire",
+        "behance",
+        "pinterest",
+        "unsplash"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "wedding private events website examples",
+        "wedding private events product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "marketplace-classifieds",
+      "sourceIds": [
+        "airbnb",
+        "zillow",
+        "mobbin",
+        "polaris"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "marketplace classifieds website examples",
+        "marketplace classifieds product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "cybersecurity-it-services",
+      "sourceIds": [
+        "linear",
+        "vercel",
+        "github-primer",
+        "shadcn-ui"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "cybersecurity it services website examples",
+        "cybersecurity it services product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "mobile-app-landing",
+      "sourceIds": [
+        "linear",
+        "vercel",
+        "github-primer",
+        "shadcn-ui"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "mobile app landing website examples",
+        "mobile app landing product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "telecom-internet-isp",
+      "sourceIds": [
+        "linear",
+        "vercel",
+        "github-primer",
+        "shadcn-ui"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "telecom internet isp website examples",
+        "telecom internet isp product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "nicheId": "recruitment-hr-jobs",
+      "sourceIds": [
+        "stripe",
+        "fluent-2",
+        "carbon",
+        "mobbin"
+      ],
+      "mappingStatus": "suggested-shortlist",
+      "rationale": "Shortlist based on product domain and the existing AI Design Engine niche dossier. Narrow it to the actual page type and user task before use.",
+      "searchQueries": [
+        "recruitment hr jobs website examples",
+        "recruitment hr jobs product UX patterns"
+      ],
+      "verificationStatus": "catalog-only"
+    }
+  ]
+}

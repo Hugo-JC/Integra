@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://integra.dev/schemas/layout-pattern.schema.json",
+  "title": "Layout pattern",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "mode",
+    "tags",
+    "composition",
+    "when",
+    "avoid",
+    "requiredContent",
+    "responsive",
+    "accessibility",
+    "status",
+    "references"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "mode": {
+      "enum": [
+        "persuade",
+        "operate",
+        "read",
+        "experience"
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "composition": {
+      "type": "string",
+      "minLength": 25
+    },
+    "when": {
+      "type": "string",
+      "minLength": 15
+    },
+    "avoid": {
+      "type": "string"
+    },
+    "requiredContent": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "responsive": {
+      "type": "string"
+    },
+    "accessibility": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "heuristic",
+        "verified-pattern"
+      ]
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

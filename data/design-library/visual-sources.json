@@ -1,0 +1,1812 @@
+{
+  "schemaVersion": "1.0.0",
+  "title": "Integra Visual Source Catalog",
+  "policy": [
+    "This is a discovery catalog, not a verified live-site index.",
+    "Every source starts as catalog-only until a specific page or section is inspected.",
+    "Choose sources to answer a concrete design question; popularity is not authority.",
+    "Check current URLs, plan access, licences and API requirements at the point of use.",
+    "Extract transferable principles; do not copy protected layouts, text, code, brand assets or complete compositions."
+  ],
+  "sources": [
+    {
+      "id": "recent",
+      "name": "Recent (formerly Godly)",
+      "url": "https://recent.design/",
+      "category": "visual-gallery",
+      "bestFor": [
+        "Curated feed of contemporary websites, apps, branding and motion work."
+      ],
+      "howItWorks": "Use for broad visual exploration and expressive web craft.",
+      "useWhen": [
+        "Use when exploring a brand-led or motion-aware visual direction."
+      ],
+      "limitations": [
+        "A gallery entry is a discovery lead, not proof of live behavior, accessibility or performance."
+      ],
+      "tags": [
+        "visual-inspiration",
+        "motion",
+        "brand"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "godly-legacy",
+      "name": "Godly legacy bookmark",
+      "url": "https://godly.website/",
+      "category": "legacy-reference",
+      "bestFor": [
+        "Historical ID retained for existing ADE bookmarks; use Recent as the current discovery entry."
+      ],
+      "howItWorks": "Use only to resolve historic references.",
+      "useWhen": [
+        "Only for existing notes that still contain the old ID."
+      ],
+      "limitations": [
+        "Do not treat as a separate current source without checking its redirect."
+      ],
+      "tags": [
+        "legacy",
+        "redirect"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "awwwards",
+      "name": "Awwwards",
+      "url": "https://www.awwwards.com/",
+      "category": "award-gallery",
+      "bestFor": [
+        "Awarded websites and ambitious interactive experiences."
+      ],
+      "howItWorks": "Use for high-craft websites and experimental interaction ideas.",
+      "useWhen": [
+        "Use when exploring distinctive brand sites or interaction craft."
+      ],
+      "limitations": [
+        "Award status does not prove usability, accessibility, performance or product fit."
+      ],
+      "tags": [
+        "awarded",
+        "experimental",
+        "web"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "land-book",
+      "name": "Land-book",
+      "url": "https://land-book.com/",
+      "category": "landing-gallery",
+      "bestFor": [
+        "Landing-page and marketing-site discovery, including industry and style browsing."
+      ],
+      "howItWorks": "Use to compare marketing page structure and content sequencing.",
+      "useWhen": [
+        "Use for landing pages, product launches and SaaS marketing surfaces."
+      ],
+      "limitations": [
+        "A gallery screenshot may omit inner pages, states and responsive behavior."
+      ],
+      "tags": [
+        "landing",
+        "marketing",
+        "sections"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "lapa-ninja",
+      "name": "Lapa Ninja",
+      "url": "https://www.lapa.ninja/",
+      "category": "landing-gallery",
+      "bestFor": [
+        "Landing-page examples and section-level inspiration."
+      ],
+      "howItWorks": "Use its categories to find candidate page sections, then inspect original pages.",
+      "useWhen": [
+        "Use when comparing hero, feature, pricing or FAQ approaches."
+      ],
+      "limitations": [
+        "Section-level inspiration is not proof of a complete conversion journey; check plan limits."
+      ],
+      "tags": [
+        "landing",
+        "sections",
+        "marketing"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "siteinspire",
+      "name": "SiteInspire",
+      "url": "https://www.siteinspire.com/",
+      "category": "website-gallery",
+      "bestFor": [
+        "Curated websites with a strong editorial, portfolio and visual-design range."
+      ],
+      "howItWorks": "Browse by visual style and subject; inspect whole-page rhythm on source sites.",
+      "useWhen": [
+        "Use for portfolio, editorial, studio and considered brand directions."
+      ],
+      "limitations": [
+        "A screenshot cannot establish hidden interactions or mobile layout."
+      ],
+      "tags": [
+        "editorial",
+        "portfolio",
+        "minimal"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "one-page-love",
+      "name": "One Page Love",
+      "url": "https://onepagelove.com/",
+      "category": "single-page-gallery",
+      "bestFor": [
+        "Single-page websites and landing-page examples."
+      ],
+      "howItWorks": "Study how one page sequences a story, proof and action.",
+      "useWhen": [
+        "Use for one-page campaigns and compact marketing sites."
+      ],
+      "limitations": [
+        "Do not transfer one-page IA to a multi-route product by default."
+      ],
+      "tags": [
+        "one-page",
+        "landing",
+        "sections"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "minimal-gallery",
+      "name": "Minimal Gallery",
+      "url": "https://minimal.gallery/",
+      "category": "website-gallery",
+      "bestFor": [
+        "Curated minimal and typography-led website examples."
+      ],
+      "howItWorks": "Browse for restraint, whitespace and type hierarchy, then inspect live sources.",
+      "useWhen": [
+        "Use when minimalism is an explicit preference supported by the product."
+      ],
+      "limitations": [
+        "Minimal does not mean low information, low contrast or missing affordances."
+      ],
+      "tags": [
+        "minimal",
+        "typography",
+        "editorial"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "httpster",
+      "name": "Httpster",
+      "url": "https://httpster.net/",
+      "category": "website-gallery",
+      "bestFor": [
+        "Curated clean and independent website examples."
+      ],
+      "howItWorks": "Use as a discovery archive and follow original links.",
+      "useWhen": [
+        "Use for independent sites and compact visual references."
+      ],
+      "limitations": [
+        "Entries may age; recheck destination and date observations."
+      ],
+      "tags": [
+        "independent",
+        "clean",
+        "web"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "saaspo",
+      "name": "SaaSpo",
+      "url": "https://saaspo.com/",
+      "category": "saas-gallery",
+      "bestFor": [
+        "SaaS marketing and product presentation inspiration."
+      ],
+      "howItWorks": "Search SaaS categories and compare how products are explained.",
+      "useWhen": [
+        "Use for SaaS, analytics and developer-product marketing."
+      ],
+      "limitations": [
+        "Marketing pages do not prove authenticated product UX."
+      ],
+      "tags": [
+        "saas",
+        "product-marketing",
+        "software"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "css-design-awards",
+      "name": "CSS Design Awards",
+      "url": "https://www.cssdesignawards.com/",
+      "category": "award-gallery",
+      "bestFor": [
+        "Award-focused website craft and front-end experiences."
+      ],
+      "howItWorks": "Explore awarded projects and inspect original implementation behavior.",
+      "useWhen": [
+        "Use for ambitious front-end and responsive ideas."
+      ],
+      "limitations": [
+        "Visual awards do not guarantee accessibility or performance."
+      ],
+      "tags": [
+        "award",
+        "interaction",
+        "frontend"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "a1-gallery",
+      "name": "A1 Gallery",
+      "url": "https://www.a1.gallery/",
+      "category": "website-gallery",
+      "bestFor": [
+        "Curated website library for full-site and visual-feature discovery."
+      ],
+      "howItWorks": "Use visual search/filtering to shortlist, then inspect source websites.",
+      "useWhen": [
+        "Use for broad reference discovery across site categories."
+      ],
+      "limitations": [
+        "Check current catalog access and original site freshness."
+      ],
+      "tags": [
+        "whole-site",
+        "visual-search"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "dribbble",
+      "name": "Dribbble",
+      "url": "https://dribbble.com/",
+      "category": "design-community",
+      "bestFor": [
+        "Community design shots, component concepts and art direction."
+      ],
+      "howItWorks": "Search by component, visual trait or industry to collect concepts.",
+      "useWhen": [
+        "Use for isolated visual ideas, illustration and component exploration."
+      ],
+      "limitations": [
+        "Many shots are not shipped product UI or complete flows; treat as mood only."
+      ],
+      "tags": [
+        "concepts",
+        "components",
+        "illustration"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "behance",
+      "name": "Behance",
+      "url": "https://www.behance.net/",
+      "category": "case-study-gallery",
+      "bestFor": [
+        "Creative case studies, brand identities and process presentations."
+      ],
+      "howItWorks": "Read full projects for the rationale and system behind the visuals.",
+      "useWhen": [
+        "Use when studying brand systems or end-to-end visual case studies."
+      ],
+      "limitations": [
+        "Creator claims and media rights require independent review."
+      ],
+      "tags": [
+        "case-study",
+        "branding",
+        "process"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "pinterest",
+      "name": "Pinterest",
+      "url": "https://www.pinterest.com/",
+      "category": "moodboard-platform",
+      "bestFor": [
+        "Broad moodboards for photography, materials, color and visual atmosphere."
+      ],
+      "howItWorks": "Collect references by concept and trace each asset back to its original source.",
+      "useWhen": [
+        "Use for early mood exploration and clustering visual direction."
+      ],
+      "limitations": [
+        "Attribution and asset rights may be unclear; do not reuse a pin without tracing source rights."
+      ],
+      "tags": [
+        "moodboard",
+        "image-direction",
+        "visual-search"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "are-na",
+      "name": "Are.na",
+      "url": "https://www.are.na/",
+      "category": "research-collection",
+      "bestFor": [
+        "Curated research channels and linked visual material."
+      ],
+      "howItWorks": "Organize references into channels and annotate why each item matters.",
+      "useWhen": [
+        "Use for long-running design research and mixed-media collections."
+      ],
+      "limitations": [
+        "A saved item is neither verified nor automatically licensed for reuse."
+      ],
+      "tags": [
+        "research",
+        "collection",
+        "moodboard"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "mobbin",
+      "name": "Mobbin",
+      "url": "https://mobbin.com/",
+      "category": "product-ui-library",
+      "bestFor": [
+        "Real app and web product screens organized around products and flows."
+      ],
+      "howItWorks": "Search by product, screen and journey; compare sequences and related states.",
+      "useWhen": [
+        "Use for Operate surfaces, onboarding, forms, checkout and product conventions."
+      ],
+      "limitations": [
+        "Coverage, access and plan limits vary; screenshots may omit edge cases and transitions."
+      ],
+      "tags": [
+        "app-ui",
+        "flows",
+        "onboarding",
+        "checkout"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "page-flows",
+      "name": "Page Flows",
+      "url": "https://pageflows.com/",
+      "category": "product-flow-library",
+      "bestFor": [
+        "Recorded multi-step product journeys and screen sequences."
+      ],
+      "howItWorks": "Study step order, decisions, feedback and recovery in the flow.",
+      "useWhen": [
+        "Use when the question concerns a journey rather than a single screen."
+      ],
+      "limitations": [
+        "Flows may be stale or omit branches, permissions and failure states."
+      ],
+      "tags": [
+        "flows",
+        "video",
+        "journey"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "refero",
+      "name": "Refero",
+      "url": "https://refero.design/",
+      "category": "product-ui-library",
+      "bestFor": [
+        "Real SaaS screens and product UI references."
+      ],
+      "howItWorks": "Search by company, page type or component and compare production examples.",
+      "useWhen": [
+        "Use for SaaS screens, web-app UX and component inspiration."
+      ],
+      "limitations": [
+        "Static screenshots do not prove behavior; check current access terms."
+      ],
+      "tags": [
+        "saas",
+        "screens",
+        "components"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "screenlane",
+      "name": "Screenlane",
+      "url": "https://screenlane.com/",
+      "category": "product-ui-library",
+      "bestFor": [
+        "Mobile and web app screen inspiration."
+      ],
+      "howItWorks": "Search for screen-level examples and recurring interface conventions.",
+      "useWhen": [
+        "Use for mobile product screens and specific UI patterns."
+      ],
+      "limitations": [
+        "Check freshness and platform context; a screen is not a full flow."
+      ],
+      "tags": [
+        "screens",
+        "mobile",
+        "web-app"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "component-gallery",
+      "name": "Component Gallery",
+      "url": "https://component.gallery/",
+      "category": "component-reference",
+      "bestFor": [
+        "Cross-system component taxonomy and examples."
+      ],
+      "howItWorks": "Compare component roles and naming across systems.",
+      "useWhen": [
+        "Use when defining a component's purpose, vocabulary or variants."
+      ],
+      "limitations": [
+        "Catalog presence does not prove suitability or accessibility in a target app."
+      ],
+      "tags": [
+        "components",
+        "taxonomy",
+        "design-systems"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "radix-primitives",
+      "name": "Radix Primitives",
+      "url": "https://www.radix-ui.com/primitives",
+      "category": "component-documentation",
+      "bestFor": [
+        "Accessible React primitives and documented keyboard behavior."
+      ],
+      "howItWorks": "Use official API and behavior docs when the project actually uses Radix.",
+      "useWhen": [
+        "Use for dialogs, menus, popovers and other custom widgets."
+      ],
+      "limitations": [
+        "Do not add dependencies without an architectural reason; verify installed version."
+      ],
+      "tags": [
+        "react",
+        "primitives",
+        "accessibility"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "shadcn-ui",
+      "name": "shadcn/ui",
+      "url": "https://ui.shadcn.com/",
+      "category": "component-library",
+      "bestFor": [
+        "Composable React components and source-owned UI patterns."
+      ],
+      "howItWorks": "Inspect anatomy, variants and token integration; customize local component code.",
+      "useWhen": [
+        "Use when the project uses shadcn/ui or wants composable React components."
+      ],
+      "limitations": [
+        "Not a universal visual style; inspect the generated source and version."
+      ],
+      "tags": [
+        "react",
+        "components",
+        "tokens"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "21st-dev",
+      "name": "21st.dev",
+      "url": "https://21st.dev/",
+      "category": "component-gallery",
+      "bestFor": [
+        "Community component and interaction examples."
+      ],
+      "howItWorks": "Search by visual/component need; inspect source, dependencies and states.",
+      "useWhen": [
+        "Use for component ideation when a specific implementation question exists."
+      ],
+      "limitations": [
+        "Quality, accessibility and maintenance vary by contribution."
+      ],
+      "tags": [
+        "components",
+        "community",
+        "react"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "magic-ui",
+      "name": "Magic UI",
+      "url": "https://magicui.design/",
+      "category": "component-library",
+      "bestFor": [
+        "Motion-oriented React components and visual effects."
+      ],
+      "howItWorks": "Review each component's implementation and reduced-motion behavior.",
+      "useWhen": [
+        "Use only when purposeful motion is part of the brief."
+      ],
+      "limitations": [
+        "Effects can be heavy; test performance, contrast and non-animated alternatives."
+      ],
+      "tags": [
+        "motion",
+        "react",
+        "components"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "material-3",
+      "name": "Material Design 3",
+      "url": "https://m3.material.io/",
+      "category": "official-design-system",
+      "bestFor": [
+        "Semantic tokens, components, responsive layout and motion guidance."
+      ],
+      "howItWorks": "Study the official foundations, components and state models.",
+      "useWhen": [
+        "Use for systematic token/state research and Material-targeted products."
+      ],
+      "limitations": [
+        "Do not impose Material's visual language on unrelated products."
+      ],
+      "tags": [
+        "design-system",
+        "tokens",
+        "components",
+        "motion"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "fluent-2",
+      "name": "Fluent 2",
+      "url": "https://fluent2.microsoft.design/",
+      "category": "official-design-system",
+      "bestFor": [
+        "Enterprise component behavior, density and cross-platform patterns."
+      ],
+      "howItWorks": "Review official foundations, states and component usage guidance.",
+      "useWhen": [
+        "Use for enterprise, productivity and Microsoft-adjacent workflows."
+      ],
+      "limitations": [
+        "Density and interaction assumptions must fit actual users and platform."
+      ],
+      "tags": [
+        "enterprise",
+        "productivity",
+        "components"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "carbon",
+      "name": "Carbon Design System",
+      "url": "https://carbondesignsystem.com/",
+      "category": "official-design-system",
+      "bestFor": [
+        "Data-dense interfaces, grids, components and design foundations."
+      ],
+      "howItWorks": "Use IBM's docs for component anatomy, layout and tokens.",
+      "useWhen": [
+        "Use for analytics, admin and technical operational interfaces."
+      ],
+      "limitations": [
+        "Its brand and density are not universal defaults."
+      ],
+      "tags": [
+        "enterprise",
+        "data",
+        "grid",
+        "tokens"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "atlassian",
+      "name": "Atlassian Design System",
+      "url": "https://atlassian.design/",
+      "category": "official-design-system",
+      "bestFor": [
+        "Collaboration and workflow product patterns."
+      ],
+      "howItWorks": "Study official foundations, components and navigation guidance.",
+      "useWhen": [
+        "Use for project management, collaboration and team tools."
+      ],
+      "limitations": [
+        "Do not copy product IA wholesale; adapt to target jobs."
+      ],
+      "tags": [
+        "collaboration",
+        "productivity",
+        "design-system"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "polaris",
+      "name": "Shopify Polaris",
+      "url": "https://polaris.shopify.com/",
+      "category": "official-design-system",
+      "bestFor": [
+        "Merchant/admin commerce workflows, forms and tables."
+      ],
+      "howItWorks": "Use official component and pattern guidance for merchant-side tools.",
+      "useWhen": [
+        "Use for orders, inventory, catalog and commerce administration."
+      ],
+      "limitations": [
+        "Merchant admin patterns are not storefront templates; localize requirements."
+      ],
+      "tags": [
+        "commerce",
+        "admin",
+        "forms",
+        "tables"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "govuk",
+      "name": "GOV.UK Design System",
+      "url": "https://design-system.service.gov.uk/",
+      "category": "official-design-system",
+      "bestFor": [
+        "Public-service forms, plain language, validation and error recovery."
+      ],
+      "howItWorks": "Study official form, question-page and error-summary patterns.",
+      "useWhen": [
+        "Use for consequential forms and public-service journeys."
+      ],
+      "limitations": [
+        "UK policy and legal rules are jurisdiction-specific."
+      ],
+      "tags": [
+        "public-service",
+        "forms",
+        "accessibility"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "adobe-spectrum",
+      "name": "Adobe Spectrum",
+      "url": "https://spectrum.adobe.com/",
+      "category": "official-design-system",
+      "bestFor": [
+        "Creative-tool foundations and component patterns."
+      ],
+      "howItWorks": "Study official design foundations and component behavior.",
+      "useWhen": [
+        "Use for editors, creative tools and media workflows."
+      ],
+      "limitations": [
+        "Do not assume creative-tool interaction fits other workflows."
+      ],
+      "tags": [
+        "creative-tools",
+        "components",
+        "design-system"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "github-primer",
+      "name": "GitHub Primer",
+      "url": "https://primer.style/",
+      "category": "official-design-system",
+      "bestFor": [
+        "Developer tooling, repository interfaces and data-dense components."
+      ],
+      "howItWorks": "Study design tokens and component patterns for developer workflows.",
+      "useWhen": [
+        "Use for code review, issue tracking and repository products."
+      ],
+      "limitations": [
+        "Adapt product tasks and information architecture."
+      ],
+      "tags": [
+        "developer-tools",
+        "components",
+        "tokens"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "coolors",
+      "name": "Coolors",
+      "url": "https://coolors.co/",
+      "category": "color-tool",
+      "bestFor": [
+        "Palette discovery and color grouping."
+      ],
+      "howItWorks": "Use for early exploration, then assign semantic roles and measure contrast.",
+      "useWhen": [
+        "Use when palette direction is open."
+      ],
+      "limitations": [
+        "Generated palettes are not contrast verification or a brand decision."
+      ],
+      "tags": [
+        "color",
+        "palette",
+        "exploration"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "realtime-colors",
+      "name": "Realtime Colors",
+      "url": "https://www.realtimecolors.com/",
+      "category": "color-tool",
+      "bestFor": [
+        "Previewing palette behavior across common UI roles."
+      ],
+      "howItWorks": "Map candidate colors to text and surface roles for early comparison.",
+      "useWhen": [
+        "Use to explore theme relationships before implementation."
+      ],
+      "limitations": [
+        "Preview is not contrast verification across real states and overlays."
+      ],
+      "tags": [
+        "color",
+        "semantic-tokens",
+        "preview"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "radix-colors",
+      "name": "Radix Colors",
+      "url": "https://www.radix-ui.com/colors",
+      "category": "color-system",
+      "bestFor": [
+        "Color scales for UI roles and states."
+      ],
+      "howItWorks": "Study scale structure and role mapping.",
+      "useWhen": [
+        "Use with Radix-based projects or for systematic color-scale research."
+      ],
+      "limitations": [
+        "No scale guarantees every foreground/background pair passes."
+      ],
+      "tags": [
+        "colors",
+        "scales",
+        "tokens"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "fonts-in-use",
+      "name": "Fonts In Use",
+      "url": "https://fontsinuse.com/",
+      "category": "typography-reference",
+      "bestFor": [
+        "Real-world type choices and pairings in context."
+      ],
+      "howItWorks": "Search typefaces and artifacts to see how typography communicates tone.",
+      "useWhen": [
+        "Use when selecting a type direction or pairing."
+      ],
+      "limitations": [
+        "The site does not grant rights to use the displayed fonts."
+      ],
+      "tags": [
+        "typography",
+        "type-pairing",
+        "branding"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "typewolf",
+      "name": "Typewolf",
+      "url": "https://www.typewolf.com/",
+      "category": "typography-reference",
+      "bestFor": [
+        "Web typography and type-pairing discovery."
+      ],
+      "howItWorks": "Use as a curated shortlist, then inspect the actual font specimen and licence.",
+      "useWhen": [
+        "Use when a web font pairing needs direction."
+      ],
+      "limitations": [
+        "Verify language glyph coverage and font licence independently."
+      ],
+      "tags": [
+        "typography",
+        "fonts",
+        "web"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "fontshare",
+      "name": "Fontshare",
+      "url": "https://www.fontshare.com/",
+      "category": "font-library",
+      "bestFor": [
+        "Typeface discovery and font specimens."
+      ],
+      "howItWorks": "Inspect individual font family, formats and licence details.",
+      "useWhen": [
+        "Use when looking for display or text typefaces."
+      ],
+      "limitations": [
+        "Do not assume all fonts have identical rights or locale coverage."
+      ],
+      "tags": [
+        "typography",
+        "font-assets"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "google-fonts",
+      "name": "Google Fonts",
+      "url": "https://fonts.google.com/",
+      "category": "font-library",
+      "bestFor": [
+        "Font discovery, language subsets and web delivery."
+      ],
+      "howItWorks": "Inspect family metadata, variable axes, language support and licence.",
+      "useWhen": [
+        "Use when an open web font option is required."
+      ],
+      "limitations": [
+        "Verify individual family metadata and performance implications."
+      ],
+      "tags": [
+        "typography",
+        "font-assets",
+        "variable-fonts"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "unsplash",
+      "name": "Unsplash",
+      "url": "https://unsplash.com/",
+      "category": "asset-library",
+      "bestFor": [
+        "Photography discovery and potential project imagery."
+      ],
+      "howItWorks": "Open the individual image page and record creator, original URL and current terms.",
+      "useWhen": [
+        "Use when authentic photography materially improves comprehension."
+      ],
+      "limitations": [
+        "Check current Unsplash licence/API terms and relevant model/property rights; do not bulk-republish."
+      ],
+      "tags": [
+        "photography",
+        "images",
+        "asset"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "pexels",
+      "name": "Pexels",
+      "url": "https://www.pexels.com/",
+      "category": "asset-library",
+      "bestFor": [
+        "Photo and video asset discovery."
+      ],
+      "howItWorks": "Open the exact asset and record contributor, item URL and applicable restrictions.",
+      "useWhen": [
+        "Use for supporting photography or short video."
+      ],
+      "limitations": [
+        "Review current Pexels terms and restrictions for the exact use and item."
+      ],
+      "tags": [
+        "photography",
+        "video",
+        "asset"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "openverse",
+      "name": "Openverse",
+      "url": "https://openverse.org/",
+      "category": "open-licence-search",
+      "bestFor": [
+        "Creative Commons and public-domain media discovery."
+      ],
+      "howItWorks": "Open the source item and verify creator, licence and attribution details.",
+      "useWhen": [
+        "Use when the project needs explicit open-licence metadata."
+      ],
+      "limitations": [
+        "Search metadata may be incorrect; verify on the original publisher page."
+      ],
+      "tags": [
+        "creative-commons",
+        "public-domain",
+        "asset"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "pixabay",
+      "name": "Pixabay",
+      "url": "https://pixabay.com/",
+      "category": "asset-library",
+      "bestFor": [
+        "Photo, illustration, vector and video discovery."
+      ],
+      "howItWorks": "Record the exact item and review current terms before use.",
+      "useWhen": [
+        "Use for supplemental media discovery."
+      ],
+      "limitations": [
+        "Do not assume every item has the same rights or redistribution conditions."
+      ],
+      "tags": [
+        "photography",
+        "illustration",
+        "video"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "undraw",
+      "name": "unDraw",
+      "url": "https://undraw.co/",
+      "category": "illustration-library",
+      "bestFor": [
+        "Customizable vector illustration."
+      ],
+      "howItWorks": "Choose only when conceptual illustration improves explanation.",
+      "useWhen": [
+        "Use for lightweight explanatory visuals."
+      ],
+      "limitations": [
+        "Avoid generic illustrations when actual product imagery is available; check terms."
+      ],
+      "tags": [
+        "illustration",
+        "svg",
+        "assets"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "lucide",
+      "name": "Lucide",
+      "url": "https://lucide.dev/",
+      "category": "icon-library",
+      "bestFor": [
+        "Consistent open-source interface icon family."
+      ],
+      "howItWorks": "Search the official catalog and pair icons with labels where meaning is not universal.",
+      "useWhen": [
+        "Use for recognizable interface actions and status."
+      ],
+      "limitations": [
+        "Verify package version and icon meaning; avoid decorative icon overload."
+      ],
+      "tags": [
+        "icons",
+        "react",
+        "svg"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "phosphor",
+      "name": "Phosphor Icons",
+      "url": "https://phosphoricons.com/",
+      "category": "icon-library",
+      "bestFor": [
+        "Icon weights and families for interfaces."
+      ],
+      "howItWorks": "Choose one consistent weight system for each icon context.",
+      "useWhen": [
+        "Use when the project needs a flexible icon family."
+      ],
+      "limitations": [
+        "Avoid mixing weights and families without a system."
+      ],
+      "tags": [
+        "icons",
+        "weights",
+        "svg"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "codrops",
+      "name": "Codrops",
+      "url": "https://tympanus.net/codrops/",
+      "category": "motion-learning",
+      "bestFor": [
+        "Experimental front-end interaction techniques and demos."
+      ],
+      "howItWorks": "Study the mechanism and rebuild only the principle within the target stack.",
+      "useWhen": [
+        "Use for a specific motion or interaction research question."
+      ],
+      "limitations": [
+        "Check demo licence, performance and reduced-motion adaptation."
+      ],
+      "tags": [
+        "motion",
+        "webgl",
+        "interaction"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "design-spells",
+      "name": "Design Spells",
+      "url": "https://www.designspells.com/",
+      "category": "motion-gallery",
+      "bestFor": [
+        "Interface motion and micro-interaction inspiration."
+      ],
+      "howItWorks": "Study timing, feedback and transition intent rather than copying sequences.",
+      "useWhen": [
+        "Use when defining motion principles."
+      ],
+      "limitations": [
+        "Verify source context and provide reduced-motion alternatives."
+      ],
+      "tags": [
+        "motion",
+        "micro-interaction"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "rive",
+      "name": "Rive",
+      "url": "https://rive.app/",
+      "category": "interactive-motion-tool",
+      "bestFor": [
+        "State-driven interactive vector animation."
+      ],
+      "howItWorks": "Study state-machine design when animation responds to interaction.",
+      "useWhen": [
+        "Use when interactive illustration is a genuine product requirement."
+      ],
+      "limitations": [
+        "Review runtime, file size, licence and accessibility cost."
+      ],
+      "tags": [
+        "interactive-motion",
+        "state-machine"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "nngroup",
+      "name": "Nielsen Norman Group",
+      "url": "https://www.nngroup.com/articles/",
+      "category": "ux-methodology",
+      "bestFor": [
+        "Usability guidance, research and interaction design."
+      ],
+      "howItWorks": "Find guidance for a specific usability question and check publication context.",
+      "useWhen": [
+        "Use for task completion, information scent and error prevention."
+      ],
+      "limitations": [
+        "Not every article is normative; distinguish research, interpretation and dated guidance."
+      ],
+      "tags": [
+        "ux",
+        "usability",
+        "research"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "refactoring-ui",
+      "name": "Refactoring UI",
+      "url": "https://www.refactoringui.com/",
+      "category": "design-methodology",
+      "bestFor": [
+        "Practical visual hierarchy, spacing and color principles."
+      ],
+      "howItWorks": "Use as heuristic guidance for craft; validate against the actual product.",
+      "useWhen": [
+        "Use when visual hierarchy or consistency needs improvement."
+      ],
+      "limitations": [
+        "Heuristics do not override accessibility or user requirements."
+      ],
+      "tags": [
+        "visual-hierarchy",
+        "layout",
+        "color"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "laws-of-ux",
+      "name": "Laws of UX",
+      "url": "https://lawsofux.com/",
+      "category": "ux-methodology",
+      "bestFor": [
+        "Human-factors and behavioral design concepts."
+      ],
+      "howItWorks": "Use as a hypothesis vocabulary for cognitive load and recognition.",
+      "useWhen": [
+        "Use during early UX reasoning."
+      ],
+      "limitations": [
+        "Simplified laws are not proof of user outcomes; validate with research."
+      ],
+      "tags": [
+        "psychology",
+        "ux",
+        "research"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "linear",
+      "name": "Linear",
+      "url": "https://linear.app/",
+      "category": "product-example",
+      "bestFor": [
+        "Issue tracking, team workflows and developer-product UI."
+      ],
+      "howItWorks": "Inspect public product pages/docs for marketing claims separately from observable product behavior.",
+      "useWhen": [
+        "Use for issue management, compact SaaS and keyboard-driven tooling."
+      ],
+      "limitations": [
+        "Do not copy branding or assume its workflow suits every team."
+      ],
+      "tags": [
+        "developer-tools",
+        "productivity",
+        "operate"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "vercel",
+      "name": "Vercel",
+      "url": "https://vercel.com/",
+      "category": "product-example",
+      "bestFor": [
+        "Developer platform messaging and product demonstrations."
+      ],
+      "howItWorks": "Use official docs for technical claims and marketing pages for messaging structure.",
+      "useWhen": [
+        "Use for deployment and developer platform surfaces."
+      ],
+      "limitations": [
+        "Distinguish marketing presentation from verified feature behavior."
+      ],
+      "tags": [
+        "developer-tools",
+        "saas",
+        "persuade"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "stripe",
+      "name": "Stripe",
+      "url": "https://stripe.com/",
+      "category": "product-example",
+      "bestFor": [
+        "Payment product explanation, API communication and complex B2B information."
+      ],
+      "howItWorks": "Use public product pages and official docs as different evidence classes.",
+      "useWhen": [
+        "Use for APIs, payments and complex service communication."
+      ],
+      "limitations": [
+        "Never reuse Stripe claims, metrics, trust statements or branding."
+      ],
+      "tags": [
+        "fintech",
+        "api",
+        "saas"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "blue-bottle",
+      "name": "Blue Bottle Coffee",
+      "url": "https://bluebottlecoffee.com/",
+      "category": "product-example",
+      "bestFor": [
+        "Coffee product, origin storytelling and product photography."
+      ],
+      "howItWorks": "Study product/origin information architecture and visual pacing.",
+      "useWhen": [
+        "Use for coffee, specialty food and premium product presentation."
+      ],
+      "limitations": [
+        "Do not copy packaging, imagery, copy or identity."
+      ],
+      "tags": [
+        "coffee",
+        "food",
+        "commerce"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "aesop",
+      "name": "Aesop",
+      "url": "https://www.aesop.com/",
+      "category": "product-example",
+      "bestFor": [
+        "Skincare product storytelling and material-led art direction."
+      ],
+      "howItWorks": "Study measured copy, product details and contextual imagery.",
+      "useWhen": [
+        "Use for skincare, fragrance and lifestyle commerce."
+      ],
+      "limitations": [
+        "Do not reproduce packaging, copy, visual identity or claims."
+      ],
+      "tags": [
+        "beauty",
+        "skincare",
+        "wellness"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "everlane",
+      "name": "Everlane",
+      "url": "https://www.everlane.com/",
+      "category": "product-example",
+      "bestFor": [
+        "Fashion catalog, product information and material detail."
+      ],
+      "howItWorks": "Study product grids and product detail hierarchy.",
+      "useWhen": [
+        "Use for fashion retail and product catalogs."
+      ],
+      "limitations": [
+        "Do not reuse product imagery or brand claims."
+      ],
+      "tags": [
+        "fashion",
+        "commerce",
+        "retail"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "khan-academy",
+      "name": "Khan Academy",
+      "url": "https://www.khanacademy.org/",
+      "category": "product-example",
+      "bestFor": [
+        "Learning content, practice and progress feedback."
+      ],
+      "howItWorks": "Study lesson progression, content hierarchy and learner feedback.",
+      "useWhen": [
+        "Use for education and tutoring experiences."
+      ],
+      "limitations": [
+        "Do not copy educational content or imply unverified outcomes."
+      ],
+      "tags": [
+        "education",
+        "learning",
+        "progress"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "duolingo",
+      "name": "Duolingo",
+      "url": "https://www.duolingo.com/",
+      "category": "product-example",
+      "bestFor": [
+        "Language-learning, onboarding and recurring practice."
+      ],
+      "howItWorks": "Study learning path and feedback clarity.",
+      "useWhen": [
+        "Use for language learning or practice products."
+      ],
+      "limitations": [
+        "Do not reproduce brand characters, copyrighted content or mechanics without authorization."
+      ],
+      "tags": [
+        "education",
+        "language-learning",
+        "mobile"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "airbnb",
+      "name": "Airbnb",
+      "url": "https://www.airbnb.com/",
+      "category": "product-example",
+      "bestFor": [
+        "Search, listings, filters and booking discovery."
+      ],
+      "howItWorks": "Study listing hierarchy and search refinements.",
+      "useWhen": [
+        "Use for accommodation and travel marketplace patterns."
+      ],
+      "limitations": [
+        "Do not copy listings, reviews, brand or commercial policies."
+      ],
+      "tags": [
+        "marketplace",
+        "travel",
+        "search"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "zillow",
+      "name": "Zillow",
+      "url": "https://www.zillow.com/",
+      "category": "product-example",
+      "bestFor": [
+        "Real-estate search, listing cards and map/list patterns."
+      ],
+      "howItWorks": "Study property comparison and search navigation.",
+      "useWhen": [
+        "Use for real-estate product research."
+      ],
+      "limitations": [
+        "Regional legal and data requirements differ."
+      ],
+      "tags": [
+        "real-estate",
+        "marketplace",
+        "search"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "discord",
+      "name": "Discord",
+      "url": "https://discord.com/",
+      "category": "product-example",
+      "bestFor": [
+        "Community navigation and server/channel structure."
+      ],
+      "howItWorks": "Study hierarchy and communication organization.",
+      "useWhen": [
+        "Use for community and collaborative communication design."
+      ],
+      "limitations": [
+        "Include moderation, safety and privacy needs."
+      ],
+      "tags": [
+        "community",
+        "communication",
+        "gaming"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "twitch",
+      "name": "Twitch",
+      "url": "https://www.twitch.tv/",
+      "category": "product-example",
+      "bestFor": [
+        "Live media, creator discovery and community interaction."
+      ],
+      "howItWorks": "Study live content hierarchy and creator discovery.",
+      "useWhen": [
+        "Use for streaming and creator community UI."
+      ],
+      "limitations": [
+        "Moderation and safety require product-specific design."
+      ],
+      "tags": [
+        "streaming",
+        "creator",
+        "community"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "itch-io",
+      "name": "itch.io",
+      "url": "https://itch.io/",
+      "category": "product-example",
+      "bestFor": [
+        "Indie game discovery and creator marketplace pages."
+      ],
+      "howItWorks": "Study discovery, creator identity and flexible product pages.",
+      "useWhen": [
+        "Use for indie games and creator marketplaces."
+      ],
+      "limitations": [
+        "Do not reproduce creator assets or platform commerce assumptions."
+      ],
+      "tags": [
+        "gaming",
+        "marketplace",
+        "creator"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "nike",
+      "name": "Nike",
+      "url": "https://www.nike.com/",
+      "category": "product-example",
+      "bestFor": [
+        "Sports product storytelling and product imagery."
+      ],
+      "howItWorks": "Study product photography and category navigation.",
+      "useWhen": [
+        "Use for sportswear and activity-oriented commerce."
+      ],
+      "limitations": [
+        "Do not reuse athlete imagery, brand marks or claims."
+      ],
+      "tags": [
+        "sports",
+        "fitness",
+        "commerce"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "strava",
+      "name": "Strava",
+      "url": "https://www.strava.com/",
+      "category": "product-example",
+      "bestFor": [
+        "Activity tracking, training history and social fitness."
+      ],
+      "howItWorks": "Study activity summaries and progress presentation.",
+      "useWhen": [
+        "Use for fitness tracking and activity communities."
+      ],
+      "limitations": [
+        "Avoid copying personal data or making health inferences."
+      ],
+      "tags": [
+        "fitness",
+        "sports",
+        "analytics"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "maersk",
+      "name": "Maersk",
+      "url": "https://www.maersk.com/",
+      "category": "product-example",
+      "bestFor": [
+        "Logistics service navigation and shipment tracking."
+      ],
+      "howItWorks": "Study service entry points and tracking-oriented information structure.",
+      "useWhen": [
+        "Use for logistics and supply-chain interfaces."
+      ],
+      "limitations": [
+        "Tracking data and timestamps must be real and fresh."
+      ],
+      "tags": [
+        "logistics",
+        "enterprise",
+        "tracking"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "figma-community",
+      "name": "Figma Community",
+      "url": "https://www.figma.com/community",
+      "category": "design-community",
+      "bestFor": [
+        "Community design files, UI kits and editable system examples."
+      ],
+      "howItWorks": "Inspect creator, file contents, terms and version before adaptation.",
+      "useWhen": [
+        "Use when editable reference files materially help design research."
+      ],
+      "limitations": [
+        "Community publication does not grant unlimited reuse or establish quality."
+      ],
+      "tags": [
+        "figma",
+        "design-files",
+        "components"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Check the current source terms and any individual asset licence before reuse."
+    },
+    {
+      "id": "wcag-22",
+      "name": "Web Content Accessibility Guidelines (WCAG) 2.2",
+      "url": "https://www.w3.org/TR/WCAG22/",
+      "category": "normative-standard",
+      "bestFor": [
+        "Normative accessibility success criteria for web content."
+      ],
+      "howItWorks": "W3C Recommendation. Select the exact success criterion and conformance level; a partial audit does not prove whole-product conformance.",
+      "useWhen": [
+        "Use when defining or verifying a specific accessibility requirement."
+      ],
+      "limitations": [
+        "A standard is not a visual style guide; assess scope, exceptions and implementation."
+      ],
+      "tags": [
+        "accessibility",
+        "standard",
+        "normative"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Official standards and guidance support claims only within their stated scope; verify version and applicability."
+    },
+    {
+      "id": "wai-aria-apg",
+      "name": "WAI-ARIA Authoring Practices Guide",
+      "url": "https://www.w3.org/WAI/ARIA/apg/",
+      "category": "official-guidance",
+      "bestFor": [
+        "Accessible widget roles, keyboard interaction and state patterns."
+      ],
+      "howItWorks": "W3C guidance with interaction examples. Prefer native HTML semantics when they already provide the required behavior.",
+      "useWhen": [
+        "Use when a custom composite widget or ARIA interaction model is needed."
+      ],
+      "limitations": [
+        "Examples are patterns, not proof of accessibility; test the actual implementation."
+      ],
+      "tags": [
+        "accessibility",
+        "aria",
+        "keyboard"
+      ],
+      "verificationStatus": "catalog-only",
+      "lastVerifiedAt": null,
+      "verifiedPage": null,
+      "licenseNote": "Official standards and guidance support claims only within their stated scope; verify version and applicability."
+    }
+  ]
+}

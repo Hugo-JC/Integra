@@ -1,0 +1,384 @@
+{
+  "schemaVersion": "1.0.0",
+  "policy": "Anti-patterns are hypotheses, never automatic defects. Verify task, intent, implementation and user impact before reporting.",
+  "antiPatterns": [
+    {
+      "id": "generic-gradient-wash",
+      "name": "Generic gradient wash",
+      "summary": "Brandless gradients used to make an interface look modern.",
+      "trigger": "Palette and hero rely on gradient unrelated to product or identity.",
+      "impact": "Visual identity becomes interchangeable.",
+      "alternative": "Use authentic product imagery, relevant diagram or meaningful geometry.",
+      "exceptions": "Gradients are valid when they belong to the brand.",
+      "modeScope": [
+        "persuade",
+        "operate",
+        "read",
+        "experience"
+      ],
+      "status": "heuristic",
+      "verification": "human-review-with-optional-automated-signals",
+      "evidenceRequired": true
+    },
+    {
+      "id": "glass-everywhere",
+      "name": "Glassmorphism everywhere",
+      "summary": "Blurred translucent panels applied to most surfaces.",
+      "trigger": "Most containers rely on blur, transparency and glow.",
+      "impact": "Layering can harm legibility, performance and hierarchy.",
+      "alternative": "Reserve translucency for a few layered surfaces with verified contrast.",
+      "exceptions": "Glass can suit overlays and spatial depth.",
+      "modeScope": [
+        "persuade",
+        "operate",
+        "read",
+        "experience"
+      ],
+      "status": "heuristic",
+      "verification": "human-review-with-optional-automated-signals",
+      "evidenceRequired": true
+    },
+    {
+      "id": "three-equal-cards",
+      "name": "Three equal cards by default",
+      "summary": "Repeated triads without evidence that content is comparable.",
+      "trigger": "Same card row appears across unrelated pages.",
+      "impact": "The structure feels templated.",
+      "alternative": "Use lists, comparisons, steps, product demos or editorial blocks.",
+      "exceptions": "Equal cards work for genuinely comparable items.",
+      "modeScope": [
+        "persuade",
+        "operate",
+        "read",
+        "experience"
+      ],
+      "status": "heuristic",
+      "verification": "human-review-with-optional-automated-signals",
+      "evidenceRequired": true
+    },
+    {
+      "id": "split-hero-default",
+      "name": "Split hero as universal default",
+      "summary": "Text-left/image-right hero selected before content analysis.",
+      "trigger": "No product/task reason supports the split.",
+      "impact": "Hero may fail to demonstrate product or story.",
+      "alternative": "Compare product-led, typographic, full-bleed, search-first and narrative options.",
+      "exceptions": "Split works when message and visual need separate space.",
+      "modeScope": [
+        "persuade",
+        "operate",
+        "read",
+        "experience"
+      ],
+      "status": "heuristic",
+      "verification": "human-review-with-optional-automated-signals",
+      "evidenceRequired": true
+    },
+    {
+      "id": "floating-orbs",
+      "name": "Decorative floating orbs",
+      "summary": "Unrelated blurred blobs or circles used as filler.",
+      "trigger": "Shapes have no connection to product or interaction.",
+      "impact": "Attention is consumed by generic decoration.",
+      "alternative": "Use product artifacts, diagrams, typography or relevant geometry.",
+      "exceptions": "Abstract forms can be a deliberate identity.",
+      "modeScope": [
+        "persuade",
+        "operate",
+        "read",
+        "experience"
+      ],
+      "status": "heuristic",
+      "verification": "human-review-with-optional-automated-signals",
+      "evidenceRequired": true
+    },
+    {
+      "id": "icon-soup",
+      "name": "Icon soup",
+      "summary": "Generic icons added to every heading and label.",
+      "trigger": "Icons repeat text without meaning or status value.",
+      "impact": "Visual noise and weak semantics.",
+      "alternative": "Use icons for recognizable action/status and pair with labels.",
+      "exceptions": "Dense UI may need a controlled pictogram set.",
+      "modeScope": [
+        "persuade",
+        "operate",
+        "read",
+        "experience"
+      ],
+      "status": "heuristic",
+      "verification": "human-review-with-optional-automated-signals",
+      "evidenceRequired": true
+    },
+    {
+      "id": "badge-confetti",
+      "name": "Badge confetti",
+      "summary": "Excessive badges and pills.",
+      "trigger": "Many items have accent labels without information difference.",
+      "impact": "Attention becomes flat.",
+      "alternative": "Reserve badges for meaningful metadata or state.",
+      "exceptions": "Controlled status vocabulary can aid tables.",
+      "modeScope": [
+        "persuade",
+        "operate",
+        "read",
+        "experience"
+      ],
+      "status": "heuristic",
+      "verification": "human-review-with-optional-automated-signals",
+      "evidenceRequired": true
+    },
+    {
+      "id": "monotone-spacing",
+      "name": "Monotone spacing",
+      "summary": "Same gap used for unrelated relationships.",
+      "trigger": "Heading/body and section/section gaps are similar.",
+      "impact": "Groups lose rhythm.",
+      "alternative": "Use spacing scale with relationship-specific gaps.",
+      "exceptions": "Compact data grid can have consistent row spacing.",
+      "modeScope": [
+        "persuade",
+        "operate",
+        "read",
+        "experience"
+      ],
+      "status": "heuristic",
+      "verification": "human-review-with-optional-automated-signals",
+      "evidenceRequired": true
+    },
+    {
+      "id": "microtext-everywhere",
+      "name": "Microtext everywhere",
+      "summary": "Secondary text is tiny/faint to look premium.",
+      "trigger": "Labels and helper text are hard to read.",
+      "impact": "Usability is sacrificed for delicacy.",
+      "alternative": "Use clear type roles and contrast; remove unnecessary copy.",
+      "exceptions": "Non-critical metadata may be smaller if legible.",
+      "modeScope": [
+        "persuade",
+        "operate",
+        "read",
+        "experience"
+      ],
+      "status": "heuristic",
+      "verification": "human-review-with-optional-automated-signals",
+      "evidenceRequired": true
+    },
+    {
+      "id": "oversized-hero-copy",
+      "name": "Oversized hero copy without purpose",
+      "summary": "Huge headline overwhelms regardless of surface mode.",
+      "trigger": "Primary task/product is pushed below fold.",
+      "impact": "Spectacle outranks user success.",
+      "alternative": "Set type scale from brand, content and task.",
+      "exceptions": "Expressive campaign may use display as artifact.",
+      "modeScope": [
+        "persuade",
+        "operate",
+        "read",
+        "experience"
+      ],
+      "status": "heuristic",
+      "verification": "human-review-with-optional-automated-signals",
+      "evidenceRequired": true
+    },
+    {
+      "id": "empty-product-mockup",
+      "name": "Empty product mockup",
+      "summary": "Generic fake UI replaces actual product proof.",
+      "trigger": "Mockup contains meaningless placeholder widgets.",
+      "impact": "Visitors cannot understand the product.",
+      "alternative": "Use real screen, labelled prototype or authentic artifact.",
+      "exceptions": "Concepts may use illustrative UI if marked.",
+      "modeScope": [
+        "persuade",
+        "operate",
+        "read",
+        "experience"
+      ],
+      "status": "heuristic",
+      "verification": "human-review-with-optional-automated-signals",
+      "evidenceRequired": true
+    },
+    {
+      "id": "false-social-proof",
+      "name": "Fabricated social proof",
+      "summary": "Invented quotes, logos, counts or ratings.",
+      "trigger": "Trust content has no source.",
+      "impact": "It misleads and creates product/legal risk.",
+      "alternative": "Omit it, request real proof or label placeholder.",
+      "exceptions": "Fictional examples must be unmistakably fictional.",
+      "modeScope": [
+        "persuade",
+        "operate",
+        "read",
+        "experience"
+      ],
+      "status": "heuristic",
+      "verification": "human-review-with-optional-automated-signals",
+      "evidenceRequired": true
+    },
+    {
+      "id": "divider-noise",
+      "name": "Decorative divider noise",
+      "summary": "Lines separate every content group.",
+      "trigger": "Borders appear where spacing/surface already groups.",
+      "impact": "Page becomes fragmented.",
+      "alternative": "Use whitespace, grouping and surface shifts.",
+      "exceptions": "Tables and inputs may need boundaries.",
+      "modeScope": [
+        "persuade",
+        "operate",
+        "read",
+        "experience"
+      ],
+      "status": "heuristic",
+      "verification": "human-review-with-optional-automated-signals",
+      "evidenceRequired": true
+    },
+    {
+      "id": "motion-confetti",
+      "name": "Motion confetti",
+      "summary": "Many unrelated entrance, hover and scroll animations.",
+      "trigger": "Motion repeats without state/narrative purpose.",
+      "impact": "It distracts, harms performance or excludes.",
+      "alternative": "Use few coherent motion families with reduced-motion fallback.",
+      "exceptions": "Experience-first work may use coordinated motion.",
+      "modeScope": [
+        "persuade",
+        "operate",
+        "read",
+        "experience"
+      ],
+      "status": "heuristic",
+      "verification": "human-review-with-optional-automated-signals",
+      "evidenceRequired": true
+    },
+    {
+      "id": "hover-only-discovery",
+      "name": "Hover-only information",
+      "summary": "Critical action/label appears only on hover.",
+      "trigger": "Keyboard and touch cannot reveal it.",
+      "impact": "Core functionality is inaccessible.",
+      "alternative": "Provide persistent labels and keyboard/touch alternatives.",
+      "exceptions": "Non-essential previews may remain optional.",
+      "modeScope": [
+        "persuade",
+        "operate",
+        "read",
+        "experience"
+      ],
+      "status": "heuristic",
+      "verification": "human-review-with-optional-automated-signals",
+      "evidenceRequired": true
+    },
+    {
+      "id": "fake-live-status",
+      "name": "Fake live status",
+      "summary": "Pulsing dots/counters imply live data without source.",
+      "trigger": "Freshness, source or cadence is unknown.",
+      "impact": "Users mistake decoration for operational truth.",
+      "alternative": "Remove live cues or label demo data.",
+      "exceptions": "A labelled prototype can illustrate a live state.",
+      "modeScope": [
+        "persuade",
+        "operate",
+        "read",
+        "experience"
+      ],
+      "status": "heuristic",
+      "verification": "human-review-with-optional-automated-signals",
+      "evidenceRequired": true
+    },
+    {
+      "id": "inconsistent-radius-language",
+      "name": "Inconsistent radius language",
+      "summary": "Unrelated corner radii without component rationale.",
+      "trigger": "Controls and cards use arbitrary values.",
+      "impact": "System loses cohesion.",
+      "alternative": "Define semantic radius roles and exceptions.",
+      "exceptions": "Component families may have different radii.",
+      "modeScope": [
+        "persuade",
+        "operate",
+        "read",
+        "experience"
+      ],
+      "status": "heuristic",
+      "verification": "human-review-with-optional-automated-signals",
+      "evidenceRequired": true
+    },
+    {
+      "id": "one-size-dashboard",
+      "name": "One-size-fits-all dashboard",
+      "summary": "Identical metric cards/charts regardless of user task.",
+      "trigger": "No clear question or action organizes the dashboard.",
+      "impact": "It becomes a generic wall of metrics.",
+      "alternative": "Organize by decisions, data freshness and drill-down.",
+      "exceptions": "Monitoring overview may use purposeful metric tiles.",
+      "modeScope": [
+        "persuade",
+        "operate",
+        "read",
+        "experience"
+      ],
+      "status": "heuristic",
+      "verification": "human-review-with-optional-automated-signals",
+      "evidenceRequired": true
+    },
+    {
+      "id": "placeholder-labels",
+      "name": "Placeholder-only labels",
+      "summary": "Placeholder stands in as the only field label.",
+      "trigger": "Field purpose disappears after typing.",
+      "impact": "Users lose context and accessible naming clarity.",
+      "alternative": "Use persistent label and helper/error text.",
+      "exceptions": "Search may use accessible name with contextual prompt.",
+      "modeScope": [
+        "persuade",
+        "operate",
+        "read",
+        "experience"
+      ],
+      "status": "heuristic",
+      "verification": "human-review-with-optional-automated-signals",
+      "evidenceRequired": true
+    },
+    {
+      "id": "unbounded-content-width",
+      "name": "Unbounded content width",
+      "summary": "Text and forms stretch across wide viewports.",
+      "trigger": "Paragraphs/fields span viewport without purpose.",
+      "impact": "Reading and scanning become inefficient.",
+      "alternative": "Use readable measure and grid constraints.",
+      "exceptions": "Wide diagrams/tables may need width.",
+      "modeScope": [
+        "persuade",
+        "operate",
+        "read",
+        "experience"
+      ],
+      "status": "heuristic",
+      "verification": "human-review-with-optional-automated-signals",
+      "evidenceRequired": true
+    },
+    {
+      "id": "trend-stack",
+      "name": "Trend stack",
+      "summary": "Several current trends combined without a visual thesis.",
+      "trigger": "Glass, gradient, bento, pills and huge type compete.",
+      "impact": "Identity feels assembled rather than directed.",
+      "alternative": "Choose one dominant thesis and compatible supporting patterns.",
+      "exceptions": "Collage can be coherent when deliberate.",
+      "modeScope": [
+        "persuade",
+        "operate",
+        "read",
+        "experience"
+      ],
+      "status": "heuristic",
+      "verification": "human-review-with-optional-automated-signals",
+      "evidenceRequired": true
+    }
+  ]
+}

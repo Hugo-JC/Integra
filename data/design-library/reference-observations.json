@@ -1,0 +1,5 @@
+{
+  "schemaVersion": "1.0.0",
+  "policy": "Only specific page-level inspections belong here; catalog URLs alone must never be promoted to verified observations.",
+  "observations": []
+}

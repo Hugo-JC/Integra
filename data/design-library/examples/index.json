@@ -1,0 +1,335 @@
+{
+  "schemaVersion": "1.0.0",
+  "policy": "Examples demonstrate reasoning, not templates or measured production outcomes.",
+  "examples": [
+    {
+      "id": "developer-workspace",
+      "title": "Developer workspace",
+      "productType": "Developer tooling",
+      "mode": "operate",
+      "goal": "Help developers manage work with fast repeated tasks.",
+      "nicheId": "saas-developer-ai",
+      "tokenSystemIds": [
+        "neutral-product-dark",
+        "high-density-analytics"
+      ],
+      "patternIds": [
+        "task-first-workspace",
+        "data-table-workbench"
+      ],
+      "referenceIds": [
+        "linear",
+        "vercel",
+        "github-primer",
+        "mobbin"
+      ],
+      "ruleIds": [
+        "LAYOUT-003",
+        "STATE-001",
+        "DENSITY-001",
+        "A11Y-002"
+      ],
+      "antiPatternIds": [
+        "one-size-dashboard",
+        "three-equal-cards",
+        "fake-live-status"
+      ],
+      "decisions": [
+        "Keep primary task navigation stable and make current scope explicit.",
+        "Use density only where it improves scanning.",
+        "Prefer authentic code or product artifacts over generic mockups."
+      ],
+      "tradeoffs": [
+        "Dense workspaces need hierarchy and responsive alternatives.",
+        "Dark surfaces require rendered verification."
+      ],
+      "acceptanceChecks": [
+        "Users can identify current scope and next action.",
+        "Common tasks do not lose context.",
+        "Keyboard focus and error states are recoverable."
+      ],
+      "evidenceStatus": "illustrative-guidance"
+    },
+    {
+      "id": "product-led-landing",
+      "title": "Product-led SaaS landing page",
+      "productType": "SaaS marketing",
+      "mode": "persuade",
+      "goal": "Explain one capability and motivate a qualified next action.",
+      "nicheId": "saas-developer-ai",
+      "tokenSystemIds": [
+        "neutral-product-light",
+        "neutral-product-dark"
+      ],
+      "patternIds": [
+        "campaign-storytelling",
+        "pricing-comparison"
+      ],
+      "referenceIds": [
+        "linear",
+        "vercel",
+        "stripe",
+        "land-book"
+      ],
+      "ruleIds": [
+        "LAYOUT-002",
+        "COPY-001",
+        "IMAGE-001",
+        "BRAND-001"
+      ],
+      "antiPatternIds": [
+        "empty-product-mockup",
+        "false-social-proof",
+        "generic-gradient-wash"
+      ],
+      "decisions": [
+        "Demonstrate value through an actual workflow.",
+        "Choose hero from product artifact and message.",
+        "Keep pricing and technical claims attributable."
+      ],
+      "tradeoffs": [
+        "Product demo can need more space than short hero.",
+        "Expressive visual must not obscure comprehension."
+      ],
+      "acceptanceChecks": [
+        "First viewport explains product and audience.",
+        "Primary action is unambiguous.",
+        "Claims and proof have sources."
+      ],
+      "evidenceStatus": "illustrative-guidance"
+    },
+    {
+      "id": "public-service-form",
+      "title": "Public service application",
+      "productType": "Public service",
+      "mode": "operate",
+      "goal": "Help someone submit an application with confidence and error recovery.",
+      "nicheId": "government-municipality-public",
+      "tokenSystemIds": [
+        "civic-accessible"
+      ],
+      "patternIds": [
+        "form-service-journey"
+      ],
+      "referenceIds": [
+        "govuk",
+        "wcag-22",
+        "mobbin"
+      ],
+      "ruleIds": [
+        "FORM-001",
+        "STATE-002",
+        "A11Y-001",
+        "A11Y-002",
+        "RESP-001"
+      ],
+      "antiPatternIds": [
+        "placeholder-labels",
+        "microtext-everywhere"
+      ],
+      "decisions": [
+        "Use plain language and explicit required cues.",
+        "Preserve values after recoverable errors.",
+        "Localize policy content to correct jurisdiction."
+      ],
+      "tradeoffs": [
+        "A stepper helps long application but may burden short form.",
+        "Explanations aid confidence but can overwhelm."
+      ],
+      "acceptanceChecks": [
+        "Keyboard user can complete flow.",
+        "Errors identify fields and correction.",
+        "User can review before submit."
+      ],
+      "evidenceStatus": "illustrative-guidance"
+    },
+    {
+      "id": "editorial-publication",
+      "title": "Editorial publication",
+      "productType": "Editorial",
+      "mode": "read",
+      "goal": "Make long-form information easy to scan, navigate and understand.",
+      "nicheId": "portfolio-editorial-education",
+      "tokenSystemIds": [
+        "warm-editorial"
+      ],
+      "patternIds": [
+        "editorial-index",
+        "longform-reading"
+      ],
+      "referenceIds": [
+        "siteinspire",
+        "fonts-in-use",
+        "typewolf",
+        "nngroup"
+      ],
+      "ruleIds": [
+        "TYPE-001",
+        "TYPE-002",
+        "SPACE-001",
+        "LAYOUT-001"
+      ],
+      "antiPatternIds": [
+        "unbounded-content-width",
+        "microtext-everywhere"
+      ],
+      "decisions": [
+        "Use constrained reading measure and clear hierarchy.",
+        "Let imagery support rather than interrupt.",
+        "Keep metadata and contents navigation useful."
+      ],
+      "tradeoffs": [
+        "Display type adds personality; body text remains comfortable.",
+        "TOC helps long pieces but is unnecessary for short reads."
+      ],
+      "acceptanceChecks": [
+        "Article scans by headings.",
+        "Text reads on mobile and desktop.",
+        "Links and media have context."
+      ],
+      "evidenceStatus": "illustrative-guidance"
+    },
+    {
+      "id": "commerce-catalog",
+      "title": "Commerce catalog",
+      "productType": "Retail",
+      "mode": "operate",
+      "goal": "Help shoppers discover, compare and understand products.",
+      "nicheId": "fashion-commerce",
+      "tokenSystemIds": [
+        "premium-commerce",
+        "neutral-product-light"
+      ],
+      "patternIds": [
+        "catalog-discovery",
+        "product-detail-purchase"
+      ],
+      "referenceIds": [
+        "everlane",
+        "mobbin",
+        "polaris",
+        "unsplash"
+      ],
+      "ruleIds": [
+        "DATA-002",
+        "IMAGE-002",
+        "COLOR-001",
+        "RESP-001"
+      ],
+      "antiPatternIds": [
+        "badge-confetti",
+        "three-equal-cards",
+        "empty-product-mockup"
+      ],
+      "decisions": [
+        "Use consistent product imagery and useful product facts.",
+        "Filters reflect actual catalog attributes.",
+        "Price and variants are not fabricated."
+      ],
+      "tradeoffs": [
+        "Editorial imagery must not hide comparison data.",
+        "Dense filters may need progressive disclosure on mobile."
+      ],
+      "acceptanceChecks": [
+        "Users can compare items.",
+        "Price and variants are visible before purchase.",
+        "Filters work with keyboard and touch."
+      ],
+      "evidenceStatus": "illustrative-guidance"
+    },
+    {
+      "id": "education-learning-path",
+      "title": "Education learning path",
+      "productType": "Education platform",
+      "mode": "operate",
+      "goal": "Help learners understand progress, next action and feedback.",
+      "nicheId": "online-courses-edtech",
+      "tokenSystemIds": [
+        "civic-accessible",
+        "organic-wellness"
+      ],
+      "patternIds": [
+        "learning-path",
+        "lesson-practice"
+      ],
+      "referenceIds": [
+        "khan-academy",
+        "duolingo",
+        "mobbin",
+        "material-3"
+      ],
+      "ruleIds": [
+        "STATE-001",
+        "MOTION-002",
+        "COPY-001",
+        "A11Y-002"
+      ],
+      "antiPatternIds": [
+        "motion-confetti",
+        "fake-live-status",
+        "badge-confetti"
+      ],
+      "decisions": [
+        "Show meaningful progress and lesson state.",
+        "Make feedback understandable and retryable.",
+        "Keep reward effects secondary."
+      ],
+      "tradeoffs": [
+        "Gamification can motivate but cannot replace guidance.",
+        "One-task lessons need clear return path."
+      ],
+      "acceptanceChecks": [
+        "Learner can resume lesson.",
+        "Feedback explains next step.",
+        "Core works with reduced motion."
+      ],
+      "evidenceStatus": "illustrative-guidance"
+    },
+    {
+      "id": "media-library",
+      "title": "Media discovery and playback",
+      "productType": "Media app",
+      "mode": "operate",
+      "goal": "Help users find authorized content and control playback.",
+      "nicheId": "music-artist-band-label",
+      "tokenSystemIds": [
+        "neutral-product-dark"
+      ],
+      "patternIds": [
+        "media-player-library"
+      ],
+      "referenceIds": [
+        "twitch",
+        "discord",
+        "mobbin",
+        "component-gallery"
+      ],
+      "ruleIds": [
+        "STATE-001",
+        "STATE-002",
+        "DATA-002",
+        "A11Y-002"
+      ],
+      "antiPatternIds": [
+        "fake-live-status",
+        "hover-only-discovery",
+        "motion-confetti"
+      ],
+      "decisions": [
+        "Separate controls, current item, queue and discovery.",
+        "Show truthful loading and unavailable states.",
+        "Do not imply availability without provider confirmation."
+      ],
+      "tradeoffs": [
+        "Persistent player improves continuity but cannot obscure content.",
+        "Recommendations should be secondary when catalogue is limited."
+      ],
+      "acceptanceChecks": [
+        "Playback state matches media engine.",
+        "Controls are keyboard operable.",
+        "Unavailable items are clear."
+      ],
+      "evidenceStatus": "illustrative-guidance"
+    }
+  ]
+}

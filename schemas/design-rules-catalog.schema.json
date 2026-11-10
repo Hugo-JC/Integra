@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://integra.dev/schemas/design-rules-catalog.schema.json",
+  "title": "Design rules catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "policy",
+    "forceDefinitions",
+    "severityDefinitions",
+    "findingContract",
+    "rules"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string"
+    },
+    "policy": {
+      "type": "string"
+    },
+    "forceDefinitions": {
+      "type": "object"
+    },
+    "severityDefinitions": {
+      "type": "object"
+    },
+    "findingContract": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "string"
+      }
+    },
+    "rules": {
+      "type": "array",
+      "minItems": 20,
+      "items": {
+        "$ref": "https://integra.dev/schemas/design-rule.schema.json"
+      }
+    }
+  }
+}

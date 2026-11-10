@@ -16,7 +16,7 @@
     "validate:presets": "tsx scripts/validate-presets.ts",
     "direction:generate": "tsx scripts/direction-generate.ts",
     "direction:validate": "tsx scripts/direction-validate.ts",
-    "check": "npm run typecheck && npm test && npm run validate:fixtures && npm run validate:skills && npm run validate:presets && npm run validate:agent-assets && npm run validate:commands && npm run distribution:check",
+    "check": "npm run typecheck && npm test && npm run validate:fixtures && npm run validate:skills && npm run validate:presets && npm run validate:visual-library && npm run validate:agent-assets && npm run validate:commands && npm run distribution:check",
     "direction:presets": "tsx scripts/direction-presets.ts",
     "validate:agent-assets": "tsx scripts/validate-agent-assets.ts",
     "validate:commands": "tsx scripts/validate-command-manifest.ts",
@@ -26,7 +26,8 @@
     "distribution:test": "node --test packages/cli/test/*.test.mjs",
     "distribution:check": "npm run distribution:build && npm run distribution:test && npm run distribution:pack",
     "distribution:pack": "npm pack --dry-run ./packages/cli",
-    "distribution:smoke": "node scripts/test-cli-tarball.mjs"
+    "distribution:smoke": "node scripts/test-cli-tarball.mjs",
+    "validate:visual-library": "tsx scripts/validate-visual-library.ts"
   },
   "dependencies": {
     "ajv": "^8.20.0",

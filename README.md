@@ -47,6 +47,7 @@ Usa `Alt + Shift + I` para abrir/fechar rapidamente o Live depois de registar o 
 | Performance | `integra-performance-audit` | Medição e diagnóstico de gargalos |
 | Investigação | `integra-investigation` | Pesquisa técnica e de produto baseada em fontes |
 | Referências | `integra-reference-investigator` | Observação e adaptação original de referências |
+| Inteligência visual | `integra-visual-knowledge` | Curadoria e retrieval de fontes, tokens, padrões, regras e exemplos |
 | Inspeção | `integra-live-inspector` | Preview de DOM local e handoff para source |
 
 `integra-direction` é mantida como alias legado de `integra-design-direction` para compatibilidade. Os nomes canónicos seguem o padrão `integra-<capacidade>`; não renomeamos skills já distribuídas sem uma estratégia de migração.
@@ -74,10 +75,16 @@ O core determinístico é provider-agnostic. Os módulos de contexto, direção,
 
 Consulte:
 - [Arquitetura](docs/architecture.md)
+- [Visual knowledge routing](docs/ai-guides/visual-knowledge-routing.md)
+- [Design Intelligence Library](data/design-library/README.md)
 - [Compatibilidade e instalação por host](docs/agent-compatibility.md)
 - [Contrato de contexto de IA](docs/ai-context-contract.md)
 - [Contrato de integração dos agentes](docs/agent-integration-contract.md)
 - [Avisos e licenças de terceiros](docs/third-party-notices.md)
+
+## Visual Knowledge Library
+
+A biblioteca separa fontes visuais, providers de assets, mapeamentos para os 61 nichos existentes, observações por página, receitas semânticas de tokens, padrões de layout, regras, anti-patterns e exemplos. A Skill `integra-visual-knowledge` orienta a curadoria e a seleção contextual; o resolver é offline-first e devolve candidatos explicáveis, sem navegar em sites, aplicar tokens ou declarar defeitos automaticamente. Novas fontes permanecem `catalog-only` até inspeção específica.
 
 ## Desenvolvimento e validação
 
@@ -91,6 +98,12 @@ npm ci
 npm run check
 npm run distribution:check
 npm run distribution:smoke
+```
+
+Para validar a biblioteca visual:
+
+```bash
+npm run validate:visual-library
 ```
 
 Para validar apenas as skills:
