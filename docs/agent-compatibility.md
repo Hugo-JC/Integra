@@ -46,9 +46,11 @@ GitHub Copilot CLI can preview and install repository skills with the `gh skill`
 ```sh
 gh skill preview Hugo-JC/Integra integra-colorize
 gh skill install Hugo-JC/Integra integra-colorize
+gh skill preview Hugo-JC/Integra integra-animate
+gh skill install Hugo-JC/Integra integra-animate
 ```
 
-The Colorize workflow is a standalone specialist skill. It is routed by `/integra:colorize` and preserves existing product identity; it is not a brand-redesign command.
+The Colorize workflow is a standalone specialist skill routed by `/integra:colorize`; it preserves existing product identity and is not a brand-redesign command. The Animate workflow is routed by `/integra:animate` and owns motion thesis, timing, interruption, reduced-motion alternatives and performance checks. It hands implementation and verification to the relevant specialist skills.
 
 In the Copilot app, skills configured for repositories or Copilot CLI are managed under **Customize > Skills**. Copilot personal skills for cloud sessions require separate dotfiles or account setup; project paths do not automatically configure personal or cloud environments.
 
