@@ -96,7 +96,7 @@ export function createIntegraInspector(options: IntegraLiveInspectorOptions = {}
 #tag{position:fixed;display:none;max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:5px 8px;border:1px solid #3b82f6;border-radius:6px;color:#eff6ff;background:#10264a;font:11px ui-monospace,monospace;pointer-events:none}
 #panel{position:fixed;top:14px;right:14px;width:min(388px,calc(100vw - 28px));max-height:calc(100vh - 28px);overflow:auto;border:1px solid #27364b;border-radius:16px;background:rgba(10,16,27,.97);box-shadow:0 24px 72px rgba(0,0,0,.46);color:#e8eef8;pointer-events:auto;backdrop-filter:blur(18px);scrollbar-width:thin;scrollbar-color:#34445d transparent}#panel[hidden]{display:none}
 .head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 15px 12px;border-bottom:1px solid #243247}.brand{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:750;letter-spacing:-.025em}.mark{display:grid;place-items:center;width:27px;height:27px;border:1px solid #3b82f6;border-radius:8px;background:linear-gradient(145deg,#1d4ed8,#2563eb);color:white;font-size:14px}.head-actions{display:flex;gap:6px}
-button{min-height:30px;border:1px solid #30415a;border-radius:8px;background:#152238;color:#dce8fa;padding:6px 9px;cursor:pointer;font:600 11px inherit}button:hover{border-color:#60a5fa;background:#1b3150}button:focus-visible,input:focus-visible{outline:2px solid #60a5fa;outline-offset:2px}button.primary{border-color:#2563eb;background:#2563eb;color:#fff}
+button{min-height:30px;border:1px solid #30415a;border-radius:8px;background:#152238;color:#dce8fa;padding:6px 9px;cursor:pointer;font:600 11px/1.2 Inter,ui-sans-serif,system-ui,sans-serif}button:hover{border-color:#60a5fa;background:#1b3150}button:focus-visible,input:focus-visible{outline:2px solid #60a5fa;outline-offset:2px}button.primary{border-color:#2563eb;background:#2563eb;color:#fff}
 .modebar{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin:12px 14px;padding:4px;border:1px solid #26364d;border-radius:10px;background:#0b1423}.modebar button{border-color:transparent;background:transparent;color:#8fa4c1}.modebar button[aria-pressed=true]{border-color:#2e5fa5;background:#17345d;color:#eff6ff}
 .content{padding:0 14px 14px}#instructions{margin:0 0 10px;color:#9fb0c8;font-size:11px;line-height:1.5}.target{padding:11px;border:1px solid #2b466a;border-radius:11px;background:linear-gradient(135deg,rgba(29,78,216,.18),rgba(15,23,42,.6));overflow-wrap:anywhere}.target strong{display:block;color:#f4f8ff;font-size:12px}
 .muted{color:#8ea1bd;font-size:10px;line-height:1.5;overflow-wrap:anywhere}.eyebrow{display:block;margin:14px 0 6px;color:#91a6c3;font-size:9px;font-weight:750;letter-spacing:.12em;text-transform:uppercase}
@@ -361,7 +361,7 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
     if (options.keyboardShortcut !== false && event.altKey && event.shiftKey && event.key.toLowerCase() === 'i') {
       event.preventDefault();
       enabled = !enabled;
-      panel.hidden = !enabled || !selected;
+      panel.hidden = !enabled;
       if (!enabled) {
         highlight.style.display = 'none';
         tag.style.display = 'none';

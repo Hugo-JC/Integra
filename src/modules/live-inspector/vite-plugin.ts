@@ -22,7 +22,7 @@ export function integraLiveInspectorPlugin(options: IntegraLiveInspectorPluginOp
         if (!enabled || html.includes('data-integra-live-bootstrap')) return html;
         const bootstrap = `<script type="module" data-integra-live-bootstrap>
 import { createIntegraInspector } from ${JSON.stringify(entry)};
-if (!window.__INTEGRA_LIVE_INSPECTOR__) window.__INTEGRA_LIVE_INSPECTOR__ = createIntegraInspector();
+if (!window.__INTEGRA_LIVE_INSPECTOR__) window.__INTEGRA_LIVE_INSPECTOR__ = createIntegraInspector({ enabled: false });
 </script>`;
         return html.includes('</body>') ? html.replace('</body>', bootstrap + '\n</body>') : html + '\n' + bootstrap;
       }
