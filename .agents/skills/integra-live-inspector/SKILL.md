@@ -19,7 +19,7 @@ Reduce the distance between spotting a UI issue and preparing a precise source-c
 8. Launch and verify before narrating setup details.
 
 ## Modes
-**Quick Canvas (default):** blue element outline, compact element badge, dimensions/display/font summary, quick radius/padding/accent preview, one-click reset and switch to Inspector. It is not a drag/drop editor and cannot silently move, resize, reorder or replace elements.
+**Quick Canvas (default):** blue element outline, compact element badge, dimensions/display/font summary, quick radius/padding/accent preview, one-click reset, Undo/Redo and switch to Inspector. It is not a drag/drop editor and cannot silently move, resize, reorder or replace elements.
 
 **Inspector:** element identity, best-effort selector, accessible name, dimensions, display, typography, existing classes, text/surface colors, radius, padding, contrast estimate and diff export. Read-only computed values must remain distinct from editable controls. A selector is a locator, never a source path.
 
@@ -36,6 +36,9 @@ Reduce the distance between spotting a UI issue and preparing a precise source-c
 - Use Shadow DOM; render page-provided labels through `textContent`.
 - Avoid continuous animation and expensive effects. Respect reduced-motion and high-contrast preferences.
 - Teardown cancels frames, disconnects observers, removes listeners and restores original class/style attributes.
+
+## Preview history
+Maintain a bounded, session-only history of reversible class/style attribute snapshots. Coalesce consecutive edits to the same target/property; clear redo after a new branch of edits. Undo/Redo must restore exact original-vs-absent attribute states. Keyboard shortcuts must not intercept text inputs, textareas, selects or contenteditable regions. Closing Live restores original attributes by default; history never persists to source files.
 
 ## Safe preview boundary
 Only use text color, background color, border radius, padding and existing classes. Validate values and keep previews temporary. Never inject arbitrary HTML, JavaScript, remote assets or unreviewed CSS. Never weaken CSP or instrument production/remote pages. Live does not contact an AI provider or write source. `data-integra-source` is user-provided and unverified.
