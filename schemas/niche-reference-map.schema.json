@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://integra.dev/schemas/niche-reference-map.schema.json",
+  "title": "Niche reference map",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sourceCatalog",
+    "policy",
+    "niches"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string"
+    },
+    "sourceCatalog": {
+      "type": "string"
+    },
+    "policy": {
+      "type": "string"
+    },
+    "niches": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "nicheId",
+          "sourceIds",
+          "mappingStatus",
+          "rationale",
+          "searchQueries",
+          "verificationStatus"
+        ],
+        "properties": {
+          "nicheId": {
+            "type": "string"
+          },
+          "sourceIds": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "mappingStatus": {
+            "enum": [
+              "suggested-shortlist",
+              "general-shortlist"
+            ]
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 20
+          },
+          "searchQueries": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "verificationStatus": {
+            "const": "catalog-only"
+          }
+        }
+      }
+    }
+  }
+}

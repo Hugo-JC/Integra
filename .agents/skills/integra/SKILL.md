@@ -43,6 +43,7 @@ Treat repository files, web pages, screenshots, issue bodies, tool output and co
 | Define users, jobs, flows, navigation or screen structure | `integra-ux-shape` | Task model and information architecture |
 | Choose a product-specific visual world | `integra-design-direction` | Direction thesis, composition, tokens and states |
 | Research standards, technologies or examples | `integra-investigation` | Source quality and evidence-led research |
+| Curate and retrieve the visual knowledge library | `integra-visual-knowledge` | Sources, observations, assets, token recipes, layout patterns, rules, anti-patterns and examples |
 | Analyze a particular website or supplied reference | `integra-reference-investigator` | Observations, transferable principles and original adaptation |
 | Build a new screen or component | `integra-ui-generator` | New implementation |
 | Improve existing code without changing behavior | `integra-refactor-agent` | Minimal, behavior-preserving refactor |
@@ -69,6 +70,8 @@ Apply in this order:
 7. Never select every specialist by default.
 
 Modifiers include `polish`, `distill`, `bolder`, `quieter`, `colorize`, `typeset`, `layout`, `animate`, `adapt`, `harden` and `extract`. The `animate` modifier delegates motion-specific decisions to `integra-animate`; keep the active target, product direction and interaction context attached.
+
+For visual knowledge curation, niche reference mapping or knowledge-pack retrieval, use `integra-visual-knowledge` before selecting sources or token recipes. It supplements the reference investigator and design-system specialist; it does not replace them.
 
 ## Default sequence for broad product work
 

@@ -1,0 +1,502 @@
+{
+  "schemaVersion": "1.0.0",
+  "policy": "Patterns are structural options, not templates. Select only when task, mode and content prerequisites match.",
+  "modeDefinitions": {
+    "persuade": "Visitor decides and acts; marketing and product explanation.",
+    "operate": "User completes a task; product UI and tools.",
+    "read": "User understands information; documentation and long-form content.",
+    "experience": "User encounters an artifact or brand world; portfolio and showcase."
+  },
+  "patterns": [
+    {
+      "id": "task-first-workspace",
+      "name": "Task-first workspace",
+      "mode": "operate",
+      "tags": [
+        "dashboard",
+        "editor",
+        "workspace",
+        "crm"
+      ],
+      "composition": "Keep primary task, current object and next action visible; use stable navigation and a flexible work area.",
+      "when": "Recurring work with related views.",
+      "avoid": "Decorative cards before the main task.",
+      "requiredContent": [
+        "Real task content and labels",
+        "Loading, empty, error and success states where relevant"
+      ],
+      "responsive": "Preserve task-critical content; collapse secondary chrome without hiding essential context.",
+      "accessibility": "Use semantic landmarks, keyboard-operable controls, visible focus and persistent labels; verify actual contrast.",
+      "status": "heuristic",
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ]
+    },
+    {
+      "id": "data-table-workbench",
+      "name": "Data table workbench",
+      "mode": "operate",
+      "tags": [
+        "analytics",
+        "admin",
+        "finance",
+        "inventory"
+      ],
+      "composition": "Use clear column labels, sorting, row actions and persistent filters; provide responsive alternatives.",
+      "when": "Users compare, inspect or update structured records.",
+      "avoid": "Oversized cards when row comparison is the main job.",
+      "requiredContent": [
+        "Real task content and labels",
+        "Loading, empty, error and success states where relevant"
+      ],
+      "responsive": "Preserve task-critical content; collapse secondary chrome without hiding essential context.",
+      "accessibility": "Use semantic landmarks, keyboard-operable controls, visible focus and persistent labels; verify actual contrast.",
+      "status": "heuristic",
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ]
+    },
+    {
+      "id": "search-results-map-list",
+      "name": "Search results with map/list",
+      "mode": "operate",
+      "tags": [
+        "marketplace",
+        "real-estate",
+        "travel",
+        "logistics"
+      ],
+      "composition": "Keep query and filters near results; connect map and list selection; preserve context when detail opens.",
+      "when": "Location materially affects selection.",
+      "avoid": "Map-first layouts when text comparison matters more.",
+      "requiredContent": [
+        "Real task content and labels",
+        "Loading, empty, error and success states where relevant"
+      ],
+      "responsive": "Preserve task-critical content; collapse secondary chrome without hiding essential context.",
+      "accessibility": "Use semantic landmarks, keyboard-operable controls, visible focus and persistent labels; verify actual contrast.",
+      "status": "heuristic",
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ]
+    },
+    {
+      "id": "catalog-discovery",
+      "name": "Catalog discovery",
+      "mode": "operate",
+      "tags": [
+        "commerce",
+        "marketplace",
+        "media"
+      ],
+      "composition": "Prioritize search, category, useful filters and comparable cards with key metadata.",
+      "when": "Users browse a substantial catalog.",
+      "avoid": "Banners hiding search or product details.",
+      "requiredContent": [
+        "Real task content and labels",
+        "Loading, empty, error and success states where relevant"
+      ],
+      "responsive": "Preserve task-critical content; collapse secondary chrome without hiding essential context.",
+      "accessibility": "Use semantic landmarks, keyboard-operable controls, visible focus and persistent labels; verify actual contrast.",
+      "status": "heuristic",
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ]
+    },
+    {
+      "id": "product-detail-purchase",
+      "name": "Product detail and purchase",
+      "mode": "persuade",
+      "tags": [
+        "commerce",
+        "hardware",
+        "fashion",
+        "beauty"
+      ],
+      "composition": "Make product identity, media, price, availability, variants and purchase action easy to find.",
+      "when": "A real purchasable product is known.",
+      "avoid": "Lifestyle hero replacing product facts.",
+      "requiredContent": [
+        "Real task content and labels",
+        "Loading, empty, error and success states where relevant"
+      ],
+      "responsive": "Preserve task-critical content; collapse secondary chrome without hiding essential context.",
+      "accessibility": "Use semantic landmarks, keyboard-operable controls, visible focus and persistent labels; verify actual contrast.",
+      "status": "heuristic",
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ]
+    },
+    {
+      "id": "checkout-stepper",
+      "name": "Checkout stepper",
+      "mode": "operate",
+      "tags": [
+        "commerce",
+        "booking",
+        "payments"
+      ],
+      "composition": "Break multi-decision processes into clear stages and preserve input through validation.",
+      "when": "Checkout genuinely needs multiple steps.",
+      "avoid": "Decorative steps that add complexity.",
+      "requiredContent": [
+        "Real task content and labels",
+        "Loading, empty, error and success states where relevant"
+      ],
+      "responsive": "Preserve task-critical content; collapse secondary chrome without hiding essential context.",
+      "accessibility": "Use semantic landmarks, keyboard-operable controls, visible focus and persistent labels; verify actual contrast.",
+      "status": "heuristic",
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ]
+    },
+    {
+      "id": "pricing-comparison",
+      "name": "Pricing comparison",
+      "mode": "persuade",
+      "tags": [
+        "saas",
+        "commerce",
+        "subscription"
+      ],
+      "composition": "Compare plan, total cost, billing cadence, limits and meaningful differences.",
+      "when": "Plan facts are supplied and options are comparable.",
+      "avoid": "Fake discounts and unsupported popularity labels.",
+      "requiredContent": [
+        "Real task content and labels",
+        "Loading, empty, error and success states where relevant"
+      ],
+      "responsive": "Preserve task-critical content; collapse secondary chrome without hiding essential context.",
+      "accessibility": "Use semantic landmarks, keyboard-operable controls, visible focus and persistent labels; verify actual contrast.",
+      "status": "heuristic",
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ]
+    },
+    {
+      "id": "editorial-index",
+      "name": "Editorial index",
+      "mode": "read",
+      "tags": [
+        "editorial",
+        "publishing",
+        "portfolio",
+        "documentation"
+      ],
+      "composition": "Use readable title, available metadata and browsable content index.",
+      "when": "Users browse or return to long-form content.",
+      "avoid": "Feature cards replacing a clear index.",
+      "requiredContent": [
+        "Real task content and labels",
+        "Loading, empty, error and success states where relevant"
+      ],
+      "responsive": "Preserve task-critical content; collapse secondary chrome without hiding essential context.",
+      "accessibility": "Use semantic landmarks, keyboard-operable controls, visible focus and persistent labels; verify actual contrast.",
+      "status": "heuristic",
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ]
+    },
+    {
+      "id": "longform-reading",
+      "name": "Long-form reading",
+      "mode": "read",
+      "tags": [
+        "article",
+        "documentation",
+        "education"
+      ],
+      "composition": "Constrain line length, establish heading hierarchy and support navigation where useful.",
+      "when": "Comprehension of substantial content is the primary job.",
+      "avoid": "Wide paragraphs and weak hierarchy.",
+      "requiredContent": [
+        "Real task content and labels",
+        "Loading, empty, error and success states where relevant"
+      ],
+      "responsive": "Preserve task-critical content; collapse secondary chrome without hiding essential context.",
+      "accessibility": "Use semantic landmarks, keyboard-operable controls, visible focus and persistent labels; verify actual contrast.",
+      "status": "heuristic",
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ]
+    },
+    {
+      "id": "learning-path",
+      "name": "Learning path",
+      "mode": "operate",
+      "tags": [
+        "education",
+        "courses",
+        "onboarding"
+      ],
+      "composition": "Show learning goal, progression, current lesson and resume path.",
+      "when": "Learning content and progression data exist.",
+      "avoid": "Gamified progress without meaningful learning state.",
+      "requiredContent": [
+        "Real task content and labels",
+        "Loading, empty, error and success states where relevant"
+      ],
+      "responsive": "Preserve task-critical content; collapse secondary chrome without hiding essential context.",
+      "accessibility": "Use semantic landmarks, keyboard-operable controls, visible focus and persistent labels; verify actual contrast.",
+      "status": "heuristic",
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ]
+    },
+    {
+      "id": "lesson-practice",
+      "name": "Lesson and practice",
+      "mode": "operate",
+      "tags": [
+        "education",
+        "language",
+        "practice"
+      ],
+      "composition": "Present one task at a time, make feedback understandable and support retry.",
+      "when": "User practices a concept or skill.",
+      "avoid": "Reward animation obscuring feedback.",
+      "requiredContent": [
+        "Real task content and labels",
+        "Loading, empty, error and success states where relevant"
+      ],
+      "responsive": "Preserve task-critical content; collapse secondary chrome without hiding essential context.",
+      "accessibility": "Use semantic landmarks, keyboard-operable controls, visible focus and persistent labels; verify actual contrast.",
+      "status": "heuristic",
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ]
+    },
+    {
+      "id": "progressive-onboarding",
+      "name": "Progressive onboarding",
+      "mode": "operate",
+      "tags": [
+        "saas",
+        "mobile",
+        "account"
+      ],
+      "composition": "Ask only for information needed for activation; explain why and allow safe deferral.",
+      "when": "Initial setup has real prerequisites.",
+      "avoid": "Long forms before product value.",
+      "requiredContent": [
+        "Real task content and labels",
+        "Loading, empty, error and success states where relevant"
+      ],
+      "responsive": "Preserve task-critical content; collapse secondary chrome without hiding essential context.",
+      "accessibility": "Use semantic landmarks, keyboard-operable controls, visible focus and persistent labels; verify actual contrast.",
+      "status": "heuristic",
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ]
+    },
+    {
+      "id": "form-service-journey",
+      "name": "Service form journey",
+      "mode": "operate",
+      "tags": [
+        "public-service",
+        "healthcare",
+        "legal",
+        "application"
+      ],
+      "composition": "Use plain labels, grouped questions, required cues, inline recovery and review step.",
+      "when": "Consequential information submission.",
+      "avoid": "Placeholder-only labels or post-submit-only errors.",
+      "requiredContent": [
+        "Real task content and labels",
+        "Loading, empty, error and success states where relevant"
+      ],
+      "responsive": "Preserve task-critical content; collapse secondary chrome without hiding essential context.",
+      "accessibility": "Use semantic landmarks, keyboard-operable controls, visible focus and persistent labels; verify actual contrast.",
+      "status": "heuristic",
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ]
+    },
+    {
+      "id": "booking-availability",
+      "name": "Booking and availability",
+      "mode": "operate",
+      "tags": [
+        "booking",
+        "hospitality",
+        "clinic",
+        "events"
+      ],
+      "composition": "Select service, date/time and resource with truthful availability and clear confirmation.",
+      "when": "Availability can be checked from a real source.",
+      "avoid": "Invented slots or ambiguous timezone.",
+      "requiredContent": [
+        "Real task content and labels",
+        "Loading, empty, error and success states where relevant"
+      ],
+      "responsive": "Preserve task-critical content; collapse secondary chrome without hiding essential context.",
+      "accessibility": "Use semantic landmarks, keyboard-operable controls, visible focus and persistent labels; verify actual contrast.",
+      "status": "heuristic",
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ]
+    },
+    {
+      "id": "media-player-library",
+      "name": "Media player and library",
+      "mode": "operate",
+      "tags": [
+        "music",
+        "video",
+        "podcast",
+        "streaming"
+      ],
+      "composition": "Keep controls, current item, queue and discovery distinct; add unavailable and error states.",
+      "when": "Authorized playback and actual media metadata.",
+      "avoid": "Autoplay or fabricated recommendations.",
+      "requiredContent": [
+        "Real task content and labels",
+        "Loading, empty, error and success states where relevant"
+      ],
+      "responsive": "Preserve task-critical content; collapse secondary chrome without hiding essential context.",
+      "accessibility": "Use semantic landmarks, keyboard-operable controls, visible focus and persistent labels; verify actual contrast.",
+      "status": "heuristic",
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ]
+    },
+    {
+      "id": "portfolio-case-study",
+      "name": "Portfolio case study",
+      "mode": "experience",
+      "tags": [
+        "portfolio",
+        "agency",
+        "photography",
+        "creative"
+      ],
+      "composition": "Let work lead; provide concise role/context and navigable project sequence.",
+      "when": "Projects and authorship are real.",
+      "avoid": "Generic skill meters or invented client results.",
+      "requiredContent": [
+        "Real task content and labels",
+        "Loading, empty, error and success states where relevant"
+      ],
+      "responsive": "Preserve task-critical content; collapse secondary chrome without hiding essential context.",
+      "accessibility": "Use semantic landmarks, keyboard-operable controls, visible focus and persistent labels; verify actual contrast.",
+      "status": "heuristic",
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ]
+    },
+    {
+      "id": "campaign-storytelling",
+      "name": "Campaign storytelling",
+      "mode": "persuade",
+      "tags": [
+        "campaign",
+        "launch",
+        "events",
+        "brand"
+      ],
+      "composition": "Sequence one promise, supporting evidence, product/experience and a clear action.",
+      "when": "A specific launch or message objective exists.",
+      "avoid": "Competing hero messages and unsupported urgency.",
+      "requiredContent": [
+        "Real task content and labels",
+        "Loading, empty, error and success states where relevant"
+      ],
+      "responsive": "Preserve task-critical content; collapse secondary chrome without hiding essential context.",
+      "accessibility": "Use semantic landmarks, keyboard-operable controls, visible focus and persistent labels; verify actual contrast.",
+      "status": "heuristic",
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ]
+    },
+    {
+      "id": "community-hub",
+      "name": "Community hub",
+      "mode": "operate",
+      "tags": [
+        "community",
+        "gaming",
+        "creator"
+      ],
+      "composition": "Make spaces, participation status, moderation guidance and next action discoverable.",
+      "when": "Real community structure and moderation plan exist.",
+      "avoid": "Fabricated engagement metrics.",
+      "requiredContent": [
+        "Real task content and labels",
+        "Loading, empty, error and success states where relevant"
+      ],
+      "responsive": "Preserve task-critical content; collapse secondary chrome without hiding essential context.",
+      "accessibility": "Use semantic landmarks, keyboard-operable controls, visible focus and persistent labels; verify actual contrast.",
+      "status": "heuristic",
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ]
+    },
+    {
+      "id": "creative-canvas",
+      "name": "Creative canvas",
+      "mode": "experience",
+      "tags": [
+        "editor",
+        "design-tool",
+        "media"
+      ],
+      "composition": "Give artifact and editing area priority; keep tools discoverable and reversible.",
+      "when": "Users create or manipulate artifacts.",
+      "avoid": "Tool chrome dominating the canvas.",
+      "requiredContent": [
+        "Real task content and labels",
+        "Loading, empty, error and success states where relevant"
+      ],
+      "responsive": "Preserve task-critical content; collapse secondary chrome without hiding essential context.",
+      "accessibility": "Use semantic landmarks, keyboard-operable controls, visible focus and persistent labels; verify actual contrast.",
+      "status": "heuristic",
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ]
+    },
+    {
+      "id": "monitoring-incident",
+      "name": "Monitoring and incident view",
+      "mode": "operate",
+      "tags": [
+        "monitoring",
+        "observability",
+        "security"
+      ],
+      "composition": "Prioritize current state, time window, severity, affected scope and next action; label freshness.",
+      "when": "Signals and timestamps are real.",
+      "avoid": "Green status theater or unlabelled time windows.",
+      "requiredContent": [
+        "Real task content and labels",
+        "Loading, empty, error and success states where relevant"
+      ],
+      "responsive": "Preserve task-critical content; collapse secondary chrome without hiding essential context.",
+      "accessibility": "Use semantic landmarks, keyboard-operable controls, visible focus and persistent labels; verify actual contrast.",
+      "status": "heuristic",
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,960 @@
+{
+  "schemaVersion": "1.0.0",
+  "policy": "Rules are contextual heuristics unless they cite an applicable normative criterion. Rule force is not severity. A heuristic is not a confirmed defect until actual UI evidence is inspected.",
+  "forceDefinitions": {
+    "required": "Must be satisfied within scope unless documented exception or higher-priority constraint applies.",
+    "recommended": "Preferred default; deviations need product-specific rationale.",
+    "contextual": "Apply only when conditions match.",
+    "antiPattern": "Risk pattern to inspect; its presence is not proof of a defect."
+  },
+  "severityDefinitions": {
+    "P0": "Critical: blocks core task or creates severe accessibility/integrity risk.",
+    "P1": "High: materially harms a common task or broad accessibility.",
+    "P2": "Moderate: causes friction, inconsistency or recoverable confusion.",
+    "P3": "Low: polish opportunity with limited impact."
+  },
+  "findingContract": [
+    "findingId",
+    "ruleId or antiPatternId",
+    "target",
+    "observation",
+    "evidenceType",
+    "evidenceLocation",
+    "impact",
+    "severity",
+    "confidence",
+    "verificationStatus",
+    "recommendation",
+    "exceptionReview"
+  ],
+  "rules": [
+    {
+      "id": "BRIEF-001",
+      "force": "required",
+      "appliesWhen": {
+        "modes": [
+          "all"
+        ]
+      },
+      "statement": "Define the user task before choosing visual patterns.",
+      "trigger": "Brief has style adjectives but no primary user job.",
+      "rationale": "Aesthetic-first selection can undermine usefulness.",
+      "recommendedAction": "Record primary job, audience, requested surface and success outcome.",
+      "exceptions": "A visual showcase may have exploration as its primary job.",
+      "verification": {
+        "method": "Inspect brief and task model.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "MODE-001",
+      "force": "required",
+      "appliesWhen": {
+        "modes": [
+          "all"
+        ]
+      },
+      "statement": "Choose an experience mode per surface, not per product.",
+      "trigger": "The same mode is applied to every route.",
+      "rationale": "A marketing page and workspace have different success conditions.",
+      "recommendedAction": "Choose Persuade, Operate, Read or Experience per surface.",
+      "exceptions": "One surface may combine modes by region.",
+      "verification": {
+        "method": "Inspect surface brief.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "HIER-001",
+      "force": "recommended",
+      "appliesWhen": {
+        "modes": [
+          "all"
+        ]
+      },
+      "statement": "Give each screen a clear primary hierarchy.",
+      "trigger": "Several elements compete with equivalent visual weight.",
+      "rationale": "Users cannot identify the first useful action.",
+      "recommendedAction": "Choose one primary message or task and subordinate supporting content.",
+      "exceptions": "Editorial compositions may intentionally distribute attention.",
+      "verification": {
+        "method": "Review rendered hierarchy.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "TYPE-001",
+      "force": "recommended",
+      "appliesWhen": {
+        "modes": [
+          "all"
+        ]
+      },
+      "statement": "Define type roles and a readable scale.",
+      "trigger": "Headings, body and labels have no consistent role.",
+      "rationale": "Scanning and reading become tiring.",
+      "recommendedAction": "Use display, heading, body, label, caption and code roles as needed.",
+      "exceptions": "A single family can form a complete system.",
+      "verification": {
+        "method": "Review tokens and real text.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "TYPE-002",
+      "force": "contextual",
+      "appliesWhen": {
+        "modes": [
+          "read"
+        ]
+      },
+      "statement": "Constrain long-form line length and preserve comfortable line-height.",
+      "trigger": "Paragraphs span a wide viewport or body lines are dense.",
+      "rationale": "Reading requires excessive horizontal eye movement.",
+      "recommendedAction": "Set measure and line-height for font and language.",
+      "exceptions": "Tables and code may need wider measures.",
+      "verification": {
+        "method": "Inspect rendered reading view.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "SPACE-001",
+      "force": "recommended",
+      "appliesWhen": {
+        "modes": [
+          "all"
+        ]
+      },
+      "statement": "Use a coherent spacing scale with relational exceptions.",
+      "trigger": "Spacing appears arbitrary or every relationship has the same gap.",
+      "rationale": "Grouping and hierarchy weaken.",
+      "recommendedAction": "Define a base scale and choose gaps by semantic relationship.",
+      "exceptions": "Optical alignment or data density can justify exceptions.",
+      "verification": {
+        "method": "Audit spacing tokens.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "LAYOUT-001",
+      "force": "required",
+      "appliesWhen": {
+        "modes": [
+          "all"
+        ]
+      },
+      "statement": "Choose composition from content and task; do not default to split hero plus three cards.",
+      "trigger": "Same template structure appears across unrelated surfaces.",
+      "rationale": "The interface feels generic rather than product-specific.",
+      "recommendedAction": "Compare eligible alternatives when structure matters.",
+      "exceptions": "Split layout is valid when it is the clearest answer.",
+      "verification": {
+        "method": "Compare with brief.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "LAYOUT-002",
+      "force": "recommended",
+      "appliesWhen": {
+        "modes": [
+          "persuade"
+        ]
+      },
+      "statement": "Use the hero to communicate a specific promise and evidence.",
+      "trigger": "Hero contains abstract claims or unrelated decoration.",
+      "rationale": "First viewport does not explain the offer.",
+      "recommendedAction": "Use concrete message, recognizable product visual and clear action.",
+      "exceptions": "Typographic hero may fit a deliberate brand.",
+      "verification": {
+        "method": "Review content and first viewport.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "LAYOUT-003",
+      "force": "required",
+      "appliesWhen": {
+        "modes": [
+          "operate"
+        ]
+      },
+      "statement": "Keep the primary operation and context visible.",
+      "trigger": "User searches unrelated cards/views to continue a common task.",
+      "rationale": "Orientation and throughput suffer.",
+      "recommendedAction": "Group controls by workflow and preserve selected context.",
+      "exceptions": "Focused single-purpose tool may need minimal nav.",
+      "verification": {
+        "method": "Walk through a task.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "RESP-001",
+      "force": "required",
+      "appliesWhen": {
+        "modes": [
+          "all"
+        ]
+      },
+      "statement": "Preserve task-critical content and controls at narrow viewports.",
+      "trigger": "Overflow or hidden primary actions appear.",
+      "rationale": "Small-screen users cannot complete tasks.",
+      "recommendedAction": "Reflow and simplify secondary chrome while retaining context.",
+      "exceptions": "Specialized canvases may use labelled horizontal regions.",
+      "verification": {
+        "method": "Test target viewports.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "COLOR-001",
+      "force": "required",
+      "appliesWhen": {
+        "modes": [
+          "all"
+        ]
+      },
+      "statement": "Map colors to semantic roles and verify actual combinations.",
+      "trigger": "Raw colors are applied without role or state mapping.",
+      "rationale": "Themes and states become inconsistent.",
+      "recommendedAction": "Define canvas, surfaces, text, borders, actions, focus and statuses.",
+      "exceptions": "A simple illustration may need fewer roles.",
+      "verification": {
+        "method": "Inspect tokens and rendered pairs.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "COLOR-002",
+      "force": "required",
+      "appliesWhen": {
+        "modes": [
+          "all"
+        ]
+      },
+      "statement": "Check contrast on actual composited colors.",
+      "trigger": "Text overlays imagery, transparency or gradients without measurement.",
+      "rationale": "HEX values alone do not represent rendered contrast.",
+      "recommendedAction": "Measure final colors at real text sizes and states.",
+      "exceptions": "Decorative elements have applicable criteria.",
+      "verification": {
+        "method": "Run rendered contrast checks.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "STATE-001",
+      "force": "required",
+      "appliesWhen": {
+        "modes": [
+          "operate"
+        ]
+      },
+      "statement": "Specify loading, empty, error, disabled, success and focus states.",
+      "trigger": "Only ideal populated state is designed.",
+      "rationale": "Users cannot understand system response or recover.",
+      "recommendedAction": "Document state model for critical controls.",
+      "exceptions": "Static read-only content needs fewer states.",
+      "verification": {
+        "method": "Inspect component state matrix.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "STATE-002",
+      "force": "required",
+      "appliesWhen": {
+        "modes": [
+          "operate"
+        ]
+      },
+      "statement": "Preserve user input and context during recoverable errors.",
+      "trigger": "Validation clears fields or progress.",
+      "rationale": "Users repeat work and lose confidence.",
+      "recommendedAction": "Keep safe values and explain recovery.",
+      "exceptions": "Sensitive data may need clearing for security.",
+      "verification": {
+        "method": "Test error path.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "MOTION-001",
+      "force": "recommended",
+      "appliesWhen": {
+        "modes": [
+          "all"
+        ]
+      },
+      "statement": "Motion must communicate feedback, state, continuity or intentional storytelling.",
+      "trigger": "Animation exists only to decorate.",
+      "rationale": "Motion competes with content and slows interaction.",
+      "recommendedAction": "Remove motion without user or brand purpose.",
+      "exceptions": "Experience surfaces may use expressive motion.",
+      "verification": {
+        "method": "Review motion rationale.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "MOTION-002",
+      "force": "required",
+      "appliesWhen": {
+        "modes": [
+          "all"
+        ]
+      },
+      "statement": "Provide a reduced-motion path for non-essential motion.",
+      "trigger": "Information or interaction depends on animation.",
+      "rationale": "Users may lose access or experience discomfort.",
+      "recommendedAction": "Respect reduced-motion preference and preserve meaningful state.",
+      "exceptions": "Essential spatial motion needs suitable alternative.",
+      "verification": {
+        "method": "Test reduced motion.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "COMP-001",
+      "force": "recommended",
+      "appliesWhen": {
+        "modes": [
+          "all"
+        ]
+      },
+      "statement": "Use cards only for meaningful independent units.",
+      "trigger": "Every section becomes an identical grid.",
+      "rationale": "Visual chrome adds noise.",
+      "recommendedAction": "Consider lists, tables, steps or editorial blocks.",
+      "exceptions": "Cards suit comparable independent items.",
+      "verification": {
+        "method": "Review composition.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "COMP-002",
+      "force": "required",
+      "appliesWhen": {
+        "modes": [
+          "all"
+        ]
+      },
+      "statement": "Prefer native semantic controls before custom interactive elements.",
+      "trigger": "Clickable divs replace buttons/links/inputs without reason.",
+      "rationale": "Keyboard and assistive technology support degrade.",
+      "recommendedAction": "Use native HTML or document custom behavior.",
+      "exceptions": "Canvas tools may need custom pointer/keyboard handling.",
+      "verification": {
+        "method": "Inspect DOM semantics.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "FORM-001",
+      "force": "required",
+      "appliesWhen": {
+        "modes": [
+          "operate"
+        ]
+      },
+      "statement": "Give controls persistent accessible labels and clear validation.",
+      "trigger": "Placeholder is the only label.",
+      "rationale": "Users lose context; accessible naming may be unclear.",
+      "recommendedAction": "Use labels, descriptions, required cues and field errors.",
+      "exceptions": "Compact search can use accessible name and context.",
+      "verification": {
+        "method": "Keyboard and label review.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "NAV-001",
+      "force": "recommended",
+      "appliesWhen": {
+        "modes": [
+          "all"
+        ]
+      },
+      "statement": "Navigation should reflect information architecture and user frequency.",
+      "trigger": "Navigation follows fashion or has too many destinations.",
+      "rationale": "Users cannot predict where tasks live.",
+      "recommendedAction": "Group by task and frequency; expose current location.",
+      "exceptions": "Portfolio index may be novel if discoverable.",
+      "verification": {
+        "method": "Task-based navigation check.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "DATA-001",
+      "force": "required",
+      "appliesWhen": {
+        "modes": [
+          "operate"
+        ]
+      },
+      "statement": "Label metrics with units, period, scope and provenance.",
+      "trigger": "Charts show numbers without definitions or time window.",
+      "rationale": "Users misinterpret measurements.",
+      "recommendedAction": "Add units, range, source and freshness.",
+      "exceptions": "Illustrative charts must be labelled.",
+      "verification": {
+        "method": "Data review.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "DATA-002",
+      "force": "required",
+      "appliesWhen": {
+        "modes": [
+          "operate"
+        ]
+      },
+      "statement": "Do not fabricate live metrics, status or availability.",
+      "trigger": "Demo values appear live without identification.",
+      "rationale": "Users mistake mock data for operational truth.",
+      "recommendedAction": "Use real data or conspicuously labelled fixtures.",
+      "exceptions": "Prototypes may use explicit mock data.",
+      "verification": {
+        "method": "Content provenance review.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "COPY-001",
+      "force": "required",
+      "appliesWhen": {
+        "modes": [
+          "all"
+        ]
+      },
+      "statement": "Do not invent factual claims, testimonials, customer logos or certifications.",
+      "trigger": "Trust content has no source.",
+      "rationale": "Interface misleads and may create legal risk.",
+      "recommendedAction": "Use supplied verified content or labelled placeholders.",
+      "exceptions": "Fictional concepts must be clearly fictional.",
+      "verification": {
+        "method": "Review copy sources.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "IMAGE-001",
+      "force": "recommended",
+      "appliesWhen": {
+        "modes": [
+          "persuade"
+        ]
+      },
+      "statement": "Choose imagery that demonstrates product or story.",
+      "trigger": "Generic stock substitutes for product evidence.",
+      "rationale": "Images weaken comprehension and distinctiveness.",
+      "recommendedAction": "Use authentic product imagery or contextual art direction.",
+      "exceptions": "Abstract visuals may fit deliberate brand.",
+      "verification": {
+        "method": "Review image relevance.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "IMAGE-002",
+      "force": "required",
+      "appliesWhen": {
+        "modes": [
+          "all"
+        ]
+      },
+      "statement": "Track provenance and reuse rights for external assets.",
+      "trigger": "Image/font/icon/video has no source/licence record.",
+      "rationale": "Production reuse may violate rights/terms.",
+      "recommendedAction": "Record original URL, creator, licence, date and restrictions.",
+      "exceptions": "Original project assets need internal provenance.",
+      "verification": {
+        "method": "Audit asset manifest.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "A11Y-001",
+      "force": "required",
+      "appliesWhen": {
+        "modes": [
+          "all"
+        ]
+      },
+      "statement": "Do not communicate status through color alone.",
+      "trigger": "Status is indicated only by hue.",
+      "rationale": "Some users may miss the meaning.",
+      "recommendedAction": "Pair color with text, icon, shape or another cue.",
+      "exceptions": "Decorative color fields are not statuses.",
+      "verification": {
+        "method": "Visual and semantic review.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "A11Y-002",
+      "force": "required",
+      "appliesWhen": {
+        "modes": [
+          "all"
+        ]
+      },
+      "statement": "Ensure keyboard operation and visible focus.",
+      "trigger": "A control is pointer-only or focus is invisible.",
+      "rationale": "Keyboard users cannot operate or track interface.",
+      "recommendedAction": "Use logical order, visible focus and documented patterns.",
+      "exceptions": "Canvas gestures need accessible alternatives.",
+      "verification": {
+        "method": "Keyboard test.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "DENSITY-001",
+      "force": "contextual",
+      "appliesWhen": {
+        "modes": [
+          "operate"
+        ]
+      },
+      "statement": "Tune density to task frequency and information complexity.",
+      "trigger": "All dashboards are sparse or dense without role evidence.",
+      "rationale": "Throughput or comprehension may suffer.",
+      "recommendedAction": "Test density with realistic data and common tasks.",
+      "exceptions": "Expert tools may use adjustable compact density.",
+      "verification": {
+        "method": "Task and viewport review.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "BRAND-001",
+      "force": "required",
+      "appliesWhen": {
+        "modes": [
+          "all"
+        ]
+      },
+      "statement": "Preserve approved brand tokens unless redesign is authorized.",
+      "trigger": "A preset silently replaces project colors or typography.",
+      "rationale": "Product identity is lost without consent.",
+      "recommendedAction": "Treat existing tokens as constraints and document migration.",
+      "exceptions": "Explicit rebrand can replace visual world with approval.",
+      "verification": {
+        "method": "Review token diff.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "EVIDENCE-001",
+      "force": "required",
+      "appliesWhen": {
+        "modes": [
+          "all"
+        ]
+      },
+      "statement": "A reference URL is a research lead, not proof of a verified observation.",
+      "trigger": "Catalog link is described as inspected without page evidence.",
+      "rationale": "Decisions gain false confidence.",
+      "recommendedAction": "Record page, section, date, viewport and observation before verification.",
+      "exceptions": "Normative source supports only its specific scoped claim.",
+      "verification": {
+        "method": "Review observation record.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "PRESET-001",
+      "force": "required",
+      "appliesWhen": {
+        "modes": [
+          "all"
+        ]
+      },
+      "statement": "Treat preset/style matches as provisional candidates.",
+      "trigger": "A match is applied without checking brand, task or platform.",
+      "rationale": "Direction may not fit the real product.",
+      "recommendedAction": "Explain match rationale, alternatives and confidence.",
+      "exceptions": "Approved preset may apply within scope.",
+      "verification": {
+        "method": "Review direction artifact.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    },
+    {
+      "id": "QA-001",
+      "force": "required",
+      "appliesWhen": {
+        "modes": [
+          "all"
+        ]
+      },
+      "statement": "Separate objective defects, heuristic candidates and subjective preferences.",
+      "trigger": "Aesthetic preference is reported as a confirmed defect.",
+      "rationale": "Review quality and trust degrade.",
+      "recommendedAction": "State evidence, confidence, impact and verification for each finding.",
+      "exceptions": "Human critique may include opinion when labelled.",
+      "verification": {
+        "method": "Audit finding contract.",
+        "requiredEvidence": "Capture actual interface state or source artifact under review.",
+        "status": "not-run"
+      },
+      "references": [
+        "wcag-22",
+        "nngroup"
+      ],
+      "provenance": [
+        "Integra design-engineering principles",
+        "AI Design Engine migration",
+        "Impeccable methodology study"
+      ],
+      "heuristic": true
+    }
+  ]
+}

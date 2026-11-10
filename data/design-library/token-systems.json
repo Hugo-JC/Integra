@@ -1,0 +1,861 @@
+{
+  "schemaVersion": "1.0.0",
+  "policy": "Recipes are contextual starting points, not brand overrides or conformance claims. Preserve project tokens and verify rendered states.",
+  "tokenSystems": [
+    {
+      "id": "neutral-product-light",
+      "name": "Neutral Product — Light",
+      "role": "General-purpose light product UI",
+      "modes": [
+        "operate",
+        "read"
+      ],
+      "contexts": [
+        "saas",
+        "productivity",
+        "developer-tools",
+        "admin"
+      ],
+      "tags": [
+        "neutral",
+        "precise",
+        "professional"
+      ],
+      "status": "starter-recipe",
+      "contrastStatus": "requires-rendered-verification",
+      "tokens": {
+        "colors": {
+          "canvas": "#F7F8FA",
+          "surface": "#FFFFFF",
+          "surfaceRaised": "#FFFFFF",
+          "surfaceMuted": "#F1F3F5",
+          "textPrimary": "#17191C",
+          "textSecondary": "#626B76",
+          "textMuted": "#747D88",
+          "border": "#DDE2E7",
+          "borderStrong": "#B9C2CC",
+          "action": "#2563EB",
+          "actionHover": "#1D4ED8",
+          "focus": "#2563EB",
+          "success": "#18794E",
+          "warning": "#9A6700",
+          "danger": "#C43232"
+        },
+        "typography": {
+          "display": "Geist",
+          "heading": "Geist",
+          "body": "Inter",
+          "mono": "IBM Plex Mono",
+          "scale": [
+            "0.75rem",
+            "0.875rem",
+            "1rem",
+            "1.125rem",
+            "1.25rem",
+            "1.5rem",
+            "1.875rem",
+            "2.25rem"
+          ],
+          "bodyLineHeight": 1.5,
+          "measure": "Set per content type"
+        },
+        "spacing": {
+          "unit": 4,
+          "scale": [
+            4,
+            8,
+            12,
+            16,
+            24,
+            32,
+            40,
+            48,
+            64,
+            80,
+            96
+          ]
+        },
+        "radius": {
+          "control": "8px",
+          "card": "12px",
+          "panel": "16px",
+          "pill": "999px"
+        },
+        "grid": {
+          "desktopColumns": 12,
+          "tabletColumns": 8,
+          "mobileColumns": 4
+        },
+        "elevation": {
+          "subtle": "0 1px 3px rgba(0,0,0,.06)",
+          "raised": "0 10px 28px rgba(0,0,0,.10)"
+        },
+        "motion": {
+          "fast": "120ms",
+          "normal": "180ms",
+          "emphasis": "260ms",
+          "easing": "cubic-bezier(.2,.8,.2,1)"
+        }
+      },
+      "useWhen": [
+        "A neutral light workspace needs clear hierarchy and low decorative noise."
+      ],
+      "avoidWhen": [
+        "An expressive brand requires another visual world."
+      ],
+      "notes": [
+        "Preserve existing project tokens first.",
+        "Verify all semantic pairs and states after rendering."
+      ]
+    },
+    {
+      "id": "neutral-product-dark",
+      "name": "Neutral Product — Dark",
+      "role": "Dark operational product UI",
+      "modes": [
+        "operate"
+      ],
+      "contexts": [
+        "developer-tools",
+        "productivity",
+        "analytics",
+        "saas"
+      ],
+      "tags": [
+        "dark",
+        "technical",
+        "focused"
+      ],
+      "status": "starter-recipe",
+      "contrastStatus": "requires-rendered-verification",
+      "tokens": {
+        "colors": {
+          "canvas": "#090B0F",
+          "surface": "#11151B",
+          "surfaceRaised": "#171D25",
+          "surfaceMuted": "#1D2530",
+          "textPrimary": "#F4F6F8",
+          "textSecondary": "#B1BAC5",
+          "textMuted": "#8C98A6",
+          "border": "#2B3542",
+          "borderStrong": "#465363",
+          "action": "#60A5FA",
+          "actionHover": "#93C5FD",
+          "focus": "#93C5FD",
+          "success": "#4ADE80",
+          "warning": "#FBBF24",
+          "danger": "#F87171"
+        },
+        "typography": {
+          "display": "Geist",
+          "heading": "Geist",
+          "body": "Inter",
+          "mono": "IBM Plex Mono",
+          "scale": [
+            "0.75rem",
+            "0.875rem",
+            "1rem",
+            "1.125rem",
+            "1.25rem",
+            "1.5rem",
+            "1.875rem",
+            "2.25rem"
+          ],
+          "bodyLineHeight": 1.5,
+          "measure": "Set per content type"
+        },
+        "spacing": {
+          "unit": 4,
+          "scale": [
+            4,
+            8,
+            12,
+            16,
+            20,
+            24,
+            32,
+            40,
+            48,
+            64
+          ]
+        },
+        "radius": {
+          "control": "7px",
+          "card": "10px",
+          "panel": "14px",
+          "pill": "999px"
+        },
+        "grid": {
+          "desktopColumns": 12,
+          "tabletColumns": 8,
+          "mobileColumns": 4
+        },
+        "elevation": {
+          "subtle": "0 1px 3px rgba(0,0,0,.06)",
+          "raised": "0 10px 28px rgba(0,0,0,.10)"
+        },
+        "motion": {
+          "fast": "120ms",
+          "normal": "180ms",
+          "emphasis": "260ms",
+          "easing": "cubic-bezier(.2,.8,.2,1)"
+        }
+      },
+      "useWhen": [
+        "A dark theme is explicitly requested or already established by the product."
+      ],
+      "avoidWhen": [
+        "Dark mode is chosen only because it is fashionable."
+      ],
+      "notes": [
+        "Do not dim secondary text excessively.",
+        "Test disabled, hover, focus, chart and selected states."
+      ]
+    },
+    {
+      "id": "warm-editorial",
+      "name": "Warm Editorial",
+      "role": "Reading, portfolio and brand storytelling",
+      "modes": [
+        "read",
+        "persuade",
+        "experience"
+      ],
+      "contexts": [
+        "editorial",
+        "portfolio",
+        "publishing",
+        "hospitality"
+      ],
+      "tags": [
+        "editorial",
+        "warm",
+        "typographic",
+        "image-led"
+      ],
+      "status": "starter-recipe",
+      "contrastStatus": "requires-rendered-verification",
+      "tokens": {
+        "colors": {
+          "canvas": "#F7F4EE",
+          "surface": "#FFFEFC",
+          "surfaceRaised": "#FFFFFF",
+          "surfaceMuted": "#EEE9E0",
+          "textPrimary": "#24211D",
+          "textSecondary": "#58534C",
+          "textMuted": "#6E675F",
+          "border": "#DCD5CA",
+          "borderStrong": "#B9AEA0",
+          "action": "#8A3E25",
+          "actionHover": "#6F301D",
+          "focus": "#1D4ED8",
+          "success": "#28634B",
+          "warning": "#875500",
+          "danger": "#A83232"
+        },
+        "typography": {
+          "display": "Newsreader",
+          "heading": "Newsreader",
+          "body": "Inter",
+          "mono": "IBM Plex Mono",
+          "scale": [
+            "0.75rem",
+            "0.875rem",
+            "1rem",
+            "1.125rem",
+            "1.375rem",
+            "1.75rem",
+            "2.25rem",
+            "3rem",
+            "4rem"
+          ],
+          "bodyLineHeight": 1.5,
+          "measure": "Set per content type"
+        },
+        "spacing": {
+          "unit": 4,
+          "scale": [
+            4,
+            8,
+            12,
+            16,
+            24,
+            32,
+            48,
+            64,
+            80,
+            112,
+            144
+          ]
+        },
+        "radius": {
+          "control": "4px",
+          "card": "8px",
+          "panel": "12px",
+          "pill": "999px"
+        },
+        "grid": {
+          "desktopColumns": 12,
+          "tabletColumns": 8,
+          "mobileColumns": 4
+        },
+        "elevation": {
+          "subtle": "0 1px 3px rgba(0,0,0,.06)",
+          "raised": "0 10px 28px rgba(0,0,0,.10)"
+        },
+        "motion": {
+          "fast": "120ms",
+          "normal": "180ms",
+          "emphasis": "260ms",
+          "easing": "cubic-bezier(.2,.8,.2,1)"
+        }
+      },
+      "useWhen": [
+        "Reading, editorial hierarchy or portfolio work is central."
+      ],
+      "avoidWhen": [
+        "Dense operational tables dominate the surface."
+      ],
+      "notes": [
+        "Use real product/editorial imagery.",
+        "Check serif glyph coverage and body type separately."
+      ]
+    },
+    {
+      "id": "civic-accessible",
+      "name": "Civic Clarity",
+      "role": "High-clarity public and consequential service UI",
+      "modes": [
+        "operate",
+        "read"
+      ],
+      "contexts": [
+        "public-service",
+        "education",
+        "healthcare",
+        "legal",
+        "forms"
+      ],
+      "tags": [
+        "accessible",
+        "plain-language",
+        "trust",
+        "functional"
+      ],
+      "status": "starter-recipe",
+      "contrastStatus": "requires-rendered-verification",
+      "tokens": {
+        "colors": {
+          "canvas": "#F8FAFC",
+          "surface": "#FFFFFF",
+          "surfaceRaised": "#FFFFFF",
+          "surfaceMuted": "#EEF2F6",
+          "textPrimary": "#111827",
+          "textSecondary": "#344256",
+          "textMuted": "#475569",
+          "border": "#CBD5E1",
+          "borderStrong": "#64748B",
+          "action": "#075EA8",
+          "actionHover": "#064B86",
+          "focus": "#111827",
+          "success": "#176B45",
+          "warning": "#805600",
+          "danger": "#B42318"
+        },
+        "typography": {
+          "display": "Public Sans",
+          "heading": "Public Sans",
+          "body": "Inter",
+          "mono": "IBM Plex Mono",
+          "scale": [
+            "0.875rem",
+            "1rem",
+            "1.125rem",
+            "1.25rem",
+            "1.5rem",
+            "1.875rem",
+            "2.25rem",
+            "2.75rem"
+          ],
+          "bodyLineHeight": 1.5,
+          "measure": "Set per content type"
+        },
+        "spacing": {
+          "unit": 4,
+          "scale": [
+            4,
+            8,
+            12,
+            16,
+            24,
+            32,
+            40,
+            48,
+            64,
+            80
+          ]
+        },
+        "radius": {
+          "control": "4px",
+          "card": "6px",
+          "panel": "8px",
+          "pill": "999px"
+        },
+        "grid": {
+          "desktopColumns": 12,
+          "tabletColumns": 8,
+          "mobileColumns": 4
+        },
+        "elevation": {
+          "subtle": "0 1px 3px rgba(0,0,0,.06)",
+          "raised": "0 10px 28px rgba(0,0,0,.10)"
+        },
+        "motion": {
+          "fast": "120ms",
+          "normal": "180ms",
+          "emphasis": "260ms",
+          "easing": "cubic-bezier(.2,.8,.2,1)"
+        }
+      },
+      "useWhen": [
+        "A service communicates consequential information or helps people complete a high-trust form."
+      ],
+      "avoidWhen": [
+        "An expressive brand campaign is the main objective."
+      ],
+      "notes": [
+        "A starting point, not a WCAG compliance claim.",
+        "Localize legal and policy content to the right jurisdiction."
+      ]
+    },
+    {
+      "id": "expressive-brutalist",
+      "name": "Expressive Brutalist",
+      "role": "Expressive campaign, creator and youth-facing brand surfaces",
+      "modes": [
+        "persuade",
+        "experience"
+      ],
+      "contexts": [
+        "creative-agency",
+        "events",
+        "community",
+        "indie-games"
+      ],
+      "tags": [
+        "expressive",
+        "graphic",
+        "bold",
+        "playful"
+      ],
+      "status": "starter-recipe",
+      "contrastStatus": "requires-rendered-verification",
+      "tokens": {
+        "colors": {
+          "canvas": "#FFF6D6",
+          "surface": "#FFFFFF",
+          "surfaceRaised": "#FFFFFF",
+          "surfaceMuted": "#FDE9A8",
+          "textPrimary": "#151515",
+          "textSecondary": "#34302A",
+          "textMuted": "#49443A",
+          "border": "#151515",
+          "borderStrong": "#151515",
+          "action": "#D7352A",
+          "actionHover": "#A9231B",
+          "focus": "#1D4ED8",
+          "success": "#176B45",
+          "warning": "#875500",
+          "danger": "#A9231B"
+        },
+        "typography": {
+          "display": "Space Grotesk",
+          "heading": "Space Grotesk",
+          "body": "Inter",
+          "mono": "IBM Plex Mono",
+          "scale": [
+            "0.75rem",
+            "0.875rem",
+            "1rem",
+            "1.25rem",
+            "1.5rem",
+            "2rem",
+            "3rem",
+            "4.5rem",
+            "6rem"
+          ],
+          "bodyLineHeight": 1.5,
+          "measure": "Set per content type"
+        },
+        "spacing": {
+          "unit": 4,
+          "scale": [
+            4,
+            8,
+            12,
+            16,
+            24,
+            32,
+            48,
+            64,
+            96,
+            128
+          ]
+        },
+        "radius": {
+          "control": "0px",
+          "card": "0px",
+          "panel": "0px",
+          "pill": "999px"
+        },
+        "grid": {
+          "desktopColumns": 12,
+          "tabletColumns": 8,
+          "mobileColumns": 4
+        },
+        "elevation": {
+          "subtle": "0 1px 3px rgba(0,0,0,.06)",
+          "raised": "0 10px 28px rgba(0,0,0,.10)"
+        },
+        "motion": {
+          "fast": "120ms",
+          "normal": "180ms",
+          "emphasis": "260ms",
+          "easing": "cubic-bezier(.2,.8,.2,1)"
+        }
+      },
+      "useWhen": [
+        "A graphic and high-energy identity is explicit in the brief."
+      ],
+      "avoidWhen": [
+        "Sensitive or information-dense workflows require restraint."
+      ],
+      "notes": [
+        "Square corners are deliberate here, not universal.",
+        "Maintain touch, focus and readable text."
+      ]
+    },
+    {
+      "id": "high-density-analytics",
+      "name": "High-Density Analytics",
+      "role": "Data-heavy dashboards and monitoring",
+      "modes": [
+        "operate"
+      ],
+      "contexts": [
+        "analytics",
+        "finance-ops",
+        "monitoring",
+        "admin",
+        "logistics"
+      ],
+      "tags": [
+        "dense",
+        "data",
+        "tables",
+        "monitoring"
+      ],
+      "status": "starter-recipe",
+      "contrastStatus": "requires-rendered-verification",
+      "tokens": {
+        "colors": {
+          "canvas": "#F5F7FA",
+          "surface": "#FFFFFF",
+          "surfaceRaised": "#FFFFFF",
+          "surfaceMuted": "#EFF3F7",
+          "textPrimary": "#17202B",
+          "textSecondary": "#445264",
+          "textMuted": "#617084",
+          "border": "#D6DEE8",
+          "borderStrong": "#AAB7C6",
+          "action": "#245FBA",
+          "actionHover": "#1D4C93",
+          "focus": "#174EA6",
+          "success": "#1F7A4D",
+          "warning": "#956400",
+          "danger": "#B42318"
+        },
+        "typography": {
+          "display": "Inter",
+          "heading": "Inter",
+          "body": "Inter",
+          "mono": "IBM Plex Mono",
+          "scale": [
+            "0.6875rem",
+            "0.75rem",
+            "0.8125rem",
+            "0.875rem",
+            "1rem",
+            "1.125rem",
+            "1.25rem",
+            "1.5rem"
+          ],
+          "bodyLineHeight": 1.5,
+          "measure": "Set per content type"
+        },
+        "spacing": {
+          "unit": 4,
+          "scale": [
+            2,
+            4,
+            6,
+            8,
+            12,
+            16,
+            20,
+            24,
+            32,
+            40,
+            48
+          ]
+        },
+        "radius": {
+          "control": "4px",
+          "card": "6px",
+          "panel": "8px",
+          "pill": "999px"
+        },
+        "grid": {
+          "desktopColumns": 12,
+          "tabletColumns": 8,
+          "mobileColumns": 4
+        },
+        "elevation": {
+          "subtle": "0 1px 3px rgba(0,0,0,.06)",
+          "raised": "0 10px 28px rgba(0,0,0,.10)"
+        },
+        "motion": {
+          "fast": "120ms",
+          "normal": "180ms",
+          "emphasis": "260ms",
+          "easing": "cubic-bezier(.2,.8,.2,1)"
+        }
+      },
+      "useWhen": [
+        "Frequent scanning, comparison and dense tabular data are central."
+      ],
+      "avoidWhen": [
+        "A sparse editorial experience is primary."
+      ],
+      "notes": [
+        "Tune density by role and task.",
+        "Preserve row readability and responsive alternatives."
+      ]
+    },
+    {
+      "id": "organic-wellness",
+      "name": "Organic Wellness",
+      "role": "Calm wellbeing and care product surfaces",
+      "modes": [
+        "persuade",
+        "read",
+        "operate"
+      ],
+      "contexts": [
+        "wellness",
+        "beauty",
+        "care",
+        "hospitality"
+      ],
+      "tags": [
+        "organic",
+        "calm",
+        "warm",
+        "human"
+      ],
+      "status": "starter-recipe",
+      "contrastStatus": "requires-rendered-verification",
+      "tokens": {
+        "colors": {
+          "canvas": "#F6F5EF",
+          "surface": "#FFFFFF",
+          "surfaceRaised": "#FFFFFF",
+          "surfaceMuted": "#E9EEE5",
+          "textPrimary": "#202A24",
+          "textSecondary": "#4D5D52",
+          "textMuted": "#647568",
+          "border": "#D5DED4",
+          "borderStrong": "#AAB9A8",
+          "action": "#35664A",
+          "actionHover": "#254D37",
+          "focus": "#1D4ED8",
+          "success": "#28634B",
+          "warning": "#875500",
+          "danger": "#A83232"
+        },
+        "typography": {
+          "display": "Newsreader",
+          "heading": "Newsreader",
+          "body": "Inter",
+          "mono": "IBM Plex Mono",
+          "scale": [
+            "0.75rem",
+            "0.875rem",
+            "1rem",
+            "1.125rem",
+            "1.375rem",
+            "1.75rem",
+            "2.25rem",
+            "3rem"
+          ],
+          "bodyLineHeight": 1.5,
+          "measure": "Set per content type"
+        },
+        "spacing": {
+          "unit": 4,
+          "scale": [
+            4,
+            8,
+            12,
+            16,
+            24,
+            32,
+            48,
+            64,
+            88,
+            112
+          ]
+        },
+        "radius": {
+          "control": "8px",
+          "card": "14px",
+          "panel": "20px",
+          "pill": "999px"
+        },
+        "grid": {
+          "desktopColumns": 12,
+          "tabletColumns": 8,
+          "mobileColumns": 4
+        },
+        "elevation": {
+          "subtle": "0 1px 3px rgba(0,0,0,.06)",
+          "raised": "0 10px 28px rgba(0,0,0,.10)"
+        },
+        "motion": {
+          "fast": "120ms",
+          "normal": "180ms",
+          "emphasis": "260ms",
+          "easing": "cubic-bezier(.2,.8,.2,1)"
+        }
+      },
+      "useWhen": [
+        "A calm and human tone is explicit and supported by the product."
+      ],
+      "avoidWhen": [
+        "A clinical or safety-critical product needs more neutral language."
+      ],
+      "notes": [
+        "Avoid generic leaf motifs and unsupported health claims.",
+        "Use real provenance and readable copy."
+      ]
+    },
+    {
+      "id": "premium-commerce",
+      "name": "Premium Commerce",
+      "role": "Product-led, high-consideration commerce",
+      "modes": [
+        "persuade",
+        "operate"
+      ],
+      "contexts": [
+        "fashion",
+        "jewelry",
+        "hardware",
+        "beauty",
+        "hospitality"
+      ],
+      "tags": [
+        "premium",
+        "product-led",
+        "editorial",
+        "commerce"
+      ],
+      "status": "starter-recipe",
+      "contrastStatus": "requires-rendered-verification",
+      "tokens": {
+        "colors": {
+          "canvas": "#F8F6F1",
+          "surface": "#FFFFFF",
+          "surfaceRaised": "#FFFFFF",
+          "surfaceMuted": "#EEEAE2",
+          "textPrimary": "#24211D",
+          "textSecondary": "#625B52",
+          "textMuted": "#766E64",
+          "border": "#D9D1C5",
+          "borderStrong": "#AFA394",
+          "action": "#24211D",
+          "actionHover": "#000000",
+          "focus": "#1D4ED8",
+          "success": "#28634B",
+          "warning": "#875500",
+          "danger": "#A83232"
+        },
+        "typography": {
+          "display": "Cormorant Garamond",
+          "heading": "Cormorant Garamond",
+          "body": "Inter",
+          "mono": "IBM Plex Mono",
+          "scale": [
+            "0.75rem",
+            "0.875rem",
+            "1rem",
+            "1.125rem",
+            "1.375rem",
+            "1.75rem",
+            "2.25rem",
+            "3.25rem",
+            "4.5rem"
+          ],
+          "bodyLineHeight": 1.5,
+          "measure": "Set per content type"
+        },
+        "spacing": {
+          "unit": 4,
+          "scale": [
+            4,
+            8,
+            12,
+            16,
+            24,
+            32,
+            48,
+            64,
+            96,
+            128
+          ]
+        },
+        "radius": {
+          "control": "4px",
+          "card": "8px",
+          "panel": "12px",
+          "pill": "999px"
+        },
+        "grid": {
+          "desktopColumns": 12,
+          "tabletColumns": 8,
+          "mobileColumns": 4
+        },
+        "elevation": {
+          "subtle": "0 1px 3px rgba(0,0,0,.06)",
+          "raised": "0 10px 28px rgba(0,0,0,.10)"
+        },
+        "motion": {
+          "fast": "120ms",
+          "normal": "180ms",
+          "emphasis": "260ms",
+          "easing": "cubic-bezier(.2,.8,.2,1)"
+        }
+      },
+      "useWhen": [
+        "A high-consideration product needs imagery, material detail and clear purchase information."
+      ],
+      "avoidWhen": [
+        "The product depends on rapid task throughput or rejects editorial language."
+      ],
+      "notes": [
+        "Avoid gold-on-everything and vague luxury copy.",
+        "Price, stock and variants remain easy to locate."
+      ]
+    }
+  ]
+}

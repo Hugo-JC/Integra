@@ -145,3 +145,8 @@ Keep this record proportional to task complexity. A small component may need onl
 - A heuristic match is not a confirmed QA finding.
 - Accessibility and real task completion outrank aesthetic novelty.
 - A command, generated proposal or passing check does not authorize source mutation.
+
+
+## 10. Visual knowledge library v2
+
+Use `integra-visual-knowledge` and `data/design-library/` when the task needs more than niche/style matching. Keep source leads separate from inspected observations, asset providers separate from inspiration galleries, and starter token recipes separate from approved project identity. Retrieve sources by the question they can answer, normally one to three; select token recipes only after checking surface mode and existing project tokens; select layout patterns only when their content prerequisites are met. Treat design rules and anti-patterns as candidates for inspection, never as confirmed QA findings. See [Visual knowledge routing](visual-knowledge-routing.md) and the [library manifest](../../data/design-library/manifest.json).

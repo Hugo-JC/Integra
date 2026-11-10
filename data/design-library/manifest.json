@@ -1,19 +1,66 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "name": "Integra Design Intelligence Library",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "origin": {
     "repository": "https://github.com/Hugo-JC/ai-design-engine",
     "files": [
       "02-styles-and-tokens/design-styles.json",
       "03-references/local-presets.json",
       "03-references/reference-sources.json"
+    ],
+    "primarySources": [
+      "Hugo-JC/ai-design-engine (user-owned domain and niche knowledge)",
+      "Impeccable (primary design methodology and critique reference; original Integra synthesis)"
+    ],
+    "secondarySources": [
+      "Official design systems and platform documentation",
+      "Normative standards and accessibility guidance",
+      "Live product examples",
+      "Curated visual and product-UI galleries",
+      "Asset, font, color and motion providers"
     ]
   },
   "counts": {
     "styles": 17,
     "nichePresets": 61,
-    "referenceSources": 14
+    "legacyReferenceSources": 14,
+    "visualSources": 72,
+    "nicheMappings": 61,
+    "assetSources": 10,
+    "tokenSystems": 8,
+    "layoutPatterns": 20,
+    "designRules": 32,
+    "antiPatterns": 21,
+    "examples": 7,
+    "verifiedObservations": 0
   },
-  "policy": "Presets are contextual starting points, not mandatory visual templates. Always preserve explicit brand constraints, accessibility requirements, product context and user intent. Do not copy complete reference layouts."
+  "policy": "Presets and token recipes are contextual starting points, never universal templates. Preserve user intent, existing project identity, actual product behavior, accessibility, evidence status and provenance. Extract principles rather than reproducing complete reference pages, code or assets.",
+  "catalogs": {
+    "styles": "design-styles.json",
+    "niches": "local-presets.json",
+    "legacyReferenceSources": "reference-sources.json",
+    "visualSources": "visual-sources.json",
+    "nicheReferences": "niche-reference-map.json",
+    "assetSources": "asset-sources.json",
+    "referenceObservations": "reference-observations.json",
+    "tokenSystems": "token-systems.json",
+    "layoutPatterns": "layout-patterns.json",
+    "designRules": "design-rules.json",
+    "antiPatterns": "anti-patterns.json",
+    "examples": "examples/index.json"
+  },
+  "evidencePolicy": {
+    "newSources": "catalog-only",
+    "verifiedRequires": "Inspection of a specific page or section with date, evidence type, observed state/viewport and limitations.",
+    "assetRights": "Per-asset source, creator, licence/version, attribution and restriction checks are required before production use.",
+    "tokenContrast": "Recipes require actual rendered contrast verification; no starter recipe claims conformance.",
+    "rules": "Heuristic unless explicitly linked to an applicable normative criterion; never a defect without observation and impact."
+  },
+  "compatibility": {
+    "preserveExistingPresetIds": true,
+    "preserveExistingStyleIds": true,
+    "preserveExistingArchetypeIds": true,
+    "commandsChanged": false
+  }
 }

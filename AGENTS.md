@@ -30,7 +30,7 @@ The command manifest, schema validation, deterministic route planning, structure
 
 ## AI context, presets and evidence
 
-Read `docs/ai-guides/preset-reference-escape-routing.md` together with `docs/ai-context-contract.md` whenever presets, references or layout options influence a design decision.
+Read `docs/ai-guides/preset-reference-escape-routing.md` together with `docs/ai-context-contract.md` whenever presets, references or layout options influence a design decision. Read `.agents/skills/integra-visual-knowledge/SKILL.md` when curating or retrieving knowledge from the visual library.
 
 Also read `docs/ai-context-contract.md` for source precedence, fact/assumption classification, severity and approval rules. The deterministic style route, advisory niche discovery and structured product profiles are separate layers; never treat them as interchangeable. A reference URL or catalog title is not evidence that the live page was inspected.
 
@@ -45,6 +45,7 @@ Read the relevant canonical task skill under `.agents/skills/<skill-name>/SKILL.
 - Review/critique: `integra-design-qa`.
 - Accessibility: `integra-accessibility-audit`.
 - External research: `integra-investigation` and `integra-reference-investigator`.
+- Visual knowledge library: `integra-visual-knowledge` for explained sources, observations, asset providers, niche mappings, tokens, layout patterns, rules, anti-patterns and examples.
 - Tokens/components: `integra-design-system`.
 - Strategic color refinement: `integra-colorize`.
 - Purposeful transitions, micro-interactions and motion systems: `integra-animate`.

@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://integra.dev/schemas/design-example.schema.json",
+  "title": "Design knowledge example",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "productType",
+    "mode",
+    "goal",
+    "tokenSystemIds",
+    "patternIds",
+    "referenceIds",
+    "ruleIds",
+    "antiPatternIds",
+    "decisions",
+    "tradeoffs",
+    "acceptanceChecks",
+    "evidenceStatus"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "productType": {
+      "type": "string"
+    },
+    "mode": {
+      "enum": [
+        "persuade",
+        "operate",
+        "read",
+        "experience"
+      ]
+    },
+    "goal": {
+      "type": "string"
+    },
+    "nicheId": {
+      "type": "string"
+    },
+    "tokenSystemIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "patternIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "referenceIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ruleIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "antiPatternIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "decisions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "tradeoffs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "acceptanceChecks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidenceStatus": {
+      "const": "illustrative-guidance"
+    }
+  }
+}

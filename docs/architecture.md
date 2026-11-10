@@ -79,3 +79,8 @@ Live Inspector is an optional browser adapter. It uses Vite `apply: 'serve'`, Sh
 `integra-animate` é a especialista para motion design e engenharia de interação. Produz uma Motion Brief com tese, momento focal, continuidade, feedback, orçamento, timing, easing, comportamento interrompível, alternativa para `prefers-reduced-motion` e plano de verificação. A implementação reutiliza o stack existente; não adiciona uma biblioteca por defeito.
 
 Motion é uma camada de orientação, não um runtime adicional. O bundle do `integra-cli` inclui a skill e os avisos/licenças de terceiros, mas não inclui os binários, scripts ou dependências do Impeccable.
+
+
+## Visual knowledge library v2
+
+`data/design-library/` separates explained visual source leads, asset providers, niche mappings, page-level observations, semantic token recipes, task/mode-aware layout patterns, conditional design rules, anti-pattern hypotheses and illustrative examples. `.agents/skills/integra-visual-knowledge/` governs curation and consumption. `src/modules/direction/knowledge/` provides deterministic offline retrieval with match reasons and explicit safeguards; it does not inspect external sources, apply tokens, verify licences or mutate a project. New sources remain `catalog-only` until a specific page-level observation is recorded.

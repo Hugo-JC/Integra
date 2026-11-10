@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://integra.dev/schemas/anti-pattern.schema.json",
+  "title": "Design anti-pattern",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "summary",
+    "trigger",
+    "impact",
+    "alternative",
+    "exceptions",
+    "modeScope",
+    "status",
+    "verification",
+    "evidenceRequired"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "trigger": {
+      "type": "string"
+    },
+    "impact": {
+      "type": "string"
+    },
+    "alternative": {
+      "type": "string"
+    },
+    "exceptions": {
+      "type": "string"
+    },
+    "modeScope": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "persuade",
+          "operate",
+          "read",
+          "experience"
+        ]
+      }
+    },
+    "status": {
+      "const": "heuristic"
+    },
+    "verification": {
+      "type": "string"
+    },
+    "evidenceRequired": {
+      "const": true
+    }
+  }
+}

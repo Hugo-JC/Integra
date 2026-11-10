@@ -1,0 +1,207 @@
+{
+  "schemaVersion": "1.0.0",
+  "policy": "Provider records identify discovery sources only. Every exact asset, font, icon or animation requires its own provenance, current licence/terms check and suitability review before production use.",
+  "providers": [
+    {
+      "id": "unsplash",
+      "name": "Unsplash",
+      "url": "https://unsplash.com/",
+      "assetTypes": [
+        "photography"
+      ],
+      "bestFor": "Photography for editorial, product context and visual storytelling.",
+      "discovery": "Search by subject, color, composition and orientation; open the exact image page and record creator.",
+      "licensingPolicy": "Review current Unsplash licence and API terms for the exact usage; a platform-wide statement does not clear every model/property right.",
+      "attributionPolicy": "Check current terms; attribution is encouraged where applicable.",
+      "apiStatus": "not-assessed",
+      "perAssetVerificationRequired": true,
+      "restrictions": [
+        "Do not bulk-republish or compile assets to replicate a competing image service.",
+        "Review recognizable people, brands, artwork and property."
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "id": "pexels",
+      "name": "Pexels",
+      "url": "https://www.pexels.com/",
+      "assetTypes": [
+        "photography",
+        "video"
+      ],
+      "bestFor": "Supporting photography and short video assets.",
+      "discovery": "Search exact subject and aspect ratio; open the contributor's asset page.",
+      "licensingPolicy": "Review current Pexels licence and terms for the exact item and usage.",
+      "attributionPolicy": "Verify current terms; credit contributors when required or appropriate.",
+      "apiStatus": "not-assessed",
+      "perAssetVerificationRequired": true,
+      "restrictions": [
+        "Check recognizable people, brands, sensitive contexts and redistribution.",
+        "Do not assume all uses are cleared by a generic platform label."
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "id": "openverse",
+      "name": "Openverse",
+      "url": "https://openverse.org/",
+      "assetTypes": [
+        "photography",
+        "illustration",
+        "audio"
+      ],
+      "bestFor": "Searching Creative Commons and public-domain media.",
+      "discovery": "Open the individual item, then follow its original source and verify creator, licence version and attribution.",
+      "licensingPolicy": "The source item controls; verify exact licence and any additional terms.",
+      "attributionPolicy": "Follow the exact licence's attribution requirements.",
+      "apiStatus": "not-assessed",
+      "perAssetVerificationRequired": true,
+      "restrictions": [
+        "Search metadata can be incorrect or incomplete.",
+        "Public-domain status may be jurisdiction-specific."
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "id": "pixabay",
+      "name": "Pixabay",
+      "url": "https://pixabay.com/",
+      "assetTypes": [
+        "photography",
+        "illustration",
+        "vector",
+        "video"
+      ],
+      "bestFor": "Supplemental photos, illustrations and video discovery.",
+      "discovery": "Open the exact asset page and inspect current provider conditions.",
+      "licensingPolicy": "Verify current Pixabay content licence and restrictions for each item/use.",
+      "attributionPolicy": "Check provider terms and individual asset page.",
+      "apiStatus": "not-assessed",
+      "perAssetVerificationRequired": true,
+      "restrictions": [
+        "Do not assume unrestricted resale or redistribution.",
+        "Review brand, person and property context."
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "id": "undraw",
+      "name": "unDraw",
+      "url": "https://undraw.co/",
+      "assetTypes": [
+        "illustration",
+        "svg"
+      ],
+      "bestFor": "Customizable conceptual vector illustrations.",
+      "discovery": "Search concept and adjust illustration color only after selecting a coherent system.",
+      "licensingPolicy": "Review current unDraw licence and terms.",
+      "attributionPolicy": "Verify current provider requirements.",
+      "apiStatus": "not-assessed",
+      "perAssetVerificationRequired": true,
+      "restrictions": [
+        "Avoid generic illustration when real product imagery is available.",
+        "Review model/brand context within the illustration."
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "id": "lucide",
+      "name": "Lucide",
+      "url": "https://lucide.dev/",
+      "assetTypes": [
+        "icon",
+        "svg"
+      ],
+      "bestFor": "Consistent interface icons for actions and status.",
+      "discovery": "Search the official icon catalog by semantic action; check name and icon meaning.",
+      "licensingPolicy": "Review project licence and package version before bundling.",
+      "attributionPolicy": "Follow the project's current licence requirements.",
+      "apiStatus": "not-assessed",
+      "perAssetVerificationRequired": true,
+      "restrictions": [
+        "Do not use an icon as the only label when its meaning is ambiguous.",
+        "Keep stroke style and size consistent."
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "id": "phosphor",
+      "name": "Phosphor Icons",
+      "url": "https://phosphoricons.com/",
+      "assetTypes": [
+        "icon",
+        "font",
+        "svg"
+      ],
+      "bestFor": "Flexible interface icon families and weights.",
+      "discovery": "Select a single weight/style system and verify visual consistency.",
+      "licensingPolicy": "Review current project licence and package terms.",
+      "attributionPolicy": "Follow current licence requirements.",
+      "apiStatus": "not-assessed",
+      "perAssetVerificationRequired": true,
+      "restrictions": [
+        "Avoid mixing weights arbitrarily.",
+        "Check icon meaning and optical size."
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "id": "fontshare",
+      "name": "Fontshare",
+      "url": "https://www.fontshare.com/",
+      "assetTypes": [
+        "font",
+        "typeface"
+      ],
+      "bestFor": "Finding display and text font families.",
+      "discovery": "Inspect specimen, family metadata, available styles and language coverage.",
+      "licensingPolicy": "Check licence for the exact family and intended embedding/distribution.",
+      "attributionPolicy": "Follow each font's licence.",
+      "apiStatus": "not-assessed",
+      "perAssetVerificationRequired": true,
+      "restrictions": [
+        "Do not assume all families have identical terms or language coverage."
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "id": "google-fonts",
+      "name": "Google Fonts",
+      "url": "https://fonts.google.com/",
+      "assetTypes": [
+        "font",
+        "typeface"
+      ],
+      "bestFor": "Web font discovery, variable axes and language subsets.",
+      "discovery": "Inspect family metadata, supported scripts, variable axes and current licence.",
+      "licensingPolicy": "Verify the exact family licence and delivery method.",
+      "attributionPolicy": "Follow the family licence and provider requirements.",
+      "apiStatus": "not-assessed",
+      "perAssetVerificationRequired": true,
+      "restrictions": [
+        "Check glyph coverage, fallback behavior and performance.",
+        "Do not assume the platform makes all fonts identical."
+      ],
+      "verificationStatus": "catalog-only"
+    },
+    {
+      "id": "rive",
+      "name": "Rive",
+      "url": "https://rive.app/",
+      "assetTypes": [
+        "interactive-animation",
+        "vector-animation"
+      ],
+      "bestFor": "State-driven interactive vector animations.",
+      "discovery": "Inspect state-machine needs, runtime and export options before selecting an asset.",
+      "licensingPolicy": "Review current tool, asset and runtime terms.",
+      "attributionPolicy": "Check specific file and distribution terms.",
+      "apiStatus": "not-assessed",
+      "perAssetVerificationRequired": true,
+      "restrictions": [
+        "Review runtime size, performance, accessibility and reduced-motion behavior."
+      ],
+      "verificationStatus": "catalog-only"
+    }
+  ]
+}
