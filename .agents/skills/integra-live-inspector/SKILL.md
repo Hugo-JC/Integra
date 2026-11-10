@@ -1,44 +1,63 @@
 ---
 name: integra-live-inspector
-description: Inspect a trusted local development page, select DOM elements, preview reversible allowlisted visual changes and export a structured handoff. Use for live visual iteration; never treat DOM previews as source edits or use in production.
+description: Launch and operate Integra Live Workbench for fast local visual inspection, DOM selection, reversible styling previews, accessibility signals and source-code handoff. Use when a developer asks to open Live mode, inspect a running UI, tune a component visually or prepare an evidence-backed implementation diff.
 ---
 
-# Integra Live Inspector
+# Integra Live Workbench
 
-## Purpose and limits
+## Mission
+Reduce the distance between spotting a UI issue and preparing a precise source-code change. Live is a local-development workbench, not a production editor, arbitrary browser automation tool or visual website builder. Blue is Integra's interaction color; use it for selection, focus and active controls without recoloring the inspected product.
 
-Use the running browser page to understand the rendered element and evaluate temporary alternatives. The inspector is a DOM-level preview tool, not a source editor, browser automation guarantee or proof of final application behavior.
+## Fast launch
+1. Resolve the actual app root, especially in monorepos.
+2. Inspect browser tabs, terminal output and common dev-server ports. Reuse a running server; never start a duplicate because a guessed port is busy.
+3. For Vite, register `integraLiveInspectorPlugin()`. It is development-only (`apply: 'serve'`). For another framework, use `createIntegraInspector()` only from a known development entrypoint; never invent adapters.
+4. Keep activation opt-in and do not load the inspector in production. Add no dependencies to the host application.
+5. Open the local app origin, not an inspector/helper origin. If unknown, ask once rather than guessing.
+6. Press **Alt + Shift + I** to activate/deactivate Live. Press **Escape** to close and restore previews.
+7. If integration is missing, propose the smallest exact Vite config patch and obtain approval before editing configuration.
+8. Launch and verify before narrating setup details.
 
-## Safety contract
+## Modes
+**Quick Canvas (default):** blue element outline, compact element badge, dimensions/display/font summary, quick radius/padding/accent preview, one-click reset and switch to Inspector. It is not a drag/drop editor and cannot silently move, resize, reorder or replace elements.
 
-- Use only a trusted local development environment and the documented Vite development adapter.
-- Never inject the inspector into production or weaken production CSP.
-- Use the canonical `createIntegraInspector()` API; do not invent APIs or arbitrary console snippets.
-- Temporary preview changes are allowlisted and reversible.
-- Never inject arbitrary HTML, JavaScript, remote scripts or unreviewed CSS.
-- The inspector does not write source files or contact an AI provider.
-- A DOM selector, class, element ancestry or React component label is not proof of a source file.
-- A caller-provided source hint remains unverified until matched to the repository.
-- Preview acceptance is not approval to modify source.
+**Inspector:** element identity, best-effort selector, accessible name, dimensions, display, typography, existing classes, text/surface colors, radius, padding, contrast estimate and diff export. Read-only computed values must remain distinct from editable controls. A selector is a locator, never a source path.
+
+## Session lifecycle
+`inactive` → `picking` → `selected` → `previewing` → `review-ready` → `disposed`. Never silently discard unexported previews when changing selection. If a framework detaches the selected node, mark the preview stale; never apply it to a replacement based only on selector text.
+
+## Performance contract
+- Keep the adapter dependency-free and development-only.
+- Coalesce pointer geometry reads/writes to at most one `requestAnimationFrame` per frame; never measure layout on every raw pointer event.
+- Coalesce scroll, resize, visual viewport and ResizeObserver work through a shared scheduler.
+- Observe only selected/highlighted nodes and the document root; disconnect observers on selection changes and teardown.
+- No polling loops, timers, repeated full-DOM scans or global mutation observers without measured need.
+- Cache selected snapshots/computed values; refresh only on selection or preview changes.
+- Use Shadow DOM; render page-provided labels through `textContent`.
+- Avoid continuous animation and expensive effects. Respect reduced-motion and high-contrast preferences.
+- Teardown cancels frames, disconnects observers, removes listeners and restores original class/style attributes.
+
+## Safe preview boundary
+Only use text color, background color, border radius, padding and existing classes. Validate values and keep previews temporary. Never inject arbitrary HTML, JavaScript, remote assets or unreviewed CSS. Never weaken CSP or instrument production/remote pages. Live does not contact an AI provider or write source. `data-integra-source` is user-provided and unverified.
+
+## Accessibility
+Keyboard shortcuts must not intercept form controls/contenteditable. Preserve visible focus, Escape behavior and focus restoration. Give icon-only controls accessible names. Honor reduced motion and high contrast. Contrast is an estimate; gradients, images, pseudo-elements, filters, opacity and compositing can make it inconclusive.
 
 ## Workflow
+1. Confirm local origin, app root and adapter.
+2. Launch/activate Live.
+3. Select the smallest meaningful target.
+4. Record tag, accessible name, selector, viewport and state.
+5. Make focused previews; avoid unrelated changes.
+6. Review contrast and narrow/wide layouts where relevant.
+7. Export the diff and prompt.
+8. Use `integra-refactor-agent` to map the target to actual source; never infer a file from classes or ancestry.
+9. Present exact source diff, behavior impact and verification plan.
+10. Obtain approval for that diff before editing source.
+11. Run checks and inspect the rendered implementation.
 
-1. Confirm the page is local, in development mode and within the user's authorized scope.
-2. Start the project's documented dev server only when authorized and the command is known.
-3. Inspect the element's role, content, parent context, computed styles, viewport and relevant states.
-4. Ignore inspector chrome and elements explicitly marked `[data-integra-ignore]`.
-5. Preview only supported color, radius, padding and existing-class operations.
-6. Record before/after values and the exact target selector. Note when framework re-rendering may reset the preview.
-7. Inspect contrast output critically. Gradients, images, transparency, pseudo-elements and complex compositing may be inconclusive.
-8. Export the structured change set and prompt handoff. Keep DOM locators distinct from source locations.
-9. Search the real repository and resolve the responsible source component from evidence; never guess a path from a selector.
-10. If a persistent change is requested, prepare a source diff, explain behavior impact and tests, then obtain approval for that exact diff.
-11. After approved source changes, run relevant checks and compare the actual rendered result again.
+## Deliverable
+Concise Live Review: local URL/adapter, selected element/viewport, preview changes, contrast evidence/confidence, source mapping status, proposed diff/tests and cleanup state.
 
-## Output
-
-Provide the inspected target, viewport and state; preview operations; contrast/evidence limitations; source mapping status; and next-step diff or test plan.
-
-## Restoration
-
-Destroying the inspector restores temporary classes/styles by default. Do not promise persistence through framework renders. No commit, push, PR or merge is implied.
+## Recovery
+If overlay disappears, check HMR first. Reopen the same app URL and reactivate **Alt + Shift + I**. Do not start another server until confirming the existing one is unavailable. Escape closes and restores by default.

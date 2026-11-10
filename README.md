@@ -15,15 +15,13 @@ npx integra-cli list
 npx integra-cli doctor
 ```
 
-O destino predefinido é `.agents/skills/`. Para escolher outro diretório relativo:
+## Live Workbench (local development only)
 
-```bash
-npx integra-cli init --target .claude/skills
-```
+O Live Workbench oferece Quick Canvas para ajustes rápidos e Inspector para diagnóstico detalhado. É independente de framework e não acrescenta dependências de runtime. Ativa-o apenas num entrypoint de desenvolvimento (por exemplo, Vite):
 
 Consulta o [guia do CLI](packages/cli/README.md) para os comandos `add`, `update`, `remove` e para o contrato de instalação. O CLI instala skills e contexto partilhado; não instala o runtime do repositório nem ativa automaticamente uma skill em todos os hosts.
 
-## O que o Integra oferece
+Usa `Alt + Shift + I` para abrir/fechar rapidamente o Live depois de registar o plugin. Hover e seleção usam o azul Integra `#3B82F6`; **↑ Pai** sobe na árvore DOM. Podes pré-visualizar classes, cores, tamanho de texto, padding e radius; consultar o contraste; repor o estado; e copiar o DOM diff.
 
 - **Direção contextual:** transforma objetivos, utilizadores, conteúdo e restrições numa tese visual implementável.
 - **Design intelligence:** roteamento de estilos e descoberta contextual de presets, sempre subordinados ao brief e à identidade do produto.
