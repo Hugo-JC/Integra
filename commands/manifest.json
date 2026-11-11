@@ -135,6 +135,42 @@
       ]
     },
     {
+      "id": "visual-intelligence",
+      "kind": "workflow",
+      "invocation": "/integra:visual-intelligence",
+      "description": "Assemble a deterministic, provenance-preserving Visual Intelligence Bundle for an external implementation agent from a validated Direction Artifact.",
+      "skills": [
+        "integra-design-direction",
+        "integra-visual-knowledge"
+      ],
+      "outputs": [
+        "visual-intelligence-bundle",
+        "scoped-evidence-candidates",
+        "consumer-guidance"
+      ],
+      "sourceMutation": "never",
+      "whenToUse": [
+        "Use when an external coding agent needs a complete, versioned handoff that combines an existing Direction Artifact with contextual visual knowledge.",
+        "Use when source leads, page-scoped observations, token recipes, layout candidates and safeguards should travel together as a reviewable bundle."
+      ],
+      "notFor": [
+        "Do not use to generate a Direction Artifact from an unstructured brief; run the direction workflow first.",
+        "Do not treat catalog leads or partial observations as verified product findings, approved design decisions or implementation QA."
+      ],
+      "triggers": [
+        "visual intelligence bundle",
+        "bundle visual de inteligência",
+        "agent handoff bundle",
+        "prepare visual knowledge handoff",
+        "preparar bundle para agente"
+      ],
+      "inputs": [
+        "Validated Direction Artifact JSON and its schema version",
+        "Caller-supplied primary task and optional explicit surface mode and niche ID",
+        "Project brief, existing product identity and implementation constraints"
+      ]
+    },
+    {
       "id": "investigate",
       "kind": "workflow",
       "invocation": "/integra:investigate",
