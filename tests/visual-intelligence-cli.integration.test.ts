@@ -8,6 +8,7 @@ describe('Direction to Visual Intelligence CLI workflow', () => {
   const tsxCli = resolve(process.cwd(), 'node_modules/tsx/dist/cli.mjs');
   const directionScript = resolve(process.cwd(), 'scripts/direction-generate.ts');
   const bundleScript = resolve(process.cwd(), 'scripts/visual-intelligence-generate.ts');
+  const validateScript = resolve(process.cwd(), 'scripts/visual-intelligence-validate.ts');
   const fixturePath = resolve(process.cwd(), 'fixtures/brief-data/DL-001.json');
 
   it('generates a validated Direction Artifact and hands it to the Bundle CLI in an isolated workspace', () => {
@@ -40,6 +41,14 @@ describe('Direction to Visual Intelligence CLI workflow', () => {
       expect(bundleRun.status).toBe(0);
       expect(bundleRun.stderr).toContain('schema 1.1.0');
       expect(bundleRun.stderr).toContain('validation passed');
+
+      const validationRun = spawnSync(
+        process.execPath,
+        [tsxCli, validateScript, '--input', bundleRelative],
+        { cwd: workspace, encoding: 'utf8' },
+      );
+      expect(validationRun.status).toBe(0);
+      expect(JSON.parse(validationRun.stdout)).toEqual({ status: 'passed', errors: [] });
 
       const direction = JSON.parse(readFileSync(directionPath, 'utf8')) as {
         schemaVersion: string;
