@@ -6,6 +6,7 @@ import rulesCatalog from '../../../../data/design-library/design-rules.json' wit
 import antiPatternsCatalog from '../../../../data/design-library/anti-patterns.json' with { type: 'json' };
 import examplesCatalog from '../../../../data/design-library/examples/index.json' with { type: 'json' };
 import assetSources from '../../../../data/design-library/asset-sources.json' with { type: 'json' };
+import referenceObservationsCatalog from '../../../../data/design-library/reference-observations.json' with { type: 'json' };
 
 export type ExperienceMode = 'persuade' | 'operate' | 'read' | 'experience';
 export interface VisualKnowledgeRequest { nicheId?: string; mode?: ExperienceMode; query?: string; tags?: string[]; assetTypes?: string[]; limit?: number; }
@@ -18,6 +19,7 @@ const rules = rulesCatalog.rules;
 const antiPatterns = antiPatternsCatalog.antiPatterns;
 const examples = examplesCatalog.examples;
 const assets = assetSources.providers;
+const observations = referenceObservationsCatalog.observations;
 
 function normalize(value: string): string {
   return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('en-US')
@@ -50,6 +52,30 @@ export function buildVisualKnowledgePack(request: VisualKnowledgeRequest) {
     return { item, score, reasons };
   }).filter((candidate) => candidate.score > 0)
     .sort((a, b) => b.score - a.score || a.item.id.localeCompare(b.item.id)).slice(0, Math.min(limit, 5));
+
+  const observationCandidates = observations.map((item) => {
+    const reasons: string[] = [];
+    const relevance = overlapScore(taskQuery, [
+      item.location,
+      item.observation,
+      item.transferablePrinciple,
+      item.adaptation,
+    ]);
+    let score = relevance * 3;
+    if (referenceIds.has(item.sourceId)) {
+      score += 1.5;
+      reasons.push('Observation belongs to a source mapped to the requested niche.');
+    }
+    if (relevance > 0) reasons.push('Observed page and transferable principle overlap the task.');
+    if (item.verificationStatus === 'partial') {
+      reasons.push('Partial, page-scoped evidence; do not generalize beyond the recorded scope.');
+    }
+    if (item.evidenceType === 'official-documentation') {
+      reasons.push('Evidence comes from first-party documentation, not an independent live-product test.');
+    }
+    return { item, score, reasons, verificationStatus: item.verificationStatus };
+  }).filter((candidate) => candidate.score > 0)
+    .sort((a, b) => b.score - a.score || a.item.id.localeCompare(b.item.id)).slice(0, 5);
 
   const tokenCandidates: KnowledgeCandidate<(typeof tokenSystems)[number]>[] = tokenSystems.map((item) => {
     const reasons: string[] = [];
@@ -107,16 +133,18 @@ export function buildVisualKnowledgePack(request: VisualKnowledgeRequest) {
     (!request.mode || item.mode === request.mode) && (!request.nicheId || !item.nicheId || item.nicheId === request.nicheId)
   ).slice(0, 4);
   return {
-    schemaVersion: '1.0.0',
+    schemaVersion: '1.1.0',
     selection: { nicheId: request.nicheId ?? null, mode: request.mode ?? null, query,
       nicheMappingStatus: mapping?.mappingStatus ?? 'unmapped',
       confidence: mapping?.mappingStatus === 'suggested-shortlist' ? 'medium' : 'low' },
     references: references.map((candidate) => ({ ...candidate, verificationStatus: candidate.item.verificationStatus })),
+    observations: observationCandidates,
     assetSources: assetCandidates.map((candidate) => ({ ...candidate, verificationStatus: candidate.item.verificationStatus })),
     tokenSystems: tokenCandidates, layoutPatterns: patternCandidates, designRules: ruleCandidates,
     antiPatterns: antiPatternCandidates, examples: relevantExamples,
     safeguards: [
       'Catalog entries are research leads until page-level observation exists.',
+      'Partial page observations retain their evidence type and recorded scope; they are not verified live-product behavior.',
       'Asset provider records do not clear an individual asset licence or model/property rights.',
       'Token recipes require project-token reconciliation and rendered contrast verification.',
       'Layout patterns require matching content prerequisites and task conditions.',
