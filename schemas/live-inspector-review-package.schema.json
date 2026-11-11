@@ -11,6 +11,7 @@
     "viewport",
     "mode",
     "targetCount",
+    "staleTargetCount",
     "changes",
     "prompt",
     "sourceMapping",
@@ -19,7 +20,7 @@
   ],
   "properties": {
     "schemaVersion": {
-      "const": "1.0.0"
+      "const": "1.1.0"
     },
     "capturedAt": {
       "type": "string",
@@ -245,6 +246,10 @@
         "type": "string",
         "minLength": 1
       }
+    },
+    "staleTargetCount": {
+      "type": "integer",
+      "minimum": 0
     }
   }
 }
