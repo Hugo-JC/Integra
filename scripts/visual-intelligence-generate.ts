@@ -19,7 +19,7 @@ Retrieval:
   --query        Optional query replacing the task for knowledge retrieval.
   --tag          Additional retrieval tag; may be repeated.
   --asset-type   Requested asset type; may be repeated.
-  --limit        Source lead limit (1–20); defaults to 5.
+  --limit        Source lead limit (1–5); defaults to 5.
 
 Output:
   --out          Output JSON path; defaults to .integra/runs/visual-intelligence/bundle.json.
