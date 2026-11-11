@@ -1,4 +1,7 @@
 import { describe, expect, it } from 'vitest';
+import { Ajv2020 } from 'ajv/dist/2020.js';
+import addFormats from 'ajv-formats';
+import reviewPackageSchema from '../../schemas/live-inspector-review-package.schema.json' with { type: 'json' };
 import { createLiveInspectorReviewPackage } from '../../src/modules/live-inspector/review-package.js';
 import type { LiveElementChangeSet } from '../../src/modules/live-inspector/types.js';
 
@@ -23,6 +26,10 @@ const changes: LiveElementChangeSet[] = [{
     contrastNote: 'Runtime estimate from computed styles.',
   },
 }];
+
+const ajv = new Ajv2020({ allErrors: true, strict: true });
+addFormats(ajv);
+const validateReviewPackage = ajv.compile(reviewPackageSchema);
 
 const baseInput = {
   capturedAt: '2026-11-11T16:00:00.000Z',
@@ -51,6 +58,11 @@ describe('Live Inspector structured review package', () => {
     });
     expect(result.changes).toEqual(changes);
     expect(result.prompt).toContain('source-level implementation');
+  });
+
+  it('conforms to the published JSON Schema', () => {
+    const result = createLiveInspectorReviewPackage(baseInput);
+    expect(validateReviewPackage(result)).toBe(true);
   });
 
   it('marks an empty package instead of inventing review targets', () => {
