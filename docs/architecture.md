@@ -5,6 +5,8 @@ Integra é um motor modular de inteligência de design. O núcleo determinístic
 ~~~text
 Brief → Context → Direction + Preset → Direction Artifact
                                       ↓
+                           Visual Intelligence Bundle
+                                      ↓
                              Agent Skills / external agent
                                       ↓
                            implementation / Live Inspector
@@ -23,6 +25,7 @@ Investigation → references, observations, evidence records
 - **Shared contracts:** definem formatos serializáveis, versionados e independentes de fornecedores.
 - **Context:** normaliza contexto estruturado fornecido pelo chamador, preserva a ordem, remove duplicados triviais, valida factos e restrições e regista campos ausentes sem inferir valores.
 - **Direction:** gera decisões de sistema e recomendações contextualizadas nas oito áreas do Direction Artifact; o submódulo `presets` fornece uma sugestão contextual de estilo/nicho, com alternativas e baixa confiança explícitas.
+- **Visual Intelligence Bundle:** combina um Direction Artifact validado, tarefa fornecida pelo chamador e o Knowledge Pack offline; mantém candidatos distintos de decisões e observações.
 - **Resolver:** filtra candidatos incompatíveis com restrições rígidas antes de aplicar a precedência de proveniência. Se uma comparação não puder ser feita com segurança, o resultado é inconclusivo.
 - **Artifact validation:** verifica estrutura, semântica, restrições e consistência em quatro camadas ordenadas.
 - **Agent consumer:** interpreta o artefacto e devolve outcomes por decisão e recomendação. O relatório é auto-relatado, não uma prova independente.
@@ -83,4 +86,4 @@ Motion é uma camada de orientação, não um runtime adicional. O bundle do `in
 
 ## Visual knowledge library v2
 
-`data/design-library/` separates explained visual source leads, asset providers, niche mappings, page-level observations, semantic token recipes, task/mode-aware layout patterns, conditional design rules, anti-pattern hypotheses and illustrative examples. `.agents/skills/integra-visual-knowledge/` governs curation and consumption. `src/modules/direction/knowledge/` provides deterministic offline retrieval with match reasons and explicit safeguards; it does not inspect external sources, apply tokens, verify licences or mutate a project. New sources remain `catalog-only` until a specific page-level observation is recorded.
+`data/design-library/` separates explained visual source leads, asset providers, niche mappings, page-level observations, semantic token recipes, task/mode-aware layout patterns, conditional design rules, anti-pattern hypotheses and illustrative examples. `.agents/skills/integra-visual-knowledge/` governs curation and consumption. `src/modules/direction/knowledge/` provides deterministic offline retrieval with match reasons and explicit safeguards; `visual-intelligence-bundle.ts` adds the versioned handoff around that existing retrieval and Direction Artifact validation. Neither layer inspects external sources, applies tokens, verifies licences or mutates a project. New sources remain `catalog-only` until a specific page-level observation is recorded.

@@ -39,3 +39,18 @@ export type {
 
 export { directionPresetMetadata, getDirectionStyle, listDirectionPresets, matchDirectionPresets } from './preset-catalog.js';
 export type { DirectionPresetMatch } from './preset-catalog.js';
+export {
+  buildVisualIntelligenceBundle,
+  serializeVisualIntelligenceBundle,
+  validateVisualIntelligenceBundle,
+  VISUAL_INTELLIGENCE_BUNDLE_SCHEMA_VERSION,
+  VISUAL_INTELLIGENCE_ENGINE_VERSION,
+  VisualIntelligenceBundleError,
+} from './knowledge/visual-intelligence-bundle.js';
+export type {
+  VisualIntelligenceBundle,
+  VisualIntelligenceBundleErrorCode,
+  VisualIntelligenceBundleValidationResult,
+  VisualIntelligenceRequest,
+  VisualKnowledgePack,
+} from './knowledge/visual-intelligence-bundle.js';

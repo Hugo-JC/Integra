@@ -1,5 +1,5 @@
-import { createHash } from 'node:crypto';
 import type { DirectionContextSnapshot } from '../../contracts/direction-context.js';
+import { hashCanonicalJson, serializeCanonicalJson } from './canonical-json.js';
 import type {
   DesignDecision,
   DesignRecommendation,
@@ -23,27 +23,9 @@ export interface DirectionGenerationResult {
   diagnostics: DirectionGenerationDiagnostic[];
 }
 
-function canonicalize(value: unknown): unknown {
-  if (Array.isArray(value)) return value.map(canonicalize);
-  if (value && typeof value === 'object') {
-    const record = value as Record<string, unknown>;
-    return Object.fromEntries(
-      Object.keys(record)
-        .filter((key) => record[key] !== undefined)
-        .sort()
-        .map((key) => [key, canonicalize(record[key])]),
-    );
-  }
-  return value;
-}
-
-function canonicalStringify(value: unknown): string {
-  return JSON.stringify(canonicalize(value));
-}
-
 /** Stable JSON serialization: sorted object keys, preserved array order, no timestamp. */
 export function serializeDirectionArtifact(artifact: DirectionArtifact): string {
-  return JSON.stringify(canonicalize(artifact), null, 2) + '\n';
+  return serializeCanonicalJson(artifact);
 }
 
 function createRecommendation(
@@ -357,10 +339,7 @@ export function generateProductLandingDirection(
     context,
     sections,
   };
-  const digest = createHash('sha256')
-    .update(canonicalStringify(artifactContent))
-    .digest('hex')
-    .slice(0, 16);
+  const digest = hashCanonicalJson(artifactContent);
   const artifact: DirectionArtifact = {
     schemaVersion: '1.1.0',
     artifactId: 'direction-dl001-' + digest,

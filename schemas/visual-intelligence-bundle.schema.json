@@ -1,0 +1,315 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://integra.dev/schemas/visual-intelligence-bundle.schema.json",
+  "title": "Integra Visual Intelligence Bundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "bundleId",
+    "engineVersion",
+    "directionArtifactId",
+    "task",
+    "direction",
+    "knowledge",
+    "consumerGuidance",
+    "verificationChecklist",
+    "limitations"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "bundleId": {
+      "type": "string",
+      "pattern": "^visual-intelligence-[a-f0-9]{16}$"
+    },
+    "engineVersion": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "directionArtifactId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "task": {
+      "$ref": "#/$defs/task"
+    },
+    "direction": {
+      "$ref": "https://integra.dev/schemas/direction-artifact.schema.json"
+    },
+    "knowledge": {
+      "$ref": "#/$defs/knowledge"
+    },
+    "consumerGuidance": {
+      "$ref": "#/$defs/consumerGuidance"
+    },
+    "verificationChecklist": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "$defs": {
+    "experienceMode": {
+      "enum": [
+        "persuade",
+        "operate",
+        "read",
+        "experience"
+      ]
+    },
+    "task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primaryTask",
+        "mode",
+        "nicheId",
+        "query"
+      ],
+      "properties": {
+        "primaryTask": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "mode": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/experienceMode"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "nicheId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "query": {
+          "type": "string"
+        }
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "item",
+        "score",
+        "reasons"
+      ],
+      "properties": {
+        "item": {
+          "type": "object"
+        },
+        "score": {
+          "type": "number",
+          "minimum": 0
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "sourceCandidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "item",
+        "score",
+        "reasons",
+        "verificationStatus"
+      ],
+      "properties": {
+        "item": {
+          "type": "object"
+        },
+        "score": {
+          "type": "number",
+          "minimum": 0
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "verificationStatus": {
+          "enum": [
+            "catalog-only",
+            "partial",
+            "verified",
+            "stale",
+            "deprecated"
+          ]
+        }
+      }
+    },
+    "knowledge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "selection",
+        "references",
+        "assetSources",
+        "tokenSystems",
+        "layoutPatterns",
+        "designRules",
+        "antiPatterns",
+        "examples",
+        "safeguards"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "1.0.0"
+        },
+        "selection": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "nicheId",
+            "mode",
+            "query",
+            "nicheMappingStatus",
+            "confidence"
+          ],
+          "properties": {
+            "nicheId": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "mode": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/experienceMode"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "query": {
+              "type": "string"
+            },
+            "nicheMappingStatus": {
+              "enum": [
+                "mapped",
+                "suggested-shortlist",
+                "unmapped"
+              ]
+            },
+            "confidence": {
+              "enum": [
+                "low",
+                "medium"
+              ]
+            }
+          }
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceCandidate"
+          }
+        },
+        "assetSources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceCandidate"
+          }
+        },
+        "tokenSystems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/candidate"
+          }
+        },
+        "layoutPatterns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/candidate"
+          }
+        },
+        "designRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/candidate"
+          }
+        },
+        "antiPatterns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/candidate"
+          }
+        },
+        "examples": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "safeguards": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "consumerGuidance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidatePolicy",
+        "preserveProductIdentity",
+        "doNotCopyReferences"
+      ],
+      "properties": {
+        "candidatePolicy": {
+          "const": "review-before-adoption"
+        },
+        "preserveProductIdentity": {
+          "const": true
+        },
+        "doNotCopyReferences": {
+          "const": true
+        }
+      }
+    }
+  }
+}
