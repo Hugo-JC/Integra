@@ -80,7 +80,7 @@ const verificationChecklist = [
 const limitations = [
   'Bundle assembly is offline and does not inspect reference pages or verify licenses.',
   'Knowledge entries remain candidates; selection does not approve a direction or finding.',
-  'The current Knowledge Pack has no page-observation collection; catalogued sources remain leads.',
+  'Page observations are limited to curated records; the Bundle does not crawl references or independently verify live product states.',
   'The bundle does not implement, write to, or inspect the receiving project.',
 ];
 
