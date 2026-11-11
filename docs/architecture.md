@@ -48,13 +48,17 @@ references/ade-knowledge/ preserva o corpus legado do AI Design Engine. Os estil
 
 ## Live Inspector
 
-Usa DOM APIs e Shadow DOM, sem dependência de React/Vite/Tailwind. O seletor CSS identifica um elemento renderizado, não um ficheiro TSX. sourceHint só é aceite quando fornecido explicitamente. Source maps, persistência de alterações, keyboard picker completo e browser automation são etapas futuras.
+Usa DOM APIs e Shadow DOM, sem dependência de React, Tailwind ou provider de IA. O plugin Vite é opcional, usa `apply: 'serve'` e carrega o módulo apenas depois do atalho local; builds de produção não recebem o bootstrap. O listener de bootstrap mantém-se disponível para recriar o controller depois de Escape o descartar.
+
+Quick Canvas e Inspector partilham uma sessão. As previews limitam-se a classes existentes, cor do texto, cor de fundo, border radius e padding; o histórico é limitado e restaura os atributos originais. Elementos removidos pelo framework deixam de ser targets válidos e são excluídos dos diffs ativos. O Review Package 1.1.0 regista viewport, modo, targets ligados/desligados, limitações, source mapping não resolvido e a fronteira de aprovação.
+
+O seletor CSS identifica um elemento renderizado, não um ficheiro TSX. sourceHint só é aceite quando fornecido explicitamente e continua não verificado. O Live não escreve source, não resolve source maps, não aplica patches e não é um ambiente de produção. Browser automation multi-viewport e source mapping são etapas futuras.
 
 A geração determinística do Direction Artifact atualmente cobre DL-001. O router de presets pode funcionar independentemente, mas não implica que todos os cenários tenham geradores completos. Os restantes cenários só serão adicionados quando as suas necessidades justificarem regras específicas. Não há presets globais de estilo.
 
 ## Quality & evidence
 
-auditDesignQuality() avalia apenas observações fornecidas. createDesignEvidence() valida registos de investigação sem fazer fetch da URL. Não há score global e não se declara WCAG compliance a partir de verificações parciais.
+auditDesignQuality() avalia apenas observações fornecidas. As heurísticas de espaçamento e nesting exigem uma escala ou limite explicitamente fornecido pelo projeto; o motor não assume um grid universal. createDesignEvidence() valida registos de investigação sem fazer fetch da URL. Não há score global e não se declara WCAG compliance a partir de verificações parciais.
 
 ## Stack
 
@@ -86,4 +90,4 @@ Motion é uma camada de orientação, não um runtime adicional. O bundle do `in
 
 ## Visual knowledge library v2
 
-`data/design-library/` separates explained visual source leads, asset providers, niche mappings, page-level observations, semantic token recipes, task/mode-aware layout patterns, conditional design rules, anti-pattern hypotheses and illustrative examples. `.agents/skills/integra-visual-knowledge/` governs curation and consumption. `src/modules/direction/knowledge/` provides deterministic offline retrieval with match reasons and explicit safeguards; `visual-intelligence-bundle.ts` adds the versioned handoff around that existing retrieval and Direction Artifact validation. Neither layer inspects external sources, applies tokens, verifies licences or mutates a project. New sources remain `catalog-only` until a specific page-level observation is recorded.
+`data/design-library/` separates explained visual source leads, asset providers, niche mappings, page-level observations, semantic token recipes, task/mode-aware layout patterns, conditional design rules, anti-pattern hypotheses and illustrative examples. `.agents/skills/integra-visual-knowledge/` governs curation and consumption. `src/modules/direction/knowledge/` provides deterministic offline retrieval with bounded tokenization caching, match reasons and explicit safeguards; `visual-intelligence-bundle.ts` adds Bundle 1.1.0 around the validated Direction Artifact and Knowledge Pack. Neither layer crawls external sources, applies tokens, verifies asset licences or mutates a receiving project. Source leads and page observations stay separate: one partial documentation record does not verify an entire source.
