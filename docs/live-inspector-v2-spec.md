@@ -25,7 +25,7 @@ Keyboard shortcut must not intercept editable controls. Escape restores and clos
 Preview is a proposal. The refactor workflow inspects actual source, presents an exact diff and obtains approval before editing.
 
 ## Structured review package
-The controller exposes `getReviewPackage()` and the workbench provides **Exportar JSON**. The versioned package records a timestamp, origin/path (without query or fragment), viewport dimensions and device-pixel ratio, active mode, target diffs, and the implementation prompt. Source mapping is explicitly `unresolved` with low confidence; component hints are unverified. The package states that source mutation is `none` and requires approval for any exact source diff. It does not claim the preview is a verified implementation or a complete accessibility audit.
+The controller exposes `getReviewPackage()` and the workbench provides **Exportar JSON**. The versioned package records a timestamp, origin/path (without query or fragment), viewport dimensions and device-pixel ratio, active mode, connected target diffs, detached-target count, and the implementation prompt. Detached DOM nodes are excluded from the exported changes and reported explicitly. Source mapping is explicitly `unresolved` with low confidence; component hints are unverified. The package states that source mutation is `none` and requires approval for any exact source diff. It does not claim the preview is a verified implementation or a complete accessibility audit.
 
 ## Roadmap
 1. DOM navigator and richer computed-property groups.
