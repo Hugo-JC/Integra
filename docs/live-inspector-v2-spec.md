@@ -13,6 +13,7 @@ Reduce the distance between identifying a UI issue and preparing a precise code 
 ## Performance contract
 - Pointer events are coalesced through requestAnimationFrame.
 - Scroll/resize/visual viewport/ResizeObserver work shares a scheduled pass.
+- A bounded MutationObserver watches only direct child-list changes along the selected element's ancestor chain; it does not scan the full DOM or observe the whole document subtree.
 - No polling timers, repeated full-DOM scans or external runtime dependencies.
 - Shadow DOM isolates workbench chrome.
 - Teardown cancels frames, disconnects observers and removes listeners.
