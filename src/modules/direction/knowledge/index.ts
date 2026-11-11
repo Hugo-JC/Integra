@@ -156,4 +156,7 @@ export function buildVisualKnowledgePack(request: VisualKnowledgeRequest) {
 
 export const visualKnowledgeMetadata = { sourceCount: sources.length, assetSourceCount: assets.length, nicheMappingCount: niches.length,
   tokenSystemCount: tokenSystems.length, layoutPatternCount: patterns.length, ruleCount: rules.length,
-  antiPatternCount: antiPatterns.length, exampleCount: examples.length };
+  antiPatternCount: antiPatterns.length, exampleCount: examples.length,
+  observationCount: observations.length,
+  partialObservationCount: observations.filter((item) => item.verificationStatus === 'partial').length,
+  verifiedObservationCount: observations.filter((item) => item.verificationStatus === 'verified').length };
