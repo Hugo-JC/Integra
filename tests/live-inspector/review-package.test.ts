@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
 import { Ajv2020 } from 'ajv/dist/2020.js';
-import addFormats from 'ajv-formats';
 import reviewPackageSchema from '../../schemas/live-inspector-review-package.schema.json' with { type: 'json' };
 import { createLiveInspectorReviewPackage } from '../../src/modules/live-inspector/review-package.js';
 import type { LiveElementChangeSet } from '../../src/modules/live-inspector/types.js';
@@ -28,7 +27,6 @@ const changes: LiveElementChangeSet[] = [{
 }];
 
 const ajv = new Ajv2020({ allErrors: true, strict: true });
-addFormats(ajv);
 const validateReviewPackage = ajv.compile(reviewPackageSchema);
 
 const baseInput = {
