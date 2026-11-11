@@ -28,6 +28,9 @@ export function createLiveInspectorReviewPackage(
     width < 1 || height < 1 || devicePixelRatio <= 0) {
     throw new RangeError('viewport dimensions and devicePixelRatio must be finite positive values.');
   }
+  if (!Array.isArray(input.changes) || typeof input.prompt !== 'string') {
+    throw new TypeError('changes must be an array and prompt must be a string.');
+  }
   if (input.mode !== 'quick' && input.mode !== 'advanced') {
     throw new TypeError('mode must be quick or advanced.');
   }
