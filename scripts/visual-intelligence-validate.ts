@@ -31,13 +31,13 @@ async function main(): Promise<void> {
   const inputText = await readFile(resolve(options.inputPath!), 'utf8');
   const input = JSON.parse(inputText) as unknown;
   const result = validateVisualIntelligenceBundle(input);
-  process.stdout.write(JSON.stringify(result, null, 2) + '\\n');
+  process.stdout.write(JSON.stringify(result, null, 2) + '\n');
 
   if (result.status === 'failed') process.exitCode = 1;
 }
 
 main().catch((error: unknown) => {
   const message = error instanceof Error ? error.message : String(error);
-  process.stderr.write('Visual Intelligence validation failed: ' + message + '\\n');
+  process.stderr.write('Visual Intelligence validation failed: ' + message + '\n');
   process.exitCode = 1;
 });
