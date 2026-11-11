@@ -78,7 +78,7 @@ describe('Live Inspector structured review package', () => {
   it('rejects unsupported inspector modes', () => {
     expect(() => createLiveInspectorReviewPackage({
       ...baseInput,
-      mode: 'canvas' as 'advanced',
+      mode: 'canvas' as unknown as 'advanced',
     })).toThrow(/mode must be quick or advanced/);
   });
 });
