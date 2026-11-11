@@ -23,14 +23,16 @@ describe("Direction CLI executable workflow", () => {
 
   it("generates a file and validates it through the public npm commands", () => {
     const workspace = mkdtempSync(join(tmpdir(), "integra-direction-cli-"));
-    const artifactPath = join(workspace, "direction.json");
+    const artifactPath = join(workspace, ".integra", "runs", "direction", "DL-001.json");
+    const outputPath = ".integra/runs/direction/DL-001.json";
+    const fixturePath = resolve(process.cwd(), "fixtures/brief-data/DL-001.json");
 
     try {
       execFileSync(
         process.execPath,
-        [tsxCli, generateScript, "--out", artifactPath],
+        [tsxCli, generateScript, "--input", fixturePath, "--out", outputPath],
         {
-          cwd: process.cwd(),
+          cwd: workspace,
           stdio: "pipe",
         },
       );
@@ -45,7 +47,7 @@ describe("Direction CLI executable workflow", () => {
       const validationOutput = execFileSync(
         process.execPath,
         [tsxCli, validateScript, "--input", artifactPath],
-        { cwd: process.cwd(), encoding: "utf8" },
+        { cwd: workspace, encoding: "utf8" },
       );
       expect(JSON.parse(validationOutput).status).toBe("passed");
     } finally {
@@ -58,7 +60,8 @@ describe("Direction CLI executable workflow", () => {
       join(tmpdir(), "integra-direction-conflict-"),
     );
     const inputPath = join(workspace, "conflicted-brief.json");
-    const artifactPath = join(workspace, "must-not-exist.json");
+    const artifactPath = join(workspace, ".integra", "runs", "must-not-exist.json");
+    const outputPath = ".integra/runs/must-not-exist.json";
     const fixture = JSON.parse(
       readFileSync(
         resolve(process.cwd(), "fixtures/brief-data/DL-001.json"),
@@ -80,8 +83,8 @@ describe("Direction CLI executable workflow", () => {
     try {
       const run = spawnSync(
         process.execPath,
-        [tsxCli, generateScript, "--input", inputPath, "--out", artifactPath],
-        { cwd: process.cwd(), encoding: "utf8" },
+        [tsxCli, generateScript, "--input", inputPath, "--out", outputPath],
+        { cwd: workspace, encoding: "utf8" },
       );
       expect(run.status).toBe(2);
       expect(run.stderr).toContain("No output was written");
