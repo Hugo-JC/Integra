@@ -14,12 +14,11 @@ npx integra-cli list
 npx integra-cli doctor
 ```
 
-Para testar o instalador no checkout atual, constrói primeiro o bundle local e executa o CLI diretamente:
+Para testar a distribuição sem escrever no checkout atual, executa a validação do pacote e o smoke test em workspace temporário:
 
 ```bash
-npm run distribution:build
-node packages/cli/bin/integra.js init
-node packages/cli/bin/integra.js doctor
+npm run distribution:check
+npm run distribution:smoke
 ```
 
 Depois da publicação, para instalar apenas uma skill especializada noutro projeto:
@@ -117,7 +116,7 @@ npm run visual-intelligence:generate -- \
   --niche-id saas-developer-ai
 ```
 
-O comando produz um Visual Intelligence Bundle 1.1.0 em `.integra/runs/visual-intelligence/bundle.json`. A tarefa é obrigatória; modo e nicho são fornecidos pelo chamador e não são inferidos automaticamente. Usa `--stdout` para receber JSON no stdout, ou `--query`, `--tag`, `--asset-type` e `--limit` para orientar o retrieval.
+O comando produz um Visual Intelligence Bundle 1.1.0 em `.integra/runs/visual-intelligence/bundle.json`. A tarefa é obrigatória; modo e nicho são fornecidos pelo chamador e não são inferidos automaticamente. Usa `--stdout` para receber JSON no stdout, ou `--query`, `--tag`, `--asset-type` e `--limit` para orientar o retrieval. Para validar um Bundle já recebido ou guardado, executa `npm run visual-intelligence:validate -- --input .integra/runs/visual-intelligence/bundle.json`.
 
 O Bundle separa decisões do Direction Artifact de candidatos de conhecimento. Fontes `catalog-only`, observações `partial`, observações verificadas, receitas de tokens e padrões não são equivalentes nem se transformam automaticamente em decisões aprovadas.
 
