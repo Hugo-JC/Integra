@@ -112,6 +112,7 @@ Examples show the reasoning chain: brief → mode → task → references → to
 7. Return rules and anti-patterns as guidance to inspect, not pre-confirmed findings.
 8. Use examples to compare reasoning and trade-offs, never as templates.
 9. Explain selection rationale, confidence, alternatives, unknowns and verification needs.
+10. When a validated Direction Artifact already exists, assemble a portable handoff with `npm run visual-intelligence:generate -- --artifact <path> --task \"<primary task>\"`. Keep source leads, partial observations and verified observations distinct in the output.
 
 Prefer local/offline knowledge. Use web/browser/MCP only for a concrete question that can change the decision. If unavailable, continue with catalog-only leads and disclose the gap.
 
@@ -119,7 +120,7 @@ Prefer local/offline knowledge. Use web/browser/MCP only for a concrete question
 
 For substantial curation, report scope, changed IDs, schema/cross-link validation, coverage, provenance/licensing, compatibility, tests actually run and unresolved gaps.
 
-For a design knowledge pack, return surface mode, primary task, niche/confidence, source leads versus verified observations, token candidates, eligible patterns, rules/anti-patterns, examples, trade-offs, acceptance checks and verification gaps.
+For a design knowledge pack, return surface mode, primary task, niche/confidence, source leads, page-scoped observations with their original evidence status, token candidates, eligible patterns, rules/anti-patterns, examples, trade-offs, acceptance checks and verification gaps. The optional Visual Intelligence Bundle CLI emits the same distinction in a versioned JSON contract.
 
 ## Safety, integrity and approval
 
