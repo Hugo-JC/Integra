@@ -60,8 +60,8 @@ export function parseVisualIntelligenceGenerateArgs(args: readonly string[]): Vi
   }
   const limitValue = values.get('--limit');
   const limit = limitValue === undefined ? undefined : Number(limitValue);
-  if (limitValue !== undefined && (limit === undefined || !Number.isInteger(limit) || limit < 1 || limit > 20)) {
-    throw new TypeError('--limit must be an integer between 1 and 20.');
+  if (limitValue !== undefined && (limit === undefined || !Number.isInteger(limit) || limit < 1 || limit > 5)) {
+    throw new TypeError('--limit must be an integer between 1 and 5.');
   }
 
   const artifactPath = values.get('--artifact');
