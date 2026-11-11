@@ -25,11 +25,13 @@ export interface SpacingObservation {
   target: string;
   property: string;
   valuePx: number;
+  referenceIncrementPx?: number;
 }
 
 export interface SurfaceNestingObservation {
   target: string;
   nestedSurfaceDepth: number;
+  expectedMaximumDepth?: number;
 }
 
 export interface QualityAuditInput {
@@ -121,14 +123,16 @@ export function auditDesignQuality(input: QualityAuditInput): QualityAuditReport
   }
 
   for (const observation of input.spacing ?? []) {
-    if (!Number.isFinite(observation.valuePx) || observation.valuePx <= 0) continue;
-    if (Math.abs(observation.valuePx / 4 - Math.round(observation.valuePx / 4)) < 0.001) continue;
+    const increment = observation.referenceIncrementPx;
+    if (!Number.isFinite(observation.valuePx) || observation.valuePx <= 0 ||
+      !Number.isFinite(increment) || (increment ?? 0) <= 0) continue;
+    if (Math.abs(observation.valuePx / increment! - Math.round(observation.valuePx / increment!)) < 0.001) continue;
     findings.push({
       id: `spacing-${observation.target}-${observation.property}`,
       ruleId: 'VISUAL-SPACING-CONSISTENCY',
       severity: 'P3',
       target: observation.target,
-      message: `${observation.property} uses ${observation.valuePx}px, outside the project's 4px reference increment.`,
+      message: `${observation.property} uses ${observation.valuePx}px, outside the supplied ${increment}px reference increment.`,
       impact: 'Repeated deviations may weaken visual rhythm, but this value can be intentional.',
       recommendation: 'Check the nearby spacing tokens and keep the deviation only when the layout benefits from it.',
       verification: 'heuristic',
@@ -136,13 +140,15 @@ export function auditDesignQuality(input: QualityAuditInput): QualityAuditReport
   }
 
   for (const observation of input.surfaceNesting ?? []) {
-    if (observation.nestedSurfaceDepth < 3) continue;
+    const threshold = observation.expectedMaximumDepth;
+    if (!Number.isFinite(observation.nestedSurfaceDepth) || !Number.isFinite(threshold) ||
+      (threshold ?? 0) < 0 || observation.nestedSurfaceDepth <= threshold!) continue;
     findings.push({
       id: `surface-nesting-${observation.target}`,
       ruleId: 'VISUAL-SURFACE-NESTING',
       severity: 'P3',
       target: observation.target,
-      message: `The observed surface nesting depth is ${observation.nestedSurfaceDepth}.`,
+      message: `The observed surface nesting depth (${observation.nestedSurfaceDepth}) exceeds the supplied review threshold (${threshold}).`,
       impact: 'Excessive nested surfaces can obscure grouping and add visual noise.',
       recommendation: 'Check whether spacing, dividers or typography can express the hierarchy with fewer containers.',
       verification: 'heuristic',
