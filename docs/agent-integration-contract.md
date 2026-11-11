@@ -78,3 +78,41 @@ The report is an agent's account of its own work. It is not independent verifica
 ## Compatibility policy
 
 The artifact schema and consumption-report schema are independently versioned. A change to either contract requires a schema update, TypeScript contract update, tests and migration notes. Consumers should reject unsupported major contract changes and preserve unknown optional metadata only when their parser explicitly supports doing so.
+
+## Visual Intelligence Bundle 1.0.0
+
+The optional `VisualIntelligenceBundle` packages an existing Direction Artifact with caller-supplied task context and the result of the offline `buildVisualKnowledgePack()` resolver. Its schema is `schemas/visual-intelligence-bundle.schema.json`; the nested Direction Artifact remains unchanged at schema `1.1.0`. The bundle ID is derived from canonical JSON and does not include a timestamp.
+
+Create and validate a bundle through the public Direction module exports:
+
+```ts
+import {
+  buildVisualIntelligenceBundle,
+  serializeVisualIntelligenceBundle,
+  validateVisualIntelligenceBundle,
+} from './src/modules/direction/index.js';
+
+const bundle = buildVisualIntelligenceBundle({
+  directionArtifact,
+  primaryTask: 'Explain the product value and invite visitors to try a demo',
+  mode: 'persuade',
+});
+const validation = validateVisualIntelligenceBundle(bundle);
+const json = serializeVisualIntelligenceBundle(bundle);
+```
+
+`primaryTask` is required. `mode` and `nicheId` are optional; an omitted value remains `null`, and the builder does not infer a niche or mode. An explicit `query` replaces the primary task as the retrieval query; otherwise the primary task is used. A supplied mode is passed to the existing resolver so its token and layout filters remain authoritative.
+
+Consumers should:
+
+1. Read the project brief and the nested Direction Artifact before the knowledge candidates.
+2. Preserve the existing source-of-truth order and all hard constraints in `docs/ai-context-contract.md`.
+3. Treat catalog-only sources as research leads; treat an observation as evidence only for its recorded page, state and scope.
+4. Select token and layout candidates only when they fit the task; explain adoption, adaptation or rejection and preserve existing product tokens.
+5. Keep rules and anti-patterns as review prompts until evidence from the target interface supports a finding.
+6. Do not copy reference layouts, assets, content, components or identity.
+7. Record unknowns, trade-offs, assumptions and acceptance checks. Consuming the bundle is not implementation verification or a QA pass.
+
+This bundle does not change `DirectionConsumptionReport`, crawl or inspect references, verify licences, apply tokens, call an AI/provider, or write to the receiving project. Those capabilities remain out of scope.
+
+The current Knowledge Pack does not include a page-observation collection. Source entries remain leads in this slice; do not infer inspected evidence from a catalog record.
