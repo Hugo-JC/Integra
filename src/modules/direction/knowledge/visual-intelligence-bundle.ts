@@ -1,5 +1,6 @@
 import { Ajv2020 } from 'ajv/dist/2020.js';
 import directionArtifactSchema from '../../../../schemas/direction-artifact.schema.json' with { type: 'json' };
+import referenceObservationSchema from '../../../../schemas/reference-observation.schema.json' with { type: 'json' };
 import visualIntelligenceBundleSchema from '../../../../schemas/visual-intelligence-bundle.schema.json' with { type: 'json' };
 import { hashCanonicalJson, serializeCanonicalJson } from '../canonical-json.js';
 import { validateDirectionArtifact } from '../artifact-validation.js';
@@ -10,7 +11,7 @@ import {
   type VisualKnowledgeRequest,
 } from './index.js';
 
-export const VISUAL_INTELLIGENCE_BUNDLE_SCHEMA_VERSION = '1.0.0' as const;
+export const VISUAL_INTELLIGENCE_BUNDLE_SCHEMA_VERSION = '1.1.0' as const;
 export const VISUAL_INTELLIGENCE_ENGINE_VERSION = '0.1.0';
 
 export interface VisualIntelligenceRequest extends VisualKnowledgeRequest {
@@ -65,6 +66,7 @@ export class VisualIntelligenceBundleError extends TypeError {
 
 const ajv = new Ajv2020({ allErrors: true, strict: true });
 ajv.addSchema(directionArtifactSchema);
+ajv.addSchema(referenceObservationSchema);
 const validateSchema = ajv.compile<VisualIntelligenceBundle>(visualIntelligenceBundleSchema);
 
 const verificationChecklist = [
@@ -113,6 +115,14 @@ export function validateVisualIntelligenceBundle(
       'direction does not pass Direction Artifact validation (' +
       directionValidation.status + ').',
     );
+  }
+  for (const candidate of bundle.knowledge.observations) {
+    if (candidate.verificationStatus !== candidate.item.verificationStatus) {
+      errors.push('Observation candidate verificationStatus must match its item.');
+    }
+    if (candidate.item.verificationStatus === 'verified' && candidate.item.evidenceType === 'inference') {
+      errors.push('An inference-only observation cannot be marked verified.');
+    }
   }
   if (bundle.directionArtifactId !== bundle.direction.artifactId) {
     errors.push('directionArtifactId must match direction.artifactId.');
