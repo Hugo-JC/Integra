@@ -57,7 +57,7 @@ describe('safe generated run output', () => {
     const outside = join(root, 'outside');
     await mkdir(outside);
     await mkdir(join(root, '.integra'), { recursive: true });
-    await symlink(outside, join(root, '.integra', 'runs'));
+    await symlink(outside, join(root, '.integra', 'runs'), process.platform === 'win32' ? 'junction' : 'dir');
     await expect(writeRunOutput(root, '.integra/runs/escape.json', '{}'))
       .rejects.toThrow(/symlink or non-directory component/);
   });
