@@ -71,6 +71,7 @@ const verificationChecklist = [
   'Read the project brief and Direction Artifact before reviewing knowledge candidates.',
   'Confirm the supplied surface mode and niche fit the actual task; do not infer missing values.',
   'Treat catalog-only sources as research leads, not inspected evidence.',
+  'Use each page observation only within its recorded scope and preserve partial versus verified status.',
   'Reconcile token candidates with existing product tokens before proposing any change.',
   'Check pattern prerequisites and explain adoption, adaptation, or rejection.',
   'Verify the implemented interface independently; bundle consumption is not a QA pass.',
