@@ -27,6 +27,7 @@ const anti = readJson('data/design-library/anti-patterns.json');
 const examples = readJson('data/design-library/examples/index.json');
 const assets = readJson('data/design-library/asset-sources.json');
 const observations = readJson('data/design-library/reference-observations.json');
+const libraryManifest = readJson('data/design-library/manifest.json');
 const presets = readJson('data/design-library/local-presets.json');
 function validate(label: string, items: any[], validator: any) {
   for (const item of items) if (!validator(item)) errors.push(label + ': ' + JSON.stringify(validator.errors ?? []));
@@ -51,6 +52,10 @@ unique('anti-pattern IDs', anti.antiPatterns.map((x: any) => x.id));
 unique('example IDs', examples.examples.map((x: any) => x.id));
 unique('asset source IDs', assets.providers.map((x: any) => x.id));
 unique('observation IDs', observations.observations.map((x: any) => x.id));
+if (libraryManifest.counts.observations !== observations.observations.length) errors.push('Manifest observation count does not match the canonical catalog.');
+if (libraryManifest.counts.partialObservations !== observations.observations.filter((x: any) => x.verificationStatus === 'partial').length) errors.push('Manifest partial observation count does not match the canonical catalog.');
+if (libraryManifest.counts.verifiedObservations !== observations.observations.filter((x: any) => x.verificationStatus === 'verified').length) errors.push('Manifest verified observation count does not match the canonical catalog.');
+
 const sourceIds = new Set(sources.sources.map((x: any) => x.id));
 const nicheIds = new Set(nicheMap.niches.map((x: any) => x.nicheId));
 for (const niche of nicheMap.niches) {
