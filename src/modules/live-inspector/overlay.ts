@@ -599,6 +599,7 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
 
   return {
     isActive: () => enabled && !stopped,
+    isDisposed: () => stopped,
     setActive,
     getSelectedElement: () => selected,
     getChangeSets: buildChangeSets,
