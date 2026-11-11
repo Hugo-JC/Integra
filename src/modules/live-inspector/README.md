@@ -24,7 +24,7 @@ The adapter uses `apply: 'serve'`; production builds do not inject it. It does n
 - Blue `#3B82F6` belongs to inspector chrome only.
 
 ## Performance
-Pointer geometry is coalesced to one animation-frame callback. Scroll, resize and viewport updates share a geometry scheduler. No polling timer, external API, React dependency or full-page scan is required. Shadow DOM isolates the overlay. Teardown cancels frames, disconnects observers, removes listeners and restores original attributes.
+Pointer geometry is coalesced to one animation-frame callback. Scroll, resize and viewport updates share a geometry scheduler. A scoped MutationObserver watches only the selected element's ancestor chain to detect framework detachments without a full-DOM scan. No polling timer, external API, React dependency or full-page scan is required. Shadow DOM isolates the overlay. Teardown cancels frames, disconnects observers, removes listeners and restores original attributes.
 
 ## Boundaries
 Local development only. No source writes, AI-provider calls, CSP weakening or arbitrary HTML/JS injection. DOM selectors are not source mappings; source hints are user-provided and unverified. Review package confidence is intentionally low until each target is resolved against the actual source. Contrast is an estimate, not a complete WCAG audit.
