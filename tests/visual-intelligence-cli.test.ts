@@ -1,5 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { parseVisualIntelligenceGenerateArgs } from '../src/cli/visual-intelligence.js';
+import {
+  parseVisualIntelligenceGenerateArgs,
+  parseVisualIntelligenceValidateArgs,
+} from '../src/cli/visual-intelligence.js';
 
 describe('Visual Intelligence CLI argument parser', () => {
   it('requires an artifact and primary task', () => {
@@ -35,5 +38,24 @@ describe('Visual Intelligence CLI argument parser', () => {
   });
   it('allows help without generation arguments', () => {
     expect(parseVisualIntelligenceGenerateArgs(['--help'])).toMatchObject({ help: true });
+  });
+});
+
+describe('Visual Intelligence validation CLI argument parser', () => {
+  it('requires an input file unless help is requested', () => {
+    expect(() => parseVisualIntelligenceValidateArgs([])).toThrow(/Missing required option --input/);
+    expect(parseVisualIntelligenceValidateArgs(['--input', 'bundle.json'])).toEqual({
+      inputPath: 'bundle.json',
+      help: false,
+    });
+    expect(parseVisualIntelligenceValidateArgs(['--help'])).toMatchObject({ help: true });
+  });
+
+  it('rejects unknown, duplicate and empty validation arguments', () => {
+    expect(() => parseVisualIntelligenceValidateArgs(['--unknown'])).toThrow(/Unknown option/);
+    expect(() => parseVisualIntelligenceValidateArgs(['--input', 'one.json', '--input', 'two.json']))
+      .toThrow(/more than once/);
+    expect(() => parseVisualIntelligenceValidateArgs(['--input', '']))
+      .toThrow(/requires a non-empty value/);
   });
 });
