@@ -18,7 +18,7 @@ describe('Visual Intelligence CLI argument parser', () => {
       '--niche-id', 'saas-developer-ai', '--query', 'project table filters',
       '--tag', 'keyboard', '--tag', 'dense-ui', '--asset-type', 'icon', '--asset-type', 'illustration', '--limit', '5',
     ])).toMatchObject({ mode: 'operate', nicheId: 'saas-developer-ai', query: 'project table filters',
-      tags: ['keyboard', 'dense-ui'], assetTypes: ['icon', 'illustration'], limit: 12 });
+      tags: ['keyboard', 'dense-ui'], assetTypes: ['icon', 'illustration'], limit: 5 });
   });
   it('rejects unknown, duplicate scalar, missing and conflicting options', () => {
     const base = ['--artifact', 'direction.json', '--task', 'Manage projects'];
