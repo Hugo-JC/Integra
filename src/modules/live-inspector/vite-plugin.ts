@@ -1,7 +1,6 @@
 export interface IntegraLiveInspectorPluginOptions {
   entry?: string;
   enabled?: boolean;
-  keyboardShortcut?: boolean;
 }
 
 interface HtmlPlugin {
@@ -16,7 +15,6 @@ interface HtmlPlugin {
  */
 export function integraLiveInspectorPlugin(options: IntegraLiveInspectorPluginOptions = {}): HtmlPlugin {
   const enabled = options.enabled ?? true;
-  const keyboardShortcut = options.keyboardShortcut ?? true;
   const entry = options.entry ?? '/src/modules/live-inspector/index.ts';
 
   return {
@@ -29,11 +27,10 @@ export function integraLiveInspectorPlugin(options: IntegraLiveInspectorPluginOp
 
         const bootstrap = `<script type="module" data-integra-live-bootstrap>
 const entry = ${JSON.stringify(entry)};
-const shortcutEnabled = ${JSON.stringify(keyboardShortcut)};
 let loading = false;
 
 const shortcut = (event) => {
-  if (!shortcutEnabled || !event.altKey || !event.shiftKey || event.key.toLowerCase() !== 'i') return;
+  if (!event.altKey || !event.shiftKey || event.key.toLowerCase() !== 'i') return;
 
   const current = window.__INTEGRA_LIVE_INSPECTOR__;
   if (current && !current.isDisposed?.()) return;
@@ -55,8 +52,8 @@ window.addEventListener('keydown', shortcut, true);
 </script>`;
 
         return html.includes('</body>')
-          ? html.replace('</body>', bootstrap + '\\n</body>')
-          : html + '\\n' + bootstrap;
+          ? html.replace('</body>', bootstrap + '\n</body>')
+          : html + '\n' + bootstrap;
       },
     },
   };
