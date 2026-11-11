@@ -199,6 +199,22 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
         tag.style.display = 'none';
         return;
       }
+      if (selected && !selected.isConnected) {
+        selected = null;
+        selectionLocked = false;
+        highlighted = null;
+        resizeObserver?.disconnect();
+        resizeObserver?.observe(doc.documentElement);
+        highlight.style.display = 'none';
+        tag.style.display = 'none';
+        targetName.textContent = 'Elemento removido da página';
+        targetSelector.textContent = 'Seleciona novamente o elemento após a atualização da interface.';
+        status.textContent = 'O elemento selecionado foi removido. O seu preview não será exportado como alteração atual.';
+        panel.hidden = !enabled;
+        options.onSelectionChange?.(null);
+        notifyChanges();
+        return;
+      }
       const target = selected?.isConnected ? selected : highlighted;
       if (target?.isConnected) positionHighlight(target);
       else {
@@ -303,6 +319,7 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
   const buildChangeSets = (): LiveElementChangeSet[] => {
     const changes: LiveElementChangeSet[] = [];
     for (const [element, original] of originals) {
+      if (!element.isConnected) continue;
       const updatedClasses = element.getAttribute('class') ?? '';
       const contrastBackground = resolveCompositedBackground(element, doc);
       const computed = currentComputed(element);
@@ -336,6 +353,7 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
       },
       mode: panel.dataset.mode === 'advanced' ? 'advanced' : 'quick',
       changes,
+      staleTargetCount: [...originals.keys()].filter((element) => !element.isConnected).length,
       prompt: synthesizeLivePrompt(changes),
     });
   };
