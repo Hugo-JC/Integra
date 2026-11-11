@@ -1,6 +1,6 @@
 # Live Inspector v2 — Product and Technical Specification
 
-**Status:** Quick Canvas and Inspector shell implemented in the workbench branch; preview history and structured review package remain planned.
+**Status:** Quick Canvas, Inspector mode, reversible preview history and viewport-aware structured review package are implemented. DOM navigator, richer computed-property groups and multi-viewport browser adapter remain planned.
 
 ## Product intent
 Reduce the distance between identifying a UI issue and preparing a precise code change. Live is local-development inspection and reversible preview, not a production editor or automatic source mutator.
@@ -24,8 +24,9 @@ Keyboard shortcut must not intercept editable controls. Escape restores and clos
 ## Source handoff
 Preview is a proposal. The refactor workflow inspects actual source, presents an exact diff and obtains approval before editing.
 
+## Structured review package
+The controller exposes `getReviewPackage()` and the workbench provides **Exportar JSON**. The versioned package records a timestamp, origin/path (without query or fragment), viewport dimensions and device-pixel ratio, active mode, target diffs, and the implementation prompt. Source mapping is explicitly `unresolved` with low confidence; component hints are unverified. The package states that source mutation is `none` and requires approval for any exact source diff. It does not claim the preview is a verified implementation or a complete accessibility audit.
+
 ## Roadmap
-1. Typed operation history with undo/redo and grouped transactions.
-2. DOM navigator and richer computed-property groups.
-3. Versioned JSON review package with viewport and confidence metadata.
-4. Optional real-browser multi-viewport adapter.
+1. DOM navigator and richer computed-property groups.
+2. Optional real-browser multi-viewport adapter.
