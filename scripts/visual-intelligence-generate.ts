@@ -1,5 +1,6 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { writeRunOutput } from '../src/cli/run-output.js';
 import { parseVisualIntelligenceGenerateArgs } from '../src/cli/visual-intelligence.js';
 import { buildVisualIntelligenceBundle, serializeVisualIntelligenceBundle } from '../src/modules/direction/index.js';
 import type { DirectionArtifact } from '../src/modules/direction/types.js';
@@ -46,9 +47,7 @@ async function main(): Promise<void> {
 
   if (options.stdout) process.stdout.write(serialized);
   else {
-    const target = resolve(options.outputPath);
-    await mkdir(dirname(target), { recursive: true });
-    await writeFile(target, serialized, 'utf8');
+    const target = await writeRunOutput(process.cwd(), options.outputPath, serialized, [options.artifactPath]);
     process.stderr.write('Visual Intelligence Bundle written to ' + target + '\\n');
   }
   process.stderr.write(
