@@ -53,14 +53,17 @@ Keyboard shortcuts must not intercept form controls/contenteditable. Preserve vi
 4. Record tag, accessible name, selector, viewport and state.
 5. Make focused previews; avoid unrelated changes.
 6. Review contrast and narrow/wide layouts where relevant.
-7. Export the diff and prompt.
+7. Export the text diff for agent handoff or use **Exportar JSON** / `getReviewPackage()` for the versioned package with viewport, mode, target changes and evidence limitations.
 8. Use `integra-refactor-agent` to map the target to actual source; never infer a file from classes or ancestry.
 9. Present exact source diff, behavior impact and verification plan.
 10. Obtain approval for that diff before editing source.
 11. Run checks and inspect the rendered implementation.
 
+## Structured review package
+The controller exposes `getReviewPackage()` and the workbench provides **Exportar JSON**. The package records the current origin/path (without query or fragment), viewport and device-pixel ratio, active mode, target diffs, prompt, source-mapping status and approval policy. Source mapping is always `unresolved` with low confidence until the receiving project is inspected. The package is a proposal; it never applies source changes.
+
 ## Deliverable
-Concise Live Review: local URL/adapter, selected element/viewport, preview changes, contrast evidence/confidence, source mapping status, proposed diff/tests and cleanup state.
+Concise Live Review: local URL/adapter, selected element/viewport, preview changes, contrast evidence/confidence, source mapping status, JSON review package, proposed diff/tests and cleanup state.
 
 ## Recovery
 If overlay disappears, check HMR first. Reopen the same app URL and reactivate **Alt + Shift + I**. Do not start another server until confirming the existing one is unavailable. Escape closes and restores by default.
