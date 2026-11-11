@@ -14,7 +14,7 @@ describe('Integra Vite Live Inspector plugin', () => {
     expect(html).toContain('isDisposed?.()');
     expect(html).toContain('loading = false');
     expect(html).not.toContain('removeEventListener');
-    expect(html).toContain('</script>\\n</body></html>');
+    expect(html).toContain('</script>\n</body></html>');
     expect(plugin.transformIndexHtml.handler(html)).toBe(html);
   });
 
