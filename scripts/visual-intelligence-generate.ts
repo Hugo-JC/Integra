@@ -48,16 +48,16 @@ async function main(): Promise<void> {
   if (options.stdout) process.stdout.write(serialized);
   else {
     const target = await writeRunOutput(process.cwd(), options.outputPath, serialized, [options.artifactPath]);
-    process.stderr.write('Visual Intelligence Bundle written to ' + target + '\\n');
+    process.stderr.write('Visual Intelligence Bundle written to ' + target + '\n');
   }
   process.stderr.write(
     'Bundle ' + bundle.bundleId + ' · schema ' + bundle.schemaVersion +
-    ' · observations ' + bundle.knowledge.observations.length + ' · validation passed\\n',
+    ' · observations ' + bundle.knowledge.observations.length + ' · validation passed\n',
   );
 }
 
 main().catch((error: unknown) => {
   process.stderr.write('Visual Intelligence generation failed: ' +
-    (error instanceof Error ? error.message : String(error)) + '\\n');
+    (error instanceof Error ? error.message : String(error)) + '\n');
   process.exitCode = 1;
 });
