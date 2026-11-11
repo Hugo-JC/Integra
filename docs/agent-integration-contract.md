@@ -79,9 +79,9 @@ The report is an agent's account of its own work. It is not independent verifica
 
 The artifact schema and consumption-report schema are independently versioned. A change to either contract requires a schema update, TypeScript contract update, tests and migration notes. Consumers should reject unsupported major contract changes and preserve unknown optional metadata only when their parser explicitly supports doing so.
 
-## Visual Intelligence Bundle 1.0.0
+## Visual Intelligence Bundle 1.1.0
 
-The optional `VisualIntelligenceBundle` packages an existing Direction Artifact with caller-supplied task context and the result of the offline `buildVisualKnowledgePack()` resolver. Its schema is `schemas/visual-intelligence-bundle.schema.json`; the nested Direction Artifact remains unchanged at schema `1.1.0`. The bundle ID is derived from canonical JSON and does not include a timestamp.
+The optional `VisualIntelligenceBundle` packages an existing Direction Artifact with caller-supplied task context and the result of the offline `buildVisualKnowledgePack()` resolver, including scoped page-observation candidates. Its schema is `schemas/visual-intelligence-bundle.schema.json`; the nested Direction Artifact remains unchanged at schema `1.1.0`. The bundle ID is derived from canonical JSON and does not include a timestamp.
 
 Create and validate a bundle through the public Direction module exports:
 
@@ -101,7 +101,7 @@ const validation = validateVisualIntelligenceBundle(bundle);
 const json = serializeVisualIntelligenceBundle(bundle);
 ```
 
-`primaryTask` is required. `mode` and `nicheId` are optional; an omitted value remains `null`, and the builder does not infer a niche or mode. An explicit `query` replaces the primary task as the retrieval query; otherwise the primary task is used. A supplied mode is passed to the existing resolver so its token and layout filters remain authoritative.
+`primaryTask` is required. `mode` and `nicheId` are optional; an omitted value remains `null`, and the builder does not infer a niche or mode. An explicit `query` replaces the primary task as the retrieval query; otherwise the primary task is used. `knowledge.observations` contains only relevant page-level records and preserves each record's `evidenceType`, `confidence` and `verificationStatus`. A `partial` observation is evidence only for its documented page and scope; it is not a verified live-product finding. A supplied mode is passed to the existing resolver so its token and layout filters remain authoritative.
 
 Consumers should:
 
@@ -115,4 +115,12 @@ Consumers should:
 
 This bundle does not change `DirectionConsumptionReport`, crawl or inspect references, verify licences, apply tokens, call an AI/provider, or write to the receiving project. Those capabilities remain out of scope.
 
-The current Knowledge Pack does not include a page-observation collection. Source entries remain leads in this slice; do not infer inspected evidence from a catalog record.
+The Knowledge Pack keeps source leads and page observations separate. A source may remain `catalog-only` while one specific page observation is `partial`; never upgrade the whole source based on that record.
+
+For a repository checkout, the bundle can also be generated from a validated Direction Artifact file:
+
+```sh
+npm run visual-intelligence:generate -- --artifact .integra/runs/direction/DL-001.json --task "Explain the product value and invite visitors to try a demo" --mode persuade --niche-id saas-developer-ai --stdout
+```
+
+Use `--out <path>` instead of `--stdout` to write the JSON bundle to a run-output file. The command reads the artifact and writes only the requested bundle output; it does not modify application source. `--tag`, `--asset-type` and `--query` are optional retrieval controls. The receiving agent must still review all candidates and verify its implementation independently.

@@ -33,7 +33,9 @@
     "designRules": 32,
     "antiPatterns": 21,
     "examples": 7,
-    "verifiedObservations": 0
+    "verifiedObservations": 0,
+    "observations": 2,
+    "partialObservations": 2
   },
   "policy": "Presets and token recipes are contextual starting points, never universal templates. Preserve user intent, existing project identity, actual product behavior, accessibility, evidence status and provenance. Extract principles rather than reproducing complete reference pages, code or assets.",
   "catalogs": {

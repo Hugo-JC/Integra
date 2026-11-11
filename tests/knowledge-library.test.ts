@@ -3,10 +3,30 @@ import { buildVisualKnowledgePack, visualKnowledgeMetadata } from '../src/module
 describe('visual knowledge library', () => {
   it('covers all migrated niches with source discovery leads', () => {
     expect(visualKnowledgeMetadata.nicheMappingCount).toBe(61);
+    expect(visualKnowledgeMetadata.observationCount).toBe(2);
+    expect(visualKnowledgeMetadata.partialObservationCount).toBe(2);
+    expect(visualKnowledgeMetadata.verifiedObservationCount).toBe(0);
     const pack = buildVisualKnowledgePack({ nicheId: 'coffee-artisan-food', mode: 'persuade' });
     expect(pack.references.some((entry) => entry.item.id === 'blue-bottle')).toBe(true);
     expect(pack.references.every((entry) => entry.verificationStatus === 'catalog-only')).toBe(true);
   });
+  it('retrieves scoped documentation observations without upgrading their evidence status', () => {
+    const pack = buildVisualKnowledgePack({
+      nicheId: 'saas-developer-ai',
+      mode: 'operate',
+      query: 'task-first hierarchy compact navigation responsive layout',
+    });
+
+    expect(pack.observations.map((entry) => entry.item.id).sort()).toEqual([
+      'linear-interface-refresh-2026',
+      'primer-layout-foundations-2026',
+    ].sort());
+    expect(pack.observations.every((entry) => entry.verificationStatus === 'partial')).toBe(true);
+    expect(pack.observations.every((entry) => entry.item.evidenceType === 'official-documentation')).toBe(true);
+    expect(pack.observations.every((entry) => entry.item.confidence === 'medium')).toBe(true);
+    expect(pack.safeguards.some((item) => item.includes('Partial page observations'))).toBe(true);
+  });
+
   it('selects layout patterns by surface mode and task tags', () => {
     const pack = buildVisualKnowledgePack({ mode: 'operate', query: 'admin inventory data table' });
     expect(pack.layoutPatterns.some((entry) => entry.item.id === 'data-table-workbench')).toBe(true);

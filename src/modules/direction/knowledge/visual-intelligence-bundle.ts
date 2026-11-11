@@ -10,7 +10,7 @@ import {
   type VisualKnowledgeRequest,
 } from './index.js';
 
-export const VISUAL_INTELLIGENCE_BUNDLE_SCHEMA_VERSION = '1.0.0' as const;
+export const VISUAL_INTELLIGENCE_BUNDLE_SCHEMA_VERSION = '1.1.0' as const;
 export const VISUAL_INTELLIGENCE_ENGINE_VERSION = '0.1.0';
 
 export interface VisualIntelligenceRequest extends VisualKnowledgeRequest {
@@ -71,6 +71,7 @@ const verificationChecklist = [
   'Read the project brief and Direction Artifact before reviewing knowledge candidates.',
   'Confirm the supplied surface mode and niche fit the actual task; do not infer missing values.',
   'Treat catalog-only sources as research leads, not inspected evidence.',
+  'Use each page observation only within its recorded scope and preserve partial versus verified status.',
   'Reconcile token candidates with existing product tokens before proposing any change.',
   'Check pattern prerequisites and explain adoption, adaptation, or rejection.',
   'Verify the implemented interface independently; bundle consumption is not a QA pass.',
@@ -113,6 +114,14 @@ export function validateVisualIntelligenceBundle(
       'direction does not pass Direction Artifact validation (' +
       directionValidation.status + ').',
     );
+  }
+  for (const candidate of bundle.knowledge.observations) {
+    if (candidate.verificationStatus !== candidate.item.verificationStatus) {
+      errors.push('Observation candidate verificationStatus must match its item.');
+    }
+    if (candidate.item.verificationStatus === 'verified' && candidate.item.evidenceType === 'inference') {
+      errors.push('An inference-only observation cannot be marked verified.');
+    }
   }
   if (bundle.directionArtifactId !== bundle.direction.artifactId) {
     errors.push('directionArtifactId must match direction.artifactId.');

@@ -39,7 +39,7 @@ describe('Visual Intelligence Bundle', () => {
       nicheId: 'portfolio-editorial-education',
     });
 
-    expect(bundle.schemaVersion).toBe('1.0.0');
+    expect(bundle.schemaVersion).toBe('1.1.0');
     expect(bundle.task).toMatchObject({
       primaryTask: taskFixture.primaryTask,
       mode: 'persuade',
@@ -112,6 +112,25 @@ describe('Visual Intelligence Bundle', () => {
     expect(blueBottle?.item.verificationStatus).toBe('catalog-only');
   });
 
+  it('includes page-scoped observations without upgrading partial documentation to verified evidence', () => {
+    const bundle = buildVisualIntelligenceBundle({
+      ...baseRequest,
+      nicheId: 'saas-developer-ai',
+      query: 'task-first hierarchy compact navigation responsive layout',
+    });
+
+    expect(bundle.knowledge.schemaVersion).toBe('1.1.0');
+    expect(bundle.knowledge.observations).toHaveLength(2);
+    expect(bundle.knowledge.observations.every((candidate) =>
+      candidate.verificationStatus === 'partial' &&
+      candidate.item.verificationStatus === 'partial' &&
+      candidate.item.evidenceType === 'official-documentation',
+    )).toBe(true);
+    expect(bundle.knowledge.references.every((candidate) =>
+      candidate.verificationStatus === 'catalog-only',
+    )).toBe(true);
+  });
+
   it('keeps knowledge candidates separate from Direction Artifact decisions', () => {
     const bundle = buildVisualIntelligenceBundle(baseRequest);
     const decisions = Object.values(bundle.direction.sections).flatMap((section) => section.decisions);
@@ -159,6 +178,20 @@ describe('Visual Intelligence Bundle', () => {
     } finally {
       fetchSpy.mockRestore();
     }
+  });
+
+  it('rejects observation provenance that differs between the candidate and its record', () => {
+    const bundle = buildVisualIntelligenceBundle({
+      ...baseRequest,
+      nicheId: 'saas-developer-ai',
+      query: 'task-first hierarchy compact navigation responsive layout',
+    });
+    const altered = structuredClone(bundle);
+    altered.knowledge.observations[0].verificationStatus = 'verified';
+
+    expect(validateVisualIntelligenceBundle(altered).errors).toContain(
+      'Observation candidate verificationStatus must match its item.',
+    );
   });
 
   it('rejects changes to bundle relationships or canonical identity', () => {

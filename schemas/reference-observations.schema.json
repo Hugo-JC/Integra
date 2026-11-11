@@ -51,7 +51,9 @@
           },
           "observedAt": {
             "type": "string",
-            "format": "date-time"
+            "format": "date",
+            "description": "ISO 8601 calendar date. Time-of-day is not required when the inspection date is known but the exact time was not captured.",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
           },
           "evidenceType": {
             "enum": [

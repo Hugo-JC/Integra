@@ -2,12 +2,12 @@
 
 **Date inspected:** 2026-11-11  
 **Repository baseline:** `main` at `9db438a522d4cb7edd1bf7b16606a0915a029fb5`  
-**Batch status:** research notes; pending maintainer review and promotion into the canonical observation catalog  
+**Batch status:** promoted into the canonical observation catalog as two partial, page-scoped records; direct live-product verification remains outstanding  
 **Scope:** two official, first-party design references. This batch records documented principles, not a claim that the live authenticated products were exhaustively inspected.
 
 ## Why this batch exists
 
-The visual knowledge library currently contains discovery leads but no page-level observations. This batch establishes the first evidence-backed research records using pages that explicitly document their own design decisions.
+The visual knowledge library began with discovery leads and no page-level observations. This batch established two evidence-backed research records using first-party pages that explicitly document design decisions. Both records are now available to the deterministic knowledge resolver.
 
 Evidence type is deliberately set to `official-documentation`, not `direct-observation`: the pages were inspected as published documentation/articles, but this work did not run the products, inspect authenticated states, or capture independent browser screenshots.
 
@@ -17,7 +17,7 @@ Evidence type is deliberately set to `official-documentation`, not `direct-obser
 
 | Field | Value |
 |---|---|
-| Observation ID (proposed) | `linear-interface-refresh-2026` |
+| Canonical observation ID | `linear-interface-refresh-2026` |
 | Existing source ID | `linear` |
 | Evidence type | `official-documentation` |
 | Page | [A calmer interface for a product in motion](https://linear.app/now/behind-the-latest-design-refresh) |
@@ -122,16 +122,11 @@ The documented Primer viewport ranges may be offered as a reference for projects
 
 ---
 
-## Promotion checklist — before these notes become canonical data
+## Promotion record and evidence boundary
 
-- [ ] Maintainer reviews whether the interpretations are faithful to the source.
-- [ ] Confirm the current canonical URLs and source IDs.
-- [ ] Decide whether these records should be added to `data/design-library/reference-observations.json`.
-- [ ] If promoted, use `official-documentation`, `partial`, and medium confidence exactly as recorded; do not relabel them as direct live-product observations.
-- [ ] Update `visual-sources.json` only if the source-level verification semantics are agreed. A documented page being inspected does not mean every source feature or product state is verified.
-- [ ] Update `manifest.json` counts only after canonical promotion and validator success.
-- [ ] Run `npm run validate:visual-library` and `npm run check`.
-- [ ] Add direct rendered-product observations separately if screenshots, viewport, state and interaction evidence are later collected.
+Both records are stored in `data/design-library/reference-observations.json` with `evidenceType: official-documentation`, `verificationStatus: partial` and medium confidence. `observedAt` stores a calendar date only because the exact inspection time was not captured. The source catalog entries remain `catalog-only`; an inspection of one article or documentation page does not verify an entire product or source.
+
+The records are included in the Knowledge Pack and Visual Intelligence Bundle 1.1.0 as partial evidence candidates. The manifest tracks `observations: 2`, `partialObservations: 2` and `verifiedObservations: 0`. Run `npm run validate:visual-library` and `npm run check` after changes. Add direct rendered-product observations separately when screenshots, viewport, state and interaction evidence are later collected.
 
 ## Suggested next inspection batch
 

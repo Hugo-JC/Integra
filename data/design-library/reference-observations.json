@@ -1,5 +1,70 @@
 {
   "schemaVersion": "1.0.0",
   "policy": "Only specific page-level inspections belong here; catalog URLs alone must never be promoted to verified observations.",
-  "observations": []
+  "observations": [
+    {
+      "id": "linear-interface-refresh-2026",
+      "sourceId": "linear",
+      "canonicalUrl": "https://linear.app/now/behind-the-latest-design-refresh",
+      "observedAt": "2026-11-11",
+      "evidenceType": "official-documentation",
+      "location": "Linear design-refresh article, especially the sections on task attention, visual structure and internal design tools.",
+      "viewport": null,
+      "productState": "First-party design-process article published 2026-03-12. No authenticated Linear workspace or live product state was independently inspected.",
+      "observation": "Linear's article documents a refresh that reduced competition from navigation after users reach their destination, compacted desktop tabs, reduced decorative icon treatment and softened unnecessary separators. It also describes reversible visual experiments through feature flags, an internal comparison toolbar and token-aware color adjustments. These are statements made by Linear about its own design process, not independent measurements of the live product.",
+      "transferablePrinciple": "Allocate visual emphasis according to the user's current task. Use icons and separators only when they improve recognition or grouping, and make visual experiments reversible and comparable. Keep token values connected to the product's actual source of truth.",
+      "adaptation": "For dense workspaces, inspect the relative emphasis of primary work area, navigation, metadata and secondary actions before proposing changes. In Live Inspector, capture a baseline, preview a focused change, compare states and export a reviewable diff. Never assume a dimmer sidebar or fewer borders is universally appropriate.",
+      "doNotCopy": [
+        "Linear's exact sidebar, tab geometry, iconography, palette or proprietary component styling.",
+        "A dimmer sidebar as a universal rule; navigation may itself be the primary task.",
+        "Fewer borders as a blanket instruction; tables and forms may need clear boundaries.",
+        "Linear's internal tools or token values as public implementation specifications."
+      ],
+      "limitations": [
+        "This is a first-party design-process article, not an independent usability study.",
+        "The article describes a particular desktop refresh and does not establish universal mobile behavior.",
+        "No authenticated workspace, live interaction, keyboard flow, responsive state or runtime performance was independently tested.",
+        "The described token workflow documents process, not token suitability for another product."
+      ],
+      "confidence": "medium",
+      "verificationStatus": "partial",
+      "notes": [
+        "Evidence type remains official-documentation; this is not classified as direct-observation.",
+        "The exact inspection time was not captured; observedAt intentionally records the calendar date only.",
+        "Source-level catalog status remains catalog-only because this observation covers one article, not the entire Linear product."
+      ]
+    },
+    {
+      "id": "primer-layout-foundations-2026",
+      "sourceId": "github-primer",
+      "canonicalUrl": "https://primer.style/product/getting-started/foundations/layout/",
+      "observedAt": "2026-11-11",
+      "evidenceType": "official-documentation",
+      "location": "GitHub Primer Product design-system documentation, Layout foundation: viewport ranges, page anatomy, page types and responsive behavior.",
+      "viewport": null,
+      "productState": "Official design-system guidance page. No GitHub product workflow or responsive application state was independently exercised.",
+      "observation": "Primer's layout guidance describes narrow, regular and wide viewport ranges; separates the application header, context region and local navigation; and distinguishes full-page, split-page and interstitial structures. It recommends preserving functionality on small screens and describes transforming list-detail and auxiliary-pane patterns instead of merely shrinking desktop columns.",
+      "transferablePrinciple": "Choose page structure from the task and information relationship. Treat responsive design as an information-architecture and interaction change, not only a grid adjustment. Give global navigation, contextual location and local navigation distinct responsibilities.",
+      "adaptation": "For dashboards, file browsers and settings workflows, first classify a side pane as navigation, filtering, selected-item detail or auxiliary metadata. Then decide whether a narrow layout should become a separate list/detail view, a drawer, a bottom sheet or another task-appropriate structure. Record viewport assumptions and test the resulting states.",
+      "doNotCopy": [
+        "Primer's exact breakpoint values as universal Integra defaults.",
+        "GitHub's repository labels or information architecture when the target product has different entities.",
+        "A bottom sheet for primary navigation or a workflow-critical panel without interaction evidence.",
+        "The assumption that every desktop split layout should become a two-page mobile flow."
+      ],
+      "limitations": [
+        "This is official design-system guidance, not a measurement of every GitHub product screen.",
+        "The guidance is specific to Primer and GitHub product UI.",
+        "No full responsive screenshot series, keyboard flow or interactive product test was captured.",
+        "The documented viewport ranges are Primer guidance, not a WCAG requirement or universal breakpoint standard."
+      ],
+      "confidence": "medium",
+      "verificationStatus": "partial",
+      "notes": [
+        "Evidence type remains official-documentation; this is not classified as direct-observation.",
+        "The exact inspection time was not captured; observedAt intentionally records the calendar date only.",
+        "Source-level catalog status remains catalog-only because this observation covers one documentation page, not the full GitHub product."
+      ]
+    }
+  ]
 }

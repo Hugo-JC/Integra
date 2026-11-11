@@ -73,6 +73,8 @@ export function createLiveInspector(options: LiveInspectorOptions = {}): LiveIns
 }
 
 export { createIntegraInspector } from './overlay.js';
+export { createLiveInspectorReviewPackage } from './review-package.js';
+export type { LiveInspectorMode, LiveInspectorReviewPackageInput } from './review-package.js';
 export {
   calculateLiveContrast,
   contrastRatio,

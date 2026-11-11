@@ -55,6 +55,20 @@ export interface LiveContrastEvidence {
   level: 'AA' | 'Fail';
 }
 
+export interface LiveInspectorReviewPackage {
+  schemaVersion: '1.0.0';
+  capturedAt: string;
+  page: { origin: string; pathname: string };
+  viewport: { width: number; height: number; devicePixelRatio: number };
+  mode: 'quick' | 'advanced';
+  targetCount: number;
+  changes: LiveElementChangeSet[];
+  prompt: string;
+  sourceMapping: { status: 'unresolved'; confidence: 'low'; note: string };
+  approval: { sourceMutation: 'none'; requiredBeforeSourceChanges: true; scope: 'exact-proposed-diff' };
+  limitations: string[];
+}
+
 export interface IntegraLiveInspectorOptions {
   title?: string;
   panelTitle?: string;
@@ -66,6 +80,7 @@ export interface IntegraLiveInspectorOptions {
   onSelectionChange?: (element: HTMLElement | null) => void;
   onChange?: (changes: LiveElementChangeSet[]) => void;
   onApply?: (changes: LiveElementChangeSet[], prompt: string) => void;
+  onReviewPackage?: (reviewPackage: LiveInspectorReviewPackage) => void;
 }
 
 export interface IntegraLiveInspectorController {
@@ -74,6 +89,7 @@ export interface IntegraLiveInspectorController {
   getSelectedElement(): HTMLElement | SVGElement | null;
   getChangeSets(): LiveElementChangeSet[];
   getPrompt(): string;
+  getReviewPackage(): LiveInspectorReviewPackage;
   stop(options?: { restore?: boolean }): void;
 }
 
