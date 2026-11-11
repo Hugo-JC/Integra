@@ -18,7 +18,7 @@
   ],
   "properties": {
     "schemaVersion": {
-      "const": "1.0.0"
+      "const": "1.1.0"
     },
     "bundleId": {
       "type": "string",
@@ -178,6 +178,7 @@
         "schemaVersion",
         "selection",
         "references",
+        "observations",
         "assetSources",
         "tokenSystems",
         "layoutPatterns",
@@ -188,7 +189,7 @@
       ],
       "properties": {
         "schemaVersion": {
-          "const": "1.0.0"
+          "const": "1.1.0"
         },
         "selection": {
           "type": "object",
@@ -287,6 +288,40 @@
           "items": {
             "type": "string",
             "minLength": 1
+          }
+        },
+        "observations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "item",
+              "score",
+              "reasons",
+              "verificationStatus"
+            ],
+            "properties": {
+              "item": {
+                "$ref": "https://integra.dev/schemas/reference-observation.schema.json"
+              },
+              "score": {
+                "type": "number",
+                "minimum": 0
+              },
+              "reasons": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "verificationStatus": {
+                "enum": [
+                  "verified",
+                  "partial"
+                ]
+              }
+            }
           }
         }
       }
