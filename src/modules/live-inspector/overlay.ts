@@ -195,11 +195,6 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
     if (geometryFrame || stopped) return;
     geometryFrame = view.requestAnimationFrame(() => {
       geometryFrame = 0;
-      if (!enabled) {
-        highlight.style.display = 'none';
-        tag.style.display = 'none';
-        return;
-      }
       if (selected && !selected.isConnected) {
         selected = null;
         selectionLocked = false;
@@ -215,6 +210,11 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
         panel.hidden = !enabled;
         options.onSelectionChange?.(null);
         notifyChanges();
+        return;
+      }
+      if (!enabled) {
+        highlight.style.display = 'none';
+        tag.style.display = 'none';
         return;
       }
       const target = selected?.isConnected ? selected : highlighted;
