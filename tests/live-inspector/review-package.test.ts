@@ -35,6 +35,7 @@ const baseInput = {
   viewport: { width: 1440, height: 900, devicePixelRatio: 1 },
   mode: 'advanced' as const,
   changes,
+  staleTargetCount: 0,
   prompt: 'Review the source-level implementation for this preview.',
 };
 
@@ -42,11 +43,12 @@ describe('Live Inspector structured review package', () => {
   it('preserves the viewport, mode, target changes and review boundary', () => {
     const result = createLiveInspectorReviewPackage(baseInput);
     expect(result).toMatchObject({
-      schemaVersion: '1.0.0',
+      schemaVersion: '1.1.0',
       page: baseInput.page,
       viewport: baseInput.viewport,
       mode: 'advanced',
       targetCount: 1,
+      staleTargetCount: 0,
       sourceMapping: { status: 'unresolved', confidence: 'low' },
       approval: {
         sourceMutation: 'none',
@@ -61,6 +63,26 @@ describe('Live Inspector structured review package', () => {
   it('conforms to the published JSON Schema', () => {
     const result = createLiveInspectorReviewPackage(baseInput);
     expect(validateReviewPackage(result)).toBe(true);
+  });
+
+  it('records detached targets and warns that their previews were excluded', () => {
+    const result = createLiveInspectorReviewPackage({
+      ...baseInput,
+      staleTargetCount: 2,
+    });
+    expect(result).toMatchObject({ targetCount: 1, staleTargetCount: 2 });
+    expect(result.limitations.some((item) => item.includes('Detached DOM targets were excluded'))).toBe(true);
+  });
+
+  it('rejects negative or fractional stale target counts', () => {
+    expect(() => createLiveInspectorReviewPackage({
+      ...baseInput,
+      staleTargetCount: -1,
+    })).toThrow(RangeError);
+    expect(() => createLiveInspectorReviewPackage({
+      ...baseInput,
+      staleTargetCount: 1.5,
+    })).toThrow(RangeError);
   });
 
   it('marks an empty package instead of inventing review targets', () => {
