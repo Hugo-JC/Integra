@@ -85,6 +85,7 @@ export interface IntegraLiveInspectorOptions {
 
 export interface IntegraLiveInspectorController {
   isActive(): boolean;
+  isDisposed(): boolean;
   setActive(active: boolean): void;
   getSelectedElement(): HTMLElement | SVGElement | null;
   getChangeSets(): LiveElementChangeSet[];
