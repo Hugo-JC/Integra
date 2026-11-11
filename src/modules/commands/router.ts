@@ -10,10 +10,12 @@ function normalize(value:string):string {
   return value.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("en-US")
     .replace(/[^\p{L}\p{N}]+/gu," ").trim().replace(/\s+/g," ");
 }
-const triggerIndex = new Map(commands.map((command) => [
-  command.id,
-  command.triggers.map((term) => ({ term, normalized: normalize(term) })),
-]));
+const triggerIndex = new Map<string, { term: string; normalized: string }[]>(
+  commands.map((command) => [
+    command.id,
+    command.triggers.map((term) => ({ term, normalized: normalize(term) })),
+  ]),
+);
 function matchedTriggers(commandId:string, query:string):string[] {
   const paddedQuery = ` ${query} `;
   return (triggerIndex.get(commandId) ?? [])
