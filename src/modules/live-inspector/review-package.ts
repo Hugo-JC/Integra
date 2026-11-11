@@ -8,6 +8,7 @@ export interface LiveInspectorReviewPackageInput {
   viewport: { width: number; height: number; devicePixelRatio: number };
   mode: LiveInspectorMode;
   changes: LiveElementChangeSet[];
+  staleTargetCount: number;
   prompt: string;
 }
 
@@ -31,17 +32,21 @@ export function createLiveInspectorReviewPackage(
   if (!Array.isArray(input.changes) || typeof input.prompt !== 'string') {
     throw new TypeError('changes must be an array and prompt must be a string.');
   }
+  if (!Number.isInteger(input.staleTargetCount) || input.staleTargetCount < 0) {
+    throw new RangeError('staleTargetCount must be a non-negative integer.');
+  }
   if (input.mode !== 'quick' && input.mode !== 'advanced') {
     throw new TypeError('mode must be quick or advanced.');
   }
 
   return {
-    schemaVersion: '1.0.0',
+    schemaVersion: '1.1.0',
     capturedAt: input.capturedAt,
     page: { origin: input.page.origin, pathname: input.page.pathname },
     viewport: { width, height, devicePixelRatio },
     mode: input.mode,
     targetCount: input.changes.length,
+    staleTargetCount: input.staleTargetCount,
     changes: input.changes,
     prompt: input.prompt,
     sourceMapping: {
@@ -60,6 +65,7 @@ export function createLiveInspectorReviewPackage(
       'Contrast data is a runtime estimate or inconclusive signal, not a complete WCAG conformance result.',
       'Source mapping remains unresolved until the receiving project is inspected; a component hint is caller-provided and unverified.',
       'Any source edit requires a separate exact-diff review and explicit approval.',
+      ...(input.staleTargetCount > 0 ? ['Detached DOM targets were excluded from the changes list; select the current rendered elements again before relying on this package.'] : []),
     ],
   };
 }
