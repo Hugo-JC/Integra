@@ -31,6 +31,7 @@ let loading = false;
 
 const shortcut = (event) => {
   if (!event.altKey || !event.shiftKey || event.key.toLowerCase() !== 'i') return;
+  event.preventDefault();
 
   const current = window.__INTEGRA_LIVE_INSPECTOR__;
   if (current && !current.isDisposed?.()) return;
