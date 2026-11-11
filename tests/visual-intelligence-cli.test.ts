@@ -16,7 +16,7 @@ describe('Visual Intelligence CLI argument parser', () => {
     expect(parseVisualIntelligenceGenerateArgs([
       '--artifact', 'direction.json', '--task', 'Manage projects', '--mode', 'operate',
       '--niche-id', 'saas-developer-ai', '--query', 'project table filters',
-      '--tag', 'keyboard', '--tag', 'dense-ui', '--asset-type', 'icon', '--asset-type', 'illustration', '--limit', '12',
+      '--tag', 'keyboard', '--tag', 'dense-ui', '--asset-type', 'icon', '--asset-type', 'illustration', '--limit', '5',
     ])).toMatchObject({ mode: 'operate', nicheId: 'saas-developer-ai', query: 'project table filters',
       tags: ['keyboard', 'dense-ui'], assetTypes: ['icon', 'illustration'], limit: 12 });
   });
@@ -31,7 +31,7 @@ describe('Visual Intelligence CLI argument parser', () => {
     const base = ['--artifact', 'direction.json', '--task', 'Manage projects'];
     expect(() => parseVisualIntelligenceGenerateArgs([...base, '--mode', 'unknown'])).toThrow(/--mode must be/);
     expect(() => parseVisualIntelligenceGenerateArgs([...base, '--limit', '0'])).toThrow(/between 1 and 5/);
-    expect(() => parseVisualIntelligenceGenerateArgs([...base, '--limit', '1.5'])).toThrow(/between 1 and 20/);
+    expect(() => parseVisualIntelligenceGenerateArgs([...base, '--limit', '1.5'])).toThrow(/between 1 and 5/);
   });
   it('allows help without generation arguments', () => {
     expect(parseVisualIntelligenceGenerateArgs(['--help'])).toMatchObject({ help: true });
