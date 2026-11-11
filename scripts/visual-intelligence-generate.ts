@@ -23,7 +23,7 @@ Retrieval:
   --limit        Source lead limit (1–5); defaults to 5.
 
 Output:
-  --out          Output JSON path; defaults to .integra/runs/visual-intelligence/bundle.json.
+  --out          Output JSON path inside .integra/runs/; defaults to .integra/runs/visual-intelligence/bundle.json.
   --stdout       Write JSON to stdout instead of a file.
   --help         Show this help.
 
