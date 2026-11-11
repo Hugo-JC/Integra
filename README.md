@@ -6,7 +6,7 @@ O objetivo não é impor um tema ou gerar interfaces genéricas. É ajudar o age
 
 ## Instalação rápida
 
-O pacote npm é `integra-cli`. Num projeto onde pretendes instalar todas as skills canónicas:
+**Estado da distribuição:** o pacote `integra-cli` ainda não foi publicado no npm. Depois da publicação e confirmação do nome/versionamento, a instalação num projeto será:
 
 ```bash
 npx integra-cli init
@@ -14,7 +14,15 @@ npx integra-cli list
 npx integra-cli doctor
 ```
 
-Para instalar apenas uma skill especializada:
+Para testar o instalador no checkout atual, constrói primeiro o bundle local e executa o CLI diretamente:
+
+```bash
+npm run distribution:build
+node packages/cli/bin/integra.js init
+node packages/cli/bin/integra.js doctor
+```
+
+Depois da publicação, para instalar apenas uma skill especializada noutro projeto:
 
 ```bash
 npx integra-cli add integra-visual-knowledge
