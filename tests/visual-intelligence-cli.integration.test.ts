@@ -1,4 +1,4 @@
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
@@ -18,14 +18,13 @@ describe('Direction to Visual Intelligence CLI workflow', () => {
     const bundlePath = join(workspace, ...bundleRelative.split('/'));
 
     try {
-      const directionOutput = execFileSync(
+      execFileSync(
         process.execPath,
         [tsxCli, directionScript, '--input', fixturePath, '--out', directionRelative],
-        { cwd: workspace, encoding: 'utf8', stdio: 'pipe' },
+        { cwd: workspace, stdio: 'pipe' },
       );
-      expect(directionOutput).toContain('validation passed');
 
-      const bundleOutput = execFileSync(
+      const bundleRun = spawnSync(
         process.execPath,
         [
           tsxCli, bundleScript,
@@ -36,10 +35,11 @@ describe('Direction to Visual Intelligence CLI workflow', () => {
           '--query', 'task-first hierarchy compact navigation responsive layout',
           '--out', bundleRelative,
         ],
-        { cwd: workspace, encoding: 'utf8', stdio: 'pipe' },
+        { cwd: workspace, encoding: 'utf8' },
       );
-      expect(bundleOutput).toContain('schema 1.1.0');
-      expect(bundleOutput).toContain('validation passed');
+      expect(bundleRun.status).toBe(0);
+      expect(bundleRun.stderr).toContain('schema 1.1.0');
+      expect(bundleRun.stderr).toContain('validation passed');
 
       const direction = JSON.parse(readFileSync(directionPath, 'utf8')) as {
         schemaVersion: string;
@@ -73,7 +73,7 @@ describe('Direction to Visual Intelligence CLI workflow', () => {
         { cwd: workspace, stdio: 'pipe' },
       );
       const before = readFileSync(directionPath, 'utf8');
-      const result = require('node:child_process').spawnSync(
+      const result = spawnSync(
         process.execPath,
         [
           tsxCli, bundleScript,
