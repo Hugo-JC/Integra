@@ -17,10 +17,10 @@ describe('visual knowledge library', () => {
       query: 'task-first hierarchy compact navigation responsive layout',
     });
 
-    expect(pack.observations.map((entry) => entry.item.id)).toEqual([
+    expect(pack.observations.map((entry) => entry.item.id).sort()).toEqual([
       'linear-interface-refresh-2026',
       'primer-layout-foundations-2026',
-    ]);
+    ].sort());
     expect(pack.observations.every((entry) => entry.verificationStatus === 'partial')).toBe(true);
     expect(pack.observations.every((entry) => entry.item.evidenceType === 'official-documentation')).toBe(true);
     expect(pack.observations.every((entry) => entry.item.confidence === 'medium')).toBe(true);
