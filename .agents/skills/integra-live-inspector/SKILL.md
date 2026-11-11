@@ -24,7 +24,7 @@ Reduce the distance between spotting a UI issue and preparing a precise source-c
 **Inspector:** element identity, best-effort selector, accessible name, dimensions, display, typography, existing classes, text/surface colors, radius, padding, contrast estimate and diff export. Read-only computed values must remain distinct from editable controls. A selector is a locator, never a source path.
 
 ## Session lifecycle
-`inactive` → `picking` → `selected` → `previewing` → `review-ready` → `disposed`. Never silently discard unexported previews when changing selection. If a framework detaches the selected node, mark the preview stale; never apply it to a replacement based only on selector text.
+`inactive` → `picking` → `selected` → `previewing` → `review-ready` → `disposed`. Never silently discard unexported previews when changing selection. If a framework detaches the selected node, discard it as a current target, explain that the selection is stale and exclude its changes from the active diff. Include the detached-target count in the exported review package; never apply its preview to a replacement based only on selector text.
 
 ## Performance contract
 - Keep the adapter dependency-free and development-only.
