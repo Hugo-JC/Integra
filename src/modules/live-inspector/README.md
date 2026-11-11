@@ -20,7 +20,7 @@ The adapter uses `apply: 'serve'`; production builds do not inject it. It does n
 ## Modes
 - **Quick Canvas:** element picking, dimensions, common visual adjustments and one-click reset.
 - **Inspector:** classes, text/surface colors, radius, padding, contrast estimate and diff export.
-- **Structured review package:** use **Exportar JSON** or `controller.getReviewPackage()` to capture the current viewport, active mode, target diffs, evidence limits and approval boundary.
+- **Structured review package:** use **Exportar JSON** or `controller.getReviewPackage()` to capture the current viewport, active mode, connected target diffs, detached-target count, evidence limits and approval boundary.
 - Blue `#3B82F6` belongs to inspector chrome only.
 
 ## Performance
