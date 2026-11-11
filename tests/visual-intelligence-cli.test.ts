@@ -30,7 +30,7 @@ describe('Visual Intelligence CLI argument parser', () => {
   it('rejects unsupported modes and invalid limits', () => {
     const base = ['--artifact', 'direction.json', '--task', 'Manage projects'];
     expect(() => parseVisualIntelligenceGenerateArgs([...base, '--mode', 'unknown'])).toThrow(/--mode must be/);
-    expect(() => parseVisualIntelligenceGenerateArgs([...base, '--limit', '0'])).toThrow(/between 1 and 20/);
+    expect(() => parseVisualIntelligenceGenerateArgs([...base, '--limit', '0'])).toThrow(/between 1 and 5/);
     expect(() => parseVisualIntelligenceGenerateArgs([...base, '--limit', '1.5'])).toThrow(/between 1 and 20/);
   });
   it('allows help without generation arguments', () => {
