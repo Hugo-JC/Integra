@@ -1,4 +1,4 @@
-import type { LiveElementChangeSet } from './types.js';
+import type { LiveElementChangeSet, LiveInspectorReviewPackage } from './types.js';
 
 export type LiveInspectorMode = 'quick' | 'advanced';
 
@@ -11,27 +11,6 @@ export interface LiveInspectorReviewPackageInput {
   prompt: string;
 }
 
-export interface LiveInspectorReviewPackage {
-  schemaVersion: '1.0.0';
-  capturedAt: string;
-  page: { origin: string; pathname: string };
-  viewport: { width: number; height: number; devicePixelRatio: number };
-  mode: LiveInspectorMode;
-  targetCount: number;
-  changes: LiveElementChangeSet[];
-  prompt: string;
-  sourceMapping: {
-    status: 'unresolved';
-    confidence: 'low';
-    note: string;
-  };
-  approval: {
-    sourceMutation: 'none';
-    requiredBeforeSourceChanges: true;
-    scope: 'exact-proposed-diff';
-  };
-  limitations: string[];
-}
 
 /** Builds a portable review handoff; it never applies previews or writes source files. */
 export function createLiveInspectorReviewPackage(
