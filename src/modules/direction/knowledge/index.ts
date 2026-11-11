@@ -25,7 +25,26 @@ function normalize(value: string): string {
   return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('en-US')
     .replace(/[^\p{L}\p{N}]+/gu, ' ').trim().replace(/\s+/g, ' ');
 }
-function tokens(value: string): Set<string> { return new Set(normalize(value).split(' ').filter((token) => token.length > 2)); }
+const TOKEN_CACHE_LIMIT = 512;
+const tokenCache = new Map<string, Set<string>>();
+
+function tokens(value: string): Set<string> {
+  const normalized = normalize(value);
+  const cached = tokenCache.get(normalized);
+  if (cached) {
+    tokenCache.delete(normalized);
+    tokenCache.set(normalized, cached);
+    return cached;
+  }
+
+  const result = new Set(normalized.split(' ').filter((token) => token.length > 2));
+  if (tokenCache.size >= TOKEN_CACHE_LIMIT) {
+    const oldest = tokenCache.keys().next().value;
+    if (oldest !== undefined) tokenCache.delete(oldest);
+  }
+  tokenCache.set(normalized, result);
+  return result;
+}
 function overlapScore(query: string, values: string[]): number {
   const queryTokens = tokens(query); if (!queryTokens.size) return 0;
   const valueTokens = new Set(values.flatMap((value) => [...tokens(value)]));
