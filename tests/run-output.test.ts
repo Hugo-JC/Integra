@@ -1,4 +1,4 @@
-import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
@@ -45,11 +45,8 @@ describe('safe generated run output', () => {
   it('does not allow generated output to overwrite the input artifact', async () => {
     const root = await createWorkspace();
     const input = '.integra/runs/direction/source.json';
-    await writeFile(resolve(root, input), '{"source":true}', { recursive: true }).catch(async () => {
-      const { mkdir } = await import('node:fs/promises');
-      await mkdir(join(root, '.integra', 'runs', 'direction'), { recursive: true });
-      await writeFile(resolve(root, input), '{"source":true}');
-    });
+    await mkdir(join(root, '.integra', 'runs', 'direction'), { recursive: true });
+    await writeFile(resolve(root, input), '{"source":true}');
     await expect(writeRunOutput(root, input, '{"overwrite":true}', [input]))
       .rejects.toThrow(/cannot overwrite one of its input files/);
     expect(await readFile(resolve(root, input), 'utf8')).toBe('{"source":true}');
@@ -57,7 +54,6 @@ describe('safe generated run output', () => {
 
   it('rejects a symlinked output directory', async () => {
     const root = await createWorkspace();
-    const { mkdir, symlink } = await import('node:fs/promises');
     const outside = join(root, 'outside');
     await mkdir(outside);
     await mkdir(join(root, '.integra'), { recursive: true });
