@@ -131,9 +131,7 @@ O comando prepara um pacote manual em `.integra/runs/pilots/DL-001/` com brief, 
 Depois da execução guiada, valida a cobertura do relatório do agente:
 
 ```bash
-npm run direction:consumption:validate -- \\
-  --artifact .integra/runs/pilots/DL-001/direction.json \\
-  --report ./consumption-report.json
+npm run direction:consumption:validate -- --artifact .integra/runs/pilots/DL-001/direction.json --report ./consumption-report.json
 ```
 
 Este validator confirma schema, ligação ao artefacto e cobertura de todos os IDs de decisão/recomendação. O relatório continua a ser autorrelato e não prova qualidade da implementação.
