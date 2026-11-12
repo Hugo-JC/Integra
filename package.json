@@ -22,6 +22,7 @@
     "validate:commands": "tsx scripts/validate-command-manifest.ts",
     "design:route": "tsx scripts/design-route.ts",
     "design:qa": "tsx scripts/design-qa.ts",
+    "pilot:prepare": "tsx scripts/pilot-prepare.ts",
     "distribution:build": "node scripts/build-distribution.mjs",
     "distribution:test": "node --test packages/cli/test/*.test.mjs",
     "distribution:check": "npm run distribution:build && npm run distribution:test && npm run distribution:pack",
