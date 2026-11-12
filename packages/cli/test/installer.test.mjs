@@ -10,6 +10,8 @@ async function fixture(t) {
   const root = await mkdtemp(join(tmpdir(), 'integra-fixture-'));
   const resources = join(root, 'resources');
   const project = join(root, 'project');
+  await mkdir(join(root, 'packages', 'cli'), { recursive: true });
+  await writeFile(join(root, 'packages', 'cli', 'package.json'), JSON.stringify({ name: 'integra-cli', version: '0.2.0' }));
   await mkdir(project);
   for (const directory of ['.agents/skills/integra', '.agents/skills/integra-design-direction', 'docs', 'presets', 'data', 'references', 'rules', 'commands', 'schemas', 'licenses']) {
     await mkdir(join(root, directory), { recursive: true });
@@ -35,6 +37,7 @@ test('bundler closes skill links and emits integrity hashes', async (t) => {
   const f = await fixture(t);
   const bundle = JSON.parse(await readFile(join(f.resources, 'bundle.json'), 'utf8'));
   assert.equal(bundle.skills.integra.files.length, 1);
+  assert.equal(bundle.packageVersion, '0.2.0');
   assert.ok(bundle.sharedFiles.includes('docs/context.md'));
   assert.match(bundle.files.find((entry) => entry.path === 'docs/context.md').sha256, /^[a-f0-9]{64}$/);
 });

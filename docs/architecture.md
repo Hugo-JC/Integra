@@ -31,8 +31,17 @@ Investigation → references, observations, evidence records
 - **Agent consumer:** interpreta o artefacto e devolve outcomes por decisão e recomendação. O relatório é auto-relatado, não uma prova independente.
 - **Design Lab:** compara execuções com variáveis controladas e avalia os resultados por evidências.
 - **Refinement:** identifica problemas, explica o impacto e recomenda melhorias verificáveis; a auditoria de contraste DOM é uma primeira fatia e não uma auditoria WCAG completa.
+- **Static Source Audit:** inspeciona sinais TSX/JSX e CSS através da AST do TypeScript, devolvendo findings versionados com localização, evidência, confiança e estado heuristic. Os limites de cobertura são explícitos; não substitui o browser nem a auditoria de acessibilidade runtime.
 - **Investigation:** integra referências, ferramentas ou fontes externas através de adaptadores opcionais.
 - **Quality Gate:** aplica regras bloqueantes objetivas e conserva resultados inconclusivos e não verificáveis.
+
+## Product Context
+
+O contrato opcional PRODUCT.md / DESIGN.md / brief por superfície separa factos do produto, compromissos visuais aprovados, estado atualmente implementado, preferências, pressupostos e desconhecidos. Em refinamento, a identidade existente é preservada por defeito; mudança de identidade exige pedido ou aprovação explícita. Ver docs/product-context-contract.md e os modelos em templates/.
+
+## First Agent Pilot
+
+O comando pilot:prepare monta o pacote DL-001 com brief, tarefa comum, Direction Artifact, Visual Intelligence Bundle, contrato/instruções do agente, critérios de aceitação e hashes. A experiência baseline vs Integra-guided é executada manualmente em cópias limpas. O validador de Direction Consumption Report confirma schema e cobertura de IDs; o resultado é autorrelato e não valida a interface. A avaliação independente continua a exigir browser, screenshots, build/testes e revisão humana.
 
 ## Direction Artifact
 

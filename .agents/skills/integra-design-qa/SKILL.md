@@ -11,7 +11,7 @@ Evaluate whether the existing interface serves its users and product task clearl
 
 ## Scope contract
 
-Before reviewing, identify target routes/components, primary user task, expected behavior, viewport range, themes, available states, stack and requested depth. Inspect project conventions and the actual rendered page when available.
+Before reviewing, identify target routes/components, primary user task, expected behavior, viewport range, themes, available states, stack and requested depth. Inspect PRODUCT.md, DESIGN.md or equivalent project context when present, then inspect project conventions and the actual rendered page when available. Distinguish an approved design commitment from the current implementation; report drift rather than assuming one silently overrides the other.
 
 If no brief exists, infer only from visible evidence and label assumptions. Do not invent users, requirements or expected product behavior.
 
@@ -23,7 +23,8 @@ If no brief exists, infer only from visible evidence and label assumptions. Do n
 4. **Interaction states:** hover, focus, active, selected, disabled, loading, empty, error, success, pending and destructive confirmation.
 5. **Accessibility signals:** semantic elements, accessible names, keyboard, focus visibility, non-color cues, reduced motion and contrast.
 6. **Implementation quality:** component boundaries, types, duplication, state modeling, async errors, asset loading and measurable performance risk.
-7. **Evidence:** run repository checks and inspect the actual rendered result when tools exist. Record what was unavailable or skipped.
+7. **Static source signals:** when the repository exposes `npm run design:qa`, run it against the target source and retain its JSON report. Treat every source finding as a heuristic, not a rendered failure; read the report's checksNotRun and limitations.
+8. **Evidence:** run repository checks and inspect the actual rendered result when tools exist. Record what was unavailable or skipped.
 
 ## Multi-agent protocol
 

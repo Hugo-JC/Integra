@@ -28,7 +28,7 @@ Label each input Fact, Constraint, Preference, Assumption or Unknown. Ask only w
 
 ## Procedure
 
-1. **Read the incumbent world.** Inspect existing screens, routes, CSS, components, fonts, imagery, tokens, documentation and relevant tests. A missing DESIGN.md does not mean the project has no design system.
+1. **Read the incumbent world.** Inspect PRODUCT.md (or equivalent product truth), DESIGN.md (or approved visual-system documentation), the scoped brief, existing screens, routes, CSS, components, fonts, imagery, tokens and relevant tests. Follow docs/product-context-contract.md when available. A missing DESIGN.md does not mean the project has no design system; inspect the implementation before proposing tokens.
 2. **Choose surface mode.** Determine what the visitor is trying to do on this surface:
    - **Persuade:** decide or act; commonly marketing, campaigns and pricing.
    - **Operate:** complete a task; commonly product UI, dashboards, editors and admin.
@@ -49,7 +49,9 @@ Label each input Fact, Constraint, Preference, Assumption or Unknown. Ask only w
 ## Design safeguards
 
 - The user's explicit brand and product constraints win over generic design preferences.
-- Refinement preserves the incumbent identity; redesign may replace its visual world only when requested.
+- Refinement is the default for an existing product: preserve its approved identity, recognizable color/type/component language and working patterns while making the smallest effective improvements.
+- A new visual world, brand departure or token reset requires an explicit redesign/rebrand request or approval. State what will be retained, changed and migrated.
+- For a new product with no approved identity, propose an original direction and label it as a proposal rather than an established brand fact.
 - Do not default to the same centered hero, three-card grid, pill controls, glass cards, gradients or icon tiles.
 - Do not ban those patterns categorically; justify them with task, content and product context.
 - Never fabricate product metrics, customer logos, testimonials, features or claims.

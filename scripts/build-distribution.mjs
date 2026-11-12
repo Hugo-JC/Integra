@@ -58,6 +58,11 @@ function localMarkdownLinks(content) {
 export async function buildDistribution({ root = ROOT, outDir = resolve(ROOT, 'packages/cli/resources') } = {}) {
   root = resolve(root);
   outDir = resolve(outDir);
+  const cliPackagePath = join(root, 'packages', 'cli', 'package.json');
+  const cliPackage = JSON.parse(await readFile(cliPackagePath, 'utf8'));
+  if (typeof cliPackage.version !== 'string' || !/^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/.test(cliPackage.version)) {
+    throw new Error('packages/cli/package.json must contain a valid semantic version.');
+  }
   const included = new Set();
   for (const directory of INCLUDED_ROOTS) {
     const absolute = join(root, ...directory.split('/'));
@@ -111,7 +116,7 @@ export async function buildDistribution({ root = ROOT, outDir = resolve(ROOT, 'p
   }
   const bundle = {
     schemaVersion: '1.0.0',
-    packageVersion: '0.1.0',
+    packageVersion: cliPackage.version,
     source: 'Hugo-JC/Integra',
     skills,
     sharedFiles,
