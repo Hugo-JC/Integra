@@ -11,7 +11,7 @@ Evaluate whether the existing interface serves its users and product task clearl
 
 ## Scope contract
 
-Before reviewing, identify target routes/components, primary user task, expected behavior, viewport range, themes, available states, stack and requested depth. Inspect project conventions and the actual rendered page when available.
+Before reviewing, identify target routes/components, primary user task, expected behavior, viewport range, themes, available states, stack and requested depth. Inspect PRODUCT.md, DESIGN.md or equivalent project context when present, then inspect project conventions and the actual rendered page when available. Distinguish an approved design commitment from the current implementation; report drift rather than assuming one silently overrides the other.
 
 If no brief exists, infer only from visible evidence and label assumptions. Do not invent users, requirements or expected product behavior.
 
