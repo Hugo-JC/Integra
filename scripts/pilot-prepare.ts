@@ -175,7 +175,7 @@ async function main(): Promise<void> {
   const direction = generation.generation.artifact;
   const bundle = buildVisualIntelligenceBundle({
     directionArtifact: direction,
-    primaryTask: "Explain the product value proposition and invite visitors to try a demo",
+    primaryTask: productTask,
     mode: "persuade",
     query: "product landing page clear value proposition primary demo action audience section responsive hierarchy",
   });
