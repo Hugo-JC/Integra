@@ -198,6 +198,8 @@ Validações focadas:
 ```bash
 npm run pilot:prepare
 npm run design:qa -- ./src --json
+npm run design:qa -- ./src --json
+npm run pilot:prepare
 npm run validate:visual-library
 npm run validate:skills
 npm run validate:agent-assets
