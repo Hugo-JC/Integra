@@ -25,6 +25,7 @@ const PILOT_README = [
   "- TASK-PROMPT.md: identical task prompt for both conditions.",
   "- direction.json: validated Integra Direction Artifact.",
   "- bundle.json: validated Visual Intelligence Bundle 1.1.0.",
+  "- AGENT-CONSUMER-CONTRACT.md: shared example contract, included only in the guided condition.",
   "- GUIDED-AGENT-INSTRUCTIONS.md: instructions for the guided condition only.",
   "- acceptance-criteria.json: criteria shared by both runs.",
   "- manifest.json: input/artifact hashes and generation metadata.",
@@ -33,7 +34,7 @@ const PILOT_README = [
   "1. Record agent provider, name/version, model, tool permissions, temperature/seed (if exposed), date and host.",
   "2. Create two clean workspaces from the same base project snapshot. If there is no starter project, use the same empty-directory/setup procedure in both.",
   "3. Baseline: give the agent brief.md and TASK-PROMPT.md only. Do not provide direction.json, bundle.json or the guided instructions.",
-  "4. Integra-guided: reset to a second clean copy of the same base snapshot. Give it the same brief.md and TASK-PROMPT.md, plus direction.json, bundle.json and GUIDED-AGENT-INSTRUCTIONS.md.",
+  "4. Integra-guided: reset to a second clean copy of the same base snapshot. Give it the same brief.md and TASK-PROMPT.md, plus direction.json, bundle.json, AGENT-CONSUMER-CONTRACT.md and GUIDED-AGENT-INSTRUCTIONS.md.",
   "5. Keep model, agent version, permissions, dependencies, task wording and time budget identical. Do not feed outputs from one run into the other.",
   "6. Capture at least 1440×900 and 390×844. Save each implementation, logs and screenshots in separate baseline/ and integra-guided/ folders.",
   "7. Evaluate both against acceptance-criteria.json without seeing which run is guided, where practical. Record pass, fail or inconclusive with evidence. Agent self-report is not independent evidence.",
@@ -185,6 +186,7 @@ async function main(): Promise<void> {
     "TASK-PROMPT.md": TASK_PROMPT.trim() + "\n",
     "direction.json": serializeDirectionArtifact(direction),
     "bundle.json": serializeVisualIntelligenceBundle(bundle),
+    "AGENT-CONSUMER-CONTRACT.md": sourceInstructions.trimEnd() + "\n",
     "GUIDED-AGENT-INSTRUCTIONS.md": GUIDED_INSTRUCTIONS.trim() + "\n",
     "acceptance-criteria.json": JSON.stringify(ACCEPTANCE, null, 2) + "\n",
     "README.md": PILOT_README.trim() + "\n",
@@ -202,7 +204,7 @@ async function main(): Promise<void> {
     inputs: {
       briefJsonSha256: sha256(files["brief.json"]!),
       briefMarkdownSha256: sha256(files["brief.md"]!),
-      agentInstructionsSha256: sha256(sourceInstructions),
+      agentInstructionsSha256: sha256(files["AGENT-CONSUMER-CONTRACT.md"]!),
       taskPromptSha256: sha256(files["TASK-PROMPT.md"]!),
     },
     outputs: Object.fromEntries(
