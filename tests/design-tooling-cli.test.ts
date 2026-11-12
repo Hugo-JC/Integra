@@ -21,8 +21,8 @@ describe('design tooling CLIs', () => {
   it('scans JSX/TSX sources and emits a machine-readable report', () => {
     const result = runTs('scripts/design-qa.ts', 'fixtures/source-projects/react-existing-project/src/', '--json');
     expect(result.status).toBe(0);
-    const output = JSON.parse(result.stdout) as { scannedFiles: number; findings: unknown[] };
-    expect(output.scannedFiles).toBeGreaterThan(0);
+    const output = JSON.parse(result.stdout) as { summary: { scannedFiles: number }; findings: unknown[] };
+    expect(output.summary.scannedFiles).toBeGreaterThan(0);
     expect(Array.isArray(output.findings)).toBe(true);
   }, 20_000);
 });
