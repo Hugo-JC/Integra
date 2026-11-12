@@ -56,12 +56,13 @@ export interface LiveContrastEvidence {
 }
 
 export interface LiveInspectorReviewPackage {
-  schemaVersion: '1.0.0';
+  schemaVersion: '1.1.0';
   capturedAt: string;
   page: { origin: string; pathname: string };
   viewport: { width: number; height: number; devicePixelRatio: number };
   mode: 'quick' | 'advanced';
   targetCount: number;
+  staleTargetCount: number;
   changes: LiveElementChangeSet[];
   prompt: string;
   sourceMapping: { status: 'unresolved'; confidence: 'low'; note: string };
@@ -85,6 +86,7 @@ export interface IntegraLiveInspectorOptions {
 
 export interface IntegraLiveInspectorController {
   isActive(): boolean;
+  isDisposed(): boolean;
   setActive(active: boolean): void;
   getSelectedElement(): HTMLElement | SVGElement | null;
   getChangeSets(): LiveElementChangeSet[];

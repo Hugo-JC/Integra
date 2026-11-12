@@ -1,105 +1,146 @@
 # Roadmap do Integra
 
-Última atualização: 08/11/2026.
+**Última atualização:** 11/11/2026  
+**Estado global:** core determinístico e contratos iniciais implementados; piloto com agente externo e validação visual em browser ainda por executar.
 
-## Direção
+## Direção do produto
 
-Integra transforma contexto em direção visual rastreável, ajuda agentes a implementar e verifica resultados com evidências. Não é apenas um gerador de sites ou uma coleção de prompts.
+Integra transforma contexto de produto em direção visual rastreável, ajuda um agente externo a consumir conhecimento visual e prepara evidência para revisão de interfaces. Não é um gerador universal de sites nem um executor autónomo de agentes.
 
-## Fase 1 — Contracts & Design Lab foundation
+O critério de progresso não é a quantidade de Skills, regras ou ficheiros adicionados. Cada etapa deve demonstrar um fluxo funcional, preservar proveniência e ser validada no ambiente de destino.
 
-**Concluída.**
+## Estado entregue
 
-- Cinco cenários, briefs, manifests e fixtures.
+### Fase 1 — Contracts & Design Lab foundation
+
+**Estado: base implementada.**
+
+- Cenários, briefs, manifests e fixtures.
 - Schemas e contratos partilhados para cenários, relatórios e findings.
 - Helpers de scoring e métricas de deteção.
-- Base do V5 Design Lab.
+- Base do Design Lab.
 
-## Fase 2 — Deterministic Direction foundation
+**Ainda não demonstrado:** um runner completo de experiências pareadas, com workspaces isolados, captura reproduzível e comparação real de resultados.
 
-**Concluída para DL-001.**
+### Fase 2 — Deterministic Direction foundation
 
-- Direction Artifact 1.1.0 com oito secções obrigatórias.
-- Context contracts e normalizador determinístico, com diagnósticos, limites, Unicode NFC e deduplicação estável.
+**Estado: implementada para DL-001.**
+
+- Direction Artifact 1.1.0 com oito secções.
+- Context contracts e normalizador determinístico.
 - Factos de projeto e restrições estruturadas hard/soft.
-- Resolver mínimo: restrições rígidas antes da precedência brief > rule > ai > default.
-- Geração determinística para DL-001 e serialização canónica sem timestamp.
-- Validação ordenada em quatro camadas: structural, semantic, constraints e consistency.
-- CI com typecheck, testes e validação de fixtures.
+- Resolver com restrições rígidas antes da precedência brief > rule > ai > default.
+- Geração DL-001, serialização canónica e validação em quatro camadas.
 
-A fase está concluída para a primeira fatia funcional, não para todos os cenários. Não declarar cobertura geral de Direction enquanto DL-002, DL-003 e DL-005 não tiverem geradores próprios e testes específicos.
+A conclusão limita-se a DL-001. Não representa cobertura de geração para todos os cenários.
 
-## Fase 2.1 — Agent integration foundation
+### Fase 2.1 — Agent integration foundation
 
-**Em implementação nesta branch.**
+**Estado: contrato e handoff implementados; integração de agente ainda manual.**
 
-- CLI para gerar e validar Direction Artifacts sem chamar IA.
+- Direction Consumption Report e respetivo schema.
 - Contrato provider-agnostic para agentes consumidores.
-- Direction Consumption Report para rastrear decisões e recomendações aplicadas, adaptadas ou omitidas.
-- Schema do relatório de consumo e testes de contrato.
-- Design Experiment Record para comparação pareada baseline vs Integra-guided.
-- Protocolo de experiência, instruções de exemplo e documentação de compatibilidade.
+- Visual Intelligence Bundle 1.1.0, determinístico, offline e validado.
+- CLI para gerar Direction Artifacts e Visual Intelligence Bundles.
+- Limites de escrita: os outputs gerados ficam em .integra/runs/, com verificação de paths, diretórios e inputs protegidos.
+- Skill e comando /integra:visual-intelligence.
 
-Critério de conclusão: o artefacto pode ser gerado, validado, entregue a um agente externo e associado a um relatório de consumo validável.
+**Ainda não demonstrado:** um agente externo a consumir automaticamente o Bundle, devolver um relatório de consumo e produzir uma interface testada no browser. O handoff existe; o adapter/runner universal não.
 
-## Fase 2.2 — Design Intelligence & Browser Preview
+### Fase 2.2 — Visual knowledge foundation
 
-**Implementação inicial nesta branch; precisa de validação em Node 24 e browser real.**
+**Estado: biblioteca e retrieval iniciais implementados.**
 
-- Biblioteca migrada do AI Design Engine: estilos, presets, fontes, regras, anti-patterns, playbook, arquétipos e catálogo.
-- Router determinístico com termos fortes/fracos, variantes condicionais, alternativas e confirmação em fallback/ambiguidade.
-- Skills interoperáveis em `.agents/skills/` e contextos para Gemini, Claude Code, Cursor e GitHub Copilot.
-- QA estático AST para regras JSX/TSX selecionadas.
-- Live Inspector local: seleção DOM azul, navegação ao pai, preview de classes/estilos, reset e exportação de diff.
-- Auditoria de contraste de texto WCAG 2.2 1.4.3 com estados passed/failed/inconclusive.
+- 72 fontes visuais, 10 providers de assets e 61 mapeamentos de nicho.
+- 8 receitas de tokens, 20 padrões de layout, 32 regras, 21 anti-patterns e 7 exemplos.
+- 2 observações page-scoped, ambas official-documentation, partial e confiança média.
+- Retrieval determinístico, offline-first, com candidatos separados de decisões.
+- Bundle preserva status, proveniência, âmbito e limitações das observações.
 
-Não declarar conformidade WCAG global nem persistência das edições do Live Inspector. O preview altera apenas o DOM; mudanças duráveis são feitas no código-fonte após revisão do agente.
+**Limite importante:** existem apenas duas observações documentais parciais. O catálogo não é uma biblioteca de interfaces diretamente verificadas. Não há ainda cobertura direta de produto autenticado, screenshots sistemáticos ou estados interativos reais.
 
-## Marco seguinte — First Agent Pilot
+### Fase 2.3 — Live Inspector hardening
 
-1. Escolher um brief DL-001 e congelar o seu SHA-256.
-2. Gerar e validar o Direction Artifact.
-3. Executar o mesmo agente com a mesma configuração em dois workspaces limpos: baseline e Integra-guided.
-4. Guardar outputs, screenshots, hashes e evidências.
-5. Avaliar os mesmos critérios para os dois resultados e preencher o Design Experiment Record.
-6. Documentar ganhos, regressões, aspetos não verificáveis e limitações.
+**Estado: primeira versão funcional e contratos de revisão implementados.**
 
-Não alterar o motor com base numa impressão isolada. Primeiro recolher evidência do comportamento real do agente.
+- Plugin Vite apply: serve, com carregamento tardio e sem injeção em produção.
+- Quick Canvas e Inspector partilham uma sessão de seleção.
+- Pré-visualizações temporárias de classes e propriedades visuais permitidas.
+- Histórico limitado, Undo/Redo e restauração no encerramento.
+- Reativação do bootstrap depois de o controller ser descartado.
+- Elementos DOM desligados são removidos do diff atual e contabilizados no pacote de revisão.
+- Review Package 1.1.0 inclui viewport, modo, diffs, targets obsoletos, limitações e política de aprovação.
 
-## Fase 3 — Runner & reproducible experiments
+**Ainda fora do âmbito:** source-map resolution, mapeamento automático DOM → TSX, aplicação de patches, navegação completa da árvore DOM e browser automation multi-viewport.
 
-- Carregar manifests e preparar workspaces isolados.
-- Capturar versões, configurações, logs e hashes.
-- Guardar artefactos de execução sem misturar inputs e outputs.
-- Repetir runs com controlo de variáveis.
-- Produzir relatórios mesmo quando uma execução falha.
-- Limpar workspaces de forma segura.
+### Fase 2.4 — Refinement & evidence foundation
 
-## Fase 4 — Refinement & evaluators
-Adapter DOM/browser, axe-core opcional, TypeScript AST, responsive tests, findings baseados em evidências e deteção de regressões.
+**Estado: primeira camada implementada.**
+
+- Auditoria de contraste para estados avaliáveis e inconclusivos.
+- Quality Audit baseada apenas em observações fornecidas.
+- Heurísticas de espaçamento e nesting exigem baseline de projeto explicitamente fornecida.
+- Findings separam evidência verificada de heurísticas.
+
+**Ainda fora do âmbito:** parser DOM/AST abrangente, auditoria WCAG completa, avaliação visual automática e validação visual independente.
+
+## Próximo marco — DL-001 First Agent Pilot
+
+Objetivo: provar que o Bundle melhora a implementação de um agente externo sem introduzir regressões.
+
+1. Congelar o SHA-256 do brief e a versão do Direction Artifact.
+2. Escolher um agente, versão, modelo e configuração; registar esses valores.
+3. Executar o mesmo agente em dois workspaces limpos: baseline e Integra-guided.
+4. No segundo run, entregar o Bundle 1.1.0 sem alterar o prompt base além da integração definida.
+5. Guardar outputs, screenshots, hashes, logs e testes.
+6. Verificar os mesmos critérios nos dois resultados, sem usar o relatório autoavaliado do agente como prova independente.
+7. Documentar ganhos, regressões, inconclusivos e limites.
+
+O piloto é manual nesta fase. Não criar um runner genérico antes de saber quais os inputs, permissões e outputs efetivamente necessários.
+
+## Fase 3 — Reproducible execution & experiment runner
+
+- Preparação de workspaces descartáveis.
+- Captura de versões, configuração, prompts, logs e hashes.
+- Execução baseline vs guided com variáveis controladas.
+- Artefactos de run isolados e relatório mesmo em caso de falha.
+- Limpeza segura e preservação de inputs.
+
+Só avançar depois do piloto mostrar quais os passos que precisam de automação.
+
+## Fase 4 — Visual Validation & source mapping
+
+- Adapter browser opcional para screenshots e estados.
+- Comparação da intenção do Direction Artifact com a implementação real.
+- Source mapping com evidência de AST/source-map, sem inferir ficheiros a partir de seletores.
+- Contrast, keyboard, responsive, interaction e visual findings com estado e confiança.
+- Review package unificado para Bundle + Live + QA.
+
+Nenhuma comparação visual deve produzir um finding confirmado apenas por semelhança estética; exige tarefa, estado, viewport e evidência.
 
 ## Fase 5 — Scenario coverage
-Implementar DL-002, DL-003 e DL-005 com regras e fixtures específicas. DL-004 continua como avaliação de interfaces genéricas.
+
+Adicionar geradores específicos para DL-002, DL-003, DL-004 e DL-005 apenas quando cada cenário tiver:
+- contrato de inputs e outputs;
+- regras e restrições próprias;
+- fixtures positivas e negativas;
+- critérios de aceitação verificáveis;
+- testes de regressão.
 
 ## Fase 6 — Investigation adapters & optional AI
-Adapters autorizados para fontes externas; providers opcionais com timeout, cancelamento, validação, fallback determinístico e respeito por hard constraints.
+
+- Adapters autorizados para browser, documentação e fontes externas.
+- Timeouts, cancelamento, quotas e fallback offline.
+- Providers opcionais com saída validada e provenance.
+- Hard constraints mantidas como gates.
+- Conteúdo externo tratado como dados não confiáveis.
 
 ## Release gates
 
-- Alterações de schema incluem testes, documentação e migração.
-- Nenhuma fase é concluída apenas por adicionar ficheiros.
-- Checks locais e CI têm de passar no head exato do PR.
-- Resultados de agentes são avaliados separadamente dos seus relatórios de autoavaliação.
-- Não publicar claims de melhoria sem experiências reproduzíveis.
-- WCAG, heurísticas [R], preferências subjetivas e decisões de produto continuam separados.
-
-
-## Delivered: agent skills, design intelligence and Live Inspector
-- Migrated 61 niche presets and 17 style definitions from AI Design Engine v3 with provenance.
-- Added deterministic offline preset matching and the `direction:presets` command.
-- Added experience archetypes, evidence-led quality heuristics and agent prompt vocabulary.
-- Added eight portable Agent Skills plus Gemini CLI guidance.
-- Added a Vite development-only Live Inspector with element selection, temporary style/class previews, contrast estimate and exact diff/prompt export.
-- Added asset validation to the project quality check.
-
-Still outside this slice: persistent source writing, React state mutation, source-map resolution, full WCAG audit, automatic visual scoring and a complete Design Lab runner.
+- npm run check e matriz CI passam no SHA exato que será revisto.
+- Contratos versionados incluem schemas, tipos, fixtures, testes e notas de migração.
+- Cada output gerado permanece isolado dos inputs e do source do projeto.
+- Nenhum workflow afirma que um host carregou uma Skill sem confirmação real.
+- Nenhuma fase é marcada como completa apenas por adicionar ficheiros.
+- Resultados de agentes são avaliados independentemente do seu autorrelato.
+- Não publicar ganhos visuais, de performance ou WCAG sem evidência reproduzível.

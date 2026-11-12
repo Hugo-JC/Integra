@@ -1,5 +1,6 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { writeRunOutput } from '../src/cli/run-output.js';
 import { parseVisualIntelligenceGenerateArgs } from '../src/cli/visual-intelligence.js';
 import { buildVisualIntelligenceBundle, serializeVisualIntelligenceBundle } from '../src/modules/direction/index.js';
 import type { DirectionArtifact } from '../src/modules/direction/types.js';
@@ -19,10 +20,10 @@ Retrieval:
   --query        Optional query replacing the task for knowledge retrieval.
   --tag          Additional retrieval tag; may be repeated.
   --asset-type   Requested asset type; may be repeated.
-  --limit        Source lead limit (1–20); defaults to 5.
+  --limit        Source lead limit (1–5); defaults to 5.
 
 Output:
-  --out          Output JSON path; defaults to .integra/runs/visual-intelligence/bundle.json.
+  --out          Output JSON path inside .integra/runs/; defaults to .integra/runs/visual-intelligence/bundle.json.
   --stdout       Write JSON to stdout instead of a file.
   --help         Show this help.
 
@@ -46,19 +47,17 @@ async function main(): Promise<void> {
 
   if (options.stdout) process.stdout.write(serialized);
   else {
-    const target = resolve(options.outputPath);
-    await mkdir(dirname(target), { recursive: true });
-    await writeFile(target, serialized, 'utf8');
-    process.stderr.write('Visual Intelligence Bundle written to ' + target + '\\n');
+    const target = await writeRunOutput(process.cwd(), options.outputPath, serialized, [options.artifactPath]);
+    process.stderr.write('Visual Intelligence Bundle written to ' + target + '\n');
   }
   process.stderr.write(
     'Bundle ' + bundle.bundleId + ' · schema ' + bundle.schemaVersion +
-    ' · observations ' + bundle.knowledge.observations.length + ' · validation passed\\n',
+    ' · observations ' + bundle.knowledge.observations.length + ' · validation passed\n',
   );
 }
 
 main().catch((error: unknown) => {
   process.stderr.write('Visual Intelligence generation failed: ' +
-    (error instanceof Error ? error.message : String(error)) + '\\n');
+    (error instanceof Error ? error.message : String(error)) + '\n');
   process.exitCode = 1;
 });

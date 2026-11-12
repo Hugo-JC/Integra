@@ -157,6 +157,7 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
   let pointerFrame = 0;
   let pendingPointerTarget: Element | null = null;
   let resizeObserver: ResizeObserver | null = null;
+  let selectionMutationObserver: MutationObserver | null = null;
 
   const isInspectorEvent = (event: Event): boolean => event.composedPath().includes(host);
   const isInspectable = (element: Element): element is HTMLElement | SVGElement => {
@@ -194,6 +195,23 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
     if (geometryFrame || stopped) return;
     geometryFrame = view.requestAnimationFrame(() => {
       geometryFrame = 0;
+      if (selected && !selected.isConnected) {
+        selected = null;
+        selectionLocked = false;
+        highlighted = null;
+        selectionMutationObserver?.disconnect();
+        resizeObserver?.disconnect();
+        resizeObserver?.observe(doc.documentElement);
+        highlight.style.display = 'none';
+        tag.style.display = 'none';
+        targetName.textContent = 'Elemento removido da página';
+        targetSelector.textContent = 'Seleciona novamente o elemento após a atualização da interface.';
+        status.textContent = 'O elemento selecionado foi removido. O seu preview não será exportado como alteração atual.';
+        panel.hidden = !enabled;
+        options.onSelectionChange?.(null);
+        notifyChanges();
+        return;
+      }
       if (!enabled) {
         highlight.style.display = 'none';
         tag.style.display = 'none';
@@ -236,9 +254,24 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
     contrastOutput.style.borderColor = result.passesAA ? accent : '#B45309';
   };
 
+  const observeSelectedAncestors = (element: Element): void => {
+    selectionMutationObserver?.disconnect();
+    if (typeof view.MutationObserver === 'undefined') return;
+    selectionMutationObserver = new view.MutationObserver(() => {
+      if (selected && !selected.isConnected) scheduleGeometryUpdate();
+    });
+    let ancestor = element.parentElement;
+    while (ancestor) {
+      selectionMutationObserver.observe(ancestor, { childList: true });
+      if (ancestor === doc.documentElement) break;
+      ancestor = ancestor.parentElement;
+    }
+  };
+
   const selectElement = (element: HTMLElement | SVGElement): void => {
     selected = element;
     selectionLocked = true;
+    observeSelectedAncestors(element);
     resizeObserver?.disconnect();
     resizeObserver?.observe(element);
     if (!originals.has(element)) {
@@ -303,6 +336,7 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
   const buildChangeSets = (): LiveElementChangeSet[] => {
     const changes: LiveElementChangeSet[] = [];
     for (const [element, original] of originals) {
+      if (!element.isConnected) continue;
       const updatedClasses = element.getAttribute('class') ?? '';
       const contrastBackground = resolveCompositedBackground(element, doc);
       const computed = currentComputed(element);
@@ -336,6 +370,7 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
       },
       mode: panel.dataset.mode === 'advanced' ? 'advanced' : 'quick',
       changes,
+      staleTargetCount: [...originals.keys()].filter((element) => !element.isConnected).length,
       prompt: synthesizeLivePrompt(changes),
     });
   };
@@ -465,6 +500,7 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
     if (action === 'unlock') {
       selected = null;
       highlighted = null;
+      selectionMutationObserver?.disconnect();
       options.onSelectionChange?.(null);
       selectionLocked = false;
       resizeObserver?.disconnect();
@@ -548,6 +584,7 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
     view.visualViewport?.removeEventListener('resize', scheduleGeometryUpdate);
     view.visualViewport?.removeEventListener('scroll', scheduleGeometryUpdate);
     resizeObserver?.disconnect();
+    selectionMutationObserver?.disconnect();
     if (geometryFrame) view.cancelAnimationFrame(geometryFrame);
     if (pointerFrame) view.cancelAnimationFrame(pointerFrame);
     pendingPointerTarget = null;
@@ -599,6 +636,7 @@ label{display:block;margin:11px 0 5px;color:#a8bad3;font-size:10px;font-weight:7
 
   return {
     isActive: () => enabled && !stopped,
+    isDisposed: () => stopped,
     setActive,
     getSelectedElement: () => selected,
     getChangeSets: buildChangeSets,

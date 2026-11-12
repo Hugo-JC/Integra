@@ -1,6 +1,6 @@
 # Integra Command System — Specification
 
-**Status:** Command System Phase 1 core implemented on the feature branch; host adapters and command execution remain future work.  
+**Status:** Hybrid command manifest, schema validation, deterministic routing and review-only plan are implemented on main; host adapters and command execution remain future work.  
 **Decision:** Hybrid command interface.  
 **Default execution mode:** Review before source mutation.
 
@@ -28,7 +28,7 @@ The orchestrator is a router and coordinator, not a replacement for the speciali
 
 ### Namespaced commands
 
-Specialized commands use `/integra:<name>`, for example `/integra:direction`, `/integra:generate`, `/integra:critique` and `/integra:live`.
+Specialized commands use `/integra:<name>`, for example `/integra:direction`, `/integra:visual-intelligence`, `/integra:generate`, `/integra:critique` and `/integra:live`.
 
 Namespacing avoids collisions with host commands and makes the Integra command family discoverable. Bare aliases may be generated only by host adapters that explicitly support them and only when they do not conflict with native commands.
 
@@ -49,7 +49,7 @@ Every manifest entry defines:
 - Expected output artifact types.
 - Source-mutation policy.
 
-The manifest, JSON Schema and TypeScript validator are now part of the command contract. Phase 1 adds explicit and natural-language request routing, ambiguity handling, modifier inheritance, routing fixtures and a review-only execution plan. This remains a pure routing core: it is not a shell parser, agent executor or proof that every host exposes native slash commands.
+The manifest, JSON Schema and TypeScript validator are now part of the command contract. Phase 1 includes explicit and natural-language request routing, ambiguity handling, modifier inheritance, routing fixtures and a review-only execution plan. The visual-intelligence workflow packages a validated Direction Artifact with the offline knowledge resolver; it does not invoke an external agent. This remains a pure routing core: it is not a shell parser, agent executor or proof that every host exposes native slash commands.
 
 ## 4. Routing rules
 

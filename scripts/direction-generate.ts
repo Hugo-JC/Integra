@@ -1,5 +1,6 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { writeRunOutput } from '../src/cli/run-output.js';
 import {
   generateDirectionFromInput,
   parseDirectionGenerateArgs,
@@ -16,7 +17,7 @@ Options:
   --scenario  Scenario identifier. DL-001 is the only generated scenario today.
   --input     JSON file containing directionContext or a DirectionContextInput object.
               Defaults to fixtures/brief-data/DL-001.json.
-  --out       Output JSON path. Defaults to .integra/runs/direction/DL-001.json.
+  --out       Output JSON path inside .integra/runs/. Defaults to .integra/runs/direction/DL-001.json.
   --stdout    Write the Direction Artifact to stdout instead of a file.
   --help      Show this help.
 
@@ -61,9 +62,7 @@ async function main(): Promise<void> {
   if (options.stdout) {
     process.stdout.write(serialized);
   } else {
-    const target = resolve(options.outputPath);
-    await mkdir(dirname(target), { recursive: true });
-    await writeFile(target, serialized, 'utf8');
+    const target = await writeRunOutput(process.cwd(), options.outputPath, serialized, [options.inputPath]);
     process.stderr.write('Direction Artifact written to ' + target + '\n');
   }
 

@@ -10,9 +10,17 @@ function normalize(value:string):string {
   return value.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("en-US")
     .replace(/[^\p{L}\p{N}]+/gu," ").trim().replace(/\s+/g," ");
 }
-function includesPhrase(query:string,phrase:string):boolean {
-  const token=normalize(phrase);
-  return token.length>0 && ` ${query} `.includes(` ${token} `);
+const triggerIndex = new Map<string, { term: string; normalized: string }[]>(
+  commands.map((command) => [
+    command.id,
+    command.triggers.map((term) => ({ term, normalized: normalize(term) })),
+  ]),
+);
+function matchedTriggers(commandId:string, query:string):string[] {
+  const paddedQuery = ` ${query} `;
+  return (triggerIndex.get(commandId) ?? [])
+    .filter((entry) => entry.normalized.length > 0 && paddedQuery.includes(` ${entry.normalized} `))
+    .map((entry) => entry.term);
 }
 function result(command:CommandDefinition,status:IntegraCommandRoute["status"],reason:string,
   modifiers:string[]=[],candidates:string[]=[],triggers:string[]=[],clarification=false):IntegraCommandRoute {
@@ -39,15 +47,15 @@ export function routeIntegraRequest(request:string,options:CommandRouteOptions={
   }
 
   const modifierMatches=commands.filter((item)=>item.kind==="modifier").map((command)=>({
-    command,matches:command.triggers.filter((term)=>includesPhrase(normalized,term))
+    command,matches:matchedTriggers(command.id,normalized)
   })).filter((item)=>item.matches.length>0);
 
-  const broadMatches=orchestrator.triggers.filter((term)=>includesPhrase(normalized,term));
+  const broadMatches=matchedTriggers(orchestrator.id,normalized);
   if(broadMatches.length) return result(orchestrator,"matched","Broad or end-to-end intent is coordinated by the orchestrator.",
     modifierMatches.map((item)=>item.command.id),[],broadMatches);
 
   const workflowMatches=commands.filter((item)=>item.kind==="workflow").map((command)=>({
-    command,matches:command.triggers.filter((term)=>includesPhrase(normalized,term))
+    command,matches:matchedTriggers(command.id,normalized)
   })).filter((item)=>item.matches.length>0);
   if(workflowMatches.length) {
     const specificity=(item:typeof workflowMatches[number])=>Math.max(...item.matches.map((term)=>normalize(term).length));

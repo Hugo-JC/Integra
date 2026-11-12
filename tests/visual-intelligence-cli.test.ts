@@ -1,5 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { parseVisualIntelligenceGenerateArgs } from '../src/cli/visual-intelligence.js';
+import {
+  parseVisualIntelligenceGenerateArgs,
+  parseVisualIntelligenceValidateArgs,
+} from '../src/cli/visual-intelligence.js';
 
 describe('Visual Intelligence CLI argument parser', () => {
   it('requires an artifact and primary task', () => {
@@ -16,9 +19,9 @@ describe('Visual Intelligence CLI argument parser', () => {
     expect(parseVisualIntelligenceGenerateArgs([
       '--artifact', 'direction.json', '--task', 'Manage projects', '--mode', 'operate',
       '--niche-id', 'saas-developer-ai', '--query', 'project table filters',
-      '--tag', 'keyboard', '--tag', 'dense-ui', '--asset-type', 'icon', '--asset-type', 'illustration', '--limit', '12',
+      '--tag', 'keyboard', '--tag', 'dense-ui', '--asset-type', 'icon', '--asset-type', 'illustration', '--limit', '5',
     ])).toMatchObject({ mode: 'operate', nicheId: 'saas-developer-ai', query: 'project table filters',
-      tags: ['keyboard', 'dense-ui'], assetTypes: ['icon', 'illustration'], limit: 12 });
+      tags: ['keyboard', 'dense-ui'], assetTypes: ['icon', 'illustration'], limit: 5 });
   });
   it('rejects unknown, duplicate scalar, missing and conflicting options', () => {
     const base = ['--artifact', 'direction.json', '--task', 'Manage projects'];
@@ -30,10 +33,29 @@ describe('Visual Intelligence CLI argument parser', () => {
   it('rejects unsupported modes and invalid limits', () => {
     const base = ['--artifact', 'direction.json', '--task', 'Manage projects'];
     expect(() => parseVisualIntelligenceGenerateArgs([...base, '--mode', 'unknown'])).toThrow(/--mode must be/);
-    expect(() => parseVisualIntelligenceGenerateArgs([...base, '--limit', '0'])).toThrow(/between 1 and 20/);
-    expect(() => parseVisualIntelligenceGenerateArgs([...base, '--limit', '1.5'])).toThrow(/between 1 and 20/);
+    expect(() => parseVisualIntelligenceGenerateArgs([...base, '--limit', '0'])).toThrow(/between 1 and 5/);
+    expect(() => parseVisualIntelligenceGenerateArgs([...base, '--limit', '1.5'])).toThrow(/between 1 and 5/);
   });
   it('allows help without generation arguments', () => {
     expect(parseVisualIntelligenceGenerateArgs(['--help'])).toMatchObject({ help: true });
+  });
+});
+
+describe('Visual Intelligence validation CLI argument parser', () => {
+  it('requires an input file unless help is requested', () => {
+    expect(() => parseVisualIntelligenceValidateArgs([])).toThrow(/Missing required option --input/);
+    expect(parseVisualIntelligenceValidateArgs(['--input', 'bundle.json'])).toEqual({
+      inputPath: 'bundle.json',
+      help: false,
+    });
+    expect(parseVisualIntelligenceValidateArgs(['--help'])).toMatchObject({ help: true });
+  });
+
+  it('rejects unknown, duplicate and empty validation arguments', () => {
+    expect(() => parseVisualIntelligenceValidateArgs(['--unknown'])).toThrow(/Unknown option/);
+    expect(() => parseVisualIntelligenceValidateArgs(['--input', 'one.json', '--input', 'two.json']))
+      .toThrow(/more than once/);
+    expect(() => parseVisualIntelligenceValidateArgs(['--input', '']))
+      .toThrow(/requires a non-empty value/);
   });
 });

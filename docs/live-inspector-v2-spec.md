@@ -13,6 +13,7 @@ Reduce the distance between identifying a UI issue and preparing a precise code 
 ## Performance contract
 - Pointer events are coalesced through requestAnimationFrame.
 - Scroll/resize/visual viewport/ResizeObserver work shares a scheduled pass.
+- A bounded MutationObserver watches only direct child-list changes along the selected element's ancestor chain; it does not scan the full DOM or observe the whole document subtree.
 - No polling timers, repeated full-DOM scans or external runtime dependencies.
 - Shadow DOM isolates workbench chrome.
 - Teardown cancels frames, disconnects observers and removes listeners.
@@ -25,7 +26,7 @@ Keyboard shortcut must not intercept editable controls. Escape restores and clos
 Preview is a proposal. The refactor workflow inspects actual source, presents an exact diff and obtains approval before editing.
 
 ## Structured review package
-The controller exposes `getReviewPackage()` and the workbench provides **Exportar JSON**. The versioned package records a timestamp, origin/path (without query or fragment), viewport dimensions and device-pixel ratio, active mode, target diffs, and the implementation prompt. Source mapping is explicitly `unresolved` with low confidence; component hints are unverified. The package states that source mutation is `none` and requires approval for any exact source diff. It does not claim the preview is a verified implementation or a complete accessibility audit.
+The controller exposes `getReviewPackage()` and the workbench provides **Exportar JSON**. The versioned package records a timestamp, origin/path (without query or fragment), viewport dimensions and device-pixel ratio, active mode, connected target diffs, detached-target count, and the implementation prompt. Detached DOM nodes are excluded from the exported changes and reported explicitly. Source mapping is explicitly `unresolved` with low confidence; component hints are unverified. The package states that source mutation is `none` and requires approval for any exact source diff. It does not claim the preview is a verified implementation or a complete accessibility audit.
 
 ## Roadmap
 1. DOM navigator and richer computed-property groups.

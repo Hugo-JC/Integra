@@ -60,8 +60,8 @@ export function parseVisualIntelligenceGenerateArgs(args: readonly string[]): Vi
   }
   const limitValue = values.get('--limit');
   const limit = limitValue === undefined ? undefined : Number(limitValue);
-  if (limitValue !== undefined && (limit === undefined || !Number.isInteger(limit) || limit < 1 || limit > 20)) {
-    throw new TypeError('--limit must be an integer between 1 and 20.');
+  if (limitValue !== undefined && (limit === undefined || !Number.isInteger(limit) || limit < 1 || limit > 5)) {
+    throw new TypeError('--limit must be an integer between 1 and 5.');
   }
 
   const artifactPath = values.get('--artifact');
@@ -79,4 +79,39 @@ export function parseVisualIntelligenceGenerateArgs(args: readonly string[]): Vi
     outputPath: values.get('--out') ?? '.integra/runs/visual-intelligence/bundle.json',
     stdout, help,
   };
+}
+
+export interface VisualIntelligenceValidateOptions {
+  inputPath?: string;
+  help: boolean;
+}
+
+export function parseVisualIntelligenceValidateArgs(
+  args: readonly string[],
+): VisualIntelligenceValidateOptions {
+  let inputPath: string | undefined;
+  let help = false;
+
+  for (let index = 0; index < args.length; index += 1) {
+    const argument = args[index];
+    if (argument === '--help' || argument === '-h') {
+      help = true;
+      continue;
+    }
+    if (argument !== '--input') {
+      throw new TypeError('Unknown option: ' + argument);
+    }
+    if (inputPath !== undefined) {
+      throw new TypeError('Option --input was provided more than once.');
+    }
+    const value = args[index + 1];
+    if (!value || value.startsWith('--') || !value.trim()) {
+      throw new TypeError('Option --input requires a non-empty value.');
+    }
+    inputPath = value.trim();
+    index += 1;
+  }
+
+  if (!help && !inputPath) throw new TypeError('Missing required option --input.');
+  return { inputPath, help };
 }

@@ -28,7 +28,8 @@
     "distribution:pack": "npm pack --dry-run ./packages/cli",
     "distribution:smoke": "node scripts/test-cli-tarball.mjs",
     "validate:visual-library": "tsx scripts/validate-visual-library.ts",
-    "visual-intelligence:generate": "tsx scripts/visual-intelligence-generate.ts"
+    "visual-intelligence:generate": "tsx scripts/visual-intelligence-generate.ts",
+    "visual-intelligence:validate": "tsx scripts/visual-intelligence-validate.ts"
   },
   "dependencies": {
     "ajv": "^8.20.0",
