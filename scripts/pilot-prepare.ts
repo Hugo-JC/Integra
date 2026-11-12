@@ -69,7 +69,8 @@ const GUIDED_INSTRUCTIONS = [
   "5. Treat catalog-only sources as research leads, partial observations as partial, and token/layout patterns as candidates rather than mandatory decisions.",
   "6. Do not copy reference source code, copy, imagery, branding or distinctive page compositions.",
   "7. Implement the same task and constraints as the baseline run. Preserve the existing stack, if present.",
-  "8. Return outcomes for all decision and recommendation IDs in direction.json. Explain adaptations and omissions. This report is agent self-report, not independent quality proof.",
+  "8. Save the complete Direction Consumption Report as consumption-report.json. Include every decision and recommendation ID exactly once; explain adaptations and omissions.",
+  "9. Validate it with npm run direction:consumption:validate -- --artifact direction.json --report consumption-report.json. A passed result proves report coverage/schema only, not implementation quality.",
   "",
   "## Implementation expectations",
   "- Make the primary task and content hierarchy obvious.",
@@ -199,8 +200,8 @@ async function main(): Promise<void> {
     bundleId: bundle.bundleId,
     bundleSchemaVersion: bundle.schemaVersion,
     inputs: {
-      briefJsonSha256: sha256(briefJson),
-      briefMarkdownSha256: sha256(briefMarkdown),
+      briefJsonSha256: sha256(files["brief.json"]!),
+      briefMarkdownSha256: sha256(files["brief.md"]!),
       agentInstructionsSha256: sha256(sourceInstructions),
       taskPromptSha256: sha256(files["TASK-PROMPT.md"]!),
     },
@@ -213,7 +214,6 @@ async function main(): Promise<void> {
     integrity: {
       directionArtifactValidatedBeforeWrite: true,
       visualIntelligenceBundleValidatedBeforeWrite: true,
-      generatedPackSchemaValidation: "not-applicable-no-package-schema-yet",
       directionValidation: generation.validation.status,
       bundleValidation: "passed",
       agentExecution: "not-run",
