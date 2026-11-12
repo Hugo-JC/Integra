@@ -47,6 +47,14 @@ interface RuleDefinition {
 }
 
 const RULES = {
+  parseError: {
+    ruleId: "source.parse-error",
+    severity: "P1",
+    confidence: "high",
+    message: "The TypeScript JSX parser found a syntax error in this source file.",
+    impact: "Static analysis of this file may be incomplete until the syntax error is resolved.",
+    recommendation: "Fix the reported parser error, then run the project typecheck/build and repeat the audit.",
+  },
   missingImageAlt: {
     ruleId: "a11y.image-alt",
     severity: "P1",
@@ -112,6 +120,7 @@ const RULES = {
 } satisfies Record<string, RuleDefinition>;
 
 const CHECKS_RUN = [
+  "jsx-tsx-parser-diagnostics",
   "jsx-image-alt-attribute",
   "jsx-native-interactive-accessible-name",
   "jsx-form-label-association",
@@ -158,28 +167,43 @@ function hasAttribute(node: ts.JsxOpeningLikeElement, name: string): boolean {
   );
 }
 
-function hasStaticText(node: ts.JsxElement | ts.JsxSelfClosingElement): boolean {
+type StaticPresence = true | false | null;
+
+function hasStaticText(node: ts.JsxElement | ts.JsxSelfClosingElement): StaticPresence {
   if (ts.isJsxSelfClosingElement(node)) return false;
-  const containsText = (child: ts.Node): boolean => {
-    if (ts.isJsxText(child)) return child.getText().trim().length > 0;
-    if (ts.isStringLiteral(child) || ts.isNoSubstitutionTemplateLiteral(child)) {
-      return child.text.trim().length > 0;
+  let unknown = false;
+  for (const child of node.children) {
+    if (ts.isJsxText(child) && child.getText().trim().length > 0) return true;
+    if ((ts.isStringLiteral(child) || ts.isNoSubstitutionTemplateLiteral(child)) && child.text.trim()) return true;
+    if (ts.isJsxExpression(child) && child.expression) {
+      if ((ts.isStringLiteral(child.expression) || ts.isNoSubstitutionTemplateLiteral(child.expression)) &&
+          child.expression.text.trim()) return true;
+      unknown = true;
     }
-    if (ts.isJsxElement(child)) return hasStaticText(child);
-    return false;
-  };
-  return node.children.some(containsText);
+    if (ts.isJsxElement(child)) {
+      const nested = hasStaticText(child);
+      if (nested === true) return true;
+      if (nested === null) unknown = true;
+    }
+  }
+  return unknown ? null : false;
 }
 
 function hasAccessibleName(
   node: ts.JsxOpeningLikeElement,
   element: ts.JsxElement | ts.JsxSelfClosingElement,
-): boolean {
+): StaticPresence {
+  let unknown = false;
   for (const name of ["aria-label", "aria-labelledby", "title"]) {
+    if (!hasAttribute(node, name)) continue;
     const value = staticAttribute(node, name);
     if (value?.trim()) return true;
+    if (value === undefined) unknown = true;
   }
-  return hasStaticText(element);
+  const text = hasStaticText(element);
+  if (text === true) return true;
+  if (text === null) unknown = true;
+  return unknown ? null : false;
 }
 
 function tagName(node: ts.JsxOpeningLikeElement): string {
@@ -194,7 +218,8 @@ function hasAssociatedLabel(
   node: ts.JsxOpeningLikeElement,
   ancestor: ts.Node | undefined,
   labelsByFor: Set<string>,
-): boolean {
+  hasDynamicLabelFor: boolean,
+): StaticPresence {
   const id = staticId(node);
   if (id && labelsByFor.has(id)) return true;
 
@@ -205,7 +230,7 @@ function hasAssociatedLabel(
     }
     current = current.parent;
   }
-  return false;
+  return hasDynamicLabelFor ? null : false;
 }
 
 function normalizeFile(file: string, root: string): string {
@@ -251,6 +276,7 @@ export function auditSourceFiles(
   for (const file of sourceFiles) {
     const source = ts.createSourceFile(file.file, file.content, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
     const labelsByFor = new Set<string>();
+    let hasDynamicLabelFor = false;
     const focusReplacementPresent = /focus-visible\s*:\s*(?:outline|ring|border)|:focus-visible\b/i.test(file.content);
 
     const collectLabels = (node: ts.Node): void => {
@@ -258,10 +284,32 @@ export function auditSourceFiles(
           tagName(node) === "label") {
         const htmlFor = staticAttribute(node, "htmlFor");
         if (htmlFor) labelsByFor.add(htmlFor);
+        else if (hasAttribute(node, "htmlFor")) hasDynamicLabelFor = true;
       }
       ts.forEachChild(node, collectLabels);
     };
     collectLabels(source);
+
+    for (const diagnostic of source.parseDiagnostics) {
+      const offset = diagnostic.start ?? 0;
+      const position = lineAndColumn(source, offset);
+      const normalized = normalizeFile(file.file, root);
+      findings.push({
+        id: [RULES.parseError.ruleId, normalized, position.line, position.column].join(":"),
+        ruleId: RULES.parseError.ruleId,
+        severity: RULES.parseError.severity,
+        confidence: RULES.parseError.confidence,
+        verificationStatus: "heuristic",
+        location: { file: normalized, ...position },
+        message: RULES.parseError.message + " " + ts.flattenDiagnosticMessageText(diagnostic.messageText, " "),
+        impact: RULES.parseError.impact,
+        recommendation: RULES.parseError.recommendation,
+        evidence: {
+          kind: "source-static",
+          excerpt: file.content.slice(offset, offset + 180).replace(/\\s+/g, " "),
+        },
+      });
+    }
 
     const visit = (node: ts.Node): void => {
       if (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) {
@@ -279,7 +327,7 @@ export function auditSourceFiles(
         if (["button", "a"].includes(tag)) {
           const isAnchor = tag === "a";
           const hasRequiredHref = !isAnchor || hasAttribute(node, "href");
-          if (hasRequiredHref && !hasAccessibleName(node, element)) {
+          if (hasRequiredHref && hasAccessibleName(node, element) === false) {
             add(source, file.file, node, RULES.emptyInteractiveName);
           }
         }
@@ -287,9 +335,11 @@ export function auditSourceFiles(
         if (["input", "select", "textarea"].includes(tag)) {
           const type = (staticAttribute(node, "type") ?? "").toLowerCase();
           const hiddenInput = tag === "input" && type === "hidden";
-          const hasName = hasAccessibleName(node, element) ||
-            hasAssociatedLabel(node, node.parent, labelsByFor);
-          if (!hiddenInput && !hasName) add(source, file.file, node, RULES.unlabeledFormControl);
+          const name = hasAccessibleName(node, element);
+          const label = hasAssociatedLabel(node, node.parent, labelsByFor, hasDynamicLabelFor);
+          if (!hiddenInput && name === false && label === false) {
+            add(source, file.file, node, RULES.unlabeledFormControl);
+          }
         }
 
         if (["div", "span", "li"].includes(tag) && hasAttribute(node, "onClick")) {
