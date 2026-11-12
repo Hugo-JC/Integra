@@ -1,88 +1,118 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import ts from 'typescript';
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { auditSourceFiles } from "../src/modules/refinement/source-audit.js";
 
-type Finding = { file: string; line: number; rule: string; severity: 'major' | 'minor'; message: string; recommendation: string };
-const root = path.resolve(process.argv.find((arg) => !arg.startsWith('-') && arg.endsWith('/')) ?? 'src');
-const json = process.argv.includes('--json');
-const strict = process.argv.includes('--strict');
-const ignored = new Set(['node_modules', '.git', 'dist', 'build', '.next', 'coverage']);
-const files: string[] = [];
-function collect(dir: string): void {
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (entry.isDirectory()) { if (!ignored.has(entry.name)) collect(path.join(dir, entry.name)); }
-    else if (/\.(tsx|jsx)$/.test(entry.name)) files.push(path.join(dir, entry.name));
-  }
-}
-function textOf(node: ts.Node): string {
-  if (ts.isStringLiteral(node) || ts.isNoSubstitutionTemplateLiteral(node)) return node.text;
-  return '';
-}
-function hasAttr(node: ts.JsxOpeningLikeElement, name: string): boolean {
-  return node.attributes.properties.some((item) => ts.isJsxAttribute(item) && item.name.getText() === name);
-}
-function attr(node: ts.JsxOpeningLikeElement, name: string): string {
-  const item = node.attributes.properties.find((candidate) => ts.isJsxAttribute(candidate) && candidate.name.getText() === name);
-  return item && ts.isJsxAttribute(item) && item.initializer && ts.isStringLiteral(item.initializer) ? item.initializer.text : '';
-}
-const findings: Finding[] = [];
-function scan(file: string): void {
-  const source = fs.readFileSync(file, 'utf8');
-  const ast = ts.createSourceFile(file, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
-  const add = (node: ts.Node, rule: string, severity: Finding['severity'], message: string, recommendation: string) => {
-    const line = ast.getLineAndCharacterOfPosition(node.getStart(ast)).line + 1;
-    findings.push({ file: path.relative(process.cwd(), file), line, rule, severity, message, recommendation });
-  };
-  const visit = (node: ts.Node): void => {
-    if (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) {
-      const tag = node.tagName.getText();
-      const classes = attr(node, 'className') || attr(node, 'class');
-      if (tag === 'img' && !hasAttr(node, 'alt')) {
-        add(node, 'a11y.image-alt', 'major', 'Image has no alt attribute.', 'Add meaningful alt text or alt="" for decorative imagery.');
-      }
-      if (['div', 'span', 'li'].includes(tag) && hasAttr(node, 'onClick')) {
-        const role = attr(node, 'role');
-        const keyboard = hasAttr(node, 'onKeyDown') || hasAttr(node, 'onKeyUp');
-        if (!['button', 'link'].includes(role) || !hasAttr(node, 'tabIndex') || !keyboard) {
-          add(node, 'a11y.interactive-semantics', 'major', 'Clickable non-native element lacks complete keyboard semantics.', 'Prefer button/link; otherwise add role, tabIndex and keyboard interaction.');
-        }
-      }
-      if (classes.includes('outline-none') && !/(focus-visible:|focus:)/.test(classes)) {
-        add(node, 'a11y.visible-focus', 'major', 'Focus outline is removed without a visible replacement.', 'Add a clear focus-visible ring/border or preserve the browser outline.');
-      }
-      if (/(?:bg|text|border)-\[#(?:[\da-fA-F]{3}|[\da-fA-F]{6})\]/.test(classes)) {
-        add(node, 'design.hardcoded-color', 'minor', 'Literal hex utility bypasses design tokens.', 'Prefer a semantic token; keep explicit brand exceptions documented.');
-      }
+const ignored = new Set(["node_modules", ".git", "dist", "build", ".next", "coverage", ".turbo"]);
+const extensions = new Set([".tsx", ".jsx", ".css", ".scss", ".sass", ".less"]);
+
+interface Options { root: string; json: boolean; strict: boolean; help: boolean }
+
+function parseArgs(args: readonly string[]): Options {
+  let root = "src";
+  let positionalSeen = false;
+  let json = false;
+  let strict = false;
+  let help = false;
+
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index]!;
+    if (arg === "--help" || arg === "-h") { help = true; continue; }
+    if (arg === "--json") { json = true; continue; }
+    if (arg === "--strict") { strict = true; continue; }
+    if (arg === "--root") {
+      const value = args[index + 1];
+      if (!value || value.startsWith("--")) throw new TypeError("--root requires a path.");
+      if (positionalSeen || root !== "src") throw new TypeError("Specify the scan root only once.");
+      root = value;
+      positionalSeen = true;
+      index += 1;
+      continue;
     }
-    ts.forEachChild(node, visit);
-  };
-  visit(ast);
-  const syntaxDiagnostics = ts.transpileModule(source, {
-    fileName: file,
-    compilerOptions: { jsx: ts.JsxEmit.Preserve, target: ts.ScriptTarget.ES2022 },
-    reportDiagnostics: true,
-  }).diagnostics ?? [];
-  if (syntaxDiagnostics.length) {
-    for (const diagnostic of syntaxDiagnostics) {
-      const pos = diagnostic.start ?? 0;
-      findings.push({ file: path.relative(process.cwd(), file), line: ast.getLineAndCharacterOfPosition(pos).line + 1,
-        rule: 'source.parse-error', severity: 'major', message: ts.flattenDiagnosticMessageText(diagnostic.messageText, ' '),
-        recommendation: 'Fix the syntax error before trusting static findings.' });
+    if (arg.startsWith("-")) throw new TypeError("Unknown option: " + arg);
+    if (positionalSeen) throw new TypeError("Only one scan root may be supplied.");
+    root = arg;
+    positionalSeen = true;
+  }
+  return { root, json, strict, help };
+}
+
+function collectFiles(directory: string, root: string, result: Array<{ file: string; content: string }>): void {
+  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+    if (entry.isSymbolicLink()) continue;
+    const absolute = path.join(directory, entry.name);
+    if (entry.isDirectory()) {
+      if (!ignored.has(entry.name)) collectFiles(absolute, root, result);
+    } else if (entry.isFile() && extensions.has(path.extname(entry.name).toLowerCase())) {
+      result.push({
+        file: path.relative(root, absolute),
+        content: fs.readFileSync(absolute, "utf8"),
+      });
     }
   }
 }
+
+function main(): void {
+  const options = parseArgs(process.argv.slice(2));
+  if (options.help) {
+    process.stdout.write([
+      "Integra Design QA — static source signals",
+      "",
+      "Usage:",
+      "  npm run design:qa -- [path] [--json] [--strict]",
+      "  npm run design:qa -- --root src --json",
+      "",
+      "Options:",
+      "  --root <path>  Directory to scan (default: src)",
+      "  --json         Emit the versioned JSON report",
+      "  --strict       Exit with code 2 when P1 static signals exist",
+      "  --help         Show this help",
+      "",
+      "All findings are heuristics. A clean report is not a visual, runtime or WCAG pass.",
+      "",
+    ].join("\n"));
+    return;
+  }
+
+  const root = path.resolve(process.cwd(), options.root);
+  if (!fs.existsSync(root) || !fs.statSync(root).isDirectory()) {
+    throw new Error("Scan root is not a directory: " + root);
+  }
+
+  const files: Array<{ file: string; content: string }> = [];
+  collectFiles(root, root, files);
+  const report = auditSourceFiles(files, root);
+
+  if (options.json) {
+    process.stdout.write(JSON.stringify(report, null, 2) + "\n");
+  } else {
+    const counts = report.summary.findingsBySeverity;
+    process.stdout.write(
+      "Integra Design QA · " + report.summary.scannedFiles +
+      " files · P1 " + counts.P1 + " · P2 " + counts.P2 + " · P3 " + counts.P3 + "\n",
+    );
+    for (const finding of report.findings) {
+      process.stdout.write(
+        "[" + finding.severity + " · " + finding.verificationStatus + "] " +
+        finding.location.file + ":" + finding.location.line + " " + finding.ruleId +
+        " — " + finding.message + "\n  → " + finding.recommendation + "\n",
+      );
+    }
+    process.stdout.write("\nNot run: " + report.summary.checksNotRun.join(", ") + "\n");
+  }
+
+  if (options.strict && report.findings.some((item) => item.severity === "P1")) {
+    process.exitCode = 2;
+  }
+}
+
 try {
-  if (!fs.existsSync(root) || !fs.statSync(root).isDirectory()) throw new Error(`Directory not found: ${root}`);
-  collect(root);
-  files.sort().forEach(scan);
-  const report = { scannedFiles: files.length, findings };
-  if (json) console.log(JSON.stringify(report, null, 2));
-  else {
-    console.log(`Integra Design QA · ${files.length} files · ${findings.length} findings`);
-    for (const item of findings) console.log(`[${item.severity}] ${item.file}:${item.line} ${item.rule} — ${item.message}\n  → ${item.recommendation}`);
-  }
-  if (findings.some((item) => item.severity === 'major') && strict) process.exitCode = 2;
+  main();
 } catch (error) {
-  console.error(error instanceof Error ? error.message : String(error));
+  process.stderr.write(
+    "Design QA failed: " + (error instanceof Error ? error.message : String(error)) + "\n",
+  );
   process.exitCode = 1;
 }
+
+export { parseArgs as parseDesignQaArgs };
