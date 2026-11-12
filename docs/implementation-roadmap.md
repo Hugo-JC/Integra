@@ -73,6 +73,17 @@ A conclusão limita-se a DL-001. Não representa cobertura de geração para tod
 
 **Ainda fora do âmbito:** source-map resolution, mapeamento automático DOM → TSX, aplicação de patches, navegação completa da árvore DOM e browser automation multi-viewport.
 
+### Fase 2.4 — Refinement & evidence foundation
+
+**Estado: primeira camada implementada.**
+
+- Auditoria de contraste para estados avaliáveis e inconclusivos.
+- Quality Audit baseada apenas em observações fornecidas.
+- Heurísticas de espaçamento e nesting exigem baseline de projeto explicitamente fornecida.
+- Findings separam evidência verificada de heurísticas.
+
+**Ainda fora do âmbito:** browser automation, operação real de teclado, leitor de ecrã, validação visual independente e auditoria WCAG completa.
+
 ### Fase 2.5 — Static source QA & pilot contracts
 
 **Estado: primeira camada de preparação implementada; runtime QA ainda não coberta.**
@@ -85,17 +96,6 @@ A conclusão limita-se a DL-001. Não representa cobertura de geração para tod
 - pilot:prepare prepara um pacote controlado para comparação baseline vs Integra-guided.
 
 **Limite:** a análise estática não executa browser, não mede contrastes, não verifica operações reais de teclado ou leitores de ecrã, nem prova a qualidade do design. Os findings são heurísticas; o piloto ainda exige execução manual com agente externo.
-
-### Fase 2.4 — Refinement & evidence foundation
-
-**Estado: primeira camada implementada.**
-
-- Auditoria de contraste para estados avaliáveis e inconclusivos.
-- Quality Audit baseada apenas em observações fornecidas.
-- Heurísticas de espaçamento e nesting exigem baseline de projeto explicitamente fornecida.
-- Findings separam evidência verificada de heurísticas.
-
-**Ainda fora do âmbito:** parser DOM/AST abrangente, auditoria WCAG completa, avaliação visual automática e validação visual independente.
 
 ## Primeiro teste — DL-001 First Agent Pilot
 
