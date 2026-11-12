@@ -60,7 +60,7 @@ export async function buildDistribution({ root = ROOT, outDir = resolve(ROOT, 'p
   outDir = resolve(outDir);
   const cliPackagePath = join(root, 'packages', 'cli', 'package.json');
   const cliPackage = JSON.parse(await readFile(cliPackagePath, 'utf8'));
-  if (typeof cliPackage.version !== 'string' || !/^\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?$/.test(cliPackage.version)) {
+  if (typeof cliPackage.version !== 'string' || !/^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/.test(cliPackage.version)) {
     throw new Error('packages/cli/package.json must contain a valid semantic version.');
   }
   const included = new Set();
