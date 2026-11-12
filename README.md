@@ -120,9 +120,31 @@ O comando produz um Visual Intelligence Bundle 1.1.0 em `.integra/runs/visual-in
 
 O Bundle separa decisões do Direction Artifact de candidatos de conhecimento. Fontes `catalog-only`, observações `partial`, observações verificadas, receitas de tokens e padrões não são equivalentes nem se transformam automaticamente em decisões aprovadas.
 
-### 3. Implementar e rever
+### 3. Preparar o primeiro piloto DL-001
+
+```bash
+npm run pilot:prepare
+```
+
+O comando prepara um pacote manual em `.integra/runs/pilots/DL-001/` com brief, prompt comum, Direction Artifact, Bundle, instruções para a condição guiada, critérios de aceitação e hashes. Executa o mesmo agente em duas cópias limpas: baseline (brief + prompt) e Integra-guided (os mesmos materiais + artefactos). O comando não invoca o agente nem cria a interface. Segue [o protocolo do primeiro piloto](docs/first-agent-pilot.md).
+
+Depois da execução guiada, valida a cobertura do relatório do agente:
+
+```bash
+npm run direction:consumption:validate -- \\
+  --artifact .integra/runs/pilots/DL-001/direction.json \\
+  --report ./consumption-report.json
+```
+
+Este validator confirma schema, ligação ao artefacto e cobertura de todos os IDs de decisão/recomendação. O relatório continua a ser autorrelato e não prova qualidade da implementação.
+
+### 4. Implementar e rever
 
 O agente externo recebe o Bundle e implementa no projeto de destino segundo o seu próprio contrato de execução. O Live Inspector pode depois recolher previews e exportar um pacote de revisão. O source mapping é resolvido separadamente; o Bundle e o pacote Live não são prova de implementação nem um QA pass.
+
+## Contexto de produto e identidade
+
+Quando disponíveis, `PRODUCT.md` e `DESIGN.md` ajudam a preservar a verdade do produto e o sistema visual aprovado. O contrato e os modelos opcionais estão em [docs/product-context-contract.md](docs/product-context-contract.md) e [templates/](templates/). Para produtos existentes, refinamento preserva a identidade por defeito; uma mudança de mundo visual requer pedido ou aprovação explícita.
 
 ## Princípios de funcionamento
 
@@ -146,6 +168,8 @@ Consulte:
 - [Compatibilidade e instalação por host](docs/agent-compatibility.md)
 - [Contrato de contexto de IA](docs/ai-context-contract.md)
 - [Contrato de integração dos agentes](docs/agent-integration-contract.md)
+- [Contrato de contexto e identidade](docs/product-context-contract.md)
+- [Protocolo do primeiro piloto DL-001](docs/first-agent-pilot.md)
 - [Especificação do Live Inspector](docs/live-inspector-v2-spec.md)
 - [Avisos e licenças de terceiros](docs/third-party-notices.md)
 
@@ -172,6 +196,8 @@ npm run distribution:smoke
 Validações focadas:
 
 ```bash
+npm run pilot:prepare
+npm run design:qa -- ./src --json
 npm run validate:visual-library
 npm run validate:skills
 npm run validate:agent-assets
@@ -187,7 +213,7 @@ O validador de skills verifica frontmatter, nomes, limites do formato e links lo
 - Instalar uma skill não garante que um host a tenha descoberto, ativado ou seguido.
 - O routing prepara um plano; não é um executor universal de agentes.
 - O Live Inspector é apenas para desenvolvimento local; não edita source nem deve ser usado em produção.
-- O Design QA contém heurísticas; não substitui revisão humana nem testes reais no browser.
+- O Design QA estático lê JSX/TSX e CSS e produz sinais heuristic com localização e evidência de source. Não é uma auditoria runtime: teclado, screen readers, layout renderizado, contraste compositado, estados e performance continuam a exigir teste independente.
 - Uma auditoria parcial não prova conformidade WCAG global.
 - Uma recomendação de performance sem medições não é um ganho comprovado.
 
