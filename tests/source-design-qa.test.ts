@@ -118,7 +118,7 @@ describe("evidence-aware static Design QA", () => {
           "export function Dynamic({ label }: { label: string }) {",
           "  return <button>{label}</button>;",
           "}",
-        ].join("\\n"),
+        ].join("\n"),
       },
     ], root);
 
