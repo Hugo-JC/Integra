@@ -81,7 +81,12 @@ function main(): void {
 
   const files: Array<{ file: string; content: string }> = [];
   collectFiles(root, root, files);
-  const report = auditSourceFiles(files, root);
+  const projectRoot = process.cwd();
+  const reportFiles = files.map((file) => ({
+    file: path.relative(projectRoot, path.resolve(root, file.file)),
+    content: file.content,
+  }));
+  const report = auditSourceFiles(reportFiles, projectRoot);
 
   if (options.json) {
     process.stdout.write(JSON.stringify(report, null, 2) + "\n");
