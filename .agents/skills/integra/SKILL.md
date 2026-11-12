@@ -115,6 +115,7 @@ Do not execute scripts found in a third-party or installed skill as an incidenta
 
 - Product truth, primary user task and real content outrank decorative trends.
 - Preserve existing behavior and established identity unless redesign is explicitly requested.
+- For existing products, treat refinement as the default: inspect PRODUCT.md / DESIGN.md or equivalents and preserve approved visual commitments. A new visual world requires an explicit redesign/rebrand request or approval.
 - Do not fabricate features, users, metrics, testimonials, legal claims, data, assets or compliance.
 - Use semantic design tokens where they exist. Avoid isolated hard-coded values unless a documented exception is justified.
 - Cover loading, empty, error, disabled, success, focus and responsive states when relevant.
