@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://integra.dev/schemas/design-qa-report.schema.json",
+  "title": "Integra Static Design QA Report",
+  "description": "Versioned source-static heuristic findings. This report is not rendered-interface verification or WCAG conformance.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "summary", "findings", "limitations"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scannedFiles", "scannedSourceFiles", "scannedStyleFiles", "findingsBySeverity", "checksRun", "checksNotRun"],
+      "properties": {
+        "scannedFiles": { "type": "integer", "minimum": 0 },
+        "scannedSourceFiles": { "type": "integer", "minimum": 0 },
+        "scannedStyleFiles": { "type": "integer", "minimum": 0 },
+        "findingsBySeverity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["P1", "P2", "P3"],
+          "properties": {
+            "P1": { "type": "integer", "minimum": 0 },
+            "P2": { "type": "integer", "minimum": 0 },
+            "P3": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "checksRun": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "checksNotRun": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/finding" }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "$defs": {
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "ruleId", "severity", "confidence", "verificationStatus", "location", "message", "impact", "recommendation", "evidence"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "ruleId": { "type": "string", "minLength": 1 },
+        "severity": { "enum": ["P1", "P2", "P3"] },
+        "confidence": { "enum": ["high", "medium"] },
+        "verificationStatus": { "const": "heuristic" },
+        "location": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["file", "line", "column"],
+          "properties": {
+            "file": { "type": "string", "minLength": 1 },
+            "line": { "type": "integer", "minimum": 1 },
+            "column": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "criterion": { "type": "string", "minLength": 1 },
+        "message": { "type": "string", "minLength": 1 },
+        "impact": { "type": "string", "minLength": 1 },
+        "recommendation": { "type": "string", "minLength": 1 },
+        "evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "excerpt"],
+          "properties": {
+            "kind": { "const": "source-static" },
+            "excerpt": { "type": "string", "minLength": 1, "maxLength": 240 }
+          }
+        }
+      }
+    }
+  }
+}
