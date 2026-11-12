@@ -23,13 +23,14 @@ describe("Design QA CLI", () => {
       const report = JSON.parse(run.stdout) as {
         schemaVersion: string;
         summary: { scannedSourceFiles: number };
-        findings: Array<{ ruleId: string; verificationStatus: string }>;
+        findings: Array<{ ruleId: string; verificationStatus: string; location: { file: string } }>;
       };
       expect(report.schemaVersion).toBe("1.0.0");
       expect(report.summary.scannedSourceFiles).toBe(1);
       expect(report.findings[0]).toMatchObject({
         ruleId: "a11y.image-alt",
         verificationStatus: "heuristic",
+        location: { file: "src/App.tsx" },
       });
     } finally {
       rmSync(workspace, { recursive: true, force: true });
