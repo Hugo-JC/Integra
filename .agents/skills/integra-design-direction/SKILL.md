@@ -28,7 +28,7 @@ Label each input Fact, Constraint, Preference, Assumption or Unknown. Ask only w
 
 ## Procedure
 
-1. **Read the incumbent world.** Inspect existing screens, routes, CSS, components, fonts, imagery, tokens, documentation and relevant tests. A missing DESIGN.md does not mean the project has no design system.
+1. **Read the incumbent world.** Inspect PRODUCT.md (or equivalent product truth), DESIGN.md (or approved visual-system documentation), the scoped brief, existing screens, routes, CSS, components, fonts, imagery, tokens and relevant tests. Follow docs/product-context-contract.md when available. A missing DESIGN.md does not mean the project has no design system; inspect the implementation before proposing tokens.
 2. **Choose surface mode.** Determine what the visitor is trying to do on this surface:
    - **Persuade:** decide or act; commonly marketing, campaigns and pricing.
    - **Operate:** complete a task; commonly product UI, dashboards, editors and admin.
