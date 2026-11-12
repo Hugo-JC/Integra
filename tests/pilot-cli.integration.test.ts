@@ -20,7 +20,7 @@ describe("DL-001 pilot pack CLI", () => {
         encoding: "utf8",
       });
       expect(run.status, run.stderr).toBe(0);
-      expect(run.stdout).toContain("9 files");
+      expect(run.stdout).toContain("10 files");
       expect(run.stdout).toContain("Agent execution: not run");
 
       const requiredFiles = [
@@ -30,6 +30,7 @@ describe("DL-001 pilot pack CLI", () => {
         "TASK-PROMPT.md",
         "direction.json",
         "bundle.json",
+        "AGENT-CONSUMER-CONTRACT.md",
         "GUIDED-AGENT-INSTRUCTIONS.md",
         "acceptance-criteria.json",
         "manifest.json",
