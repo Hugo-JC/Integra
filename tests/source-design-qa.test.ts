@@ -52,12 +52,16 @@ describe("evidence-aware static Design QA", () => {
       {
         file: "src/Accessible.tsx",
         content: [
+          "export function Accessible() {",
+          "  return <>",
           '<button aria-label="Close"><svg /></button>',
           '<a href="/docs">Read documentation</a>',
           '<label htmlFor="name">Name</label>',
           '<input id="name" />',
           '<div role="button" tabIndex={0} onClick={run} onKeyDown={run}>Run</div>',
           '<button className="outline-none focus-visible:ring-2">Save</button>',
+          "  </>;",
+          "}",
         ].join("\n"),
       },
       {
