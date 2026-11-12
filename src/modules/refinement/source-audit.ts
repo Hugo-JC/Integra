@@ -174,7 +174,6 @@ function hasStaticText(node: ts.JsxElement | ts.JsxSelfClosingElement): StaticPr
   let unknown = false;
   for (const child of node.children) {
     if (ts.isJsxText(child) && child.getText().trim().length > 0) return true;
-    if ((ts.isStringLiteral(child) || ts.isNoSubstitutionTemplateLiteral(child)) && child.text.trim()) return true;
     if (ts.isJsxExpression(child) && child.expression) {
       if ((ts.isStringLiteral(child.expression) || ts.isNoSubstitutionTemplateLiteral(child.expression)) &&
           child.expression.text.trim()) return true;
@@ -290,7 +289,12 @@ export function auditSourceFiles(
     };
     collectLabels(source);
 
-    for (const diagnostic of source.parseDiagnostics) {
+    const syntaxDiagnostics = ts.transpileModule(file.content, {
+      fileName: file.file,
+      compilerOptions: { jsx: ts.JsxEmit.Preserve, target: ts.ScriptTarget.ES2022 },
+      reportDiagnostics: true,
+    }).diagnostics ?? [];
+    for (const diagnostic of syntaxDiagnostics.filter((item) => item.category === ts.DiagnosticCategory.Error)) {
       const offset = diagnostic.start ?? 0;
       const position = lineAndColumn(source, offset);
       const normalized = normalizeFile(file.file, root);
