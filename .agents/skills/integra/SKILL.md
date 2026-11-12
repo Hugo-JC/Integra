@@ -24,7 +24,7 @@ A successful run must make clear:
 
 1. Restate the desired outcome internally in one sentence.
 2. Identify the target: product, route, screen, flow, component, design system, repository, reference or running page.
-3. Inspect relevant project context when tools are available: README, agent instructions, package scripts, routes, nearby components, tokens, tests and existing assets. Do not scan unrelated or private files.
+3. Inspect relevant project context when tools are available: project instructions, PRODUCT.md (or equivalent product facts), DESIGN.md (or approved design-system docs), scoped briefs, README, package scripts, routes, nearby components, tokens, tests and existing assets. Follow docs/product-context-contract.md when present. Do not scan unrelated or private files.
 4. Separate:
    - **Fact:** directly observed or supplied and attributable.
    - **Constraint:** a requirement that must be preserved.
