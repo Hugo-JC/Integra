@@ -211,7 +211,9 @@ async function main(): Promise<void> {
       ]),
     ),
     integrity: {
-      allGeneratedFilesValidatedBeforeWrite: true,
+      directionArtifactValidatedBeforeWrite: true,
+      visualIntelligenceBundleValidatedBeforeWrite: true,
+      generatedPackSchemaValidation: "not-applicable-no-package-schema-yet",
       directionValidation: generation.validation.status,
       bundleValidation: "passed",
       agentExecution: "not-run",
