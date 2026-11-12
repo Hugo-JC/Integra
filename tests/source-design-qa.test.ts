@@ -70,7 +70,7 @@ describe("evidence-aware static Design QA", () => {
       },
     ], root);
 
-    expect(report.findings).toHaveLength(0);
+    expect(report.findings, JSON.stringify(report.findings, null, 2)).toHaveLength(0);
   });
 
   it("marks focus removal and literal utility colors as review signals, not proven defects", () => {
