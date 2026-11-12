@@ -1,6 +1,6 @@
 # Roadmap do Integra
 
-**Última atualização:** 11/11/2026  
+**Última atualização:** 12/11/2026  
 **Estado global:** core determinístico e contratos iniciais implementados; piloto com agente externo e validação visual em browser ainda por executar.
 
 ## Direção do produto
@@ -73,6 +73,19 @@ A conclusão limita-se a DL-001. Não representa cobertura de geração para tod
 
 **Ainda fora do âmbito:** source-map resolution, mapeamento automático DOM → TSX, aplicação de patches, navegação completa da árvore DOM e browser automation multi-viewport.
 
+### Fase 2.5 — Static source QA & pilot contracts
+
+**Estado: primeira camada de preparação implementada; runtime QA ainda não coberta.**
+
+- Static audit TSX/JSX + CSS com localização, regra, severidade, confiança, excerpto e status heuristic.
+- JSON schema versionado para o relatório.
+- Sinais para alt de imagens, nomes acessíveis, labels de forms, semântica teclado, foco, reduced motion e cores utilitárias hardcoded.
+- Parser diagnostics incluídos; valores dinâmicos não são tratados como ausentes quando não podem ser determinados estaticamente.
+- direction:consumption:validate verifica schema, artifact ID e cobertura exata de decisões/recomendações.
+- pilot:prepare prepara um pacote controlado para comparação baseline vs Integra-guided.
+
+**Limite:** a análise estática não executa browser, não mede contrastes, não verifica operações reais de teclado ou leitores de ecrã, nem prova a qualidade do design. Os findings são heurísticas; o piloto ainda exige execução manual com agente externo.
+
 ### Fase 2.4 — Refinement & evidence foundation
 
 **Estado: primeira camada implementada.**
@@ -84,17 +97,21 @@ A conclusão limita-se a DL-001. Não representa cobertura de geração para tod
 
 **Ainda fora do âmbito:** parser DOM/AST abrangente, auditoria WCAG completa, avaliação visual automática e validação visual independente.
 
-## Próximo marco — DL-001 First Agent Pilot
+## Primeiro teste — DL-001 First Agent Pilot
 
-Objetivo: provar que o Bundle melhora a implementação de um agente externo sem introduzir regressões.
+**Preparação automatizada disponível; execução externa ainda manual.** O comando `npm run pilot:prepare` gera o pacote com brief, prompt de tarefa idêntico para as duas condições, Direction Artifact 1.1.0, Visual Intelligence Bundle 1.1.0, instruções/contrato do agente, critérios de aceitação e hashes. O comando valida os dois artefactos centrais, protege os inputs e escreve em `.integra/runs/`. O agente e o browser ainda não são invocados automaticamente.
 
-1. Congelar o SHA-256 do brief e a versão do Direction Artifact.
+O comando `npm run direction:consumption:validate -- --artifact direction.json --report consumption-report.json` valida o schema e garante que o relatório cobre exatamente cada decisão e recomendação uma vez. Isto verifica cobertura do autorrelato, não a veracidade dos outcomes.
+
+Objetivo do piloto: provar, ou refutar, se o Bundle melhora a implementação de um agente externo sem introduzir regressões.
+
+1. Executar `npm run pilot:prepare` e preservar o manifest/hashes gerados.
 2. Escolher um agente, versão, modelo e configuração; registar esses valores.
-3. Executar o mesmo agente em dois workspaces limpos: baseline e Integra-guided.
-4. No segundo run, entregar o Bundle 1.1.0 sem alterar o prompt base além da integração definida.
-5. Guardar outputs, screenshots, hashes, logs e testes.
-6. Verificar os mesmos critérios nos dois resultados, sem usar o relatório autoavaliado do agente como prova independente.
-7. Documentar ganhos, regressões, inconclusivos e limites.
+3. Executar o mesmo agente em dois workspaces limpos: baseline e Integra-guided, sem partilhar contexto entre runs.
+4. No segundo run, entregar o Direction Artifact e Bundle 1.1.0, mantendo o mesmo brief e prompt base.
+5. Guardar outputs, screenshots nos dois viewports, hashes, logs e testes.
+6. Validar o report do agente com `direction:consumption:validate`, mas não usar o autorrelato como prova independente.
+7. Verificar os mesmos critérios nos dois resultados e documentar ganhos, regressões, inconclusivos e limites.
 
 O piloto é manual nesta fase. Não criar um runner genérico antes de saber quais os inputs, permissões e outputs efetivamente necessários.
 
