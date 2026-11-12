@@ -110,6 +110,30 @@ describe("evidence-aware static Design QA", () => {
     expect(validate(report), JSON.stringify(validate.errors)).toBe(true);
   });
 
+  it("does not guess when accessible names are supplied dynamically", () => {
+    const report = auditSourceFiles([
+      {
+        file: "src/Dynamic.tsx",
+        content: [
+          "export function Dynamic({ label }: { label: string }) {",
+          "  return <button>{label}</button>;",
+          "}",
+        ].join("\\n"),
+      },
+    ], root);
+
+    expect(report.findings).toHaveLength(0);
+  });
+
+  it("reports JSX parser errors as static signals", () => {
+    const report = auditSourceFiles([
+      { file: "src/Broken.tsx", content: "export const Broken = () => <section><div></section>;" },
+    ], root);
+
+    expect(report.findings.some((item) => item.ruleId === "source.parse-error")).toBe(true);
+    expect(report.summary.findingsBySeverity.P1).toBeGreaterThan(0);
+  });
+
   it("does not emit findings for files outside supported source/style extensions", () => {
     const report = auditSourceFiles([
       { file: "README.md", content: '<img src="fake.png" />' },
