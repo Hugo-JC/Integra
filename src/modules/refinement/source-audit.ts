@@ -266,9 +266,10 @@ export function auditSourceFiles(
     const visit = (node: ts.Node): void => {
       if (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) {
         const tag = tagName(node).toLowerCase();
-        const element = ts.isJsxOpeningElement(node)
-          ? node.parent
-          : node;
+        const element: ts.JsxElement | ts.JsxSelfClosingElement =
+          ts.isJsxOpeningElement(node) && ts.isJsxElement(node.parent)
+            ? node.parent
+            : node as ts.JsxSelfClosingElement;
         const classes = staticAttribute(node, "className") ?? staticAttribute(node, "class") ?? "";
 
         if (tag === "img" && !hasAttribute(node, "alt")) {
